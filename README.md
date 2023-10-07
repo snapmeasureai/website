@@ -1,4 +1,4 @@
-# SnapMeasureAI: 99% Accurate 3D Body Measuring Solution
+# SnapMeasureAI: 99% Accurate 3D Body Measurement Solution
 
 SnapMeasureAI is an advanced computer vision solution that provides precise 3D body measurements and size recommendations using just a few images or a video. Say goodbye to clothing returns and find the perfect fit every time.
 
