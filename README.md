@@ -1,10 +1,10 @@
 # SnapMeasureAI: 99% Accurate 3D Body Measurement Solution
 
-SnapMeasureAI is a computer vision body scanner that provides accurate clothing measurements. Achieving 99% accuracy across 16 key measurements, it uses a few images or a short video. The average error is only 7.0 mm (0.27 in).
+SnapMeasureAI is a computer vision body scanner that delivers 99% accuracy across 16 key measurements using just a few images or a short video, with an average error of only 7.0 mm (0.27 in).
 
-No more ill-fitting clothes or returns. SnapMeasureAI aims to find perfect size every time, cutting return costs significantly.
+SnapMeasureAI aims to find perfect size every time, cutting return costs significantly.
 
-Reach us at SnapMeasureAI@gmail.com for a live demo or technology license.
+See SnapMeasureAI in action below. Reach us at SnapMeasureAI@gmail.com for a live demo or technology license.
 
 <div align="center">
   <video src="https://github.com/snapmeasureai/website/assets/143150368/e9532fb2-f40f-4ae9-8e83-700a6c8959be" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
