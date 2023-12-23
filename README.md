@@ -1,6 +1,6 @@
 # SnapMeasure: 99% Accurate E-commerce Sizing Solution
 
-SnapMeasure is a 99% accurate mobile body scan technology for e-commerce sizing. Find your perfect fit every time.
+SnapMeasure is a 99% accurate mobile body scan technology for e-commerce sizing.
 
 SnapMeasure aims to find the perfect clothing size every time, cutting return costs significantly. The average error is only 7.0 mm (0.27 in).
 
