@@ -1,7 +1,7 @@
 <h3 align="center"><strong>SnapMeasure</strong>
 <br>
 <br>
-<strong>99% Reliable AI Body Sizing: The Future of Shopping</strong></h3>
+<strong>99% Accurate AI Body Measurements for the Perfect Fit</strong></h3>
 
 SnapMeasure helps customers find their perfect fit when ordering online. Using AI technology, it analyzes a few photos or a short video to determine the circumference and length of each body part accurately. The average error is only 7.0 mm (0.27 in).
 
