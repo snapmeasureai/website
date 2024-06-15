@@ -7,6 +7,8 @@ SnapMeasure helps customers find their perfect fit when ordering online. Using A
 
 Any body type, skin complexion, body pose, or user background can be accommodated by SnapMeasure.
 
+Try the free demo at https://demo.snapmeasureai.com.
+
 Increase conversions and reduce returns. Reach us at snapmeasureai@gmail.com for a demo or licensing.
 
 <div align="center">
