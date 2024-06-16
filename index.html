@@ -100,6 +100,12 @@
         
         document.addEventListener('touchmove', event => event.scale !== 1 && event.preventDefault(), { passive: false });
 
+        var ifr = document.getElementsByTagName("iframe")[0];
+        var ifr_window = ifr.contentWindow;
+        ifr_window.addEventListener("keydown", function(e){
+            console.log("clicked ", e.keyCode);
+        });
+
         var frame1 = document.getElementsByTagName("iframe")[0];
         var ifr_window1 = frame1.contentWindow;
         ifr_window1.addEventListener("load", ev => {
