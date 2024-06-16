@@ -1294,8 +1294,8 @@ video {
 }
 
 .py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
 }
 
 .px-1 {
@@ -1347,7 +1347,7 @@ video {
 
 .text-xl {
   font-size: 1.25rem;
-  line-height: 1.75rem;
+  line-height: 1.70rem;
 }
 
 .text-2xl {
