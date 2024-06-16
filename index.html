@@ -124,6 +124,7 @@
             max-width: 560px;
         }
     </style>
+    <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
 </head>
 <body class="bg-white dark:bg-dark seceltion font-Inter">
 <div class="fixed top-0 left-0 z-50 w-full">
@@ -179,13 +180,17 @@
                    class="btn bg-[#090E34] text-neutral-900 bg-opacity-20 hover:bg-opacity-30 dark:bg-[#ffff64] dark:bg-opacity-10 dark:hover:bg-opacity-5">Contact Us</a>
             </div>
             <div class="flex flex-col lg:flex-row items-center justify-center mt-8">
-                <div class="relative mt-8 lg:mt-4 video-container" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
-                    <iframe src="https://www.youtube.com/embed/mre_clTbn9U?si=l4kTTNOcSm8JVsaE" title="YouTube video player" class="mx-auto rounded  sticky" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                <div class="relative mt-8 lg:mt-4" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
+                    <div class='embed-container'>
+                        <iframe src="https://www.youtube.com/embed/mre_clTbn9U?si=l4kTTNOcSm8JVsaE" title="YouTube video player" class="mx-auto rounded  sticky" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                    </div
                 </div>
             </div>
             <div class="flex flex-col lg:flex-row items-center justify-center mt-8">
-                <div class="relative mt-8 lg:mt-4 video-container" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
-                    <iframe src="https://www.youtube.com/embed/RKO6Ss5aMbQ?si=jcvK8fzgVetRlHaq" title="YouTube video player" class="mx-auto rounded  sticky" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                <div class="relative mt-8 lg:mt-4" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
+                    <div class='embed-container'>
+                        <iframe src="https://www.youtube.com/embed/RKO6Ss5aMbQ?si=jcvK8fzgVetRlHaq" title="YouTube video player" class="mx-auto rounded  sticky" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                    </div>
                 </div>
             </div>
         </div>
