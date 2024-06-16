@@ -59,7 +59,6 @@
     <!--Meta Tags for HTML pages on Mobile-->
     <meta name="format-detection" content="telephone=yes"/>
     <meta name="HandheldFriendly" content="true"/> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
     <!--http-equiv Tags-->
     <meta http-equiv="Content-Style-Type" content="text/css">
@@ -79,6 +78,28 @@
     <meta property="og:video:width" content="auto">
     <meta property="og:video:height" content="auto">
     <meta name="og:image" content="https://snapmeasureai.com/img/SnapMeasure_cover_body_models.jpg">
+
+    <script>
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+            // special hack to prevent zoom-to-tabs gesture in safari
+            document.body.style.zoom = 1;
+        });
+        
+        document.addEventListener('gesturechange', function(e) {
+            e.preventDefault();
+            // special hack to prevent zoom-to-tabs gesture in safari
+            document.body.style.zoom = 1;
+        });
+        
+        document.addEventListener('gestureend', function(e) {
+            e.preventDefault();
+            // special hack to prevent zoom-to-tabs gesture in safari
+            document.body.style.zoom = 1;
+        });
+        
+        document.addEventListener('touchmove', event => event.scale !== 1 && event.preventDefault(), { passive: false });
+    </script>
 </head>
 <body class="bg-white dark:bg-dark seceltion font-Inter">
 <div class="fixed top-0 left-0 z-50 w-full">
