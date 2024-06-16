@@ -100,6 +100,29 @@
         
         document.addEventListener('touchmove', event => event.scale !== 1 && event.preventDefault(), { passive: false });
     </script>
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .video-container iframe,
+        .video-container object,
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        
+            max-height: 500px;
+        }
+    </style>
 </head>
 <body class="bg-white dark:bg-dark seceltion font-Inter">
 <div class="fixed top-0 left-0 z-50 w-full">
@@ -151,10 +174,10 @@
                 <a href="#contact-us"
                    class="btn bg-[#090E34] text-neutral-900 bg-opacity-20 hover:bg-opacity-30 dark:bg-[#ffff64] dark:bg-opacity-10 dark:hover:bg-opacity-5">Contact Us</a>
             </div>
-            <div class="relative mt-8 lg:mt-4" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
+            <div class="relative mt-8 lg:mt-4 video-container" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
                 <iframe width="70%" height="400vh" src="https://www.youtube.com/embed/mre_clTbn9U?si=l4kTTNOcSm8JVsaE" title="YouTube video player" class="mx-auto rounded  sticky" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
             </div>
-            <div class="relative mt-8 lg:mt-4" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
+            <div class="relative mt-8 lg:mt-4 video-container" itemprop="video" itemscope itemtype="https://schema.org/VideoObject">
                 <iframe width="70%" height="400vh" src="https://www.youtube.com/embed/RKO6Ss5aMbQ?si=jcvK8fzgVetRlHaq" title="YouTube video player" class="mx-auto rounded  sticky" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
             </div>
         </div>
