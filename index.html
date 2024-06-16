@@ -99,21 +99,6 @@
         });
         
         document.addEventListener('touchmove', event => event.scale !== 1 && event.preventDefault(), { passive: false });
-
-        var frame1 = window.frames["frame1"];
-        frame1.addEventListener("load", ev => {
-            const new_style_element = document.createElement("style");
-            new_style_element.textContent = ".ytp-cued-thumbnail-overlay-image { background-size: 100% 100% !important; }"
-            ev.target.contentDocument.head.appendChild(new_style_element);
-        });
-
-        var frame2 = document.getElementsByTagName("iframe")[1];
-        var x = (frame2.contentWindow || frame2.contentDocument);
-        x.addEventListener("load", ev => {
-            const new_style_element = document.createElement("style");
-            new_style_element.textContent = ".ytp-cued-thumbnail-overlay-image { background-size: 100% 100% !important; }"
-            ev.target.contentDocument.head.appendChild(new_style_element);
-        });
     </script>
     <style>
         .video-container {
