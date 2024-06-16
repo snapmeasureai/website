@@ -101,16 +101,14 @@
         document.addEventListener('touchmove', event => event.scale !== 1 && event.preventDefault(), { passive: false });
 
         var frame1 = document.getElementsByTagName("iframe")[0];
-        var ifr_window1 = frame1.contentWindow.document;
-        ifr_window1.addEventListener("load", ev => {
+        frame1.addEventListener("load", ev => {
             const new_style_element = document.createElement("style");
             new_style_element.textContent = ".ytp-cued-thumbnail-overlay-image { background-size: 100% 100% !important; }"
             ev.target.contentDocument.head.appendChild(new_style_element);
         });
 
         var frame2 = document.getElementsByTagName("iframe")[1];
-        var ifr_window2 = frame2.contentWindow.document;
-        ifr_window2.addEventListener("load", ev => {
+        frame2.addEventListener("load", ev => {
             const new_style_element = document.createElement("style");
             new_style_element.textContent = ".ytp-cued-thumbnail-overlay-image { background-size: 100% 100% !important; }"
             ev.target.contentDocument.head.appendChild(new_style_element);
