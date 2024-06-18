@@ -83,14 +83,18 @@
         document.addEventListener('dblclick', function(event) {
             event.preventDefault();
         }, { passive: false });
-        
-        document.addEventListener('touchmove', e => {
-          if (e.touches.length > 1) {  
-             e.preventDefault();
-          }
-        }, {passive: false})
     </script>
     <style>
+        :root {
+            touch-action: pan-x pan-y;
+            overflow:visible !important;
+        }
+
+        html, body {
+            overscroll-behavior: none;
+            overflow:visible !important;
+        }
+        
         .video-container {
             position: relative;
             /*padding-bottom: 32vh;*/
