@@ -80,25 +80,15 @@
     <meta name="og:image" content="https://snapmeasureai.com/img/SnapMeasure_cover_body_models.jpg">
 
     <script>
-        document.addEventListener('gesturestart', function(e) {
-            e.preventDefault();
-            // special hack to prevent zoom-to-tabs gesture in safari
-            document.body.style.zoom = 1;
-        });
+        document.addEventListener('dblclick', function(event) {
+            event.preventDefault();
+        }, { passive: false });
         
-        document.addEventListener('gesturechange', function(e) {
-            e.preventDefault();
-            // special hack to prevent zoom-to-tabs gesture in safari
-            document.body.style.zoom = 1;
-        });
-        
-        document.addEventListener('gestureend', function(e) {
-            e.preventDefault();
-            // special hack to prevent zoom-to-tabs gesture in safari
-            document.body.style.zoom = 1;
-        });
-        
-        document.addEventListener('touchmove', event => event.scale !== 1 && event.preventDefault(), { passive: false });
+        document.addEventListener('touchmove', e => {
+          if (e.touches.length > 1) {  
+             e.preventDefault();
+          }
+        }, {passive: false})
     </script>
     <style>
         .video-container {
