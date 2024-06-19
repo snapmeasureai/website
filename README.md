@@ -1,4 +1,4 @@
-<h1 align="center"><strong>SnapMeasure</strong></h1>
+<h2 align="center"><strong>SnapMeasure</strong></h2>
 <h4><strong>99% Accurate AI Body Measurements for the Perfect Fit</strong></h3>
 
 SnapMeasure makes finding your perfect fit online easy.
