@@ -1,7 +1,5 @@
-<h3 align="center"><strong>SnapMeasure</strong>
-<br>
-<br>
-<strong>99% Accurate AI Body Measurements for the Perfect Fit</strong></h3>
+<h1 align="center"><strong>SnapMeasure</strong></h1>
+<h4><strong>99% Accurate AI Body Measurements for the Perfect Fit</strong></h3>
 
 SnapMeasure makes finding your perfect fit online easy.
 
