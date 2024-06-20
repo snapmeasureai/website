@@ -9,7 +9,7 @@ SnapMeasure works with any body type, skin tone, pose, or background.
 
 Try the free demo at <a href="https://demo.snapmeasureai.com.">demo.snapmeasureai.com</a>.
 
-Increase conversions and reduce returns. Reach us at snapmeasureai@gmail.com for a demo or licensing.
+Increase conversions and reduce returns. Reach us at info@snapmeasureai.com for a demo or licensing.
 
 <div align="center">
   <video src="https://github.com/snapmeasureai/website/assets/143150368/e9532fb2-f40f-4ae9-8e83-700a6c8959be" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
