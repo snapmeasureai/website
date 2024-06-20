@@ -39,4 +39,4 @@ Increase conversions and reduce returns. Reach us at info@snapmeasureai.com for 
 
 # Contact Us
 
-Reach us at SnapMeasureAI@gmail.com for more information.
+Reach us at info@snapmeasureai.com for more information.
