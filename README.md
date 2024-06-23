@@ -3,7 +3,7 @@
 
 SnapMeasure makes finding your perfect fit easy.
 
-With advanced AI, SnapMeasure accurately determines your measurements from just a few photos or a short video. The average error is only 7.0 mm or 0.27 in.
+With advanced AI, SnapMeasure accurately determines your measurements from just a few photos or a short video. The average error is only 0.70 cm or 0.27 in.
 
 SnapMeasure works with any body type, skin tone, pose, or background.
 
