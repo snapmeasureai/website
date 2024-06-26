@@ -1,7 +1,7 @@
 <h2 align="center"><strong>SnapMeasure</strong></h2>
-<h4 align="center"><strong>99% Accurate AI Body Measurements for the Perfect Fit</strong></h3>
+<h4 align="center"><strong>Perfect Fit with 99% Accurate AI Body Measurements</strong></h3>
 
-SnapMeasure makes finding your perfect fit easy.
+SnapMeasure makes finding your perfect fit fast and easy.
 
 With advanced AI, SnapMeasure accurately determines your measurements from just a few photos or a short video. The average error is only 0.70 cm or 0.27 in.
 
