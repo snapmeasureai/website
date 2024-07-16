@@ -402,7 +402,7 @@
 }
 
 .demo__container-inner {
-  display: block;
+  display: flex;
   justify-content: center;
   align-items: stretch;
   border-radius: 30px;
