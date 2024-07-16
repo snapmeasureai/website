@@ -225,21 +225,3 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
-
-  // Smooth scroll for Contact Us button with offset
-  const moreButton = document.getElementById("intro-button-more");
-  moreButton.addEventListener("click", function () {
-    event.preventDefault();
-
-    const targetElement = document.getElementById("section-features");
-    const offset = 105;
-
-    const elementPosition = targetElement.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  });
-});
