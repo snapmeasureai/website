@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const watchButton1 = document.getElementById("watch-button-1");
   const watchButton2 = document.getElementById("watch-button-2");
   const watchButton3 = document.getElementById("watch-button-3");
-  const watchButton4 = document.getElementById("watch-button-3");
+  const watchButton4 = document.getElementById("watch-button-4");
 
   function openVideoModal(videoSrc) {
     const viewportWidth = window.innerWidth;

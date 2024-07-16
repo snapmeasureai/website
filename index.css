@@ -354,6 +354,11 @@
   }
 }
 
+.demo__item > button {
+  background-color: transparent !important;
+  border: none !important;
+}
+
 /* Demo Section */
 .demo {
   display: flex;
