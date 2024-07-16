@@ -361,6 +361,12 @@
   align-items: center;
   position: relative;
   z-index: 2;
+  margin: auto;
+  display: inline;
+  /* float: none; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .demo__container {
@@ -413,10 +419,13 @@
   z-index: 2;
   width: 100vw;
   height: auto;
+  /* align-self: center; */
+  /* text-align: center; */
+  align: center;
 }
 .demo__item-container {
   /* padding: 75px 60px; */
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   position: relative;
@@ -573,9 +582,10 @@
 
 .video-container {
   width: 100%;
-  max-width: 1015px;
+  /* max-width: 1015px; */
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .video__statsDesctop,
 .video__statsMobile {
