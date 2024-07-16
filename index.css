@@ -370,6 +370,10 @@
   background-color: rgba(2, 3, 28, 0.8);
   position: relative;
   z-index: 2;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .demo__container > .purple-blurry-left {
@@ -409,7 +413,7 @@
   z-index: 2;
 }
 .demo__item-container {
-  padding: 75px 60px;
+  /* padding: 75px 60px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -496,7 +500,7 @@
   }
 
   .demo__item-container {
-    padding: 40px 30px;
+    /* padding: 40px 30px; */
   }
 
   .demo__item-container:first-of-type::after {
