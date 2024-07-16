@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+/*
   // Smooth scroll for links with offset
   const links = document.querySelectorAll(".header__nav-link");
 
@@ -164,4 +165,5 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+*/
 });

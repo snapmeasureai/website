@@ -1428,13 +1428,13 @@
 .accordion__content.hidden {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.15s ease-out, margin-top 0.3s ease-out;
+  /* transition: max-height 0.15s ease-out, margin-top 0.3s ease-out; */
 }
 
 .accordion__content.visible {
   margin-top: 20px;
   max-height: 400px;
-  transition: max-height 0.3s ease-in;
+  /* transition: max-height 0.3s ease-in; */
 }
 
 .accordion__icon--open {
