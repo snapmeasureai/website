@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Smooth scroll for Contact Us button with offset
-  const moreButton = document.getElementById("intro-button-more");
+  const moreButton = document.getElementById("button-learn-more");
   moreButton.addEventListener("click", function () {
     event.preventDefault();
 
