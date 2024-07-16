@@ -98,9 +98,36 @@
             overscroll-behavior: none;
             overflow:visible !important;
         }
+
+        .video-container-yt {
+            position: relative;
+            /*padding-bottom: 32vh;*/
+            padding-top: 30px;
+            height: auto !important;
+            max-height: 320px;
+            overflow: hidden;
+            width: 100% !important;
+            max-width: 560px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+        }
+        .video-container-yt iframe,
+        .video-container-yt object,
+        .video-container-yt embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            aspect-ratio: 16 / 9;
+            width: 100% !important;
+            height: auto !important;
+            max-height: 320px;
+            max-width: 560px;
+            display: flex;
+            justify-content: center;
+        }
     </style>
-    <link rel="stylesheet" href="settings.css?v=1.19" />
-    <link rel="stylesheet" href="index.css?v=1.19" />
+    <link rel="stylesheet" href="settings.css?v=1.21" />
+    <link rel="stylesheet" href="index.css?v=1.21" />
   </head>
   <body>
     <div class="main-wrapper">
@@ -173,36 +200,15 @@
             <div class="purple-blurry purple-blurry-center"></div>
             <div class="purple-blurry purple-blurry-right"></div>
             <div class="demo__container-inner">
-              <div class="demo__item-container">
-                <article class="demo__item">
-                  <div class="demo__icon">
-                    <img
-                      src="./assets/images/bordered-icon-play.svg"
-                      alt="play"
-                    />
-                  </div>
-                  <h4 class="demo__title">
-                    Perfect Fit AI: 99% Accurate Measurements
-                  </h4>
-                  <button class="intro__button intro__button-more" id="watch-button-1">
-                    <a> Watch Video </a>
-              	  </button>
+		<article class="demo__item">
+                  <div class="video-container-yt" itemprop="video" itemscope="" itemtype="https://schema.org/VideoObject">
+                    <iframe src="https://www.youtube.com/embed/mre_clTbn9U?si=l4kTTNOcSm8JVsaE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+                </div>
                 </article>
-              </div>
-              <div class="demo__item-container">
-                <article class="demo__item">
-                  <div class="demo__icon">
-                    <img
-                      src="./assets/images/bordered-icon-play.svg"
-                      alt="play"
-                    />
+		<article class="demo__item" style="padding-top: 30px;">
+                  <div class="video-container-yt" itemprop="video" itemscope="" itemtype="https://schema.org/VideoObject">
+                    <iframe src="https://www.youtube.com/embed/RKO6Ss5aMbQ?si=jcvK8fzgVetRlHaq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
                   </div>
-                  <h4 class="demo__title">
-                    SnapMeasureAI's Body Measurement Demo
-                  </h4>
-                  <button class="intro__button intro__button-more" id="watch-button-2">
-                    <a> Watch Demo </a>
-              	  </button>
                 </article>
               </div>
             </div>
