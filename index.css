@@ -354,7 +354,7 @@
   }
 }
 
-.demo__item > button {
+.play-icon-button {
   background-color: transparent !important;
   border: none !important;
 }
