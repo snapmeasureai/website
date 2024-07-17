@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const accordions = document.querySelectorAll(".accordion");
 
   accordions.forEach((accordion) => {
-    const header = accordion.querySelector(".accordion__header");
+    const header = accordion;
     const content = accordion.querySelector(".accordion__content");
     const icon = accordion.querySelector(".accordion__icon");
 
