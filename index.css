@@ -273,7 +273,7 @@
 }
 .intro__button {
   text-align: center;
-  width: 150px;
+  width: 180px;
   border-radius: 12px;
 }
 .intro__button-more {
@@ -323,7 +323,7 @@
 
   .intro__button a,
   .intro__button-more a {
-    padding: 6px 0px;
+    /* padding: 6px 0px; */
     font-size: 14px;
   }
 
