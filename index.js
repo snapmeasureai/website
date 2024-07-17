@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       tab.classList.remove("models__tab-active");
     });
     const activeTab = document.querySelector(
-      '.models__tab[data-tab="${index}"]'
+      `.models__tab[data-tab="${index}"]`
     );
     activeTab.classList.add("models__tab-active");
 
@@ -57,11 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
       item.classList.remove("models__pagination-active");
     });
     const activePaginationItem = document.querySelector(
-      '.models__pagination-item[data-page="${index}"]'
+      `.models__pagination-item[data-page="${index}"]`
     );
     activePaginationItem.classList.add("models__pagination-active");
 
-    modelImage.src = "./assets/images/models-${index}.png";
+    modelImage.src = `./assets/images/models-${index}.png`;
 
     currentIndex = index;
   }
