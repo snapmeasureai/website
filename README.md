@@ -3,7 +3,7 @@
 
 SnapMeasureAI makes finding your perfect fit fast and easy.
 
-SnapMeasureAI uses <b>advanced AI</b> to accurately measure your body from just a few photos or a short video. The <b>average error</b> for all body parts is only 0.70 cm or 0.27 in.
+Using <b>advanced AI</b> to accurately measure your body from just a few photos or a short video, SnapMeasureAI's <b>average error</b> for is only 0.70 cm or 0.27 in.
 
 SnapMeasureAI works with any body type, skin tone, pose, or background.
 
