@@ -286,7 +286,7 @@
 .intro__button-more a {
   display: block;
   padding: 12px 0px;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .intro__button-more a {
   color: #02031c;
