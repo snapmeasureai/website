@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function openImageModal(imageSrc, text) {
     modalImage.src = imageSrc;
     modalText.textContent = text;
-    imageModal.style.display = "flex !important";
+    imageModal.style = "display: flex !important;";
   }
 
   function closeImageModal() {
