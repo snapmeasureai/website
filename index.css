@@ -1393,6 +1393,11 @@
   z-index: -1;
 }
 
+.section {
+  padding-top: 105px;
+  margin-top: -105px;
+}
+
 .accordions {
   display: flex;
   justify-content: center;
