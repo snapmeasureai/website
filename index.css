@@ -1,5 +1,7 @@
 /* Global */
 
+html { scroll-padding-top: 105px; }
+
 .button--gradient {
   background-color: transparent;
   position: relative;
