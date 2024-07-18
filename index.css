@@ -38,6 +38,10 @@ html { scroll-padding-top: 105px; }
   align-items: center;
 }
 
+.demo__icon img {
+  cursor: pointer;
+}
+
 .demo__icon img,
 .features__icon img {
   width: 100%;
@@ -282,6 +286,7 @@ html { scroll-padding-top: 105px; }
   background-color: white;
   border: none;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .intro__button a,
@@ -292,6 +297,7 @@ html { scroll-padding-top: 105px; }
 }
 .intro__button-more a {
   color: #02031c;
+  cursor: pointer;
 }
 
 @media (max-width: 1024px) {
