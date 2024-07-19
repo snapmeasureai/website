@@ -342,8 +342,8 @@ html { scroll-padding-top: 105px; }
   .intro-bg-image-mobile {
     position: absolute;
     top: -683px;
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%;
+    transform: translateX(-50%); */
     background-image: url("./assets/design/intro-bg-mobile.png");
     background-size: cover;
     background-position: center center;
@@ -407,8 +407,8 @@ html { scroll-padding-top: 105px; }
 
 .demo__container > .purple-blurry-center {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   top: -80px;
   background: linear-gradient(to bottom, #6d3aff 0%, #e270ff 67%, #03041d 100%);
   z-index: 1;
@@ -561,8 +561,8 @@ html { scroll-padding-top: 105px; }
   content: "";
   position: absolute;
   top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   width: 1500px;
   height: 500px;
   background-image: url("./assets/design/video-stars.svg");
@@ -615,8 +615,8 @@ html { scroll-padding-top: 105px; }
 .video__statsMobile::after {
   content: "";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   width: 90%;
   max-width: 1700px;
   background-image: url("./assets/design/video-platform.webp");
@@ -755,8 +755,8 @@ html { scroll-padding-top: 105px; }
   content: "";
   position: absolute;
   top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   width: 100%;
   max-width: 1700px;
   height: 400px;
@@ -1159,8 +1159,8 @@ html { scroll-padding-top: 105px; }
 .solutions__bg-image {
   position: absolute;
   top: -125px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   background-image: url("./assets/design/solution-bg.png");
   background-size: 80%;
   background-position: top;
@@ -1389,8 +1389,8 @@ html { scroll-padding-top: 105px; }
   content: "";
   position: absolute;
   top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   width: 100%;
   max-width: 1300px;
   height: 443px;
@@ -1546,8 +1546,8 @@ html { scroll-padding-top: 105px; }
   content: "";
   position: absolute;
   bottom: 0px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   background-image: url("./assets/design/footer-bg.webp");
   background-size: 100%;
   background-position: bottom;
