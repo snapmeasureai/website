@@ -8,6 +8,10 @@ html { scroll-padding-top: 105px; }
   z-index: 1;
 }
 
+.section {
+  will-change: transform;
+}
+
 .button--gradient::before {
   content: "";
   position: absolute;
