@@ -218,8 +218,8 @@ html { scroll-padding-top: 105px; }
 .intro-bg-image {
   position: absolute;
   bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   background-image: url("./assets/design/bg-intro-noblur.png");
   background-size: 75%;
   background-position: bottom;
@@ -234,8 +234,8 @@ html { scroll-padding-top: 105px; }
 .intro-bg-stars {
   position: absolute;
   bottom: -200px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
   background-image: url("./assets/design/intro-bg-stars.png");
   background-size: contain;
   background-position: bottom;
