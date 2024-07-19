@@ -1,6 +1,6 @@
 /* Global */
 
-html { scroll-padding-top: 105px; }
+html { scroll-padding-top: 105px; min-height: 100vh;}
 
 .button--gradient {
   background-color: transparent;
