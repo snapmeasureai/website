@@ -133,7 +133,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 /* Header */
 .header {
-  position: sticky;
+  position: fixed;
   top: 15px;
   left: 0px;
   right: 0px;
@@ -223,7 +223,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px 0 110px 0;
+  padding: 110px 0 110px 0;
 
   position: relative;
   z-index: 2;
@@ -322,7 +322,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 @media (max-width: 768px) {
   .intro {
-    padding: 20px 0 75px;
+    padding: 75px 0 75px;
   }
 
   .intro__title,
