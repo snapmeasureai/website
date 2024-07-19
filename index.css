@@ -1,5 +1,19 @@
 /* Global */
 
+:root {
+    touch-action: pan-x pan-y;
+    overflow:hidden visible !important;
+}
+
+* {
+    touch-action: pan-x pan-y;
+}
+
+html, body {
+    overscroll-behavior: none;
+    overflow:hidden visible !important;
+}
+
 html { scroll-padding-top: 105px; min-height: 100vh;}
 
 .button--gradient {
