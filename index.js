@@ -207,6 +207,10 @@ document.addEventListener("DOMContentLoaded", function () {
       closeVideoModal();
     }
   });
+
+  document.addEventListener('dblclick', function(event) {
+    event.preventDefault();
+  }, { passive: false });
 /*
   // Smooth scroll for links with offset
   const links = document.querySelectorAll(".header__nav-link");
