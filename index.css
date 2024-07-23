@@ -231,7 +231,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 .intro-bg-image {
   position: absolute;
-  bottom: -4px;
+  /* bottom: -4px; */
   /* left: 50%;
   transform: translateX(-50%); */
   background-image: url("./assets/design/bg-intro-noblur.png");
