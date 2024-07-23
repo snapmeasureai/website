@@ -1560,8 +1560,8 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   content: "";
   position: absolute;
   bottom: 0px;
-  /* left: 50%;
-  transform: translateX(-50%); */
+  left: 50%;
+  transform: translateX(-50%);
   background-image: url("./assets/design/footer-bg.webp");
   background-size: 100%;
   background-position: bottom;
