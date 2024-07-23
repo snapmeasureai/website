@@ -134,7 +134,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 /* Header */
 .header {
   position: fixed;
-  top: 15px;
+  /* top: 15px; */
   left: 0px;
   right: 0px;
   display: flex;

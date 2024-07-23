@@ -1,3 +1,4 @@
+/*
 window.addEventListener("scroll", function () {
   const header = document.querySelector(".header");
   const screenWidth = window.innerWidth;
@@ -12,6 +13,7 @@ window.addEventListener("scroll", function () {
     header.style.top = "0px";
   }
 });
+*/
 
 function calculateTop() {
   const screenWidth = window.innerWidth;
