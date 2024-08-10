@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+/*
   // Modal logic for videos
   const videoModal = document.getElementById("video-modal");
   const videoContainer = document.getElementById("video-container");
@@ -207,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
       closeVideoModal();
     }
   });
+*/
 
   document.addEventListener('dblclick', function(event) {
     event.preventDefault();
