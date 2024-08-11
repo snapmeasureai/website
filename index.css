@@ -29,8 +29,9 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
             /* aspect-ratio: 9 / 16; */
             /* margin-left: 20px !important; */
             /* margin-right: 20px !important; */
-            padding:  20px !important;
+            padding: 5px !important;
             max-height:  720px;
+            border-radius: 30px;
         }
 
 .button--gradient {
