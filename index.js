@@ -235,13 +235,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 */
 
-document.querySelector('#demo-video').addEventListener('click', () => {
-  const target = document.getElementById('demo-video');
-console.log(true);
-  target.scrollIntoView();
-  /*const diff = target.getBoundingClientRect().top - target.getBoundingClientRect().bottom;
-  if (diff < 0) {
-    window.scrollBy(0, diff);
-  }*/
-});
+let vid = document.getElementById("demo-video");
+vid.onplaying = function() {
+  vid.scrollIntoView(true);
+};
 });
