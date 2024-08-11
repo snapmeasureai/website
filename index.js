@@ -235,11 +235,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 */
 
-$(document).ready(function () {  
-    $('#demo-video').click(function(event){
-      event.preventDefault();
-      $('#demo-video').scrollIntoView(true);
-      // let your tab id is woocommerce-tabs
-    });
+document.querySelector('#demo-video').addEventListener('click', () => {
+  const target = document.getElementById('demo-video');
+  target.scrollIntoView(true);
+  /*const diff = target.getBoundingClientRect().top - target.getBoundingClientRect().bottom;
+  if (diff < 0) {
+    window.scrollBy(0, diff);
+  }*/
 });
 });
