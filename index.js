@@ -237,7 +237,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.querySelector('#demo-video').addEventListener('click', () => {
   const target = document.getElementById('demo-video');
-  target.scrollIntoView(true);
+console.log(true);
+  target.scrollIntoView();
   /*const diff = target.getBoundingClientRect().top - target.getBoundingClientRect().bottom;
   if (diff < 0) {
     window.scrollBy(0, diff);
