@@ -234,4 +234,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 */
+
+$(document).ready(function () {  
+    $('#demo-video').click(function(event){
+      event.preventDefault();
+      $('#demo-video').scrollIntoView(true);
+      // let your tab id is woocommerce-tabs
+    });
+});
 });
