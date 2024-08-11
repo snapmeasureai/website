@@ -32,6 +32,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
             padding: 5px !important;
             max-height:  640px;
             border-radius: 30px;
+	    scroll-margin-top: -10px !important;
         }
 
 .button--gradient {
