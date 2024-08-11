@@ -235,6 +235,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 */
 
+// Hide address bar on scroll
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 0) {
+    window.scrollTo(0, 0);
+  }
+});
+
 let vid = document.getElementById("demo-video");
 vid.onplaying = function() {
   vid.scrollIntoView(true);
