@@ -541,7 +541,8 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 @media (max-width: 768px) {
         .video-container-demo {
-            max-height:  600px !important;
+            max-height:  580px !important;
+	    scroll-margin-top: -15px !important;
         }
   .demo__container-inner,
   .demo__container {
