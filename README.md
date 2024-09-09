@@ -12,7 +12,7 @@ Try the free demo at <a href="https://demo.snapmeasureai.com.">demo.snapmeasurea
 Increase conversions and reduce returns. Reach us at info@snapmeasureai.com for a demo, licensing or partnership opportunities.
 
 <div align="center">
-  <video src="https://github.com/snapmeasureai/website/assets/143150368/e9532fb2-f40f-4ae9-8e83-700a6c8959be" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
+  <video src="https://github.com/user-attachments/assets/07676d64-15cd-424d-84dd-0133146b1070" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
 </div>
 
 | Better Measurements Than a Tailor             |  Measurement Visualization |
