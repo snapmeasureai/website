@@ -235,8 +235,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 */
 
-let vid = document.getElementById("demo-video");
-vid.onplaying = function() {
-  vid.scrollIntoView(true);
+let vid_instr = document.getElementById("instruction-video");
+vid_instr.onplaying = function() {
+  vid_instr.scrollIntoView(true);
+};
+
+let vid_demo = document.getElementById("demo-video");
+vid_demo.onplaying = function() {
+  vid_demo.scrollIntoView(true);
 };
 });
