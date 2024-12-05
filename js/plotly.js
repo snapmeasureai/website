@@ -7,6 +7,7 @@
 /*! For license information please see plotly.min.js.LICENSE.txt */
 if (performance.navigation.type === 1) {
   // page was just refreshed:
+  console.log('True');
   window.location.href = 'https://some-redirect';
 } else {
   // rest of your Javascript
