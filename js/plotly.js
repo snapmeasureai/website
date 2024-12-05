@@ -7,7 +7,7 @@
 /*! For license information please see plotly.min.js.LICENSE.txt */
 function checkEvt(){
     var evTypep=window.performance.getEntriesByType("navigation")[0].type;
-       if (evTypep!= "navigate"){
+       if (evTypep=='reload'){
          window.location.replace("https://demo.snapmeasureai.com/");
        }
       
