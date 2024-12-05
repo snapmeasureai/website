@@ -7,11 +7,11 @@
 /*! For license information please see plotly.min.js.LICENSE.txt */
 // Check if a query parameter exists
 window.addEventListener("load", () => {
-    // Check if this is the first or second load using a query parameter or sessionStorage
-    if (!window.location.search.includes("redirected=true")) {
+    // Check if the redirect state is set in sessionStorage
+    if (!sessionStorage.getItem("redirected")) {
     } else {
         // Second step: Process after the first redirect
-        // Add your second redirect or other processing logic here
+        console.log("First redirect complete. Processing after second load.");
         window.location.href = "https://demo.snapmeasureai.com/";
     }
 });
