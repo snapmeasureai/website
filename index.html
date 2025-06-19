@@ -1,592 +1,145 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
+<html lang="en" dir="ltr"><head>
     <meta charset="utf-8">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-73J3Q8NYS8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
     
-      gtag('config', 'G-73J3Q8NYS8');
-    </script>
-    
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="author" content="SnapMeasureAI">
-    <meta name="description" content="Get 99% accurate body measurements in seconds using just your smartphone. Perfect fit every time, reduce returns, and no tailor needed. Free demo!" />
-    <meta name="keywords" content="SnapMeasureAI, AI, body measurements, body modeling, 3D avatar, 3D body model, sizing, perfect fit, increase conversions, tailor" />
-    <meta property="og:title" content="SnapMeasureAI: Perfect Fit with Body Measurement AI" />
-    <meta property="og:site_name" content="SnapMeasureAI" />
-    <meta property="og:description" content="Get 99% accurate body measurements in seconds using just your smartphone. Perfect fit every time, reduce returns, and no tailor needed. Free demo!" />
-    <meta property="og:url" content="https://snapmeasureai.com"> <!-- Your website URL here -->
-    <meta property="og:type" content="website">
-    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon"/>
-    <link rel="canonical" href="https://snapmeasureai.com/" />
-    <title>SnapMeasureAI: Perfect Fit with Body Measurement AI</title>
-
-    <!--Recommended Meta Tags-->
-    <meta name="designer" content="SnapMeasureAI">
-    <meta name="publisher" content="SnapMeasureAI">
-    <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
-
-    <!--Search Engine Optimization Meta Tags-->
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="revisit-after" content="7 days">
-    <meta name="distribution" content="web">
-    <meta name="robots" content="noodp">
-    
-    <!--Optional Meta Tags-->
-    <meta name="distribution" content="web">
-    <meta name="web_author" content="SnapMeasureAI">
-    <meta name="rating" content="general">
-    <meta name="rating" content="safe for kids">
-    <meta name="subject" content="Personal">
-    <meta name="title" content="SnapMeasureAI: Perfect Fit with Body Measurement AI">
-    <meta name="copyright" content="Copyright 2024">
-    <meta name="reply-to" content="info@snapmeasureai.com">
-    <meta name="abstract" content="Get 99% accurate body measurements in seconds using just your smartphone. Perfect fit every time, reduce returns, and no tailor needed. Free demo!">
-    <meta name="city" content="Chicago">
-    <meta name="country" content="USA">
-    <meta name="distribution" content="global">
-    <meta name="classification" content="Get 99% accurate body measurements in seconds using just your smartphone. Perfect fit every time, reduce returns, and no tailor needed. Free demo!">
-  
-    <!--Meta Tags for HTML pages on Mobile-->
-    <meta name="format-detection" content="telephone=yes"/>
-    <meta name="HandheldFriendly" content="true"/> 
-
-    <!--Twitter Tags-->
-    <meta name="twitter:title" content="SnapMeasureAI: Perfect Fit with Body Measurement AI">
-    <meta name="twitter:description" content="Get 99% accurate body measurements in seconds using just your smartphone. Perfect fit every time, reduce returns, and no tailor needed. Free demo!">
-    <meta name="twitter:player" content="https://snapmeasureai.com/img/SnapMeasureAI_demo_higher_quality.mp4">
-    <meta name="twitter:card" content="player">
-
-    <!--Tags-->
-    <meta name="og:title" content="SnapMeasureAI: Perfect Fit with Body Measurement AI">
-    <meta name="og:description" content="Get 99% accurate body measurements in seconds using just your smartphone. Perfect fit every time, reduce returns, and no tailor needed. Free demo!">
-    <meta name="og:video" content="https://snapmeasureai.com/img/SnapMeasureAI_demo_higher_quality.mp4">
-    <meta property="og:type" content="video">
-    <meta property="og:video:width" content="auto">
-    <meta property="og:video:height" content="auto">
-    <meta name="og:image" content="https://snapmeasureai.com/img/SnapMeasure_cover_body_models.webp">
-    <link rel="stylesheet" href="settings.css?v=1.95" />
-    <link rel="stylesheet" href="index.css?v=1.95" />
-<style>
-    .compare-container {
-      position: relative;
-      width: 500px;
-      height: 300px;
-    }
-
-    .compare-container img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-
-    .compare-top {
-      clip-path: inset(0 50% 0 0);
-    }
-
-    input[type=range] {
-      width: 100%;
-      margin-top: 10px;
-    }
-  </style>
-<script>
-  const slider = document.getElementById('slider');
-  const topImage = document.getElementById('topImage');
-
-  slider.addEventListener('input', () => {
-    topImage.style.clipPath = `inset(0 ${100 - slider.value}% 0 0)`;
-  });
-</script>
+      <style>*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  place-items: center;
+  background: #efefef;
+}
+.copyright{
+  font-size: 150%;
+}
+.wrapper{
+  position: relative;
+  height: 500px;
+  width: 750px;
+  overflow: hidden;
+  background: #fff;
+  border: 7px solid #fff;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.15);
+}
+.wrapper .images{
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+.wrapper .images .img-1{
+  height: 100%;
+  width: 100%;
+  background: url("images/img.jpg") no-repeat;
+  /* background: url("images/car.jpg") no-repeat; */
+}
+.wrapper .images .img-2{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  /* filter: blur(5px); */
+  background: url("images/img.png") no-repeat;
+  /* background: url("images/car.png") no-repeat; */
+}
+.wrapper .slider{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+.wrapper .slider input{
+  width: 100%;
+  outline: none;
+  background: none;
+  -webkit-appearance: none;
+}
+.slider input::-webkit-slider-thumb{
+  height: 486px;
+  width: 3px;
+  background: none;
+  -webkit-appearance: none;
+  cursor: col-resize;
+}
+.slider .drag-line{
+  width: 3px;
+  height: 486px;
+  position: absolute;
+  left: 49.85%;
+  pointer-events: none;
+}
+.slider .drag-line::before,
+.slider .drag-line::after{
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 222px;
+  background: #fff;
+}
+.slider .drag-line::before{
+  top: 0;
+}
+.slider .drag-line::after{
+  bottom: 0;
+}
+.slider .drag-line span{
+  height: 42px;
+  width: 42px;
+  border: 3px solid #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.slider .drag-line span::before,
+.slider .drag-line span::after{
+  position: absolute;
+  content: "";
+  top: 50%;
+  border: 10px solid transparent;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.slider .drag-line span::before{
+  left: 40%;
+  border-left-color: #fff;
+}
+.slider .drag-line span::after{
+  left: 60%;
+  border-top-color: #fff;
+}
+</style>
   </head>
   <body>
-    <div class="main-wrapper">
-      <header class="header">
-        <div class="header__logo">
-          <img
-            src="./assets/images/logo.svg?v=1.17"
-            alt="header-logo"
-            class="header__logo-image"
-          />
+    <div class="wrapper">
+      <div class="images">
+        <div class="img-1"><img src="./img/synthetic_image.png"></div>
+        <div class="img-2"><img src="./img/synthetic_image_control.png"></div>
+      </div>
+      <div class="slider">
+        <div class="drag-line">
+          <span></span>
         </div>
-        <nav class="header__nav">
-          <ul class="header__nav-list">
-            <li class="header__nav-item">
-              <a href="#section-home" class="header__nav-link">Home</a>
-            </li>
-            <li class="header__nav-item">
-              <a href="#section-features" class="header__nav-link">Features</a>
-            </li>
-            <li class="header__nav-item">
-              <a href="#section-ai-powered" class="header__nav-link"
-                >AI-Powered</a
-              >
-            </li>
-            <li class="header__nav-item">
-              <a href="#section-solutions" class="header__nav-link"
-                >Solutions</a
-              >
-            </li>
-            <li class="header__nav-item">
-              <a href="#section-faq" class="header__nav-link">FAQs</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="header__button button--gradient">
-          <a href="#section-contact">Contact Us</a>
-        </div>
-      </header>
-      <main class="main">
-        <section class="section intro" id="section-home">
-          <div class="intro__container">
-            <h1 class="intro__title">
-              <span class="text--gradient">
-                Perfect Fit with 99% Accurate AI
-              </span>
-              <br />
-              Body Measurements
-            </h1>
-            <h3 class="intro__subtitle" style="margin-bottom: 10px !important;">
-              SnapMeasureAI makes finding your perfect fit fast and easy.
-            </h3>
-	    <h3 class="intro__subtitle">
-    	      Trained on over one million body scans!
-            </h3>
-            <div class="intro__buttons">
-              <div
-                class="intro__button intro__button-more"
-                id="free-demo-button">
-                <a href="https://demo.snapmeasureai.com/">Free Demo</a>
-              </div>
-              <div class="intro__button button--gradient">
-                <a href="#section-features" class="header__nav-link">Learn More</a>
-              </div>
-            </div>
-          </div>
-          <div class="intro-bg-stars"></div>
-        </section>
-        <section class="section demo">
-          <div class="demo__container">
-            <div class="purple-blurry purple-blurry-left"></div>
-            <div class="purple-blurry purple-blurry-center"></div>
-            <div class="purple-blurry purple-blurry-right"></div>
-<div class="demo__container-inner">
-		<article class="demo__item" style="padding-top: 10px;">How It Works
-<video id="instruction-video" src="./img/SnapMeasureAI_instructional_video.mp4" webkit-playsinline="" playsinline="" controls="controls" type="video/mp4" preload="none" poster="./img/SnapMeasureAI_video_poster.webp" class="video-container-demo">
-                </video></article><article class="demo__item" style="margin-top: 20px;">Behind The Scenes
-<video id="demo-video" src="./img/SnapMeasureAI_demo_no_heatmap_body_min.mp4" webkit-playsinline="" playsinline="" controls="controls" type="video/mp4" preload="none" poster="./assets/images/models-1.webp" class="video-container-demo">
-                </video></article>
-              </div>
-          </div>
-          <div class="intro-bg-image-mobile"></div>
-        </section>
-        <section class="section video">
-          <div class="video-container">
-            <div class="video__statsDesctop">
-              <div class="video__stat">
-                <p class="video__stat-value text--gradient">99%</p>
-                <p class="video__stat-label">Accuracy</p>
-              </div>
-
-              <div class="video__media-container">
-                <video class="video__media" loop autoplay muted playsinline>
-                  <source src="./assets/video/loom-body.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="video__stat">
-                <p class="video__stat-value text--gradient">100+</p>
-                <p class="video__stat-label">Key Measurements</p>
-              </div>
-            </div>
-
-            <div class="video__statsMobile">
-              <div class="video__media-container">
-                <video class="video__media" loop autoplay muted playsinline>
-                  <source src="./assets/video/loom-body.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="video__statsMobile-container">
-                <div class="video__stat">
-                  <p class="video__stat-value text--gradient">99%</p>
-                  <p class="video__stat-label">Accuracy</p>
-                </div>
-                <div class="video__stat">
-                  <p class="video__stat-value text--gradient">100+</p>
-                  <p class="video__stat-label">Key Measurements</p>
-                </div>
-              </div>
-            </div>
-            <div class="video__description">
-              <p class="video__description-item">
-                Using
-                <span class="video__description-white">advanced AI</span>
-                  to accurately measure your body from just a few photos or a short video, SnapMeasureAI's 
-                <span class="video__description-white">average error</span>
-                is only 0.70 cm or 0.27 in.
-              </p>
-              <p class="video__description-item">
-                SnapMeasureAI works with any body type, skin tone, pose, or
-                background.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section class="section features" id="section-features">
-          <div class="comets"></div>
-
-          <div class="features__header">
-            <h2 class="features__title section__title text--gradient">
-              Main Features
-            </h2>
-            <h3 class="features__subtitle section__subtitle">
-              Unparalleled body shape and measurement precision
-            </h3>
-          </div>
-          <div class="features__content-container">
-            <div class="features__content">
-              <article class="features__item">
-                <div class="features__icon">
-                  <img
-                    src="./assets/images/bordered-icon-ruler.svg"
-                    alt="perfect-fit"
-                  />
-                </div>
-                <h4 class="features__item-title">Find Your Perfect Fit</h4>
-                <p class="features__item-description">
-                  99% accuracy across all body measurements, with an average error of 0.70 cm (0.27 in). Find the perfect fit and never visit a tailor again.
-                </p>
-              </article>
-              <article class="features__item">
-                <div class="features__icon">
-                  <img
-                    src="./assets/images/bordered-icon-check.svg"
-                    alt="performance"
-                  />
-                </div>
-                <h4 class="features__item-title">Reliable Performance</h4>
-                <p class="features__item-description">
-                  Trained on over 100 million body combinations, 400,000 backgrounds, and 90,000 poses, ensuring reliable performance in diverse scenarios.
-                </p>
-              </article>
-              <article class="features__item">
-                <div class="features__icon">
-                  <img src="./assets/images/bordered-icon-chip.svg" alt="ai" />
-                </div>
-                <h4 class="features__item-title">State of the Art AI</h4>
-                <p class="features__item-description">
-                  Accommodates any body type, pose, skin complexion, or user
-                  background. All you need is a smart phone/cell phone with a camera.
-                </p>
-              </article>
-              <article class="features__item">
-                <div class="features__icon">
-                  <img
-                    src="./assets/images/bordered-icon-timer.svg"
-                    alt="speed"
-                  />
-                </div>
-                <h4 class="features__item-title">Speed Optimized</h4>
-                <p class="features__item-description">
-                  Body scans are analyzed in under 10 seconds. Upload two images or a
-                  video. SnapMeasureAI works on desktop or mobile.
-                </p>
-              </article>
-              <article class="features__item">
-                <div class="features__icon">
-                  <img
-                    src="./assets/images/bordered-icon-bars.svg"
-                    alt="customizable"
-                  />
-                </div>
-                <h4 class="features__item-title">Fully Customizable</h4>
-                <p class="features__item-description">
-                  Unlimited body measurements from ten thousand index points. Create a 3D OBJ file of your body with the press of a button.                
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section models" id="section-ai-powered">
-
-          <div class="models__header">
-            <h2 class="models__title section__title text--gradient">
-              AI-Powered Body Models
-            </h2>
-            <h3 class="models__subtitle section__subtitle">
-              Click images to enlarge and learn more
-            </h3>
-          </div>
-          <ul class="models__tabs">
-            <li class="models__tab models__tab-active" data-tab="1">
-              Front view
-            </li>
-            <li class="models__tab" data-tab="2">Measurements</li>
-            <li class="models__tab" data-tab="3">3D avatar</li>
-            <li class="models__tab" data-tab="4">Adjusted pose</li>
-            <li class="models__tab" data-tab="5">Back view</li>
-            <li class="models__tab" data-tab="6">Side view</li>
-          </ul>
-          <div class="models__content">
-            <button
-              class="models__pagination-button pagination__button-desk"
-              id="prev-button-desk"
-            >
-              <img src="./assets/images/icon-left.svg" alt="back" />
-            </button>
-            <div class="models__images">
-              <img
-                src="./assets/images/models-1.webp"
-                alt="models"
-                id="model-image"
-                class="models__image"
-              />
-            </div>
-            <button
-              class="models__pagination-button pagination__button-desk"
-              id="next-button-desk"
-            >
-              <img src="./assets/images/icon-right.svg" alt="next" />
-            </button>
-          </div>
-
-          <div class="models__pagination">
-            <button
-              class="models__pagination-button pagination__button-mob"
-              id="prev-button-mob"
-            >
-              <img src="./assets/images/icon-left.svg" alt="back" />
-            </button>
-            <div class="models__pagination-content">
-              <span
-                class="models__pagination-item models__pagination-active"
-                data-page="1"
-              ></span>
-              <span class="models__pagination-item" data-page="2"></span>
-              <span class="models__pagination-item" data-page="3"></span>
-              <span class="models__pagination-item" data-page="4"></span>
-              <span class="models__pagination-item" data-page="5"></span>
-              <span class="models__pagination-item" data-page="6"></span>
-            </div>
-            <button
-              class="models__pagination-button pagination__button-mob"
-              id="next-button-mob"
-            >
-              <img src="./assets/images/icon-right.svg" alt="next" />
-            </button>
-          </div>
-        </section>
-
-        <section class="section solutions" id="section-solutions">
-          <div class="solutions__bg-image"></div>
-
-          <div class="solutions__header">
-            <div class="purple-blurry purple-blurry-left"></div>
-            <div class="purple-blurry purple-blurry-right"></div>
-            <h2 class="solutions__title section__title text--gradient">
-              The Fit Solution
-            </h2>
-            <h3 class="solutions__subtitle section__subtitle">
-              Reduce returns and save cost with accurate body measurements
-            </h3>
-          </div>
-          <div class="solutions__content">
-            <article class="solutions__item">
-              <h4 class="solutions__item-title">Reduce Returns</h4>
-              <ul class="solutions__list">
-                <li class="solutions__list-item">Save money</li>
-                <li class="solutions__list-item">Perfect fit every time</li>
-                <li class="solutions__list-item">99% accuracy</li>
-              </ul>
-            </article>
-            <article class="solutions__item">
-              <h4 class="solutions__item-title">Grow Your Business</h4>
-              <ul class="solutions__list">
-                <li class="solutions__list-item">Increase revenue</li>
-                <li class="solutions__list-item">Reduce landfill waste</li>
-                <li class="solutions__list-item">Easy and fast to use</li>
-              </ul>
-            </article>
-            <article class="solutions__item">
-              <h4 class="solutions__item-title">Increase Conversions</h4>
-              <ul class="solutions__list">
-                <li class="solutions__list-item">Shopping confidence</li>
-                <li class="solutions__list-item">Innovative technology</li>
-                <li class="solutions__list-item">Robust sizing solution</li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section class="section faq" id="section-faq">
-          <div class="comets"></div>
-
-          <div class="faq__header">
-            <h2 class="contact__title section__title text--gradient">
-              FAQs
-            </h2>
-            <h3 class="faq__subtitle section__subtitle">
-              Answers to frequently asked questions
-            </h3>
-          </div>
-          <div class="accordions">
-            <article class="accordion" id="accordion1">
-              <div class="accordion__header">
-                <h4 class="accordion__title">What is SnapMeasureAI?</h4>
-                <img
-                  src="./assets/images/icon-more.svg"
-                  alt="close"
-                  class="accordion__icon"
-                />
-              </div>
-              <p class="accordion__content hidden">
-                SnapMeasureAI is an AI technology that provides 99% accurate
-                body measurements without the need to visit a tailor.
-              </p>
-            </article>
-            <article class="accordion" id="accordion2">
-              <div class="accordion__header">
-                <h4 class="accordion__title">
-                  What body measurements does SnapMeasureAI provide?
-                </h4>
-                <img
-                  src="./assets/images/icon-more.svg"
-                  alt="open"
-                  class="accordion__icon"
-                />
-              </div>
-              <p class="accordion__content hidden">
-                SnapMeasureAI offers unlimited body measurements using a precise 3D avatar. With seven thousand index points, you can select the exact measurements you need.
-              </p>
-            </article>
-            <article class="accordion" id="accordion3">
-              <div class="accordion__header">
-                <h4 class="accordion__title">
-                  Do I need special clothing or equipment?
-                </h4>
-                <img
-                  src="./assets/images/icon-more.svg"
-                  alt="open"
-                  class="accordion__icon"
-                />
-              </div>
-              <p class="accordion__content hidden">
-                No special equipment is required. Just take or upload two photos. For the best results, wear tightly fitting clothing and tuck in any loose shirts.
-              </p>
-            </article>
-            <article class="accordion" id="accordion4">
-              <div class="accordion__header">
-                <h4 class="accordion__title">
-                  How accurate are the measurements?
-                </h4>
-                <img
-                  src="./assets/images/icon-more.svg"
-                  alt="open"
-                  class="accordion__icon"
-                />
-              </div>
-              <p class="accordion__content hidden">
-                Measurements are 99% accurate across the entire body.
-              </p>
-            </article>
-            <article class="accordion" id="accordion5">
-              <div class="accordion__header">
-                <h4 class="accordion__title">How can I test the technology?</h4>
-                <img
-                  src="./assets/images/icon-more.svg"
-                  alt="open"
-                  class="accordion__icon"
-                />
-              </div>
-              <p class="accordion__content hidden">
-                You can now try a free demo at <a href="https://demo.snapmeasureai.com/">demo.snapmeasureai.com</a>. Experience the technology firsthand and see its impressive accuracy!
-              </p>
-            </article>
-            <article class="accordion" id="accordion6">
-              <div class="accordion__header">
-                <h4 class="accordion__title">
-                  What is the main goal of SnapMeasureAI?
-                </h4>
-                <img
-                  src="./assets/images/icon-more.svg"
-                  alt="open"
-                  class="accordion__icon"
-                />
-              </div>
-              <p class="accordion__content hidden">
-                SnapMeasureAI is tackling the $500 billion problem of annual retail returns, which also has a significant environmental impact. By offering precise measurements, SnapMeasureAI helps users find their perfect fit reliably.
-              </p>
-            </article>
-          </div>
-        </section>
-
-<section class="section contact-us" id="section-contact">
-          <div class="contact-us__header">
-            <h2 class="contact-us__title section__title text--gradient">
-              Contact Us
-            </h2>
-            <h3 class="contact-us__subtitle section__subtitle">
-              Contact us for a live demo, technology license, or partnership opportunities at
-            </h3>
-          </div>
-          <a href="mailto:info@snapmeasureai.com" class="contact-us__info">
-            <img src="./assets/images/icon-email.svg" alt="mail-icon" class="contact-us__icon">info@snapmeasureai.com
-          </a><div class="contact-us__info" style="margin-top: 100px; font-size: 14px;">
-            Social Links
-</div><div class="contact-us__info">
-<a class="contact-us__icon" href="https://www.linkedin.com/company/snapmeasureai"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="50" viewBox="0,0,300,150">
-<g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M41,4h-32c-2.76,0 -5,2.24 -5,5v32c0,2.76 2.24,5 5,5h32c2.76,0 5,-2.24 5,-5v-32c0,-2.76 -2.24,-5 -5,-5zM17,20v19h-6v-19zM11,14.47c0,-1.4 1.2,-2.47 3,-2.47c1.8,0 2.93,1.07 3,2.47c0,1.4 -1.12,2.53 -3,2.53c-1.8,0 -3,-1.13 -3,-2.53zM39,39h-6c0,0 0,-9.26 0,-10c0,-2 -1,-4 -3.5,-4.04h-0.08c-2.42,0 -3.42,2.06 -3.42,4.04c0,0.91 0,10 0,10h-6v-19h6v2.56c0,0 1.93,-2.56 5.81,-2.56c3.97,0 7.19,2.73 7.19,8.26z"></path></g></g>
-</svg></a>
-            <a class="contact-us__icon" href="https://www.youtube.com/watch?v=rQr4I5apFDk"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="50" viewBox="0,0,300,150" style="fill:#FFFFFF;">
-<g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M44.89844,14.5c-0.39844,-2.19922 -2.29687,-3.80078 -4.5,-4.30078c-3.29687,-0.69922 -9.39844,-1.19922 -16,-1.19922c-6.59766,0 -12.79687,0.5 -16.09766,1.19922c-2.19922,0.5 -4.10156,2 -4.5,4.30078c-0.40234,2.5 -0.80078,6 -0.80078,10.5c0,4.5 0.39844,8 0.89844,10.5c0.40234,2.19922 2.30078,3.80078 4.5,4.30078c3.5,0.69922 9.5,1.19922 16.10156,1.19922c6.60156,0 12.60156,-0.5 16.10156,-1.19922c2.19922,-0.5 4.09766,-2 4.5,-4.30078c0.39844,-2.5 0.89844,-6.10156 1,-10.5c-0.20312,-4.5 -0.70312,-8 -1.20312,-10.5zM19,32v-14l12.19922,7z"></path></g></g>
-</svg></a>
-          
-            <a class="contact-us__icon" href="https://www.tiktok.com/@snapmeasureai"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="50" viewBox="0,0,300,150" style="fill:#FFFFFF;">
-<g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M41,4h-32c-2.757,0 -5,2.243 -5,5v32c0,2.757 2.243,5 5,5h32c2.757,0 5,-2.243 5,-5v-32c0,-2.757 -2.243,-5 -5,-5zM37.006,22.323c-0.227,0.021 -0.457,0.035 -0.69,0.035c-2.623,0 -4.928,-1.349 -6.269,-3.388c0,5.349 0,11.435 0,11.537c0,4.709 -3.818,8.527 -8.527,8.527c-4.709,0 -8.527,-3.818 -8.527,-8.527c0,-4.709 3.818,-8.527 8.527,-8.527c0.178,0 0.352,0.016 0.527,0.027v4.202c-0.175,-0.021 -0.347,-0.053 -0.527,-0.053c-2.404,0 -4.352,1.95 8 -4.352,4.352c0,2.404 1.95 8,4.352 4.352,4.352c2.404,0 4.527,-1.934 4.527,-4.298c0,-0.095 0.042,-19.594 0.042,-19.594h4.016c0.378,3.591 3.277,6.425 6.901,6.685z"></path></g></g>
-</svg>
-          </a>
-<a class="contact-us__icon" href="https://www.reddit.com/r/ChatGPT/comments/1ex4rjo/mobile_tailor_ai_body_measurements/"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="50" viewBox="0,0,300,150" style="fill:#FFFFFF;">
-<g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M29,3c-2.10547,0 -4.56641,1.65234 -4.9375,9.03125c0.3125,-0.00781 0.62109,-0.03125 0.9375,-0.03125c0.35156,0 0.71484,0.01953 1.0625,0.03125c0.23828,-4.43359 1.29297,-7.03125 2.9375,-7.03125c0.70313,0 1.10156,0.38281 1.84375,1.1875c0.86719,0.94141 2,2.16406 4.21875,2.625c-0.03516,-0.26172 -0.0625,-0.54297 -0.0625,-0.8125c0,-0.42187 0.04297,-0.82031 0.125,-1.21875c-1.375,-0.375 -2.10156,-1.16797 -2.8125,-1.9375c-0.79297,-0.85937 -1.70312,-1.84375 -3.3125,-1.84375zM41,4c-2.20703,0 -4,1.79688 -4,4c0,2.20313 1.79297,4 4,4c2.20703,0 4,-1.79687 4,-4c0,-2.20312 -1.79297,-4 -4,-4zM25,14c-12.13281,0 -22,6.17969 -22,15c0,8.82031 9.86719,16 22,16c12.13281,0 22,-7.17969 22,-16c0,-8.82031 -9.86719,-15 -22,-15zM7.5,14.9375c-1.46094,0 -2.84766,0.59766 -3.90625,1.65625c-1.72266,1.72266 -2.07812,4.19922 -1.09375,6.25c1.51172,-2.92578 4.11328,-5.42187 7.46875,-7.28125c-0.76172,-0.38672 -1.60547,-0.625 -2.46875,-0.625zM42.5,14.9375c-0.86328,0 -1.70703,0.23828 -2.46875,0.625c3.35547,1.85938 5.95703,4.35547 7.46875,7.28125c0.98438,-2.05078 0.62891,-4.52734 -1.09375,-6.25c-1.05859,-1.05859 -2.44531,-1.65625 -3.90625,-1.65625zM17,23c1.65625,0 3,1.34375 3,3c0,1.65625 -1.34375,3 -3,3c-1.65625,0 -3,-1.34375 -3,-3c0,-1.65625 1.34375,-3 3,-3zM33,23c1.65625,0 3,1.34375 3,3c0,1.65625 -1.34375,3 -3,3c-1.65625,0 -3,-1.34375 -3,-3c0,-1.65625 1.34375,-3 3,-3zM16.0625,34c0.25,0.04297 0.49609,0.18359 0.65625,0.40625c0.10547,0.14844 2.44922,3.28125 8.28125,3.28125c5.91016,0 8.25781,-3.21875 8.28125,-3.25c0.31641,-0.44922 0.95313,-0.57031 1.40625,-0.25c0.44922,0.31641 0.53516,0.92188 0.21875,1.375c-0.11719,0.16797 -2.96875,4.125 -9.90625,4.125c-6.94141,0 -9.78906,-3.95703 -9.90625,-4.125c-0.31641,-0.45312 -0.23437,-1.05859 0.21875,-1.375c0.22656,-0.16016 0.5,-0.23047 0.75,-0.1875z"></path></g></g>
-</svg>
-          </a>
-	</div>
-        </section>
-      </main>
-      <footer class="footer">
-        <p class="footer__text">&copy; 2025 - SnapMeasureAI</p>
-      </footer>
-
-      <div id="image-modal" class="modal">
-        <button class="modal__close" id="modal-close">
-          <img src="./assets/images/icon-close.svg" alt="close" />
-        </button>
-        <div class="modal__content">
-          <img src="" alt="model" class="modal__image" id="modal-image" />
-          <p class="modal__text"></p>
-        </div>
+        <input type="range" min="0" max="100" value="50">
       </div>
     </div>
+    
+    
 
-    <div id="video-modal" class="modal">
-      <button class="modal__close" id="video-modal-close">
-        <img src="./assets/images/icon-close.svg" alt="close" />
-      </button>
-      <div class="modal__content">
-        <div class="modal__video-container" id="video-container"></div>
-      </div>
-    </div>
-    <script src="styles.js?v=1.95"></script>
-    <script src="index.js?v=1.95"></script>
-  </body>
-</html>
+    <script>
+      const slider = document.querySelector(".slider input");
+      const img = document.querySelector(".images .img-2");
+      const dragLine = document.querySelector(".slider .drag-line");
+      slider.oninput = ()=>{
+        let sliderVal = slider.value;
+        dragLine.style.left = sliderVal + "%";
+        img.style.width = sliderVal + "%";
+      }
+    </script>
+
+  
+
+</body></html>
