@@ -73,6 +73,39 @@
     <meta name="og:image" content="https://snapmeasureai.com/img/SnapMeasure_cover_body_models.webp">
     <link rel="stylesheet" href="settings.css?v=1.95" />
     <link rel="stylesheet" href="index.css?v=1.95" />
+<style>
+    .compare-container {
+      position: relative;
+      width: 500px;
+      height: 300px;
+    }
+
+    .compare-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .compare-top {
+      clip-path: inset(0 50% 0 0);
+    }
+
+    input[type=range] {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+<script>
+  const slider = document.getElementById('slider');
+  const topImage = document.getElementById('topImage');
+
+  slider.addEventListener('input', () => {
+    topImage.style.clipPath = `inset(0 ${100 - slider.value}% 0 0)`;
+  });
+</script>
   </head>
   <body>
     <div class="main-wrapper">
