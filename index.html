@@ -1,144 +1,103 @@
 <html lang="en" dir="ltr"><head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"><script>jQuery(document).ready(function($){
+   //function to check if the .cd-image-container is in the viewport here
+   // ...
     
-      <style>*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html,body{
-  display: grid;
+   //make the .cd-handle element draggable and modify .cd-resize-img width according to its position
+   $('.cd-image-container').each(function(){
+      var actual = $(this);
+      drags(actual.find('.cd-handle'), actual.find('.cd-resize-img'), actual);
+   });
+
+   //function to upadate images label visibility here
+   // ...
+});
+
+//draggable funtionality - credits to http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/
+function drags(dragElement, resizeElement, container) {
+   dragElement.on("mousedown vmousedown", function(e) {
+      dragElement.addClass('draggable');
+      resizeElement.addClass('resizable');
+
+      var dragWidth = dragElement.outerWidth(),
+          xPosition = dragElement.offset().left + dragWidth - e.pageX,
+          containerOffset = container.offset().left,
+          containerWidth = container.outerWidth(),
+          minLeft = containerOffset + 10,
+          maxLeft = containerOffset + containerWidth - dragWidth - 10;
+        
+      dragElement.parents().on("mousemove vmousemove", function(e) {
+         leftValue = e.pageX + xPosition - dragWidth;
+            
+         //constrain the draggable element to move inside its container
+         if(leftValue < minLeft ) {
+            leftValue = minLeft;
+         } else if ( leftValue > maxLeft) {
+            leftValue = maxLeft;
+         }
+
+         widthValue = (leftValue + dragWidth/2 - containerOffset)*100/containerWidth+'%';
+
+         $('.draggable').css('left', widthValue).on("mouseup vmouseup", function() {
+            $(this).removeClass('draggable');
+            resizeElement.removeClass('resizable');
+         });
+
+         $('.resizable').css('width', widthValue); 
+
+         //function to upadate images label visibility here
+         // ...
+
+      }).on("mouseup vmouseup", function(e){
+         dragElement.removeClass('draggable');
+         resizeElement.removeClass('resizable');
+      });
+      e.preventDefault();
+   }).on("mouseup vmouseup", function(e) {
+      dragElement.removeClass('draggable');
+      resizeElement.removeClass('resizable');
+   });})</script>
+    
+      <style>.cd-resize-img {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-  place-items: center;
-  background: #efefef;
-}
-.copyright{
-  font-size: 150%;
-}
-.wrapper{
-  position: relative;
-  height: 500px;
-  width: 750px;
+  width: 0;
   overflow: hidden;
-  background: #fff;
-  border: 7px solid #fff;
-  box-shadow: 0px 0px 15px rgba(0,0,0,0.15);
+  /* Force Hardware Acceleration in WebKit */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
-.wrapper .images{
-  height: 100%;
-  width: 100%;
-  display: flex;
-}
-.wrapper .images .img-1{
-  height: 100%;
-  width: 100%;
-  background: url("images/img.jpg") no-repeat;
-  /* background: url("images/car.jpg") no-repeat; */
-}
-.wrapper .images .img-2{
-  position: absolute;
-  height: 100%;
+.is-visible .cd-resize-img {
   width: 50%;
-  /* filter: blur(5px); */
-  background: url("images/img.png") no-repeat;
-  /* background: url("images/car.png") no-repeat; */
+  /* bounce in animation of the modified image */
+  animation: cd-bounce-in 0.7s;
 }
-.wrapper .slider{
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 99;
-}
-.wrapper .slider input{
-  width: 100%;
-  outline: none;
-  background: none;
-  -webkit-appearance: none;
-}
-.slider input::-webkit-slider-thumb{
-  height: 486px;
-  width: 3px;
-  background: none;
-  -webkit-appearance: none;
-  cursor: col-resize;
-}
-.slider .drag-line{
-  width: 3px;
-  height: 486px;
-  position: absolute;
-  left: 49.85%;
-  pointer-events: none;
-}
-.slider .drag-line::before,
-.slider .drag-line::after{
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 222px;
-  background: #fff;
-}
-.slider .drag-line::before{
-  top: 0;
-}
-.slider .drag-line::after{
-  bottom: 0;
-}
-.slider .drag-line span{
-  height: 42px;
-  width: 42px;
-  border: 3px solid #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-.slider .drag-line span::before,
-.slider .drag-line span::after{
-  position: absolute;
-  content: "";
-  top: 50%;
-  border: 10px solid transparent;
-  border-bottom-width: 0px;
-  border-right-width: 0px;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-.slider .drag-line span::before{
-  left: 40%;
-  border-left-color: #fff;
-}
-.slider .drag-line span::after{
-  left: 60%;
-  border-top-color: #fff;
-}
-</style>
+@keyframes cd-bounce-in {
+  0% {
+    width: 0;
+  }
+  60% {
+    width: 55%;
+  }
+  100% {
+    width: 50%;
+  }
+}</style>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="images">
-        <div class="img-1"><img src="./img/synthetic_image.png"></div>
-        <div class="img-2"><img src="./img/synthetic_image_control.png"></div>
-      </div>
-      <div class="slider">
-        <div class="drag-line">
-          <span></span>
-        </div>
-        <input type="range" min="0" max="100" value="50">
-      </div>
-    </div>
-    
-    
-
-    <script>
-      const slider = document.querySelector(".slider input");
-      const img = document.querySelector(".images .img-2");
-      const dragLine = document.querySelector(".slider .drag-line");
-      slider.oninput = ()=>{
-        let sliderVal = slider.value;
-        dragLine.style.left = sliderVal + "%";
-        img.style.width = sliderVal + "%";
-      }
-    </script>
+<figure class="cd-image-container">
+   <img src="./img/synthetic_image.png" alt="Original Image">
+   <span class="cd-image-label" data-type="original">Original</span>
+  
+   <div class="cd-resize-img"> <!-- the resizable image on top -->
+      <img src="./img/synthetic_image_control.png" alt="Modified Image">
+      <span class="cd-image-label" data-type="modified">Modified</span>
+   </div>
+  
+   <span class="cd-handle"></span> <!-- slider handle -->
+</figure> <!-- cd-image-container -->
 
   
 
