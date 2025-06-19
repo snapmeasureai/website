@@ -707,7 +707,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   mix-blend-mode: lighten;
 }
 .video__description {
-  max-width: 608px;
+  max-width: 720px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
