@@ -1,103 +1,19 @@
 <html lang="en" dir="ltr"><head>
-    <meta charset="utf-8"><script>jQuery(document).ready(function($){
-   //function to check if the .cd-image-container is in the viewport here
-   // ...
+    <meta charset="utf-8"><script>new Dics({
+  container: document.querySelector(".b-dics"),
+  textPosition: "top"
+});</script><link rel="stylesheet" href="dics.css">
+<script src="dics.js"></script>
     
-   //make the .cd-handle element draggable and modify .cd-resize-img width according to its position
-   $('.cd-image-container').each(function(){
-      var actual = $(this);
-      drags(actual.find('.cd-handle'), actual.find('.cd-resize-img'), actual);
-   });
-
-   //function to upadate images label visibility here
-   // ...
-});
-
-//draggable funtionality - credits to http://css-tricks.com/snippets/jquery/draggable-without-jquery-ui/
-function drags(dragElement, resizeElement, container) {
-   dragElement.on("mousedown vmousedown", function(e) {
-      dragElement.addClass('draggable');
-      resizeElement.addClass('resizable');
-
-      var dragWidth = dragElement.outerWidth(),
-          xPosition = dragElement.offset().left + dragWidth - e.pageX,
-          containerOffset = container.offset().left,
-          containerWidth = container.outerWidth(),
-          minLeft = containerOffset + 10,
-          maxLeft = containerOffset + containerWidth - dragWidth - 10;
-        
-      dragElement.parents().on("mousemove vmousemove", function(e) {
-         leftValue = e.pageX + xPosition - dragWidth;
-            
-         //constrain the draggable element to move inside its container
-         if(leftValue < minLeft ) {
-            leftValue = minLeft;
-         } else if ( leftValue > maxLeft) {
-            leftValue = maxLeft;
-         }
-
-         widthValue = (leftValue + dragWidth/2 - containerOffset)*100/containerWidth+'%';
-
-         $('.draggable').css('left', widthValue).on("mouseup vmouseup", function() {
-            $(this).removeClass('draggable');
-            resizeElement.removeClass('resizable');
-         });
-
-         $('.resizable').css('width', widthValue); 
-
-         //function to upadate images label visibility here
-         // ...
-
-      }).on("mouseup vmouseup", function(e){
-         dragElement.removeClass('draggable');
-         resizeElement.removeClass('resizable');
-      });
-      e.preventDefault();
-   }).on("mouseup vmouseup", function(e) {
-      dragElement.removeClass('draggable');
-      resizeElement.removeClass('resizable');
-   });})</script>
-    
-      <style>.cd-resize-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  overflow: hidden;
-  /* Force Hardware Acceleration in WebKit */
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-.is-visible .cd-resize-img {
-  width: 50%;
-  /* bounce in animation of the modified image */
-  animation: cd-bounce-in 0.7s;
-}
-@keyframes cd-bounce-in {
-  0% {
-    width: 0;
-  }
-  60% {
-    width: 55%;
-  }
-  100% {
-    width: 50%;
-  }
-}</style>
+      
   </head>
   <body>
-<figure class="cd-image-container">
-   <img src="./img/synthetic_image.png" alt="Original Image">
-   <span class="cd-image-label" data-type="original">Original</span>
-  
-   <div class="cd-resize-img"> <!-- the resizable image on top -->
-      <img src="./img/synthetic_image_control.png" alt="Modified Image">
-      <span class="cd-image-label" data-type="modified">Modified</span>
-   </div>
-  
-   <span class="cd-handle"></span> <!-- slider handle -->
-</figure> <!-- cd-image-container -->
+<div class="b-dics" style="width: 590px">
+  <img src="http://codictados.com/wp-content/uploads/2017/01/01.jpg" alt="Japan">
+  <img src="http://codictados.com/wp-content/uploads/2017/01/02.jpg" alt="Japan Yellow">
+  <img src="http://codictados.com/wp-content/uploads/2017/01/03.jpg" alt="Japan Orange">
+  <img src="http://codictados.com/wp-content/uploads/2017/01/04.jpg" alt="Japan Black &amp; White">
+</div> <!-- cd-image-container -->
 
   
 
