@@ -570,7 +570,12 @@
         </section>
       </main>
       <footer class="footer">
-        <p class="footer__text">&copy; 2025 - SnapMeasureAI</p>
+        <p class="footer__text">© <span id="year"></span> - SnapMeasureAI</p>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
       </footer>
 
       <div id="image-modal" class="modal">
