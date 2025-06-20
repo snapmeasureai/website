@@ -606,11 +606,11 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   /* left: 50%;
   transform: translateX(-50%); */
   width: 1500px;
-  height: 500px;
+  height: 1500px;
   background-image: url("./assets/design/video-stars.svg");
   background-size: 100%;
   background-position: center top;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   z-index: -1;
 }
 
