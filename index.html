@@ -98,14 +98,6 @@
       margin-top: 10px;
     }
   </style>
-<script>
-  const slider = document.getElementById('slider');
-  const topImage = document.getElementById('topImage');
-
-  slider.addEventListener('input', () => {
-    topImage.style.clipPath = `inset(0 ${100 - slider.value}% 0 0)`;
-  });
-</script>
   </head>
   <body>
     <div class="main-wrapper">
