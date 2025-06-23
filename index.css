@@ -1488,7 +1488,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 .accordion__content.visible {
   margin-top: 20px;
-  max-height: 400px;
+  /* max-height: 400px; */
   /* transition: max-height 0.3s ease-in; */
 }
 
