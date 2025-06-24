@@ -1,7 +1,7 @@
 <h2 align="center"><strong>SnapMeasureAI</strong></h2>
-<h4 align="center"><strong>Lifelike Synthetic Human Images, AI Body Measurement, and 3D Motion Analysis</strong></h3>
+<h4 align="center"><strong>Synthetic Human Images, AI Body Measurements & 3D Motion Tracking</strong></h3>
 
-SnapMeasureAI delivers three core technologies—supported by issued and pending patents: photorealistic synthetic human images for AI training, 3D body measurement from just two photos, and 3D motion analysis from video—no mocap suits or manual labeling required. These solutions enable scalable human-centric AI across retail, health, fitness, and security.
+SnapMeasureAI delivers three core technologies—<b>supported by issued and pending patents: photorealistic synthetic human images for AI training, 3D body measurement from just two photos, and 3D motion analysis from video—no mocap suits or manual labeling required.</b> These solutions enable scalable human-centric AI across retail, health, fitness, and security.
 
 SnapMeasureAI generates unlimited synthetic images with perfectly aligned labels, allowing computer vision teams to train models without human annotation. Its advanced mesh prediction system extracts accurate body measurements across 10,000+ points using only two input images.
 
@@ -11,8 +11,12 @@ Try the free demo at <a href="https://demo.snapmeasureai.com.">demo.snapmeasurea
 
 Reach us at info@snapmeasureai.com for a demo, licensing or partnership opportunities.
 
+| Mesh-Aligned Images | Photorealistic Generated Output | With Known Ground Truths |
+:-------------------------:|:-------------------------:|:-------------------------:
+![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_control.png) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image.png) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_keypoints.png)
+
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/07676d64-15cd-424d-84dd-0133146b1070" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
+  <video src="https://github.com/user-attachments/assets/a87d42d6-53d2-41b0-a57c-cd6b5a22a1ab" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
 </div>
 
 # Contact Us
