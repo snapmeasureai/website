@@ -1724,7 +1724,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
     user-select    : none;
     font-size      : 13px;
     text-align     : center;
-    margin         : 16px 0;
+    margin         : 3px 0;
     white-space    : nowrap;
     opacity        : .7;
     pointer-events : none;
