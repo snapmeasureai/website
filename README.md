@@ -11,7 +11,7 @@ Try the free demo at <a href="https://demo.snapmeasureai.com.">demo.snapmeasurea
 
 Reach us at info@snapmeasureai.com for a demo, licensing or partnership opportunities.
 
-| Mesh-Aligned Images | Realistic AI Generated Output | With Known Ground Truths |
+| Mesh-Aligned | Realistic AI Generated Image | With Known Ground Truths |
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_control.png) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image.png) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_keypoints.png)
 
