@@ -16,14 +16,24 @@ html, body {
 
 html { scroll-padding-top: 105px; min-height: 100vh;}
 
-.video-container-demo, 
-.video-poster {
-  position: relative;
-  max-width: 100% !important;
-  width: 100% !important;
-  height: auto !important;
-  display: block;
-}
+        .video-container-demo {
+            position: relative;
+            /*padding-bottom: 32vh;*/
+            /* padding-top: 30px; */
+            height: auto !important;
+            /* max-height: 320px; */
+            /* overflow: hidden; */
+            width: 100% !important;
+            /* max-width: 560px; */
+            /* margin: 20px auto; */
+            /* aspect-ratio: 9 / 16; */
+            /* margin-left: 20px !important; */
+            /* margin-right: 20px !important; */
+            padding: 5px !important;
+            max-height:  min(85vh, 840px);
+            border-radius: 30px;
+	    /* scroll-margin-top: -10px !important; */
+        }
 
 .button--gradient {
   background-color: transparent;
