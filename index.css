@@ -20,7 +20,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
             position: relative;
             /*padding-bottom: 32vh;*/
             /* padding-top: 30px; */
-            height: auto !important;
+            /* height: auto !important; */
             /* max-height: 320px; */
             /* overflow: hidden; */
             width: 100% !important;
