@@ -16,32 +16,13 @@ html, body {
 
 html { scroll-padding-top: 105px; min-height: 100vh;}
 
-        .video-container-demo {
-            position: relative;
-            /*padding-bottom: 32vh;*/
-            /* padding-top: 30px; */
-            /* height: auto !important; */
-            /* max-height: 320px; */
-            /* overflow: hidden; */
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            /* max-width: 560px; */
-            /* margin: 20px auto; */
-            /* aspect-ratio: 9 / 16; */
-            /* margin-left: 20px !important; */
-            /* margin-right: 20px !important; */
-            padding: 5px !important;
-            /* max-height:  min(85vh, 840px); */
-            border-radius: 30px;
-	    /* scroll-margin-top: -10px !important; */
-        }
-
-.demo__container-inner, 
-.demo__item, 
-.b-dics, 
-.video-container-demo {
-  outline: 1px solid red !important;
+.video-container-demo video, 
+.video-poster {
+  position: relative;
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block;
 }
 
 .button--gradient {
