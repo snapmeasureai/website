@@ -30,7 +30,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
             /* margin-left: 20px !important; */
             /* margin-right: 20px !important; */
             padding: 5px !important;
-            max-height:  min(85vh, 840px);
+            /* max-height:  min(85vh, 840px); */
             border-radius: 30px;
 	    /* scroll-margin-top: -10px !important; */
         }
