@@ -535,6 +535,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
         .video-container-demo {
             max-height:  560px !important;
 	    scroll-margin-top: -20px !important;
+	    aspect-ratio: 16/9; /* Force portrait shape */
         }
   .demo__container-inner,
   .demo__container {
