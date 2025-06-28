@@ -23,7 +23,9 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
             /* height: auto !important; */
             /* max-height: 320px; */
             /* overflow: hidden; */
-            width: 100% !important;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
             /* max-width: 560px; */
             /* margin: 20px auto; */
             /* aspect-ratio: 9 / 16; */
