@@ -16,7 +16,7 @@ html, body {
 
 html { scroll-padding-top: 105px; min-height: 100vh;}
 
-.video-container-demo video, 
+.video-container-demo, 
 .video-poster {
   position: relative;
   max-width: 100% !important;
