@@ -37,6 +37,13 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 	    /* scroll-margin-top: -10px !important; */
         }
 
+.demo__container-inner, 
+.demo__item, 
+.b-dics, 
+.video-container-demo {
+  outline: 1px solid red !important;
+}
+
 .button--gradient {
   background-color: transparent;
   position: relative;
