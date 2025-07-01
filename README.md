@@ -13,7 +13,7 @@ Reach us at info@snapmeasureai.com for a demo, licensing or partnership opportun
 
 | Mesh-Aligned | Realistic AI-Generated Images | With Annotations |
 :-------------------------:|:-------------------------:|:-------------------------:
-![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_control.png) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image.png) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_keypoints.png)
+![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_control.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_keypoints.webp)
 
 <div align="center">
   <video src="https://github.com/user-attachments/assets/a87d42d6-53d2-41b0-a57c-cd6b5a22a1ab" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
