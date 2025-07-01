@@ -527,6 +527,26 @@ For motion, the platform analyzes video input to extract 3D skeletal motion usin
         textPosition: 'top'
       });
     });
+  window.addEventListener('DOMContentLoaded', function () {
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    const desktopVideo = document.querySelector('.video__statsDesctop video');
+    const mobileVideo = document.querySelector('.video__statsMobile video');
+
+    if (isMobile) {
+      // Mobile active: lazy-load desktop video
+      if (desktopVideo) {
+        desktopVideo.setAttribute('loading', 'lazy');
+        desktopVideo.style.display = 'none'; // Hide to help browser skip it
+      }
+    } else {
+      // Desktop active: lazy-load mobile video
+      if (mobileVideo) {
+        mobileVideo.setAttribute('loading', 'lazy');
+        mobileVideo.style.display = 'none';
+      }
+    }
+  });
   </script>
   </body>
 </html>
