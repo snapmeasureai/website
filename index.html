@@ -220,40 +220,11 @@
         <section class="section video">
           <div class="video-container">
             <div class="video__statsDesctop">
-              <div class="video__stat">
-                <p class="video__stat-value text--gradient">1M+</p>
-                <p class="video__stat-label">Body Scans</p>
-              </div>
 
-              <div class="video__media-container">
-                <video class="video__media" loop autoplay muted playsinline>
-                  <source src="./assets/video/loom-body.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="video__stat">
-                <p class="video__stat-value text--gradient">100+</p>
-                <p class="video__stat-label">Key Measurements</p>
-              </div>
             </div>
 
             <div class="video__statsMobile">
-              <div class="video__media-container">
-                <video class="video__media" loop autoplay muted playsinline>
-                  <source src="./assets/video/loom-body.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="video__statsMobile-container">
-                <div class="video__stat">
-                  <p class="video__stat-value text--gradient">1M+</p>
-                  <p class="video__stat-label">Body Scans</p>
-                </div>
-                <div class="video__stat">
-                  <p class="video__stat-value text--gradient">100+</p>
-                  <p class="video__stat-label">Key Measurements</p>
-                </div>
-              </div>
+
             </div>
             <div class="video__description">
               <p class="video__description-item">
@@ -535,6 +506,57 @@ For motion, the platform analyzes video input to extract 3D skeletal motion usin
         textPosition: 'top'
       });
     });
+  document.addEventListener("DOMContentLoaded", function () {
+    const isMobile = window.innerWidth <= 768;
+
+    const mobileHTML = `
+      <div class="video__media-container">
+        <video class="video__media" loop autoplay muted playsinline>
+          <source src="./assets/video/loom-body.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video__statsMobile-container">
+        <div class="video__stat">
+          <p class="video__stat-value text--gradient">1M+</p>
+          <p class="video__stat-label">Body Scans</p>
+        </div>
+        <div class="video__stat">
+          <p class="video__stat-value text--gradient">100+</p>
+          <p class="video__stat-label">Key Measurements</p>
+        </div>
+      </div>
+    `;
+
+    const desktopHTML = `
+      <div class="video__stat">
+        <p class="video__stat-value text--gradient">1M+</p>
+        <p class="video__stat-label">Body Scans</p>
+      </div>
+      <div class="video__media-container">
+        <video class="video__media" loop autoplay muted playsinline>
+          <source src="./assets/video/loom-body.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video__stat">
+        <p class="video__stat-value text--gradient">100+</p>
+        <p class="video__stat-label">Key Measurements</p>
+      </div>
+    `;
+
+    if (isMobile) {
+      const mobileContainer = document.querySelector('.video__statsMobile');
+      if (mobileContainer) {
+        mobileContainer.innerHTML = mobileHTML;
+      }
+    } else {
+      const desktopContainer = document.querySelector('.video__statsDesctop');
+      if (desktopContainer) {
+        desktopContainer.innerHTML = desktopHTML;
+      }
+    }
+  });
   </script>
   </body>
 </html>
