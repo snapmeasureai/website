@@ -3,9 +3,9 @@
 
 SnapMeasureAI delivers three core technologies—supported by issued and pending patents:
 
-🧠 **Photorealistic AI‑generated human images with mesh‑aligned annotations** for training<br>
+🧠 **Photorealistic AI‑generated images with mesh‑aligned annotations** for training<br>
 📏 **AI‑driven 3D body measurements** from just two photos<br>
-🎥 **3D motion capture from video**—no mocap suits, no manual labeling<br>
+🎥 **3D motion capture from video**—no mocap suits, no manual labeling
 
 These power human‑centric AI across retail, health, fitness, and security.
 
@@ -15,9 +15,9 @@ These power human‑centric AI across retail, health, fitness, and security.
 
 🏃‍♂️ For motion, the platform analyzes video to extract **3D skeletal movement** across 25+ joints—enabling full-body motion capture in seconds, replacing expensive, hardware-based systems.
 
-🔗 Try the free demo: demo.snapmeasureai.com
-📬 Contact us: info@snapmeasureai.com for a demo, licensing, or partnership opportunities
-🌐 Learn more: snapmeasureai.com
+🔗 Try the free demo: <a href="https://demo.snapmeasureai.com">demo.snapmeasureai.com</a><br>
+📬 Contact us: info@snapmeasureai.com for a demo, licensing, or partnership opportunities<br>
+🌐 Learn more: <a href="https://snapmeasureai.com/">snapmeasureai.com</a>
 
 | Mesh-Aligned | Realistic AI-Generated Images | With Annotations |
 :-------------------------:|:-------------------------:|:-------------------------:
