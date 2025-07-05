@@ -1,15 +1,23 @@
 <h2 align="center"><strong>SnapMeasureAI</strong></h2>
 <h4 align="center"><strong>AI Training Images → Automatic Labeling → 3D Body Measurement & Motion Capture</strong></h4>
 
-SnapMeasureAI delivers three core technologies—supported by issued and pending patents: photorealistic AI‑generated human images with mesh‑aligned annotations for training; AI‑driven 3D body measurements from two photos; and 3D motion capture from video—all without mocap suits or manual labeling, powering human‑centric AI in retail, health, fitness, and security.
+SnapMeasureAI delivers three core technologies—supported by issued and pending patents:
 
-SnapMeasureAI generates unlimited AI images with perfectly aligned labels, allowing computer vision teams to train models without human annotation. Its advanced mesh prediction system extracts accurate body measurements across 10,000+ points using only two input images.
+🧠 **Photorealistic AI‑generated human images with mesh‑aligned annotations** for training<br>
+📏 **AI‑driven 3D body measurements** from just two photos<br>
+🎥 **3D motion capture from video**—no mocap suits, no manual labeling<br>
 
-For motion, the platform analyzes video input to extract 3D skeletal motion using over 25 joint-based skeleton outputs. This enables full-body motion capture in seconds, replacing costly motion capture systems with a fast, flexible AI-driven alternative.
+These power human‑centric AI across retail, health, fitness, and security.
 
-Try the free demo at <a href="https://demo.snapmeasureai.com.">demo.snapmeasureai.com</a>.
+⚡ SnapMeasureAI generates unlimited AI images with perfectly aligned labels, letting computer vision teams train models **without human annotation**.
 
-Reach us at info@snapmeasureai.com for a demo, licensing or partnership opportunities.
+📐 Its advanced mesh prediction system extracts **accurate body measurements** across 10,000+ points from only **two input images**.
+
+🏃‍♂️ For motion, the platform analyzes video to extract **3D skeletal movement** across 25+ joints—enabling full-body motion capture in seconds, replacing expensive, hardware-based systems.
+
+🔗 Try the free demo: demo.snapmeasureai.com
+📬 Contact us: info@snapmeasureai.com for a demo, licensing, or partnership opportunities
+🌐 Learn more: snapmeasureai.com
 
 | Mesh-Aligned | Realistic AI-Generated Images | With Annotations |
 :-------------------------:|:-------------------------:|:-------------------------:
