@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     activePaginationItem.classList.add("models__pagination-active");
 
-    modelImage.src = `./assets/images/models-${index}.webp`;
+    modelImage.src = `/assets/images/models-${index}.webp`;
 
     currentIndex = index;
   }
