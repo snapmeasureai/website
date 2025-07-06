@@ -253,7 +253,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   /* bottom: -4px; */
   /* left: 50%;
   transform: translateX(-50%); */
-  background-image: url("./assets/design/bg-intro-noblur.png");
+  background-image: url("/assets/design/bg-intro-noblur.png");
   background-size: 75%;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -269,7 +269,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   bottom: -200px;
   /* left: 50%;
   transform: translateX(-50%); */
-  background-image: url("./assets/design/intro-bg-stars.png");
+  background-image: url("/assets/design/intro-bg-stars.png");
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -377,7 +377,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
     top: -683px;
     /* left: 50%;
     transform: translateX(-50%); */
-    background-image: url("./assets/design/intro-bg-mobile.png");
+    background-image: url("/assets/design/intro-bg-mobile.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -607,7 +607,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   transform: translateX(-50%); */
   width: 1500px;
   height: 500px;
-  background-image: url("./assets/design/video-stars.svg");
+  background-image: url("/assets/design/video-stars.svg");
   background-size: 100%;
   background-position: center top;
   background-repeat: no-repeat;
@@ -661,7 +661,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   transform: translateX(-50%); */
   width: 90%;
   max-width: 1700px;
-  background-image: url("./assets/design/video-platform.webp");
+  background-image: url("/assets/design/video-platform.webp");
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
@@ -802,7 +802,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   width: 100%;
   max-width: 1700px;
   height: 400px;
-  background-image: url("./assets/design/features-comets.svg");
+  background-image: url("/assets/design/features-comets.svg");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -1203,7 +1203,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   top: -125px;
   /* left: 50%;
   transform: translateX(-50%); */
-  background-image: url("./assets/design/solution-bg.png");
+  background-image: url("/assets/design/solution-bg.png");
   background-size: 80%;
   background-position: top;
   background-repeat: no-repeat;
@@ -1391,7 +1391,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
   .solutions__bg-image {
     top: -130px;
-    background-image: url("./assets/design/solution-bg-mobile.png");
+    background-image: url("/assets/design/solution-bg-mobile.png");
     width: 160%;
   }
 
@@ -1436,7 +1436,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   width: 100%;
   max-width: 1300px;
   height: 443px;
-  background-image: url("./assets/design/faq-comets.svg");
+  background-image: url("/assets/design/faq-comets.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1493,11 +1493,11 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 }
 
 .accordion__icon--open {
-  content: url("./assets/images/icon-more.svg");
+  content: url("/assets/images/icon-more.svg");
 }
 
 .accordion__icon--close {
-  content: url("./assets/images/icon-less.svg");
+  content: url("/assets/images/icon-less.svg");
 }
 
 @media (max-width: 1024px) {
@@ -1590,7 +1590,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url("./assets/design/footer-bg.webp");
+  background-image: url("/assets/design/footer-bg.webp");
   background-size: 100%;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -1602,7 +1602,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 @media (max-width: 768px) {
   .main-wrapper::before {
-    background-image: url("./assets/design/footer-bg-mobile.png");
+    background-image: url("/assets/design/footer-bg-mobile.png");
     width: 130%;
     max-width: 100%;
   }
