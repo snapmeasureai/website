@@ -45,7 +45,7 @@
     <meta name="rating" content="safe for kids">
     <meta name="subject" content="Personal">
     <meta name="title" content="SnapMeasureAI: Perfect Fit with Body Measurement AI">
-    <meta name="copyright" content="Copyright 2024">
+    <meta name="copyright" content="Copyright 2025">
     <meta name="reply-to" content="info@snapmeasureai.com">
     <meta name="abstract" content="Get 99% accurate body measurements in seconds using just your smartphone. Perfect fit every time, reduce returns, and no tailor needed. Free demo!">
     <meta name="city" content="Chicago">
@@ -71,8 +71,8 @@
     <meta property="og:video:width" content="auto">
     <meta property="og:video:height" content="auto">
     <meta name="og:image" content="https://snapmeasureai.com/img/SnapMeasure_cover_body_models.webp">
-    <link rel="stylesheet" href="settings_measurements.css?v=1.94" />
-    <link rel="stylesheet" href="index_measurements.css?v=1.94" />
+    <link rel="stylesheet" href="settings_measurements.css?v=1.95" />
+    <link rel="stylesheet" href="index_measurements.css?v=1.95" />
   </head>
   <body>
     <div class="main-wrapper">
@@ -150,9 +150,19 @@
             <div class="purple-blurry purple-blurry-right"></div>
 <div class="demo__container-inner">
 		<article class="demo__item" style="padding-top: 10px;">How It Works
-<video id="instruction-video" src="./img/SnapMeasureAI_instructional_video.mp4" webkit-playsinline="" playsinline="" controls="controls" type="video/mp4" preload="none" poster="./img/SnapMeasureAI_video_poster.webp" class="video-container-demo">
-                </video></article><article class="demo__item" style="margin-top: 20px;">Behind The Scenes
-<video id="demo-video" src="./img/SnapMeasureAI_demo_no_heatmap_body_min.mp4" webkit-playsinline="" playsinline="" controls="controls" type="video/mp4" preload="none" poster="./assets/images/models-1.webp" class="video-container-demo">
+<video id="instruction-video"
+       webkit-playsinline playsinline
+       controls
+       preload="metadata"
+       muted
+       poster="./img/body_measurement_poster.webp"
+       class="video-container-demo">
+  <source src="./img/body_measurement.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+</article>
+<article class="demo__item" style="margin-top: 20px;">Behind The Scenes
+<video id="demo-video" src="./img/SnapMeasureAI_showcase.mp4" webkit-playsinline="" playsinline="" controls="controls" type="video/mp4" preload="none" poster="./assets/images/models-1.webp" class="video-container-demo">
                 </video></article>
               </div>
           </div>
@@ -532,7 +542,7 @@
         </section>
       </main>
       <footer class="footer">
-        <p class="footer__text">&copy; 2024 - SnapMeasureAI</p>
+        <p class="footer__text">&copy; 2025 - SnapMeasureAI</p>
       </footer>
 
       <div id="image-modal" class="modal">
@@ -554,7 +564,7 @@
         <div class="modal__video-container" id="video-container"></div>
       </div>
     </div>
-    <script src="styles_measurements.js?v=1.94"></script>
-    <script src="index_measurements.js?v=1.94"></script>
+    <script src="styles_measurements.js?v=1.95"></script>
+    <script src="index_measurements.js?v=1.95"></script>
   </body>
 </html>
