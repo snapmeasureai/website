@@ -242,7 +242,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 110px 0 110px 0;
+  padding: 120px 0 100px 0;
 
   position: relative;
   z-index: 2;
@@ -285,13 +285,13 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 800px;
+  max-width: 900px;
   position: relative;
   z-index: 2;
 }
 .intro__title,
 .intro__title span {
-  font-size: 48px;
+  font-size: 40px;
   line-height: 110%;
   font-weight: 600;
   text-align: center;
@@ -707,7 +707,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   mix-blend-mode: lighten;
 }
 .video__description {
-  max-width: 608px;
+  max-width: 720px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

@@ -235,13 +235,22 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 */
 
-let vid_instr = document.getElementById("instruction-video");
-vid_instr.onplaying = function() {
-  vid_instr.scrollIntoView(true);
-};
-
-let vid_demo = document.getElementById("demo-video");
-vid_demo.onplaying = function() {
-  vid_demo.scrollIntoView(true);
-};
+    let vid_instr = document.getElementById("instruction-video");
+    let styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = `
+  #instruction-video.portrait-aspect {
+    aspect-ratio: 9 / 16 !important;
+  }
+`;
+    document.head.appendChild(styleSheet);
+    vid_instr.onplaying = function() {
+        vid_instr.classList.add("portrait-aspect");
+        vid_instr.scrollIntoView(!0)
+    }
+    ;
+    let vid_demo = document.getElementById("demo-video");
+    vid_demo.onplaying = function() {
+        vid_demo.scrollIntoView(!0)
+    }
 });
