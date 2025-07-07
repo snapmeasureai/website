@@ -245,7 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
 `;
     document.head.appendChild(styleSheet);
     vid_instr.onplaying = function() {
-        vid_instr.classList.add("portrait-aspect");
         vid_instr.scrollIntoView(!0)
     }
     ;
