@@ -37,38 +37,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Features -->
-  <url>
-    <loc>https://snapmeasureai.com/#features</loc>
-    <lastmod>2025-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Solutions -->
-  <url>
-    <loc>https://snapmeasureai.com/#solutions</loc>
-    <lastmod>2025-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- FAQs -->
-  <url>
-    <loc>https://snapmeasureai.com/#faqs</loc>
-    <lastmod>2025-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Contact -->
-  <url>
-    <loc>https://snapmeasureai.com/#contact-us</loc>
-    <lastmod>2025-07-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
   <!-- Demo Subdomain -->
   <url>
     <loc>https://demo.snapmeasureai.com/</loc>
