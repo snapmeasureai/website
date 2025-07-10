@@ -375,6 +375,8 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
         min-width: auto;
       }
 
+.intro__button-more{background-color: #e4dbf7;}
+
   .intro__button a,
   .intro__button-more a {
     /* padding: 6px 0px; */
