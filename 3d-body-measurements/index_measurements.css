@@ -320,6 +320,9 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   border: none;
   font-weight: 600;
   cursor: pointer;
+    display: flex;         
+    align-items: center;   
+    justify-content: center; 
 }
 
 .intro__button a,
