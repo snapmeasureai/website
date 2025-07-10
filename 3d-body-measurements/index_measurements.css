@@ -323,6 +323,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
     display: flex;         
     align-items: center;   
     justify-content: center; 
+    margin-bottom: 5px;
 }
 
 .intro__button a,
