@@ -361,10 +361,19 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
     text-align: center;
   }
 
-  .intro__buttons {
-    gap: 10px;
-    max-width: 275px;
-  }
+    .intro__buttons {
+        gap: 10px;
+        max-width: 275px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .intro__button-more,
+      .intro__buttons > a {
+        width: 100%;         /* full width when stacked */
+        max-width: none;
+        min-width: auto;
+      }
 
   .intro__button a,
   .intro__button-more a {
