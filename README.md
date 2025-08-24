@@ -1,31 +1,38 @@
-<h2 align="center"><strong>SnapMeasureAI</strong></h2>
-<h4 align="center"><strong>AI Training Images → Automatic Labeling → 3D Body Measurement & Motion Capture</strong></h4>
+<h1 align="center"><strong>SnapMeasureAI</strong></h1>
 
-SnapMeasureAI delivers three core technologies—supported by issued and pending patents:
+# Make measuring and motion capture easy — no special gear, no guessing
 
-🧠 **Photorealistic AI‑generated images with mesh‑aligned annotations** for training<br>
-📏 **AI‑driven 3D body measurements** from just two photos<br>
-🎥 **3D motion capture from video**—no mocap suits, no manual labeling
+SnapMeasureAI turns two phone photos or a short video into reliable body measurements and 3D motion data — fast, private, and affordable. No suits, no manual labeling, no complicated setup.
 
-These power human‑centric AI across retail, health, fitness, and security.
+## Key Benefits
+- **Simple for anyone** — Take two photos or a short video with your phone, we do the rest.  
+- **Accurate measurements** — Get precise, consistent body measurements without visiting a lab or fitting room.  
+- **Instant motion capture** — Record natural movement on any device and get 3D skeletal output for analysis, coaching, or animation.  
+- **Cost & time savings** — Replace expensive hardware, studio time, or manual annotation with automated processing.  
+- **Privacy-minded & scalable** — Automated pipelines reduce human exposure to images and let businesses scale quickly.
 
-⚡ SnapMeasureAI generates unlimited AI images with perfectly aligned labels, letting computer vision teams train models **without human annotation**.
+## Use Cases
+- **Retail** — Improve fit recommendations and reduce returns.  
+- **Fitness & Health** — Track progress objectively from photos or video.  
+- **Animation & AR** — Generate realistic, rig-ready motion without a mocap studio.  
+- **Security & Analytics** — Capture posture and movement cues at scale with less infrastructure.
 
-📐 Its advanced mesh prediction system extracts **accurate body measurements** across 10,000+ points from only **two input images**.
-
-🏃‍♂️ For motion, the platform analyzes video to extract **3D skeletal movement** across 25+ joints—enabling full-body motion capture in seconds, replacing expensive, hardware-based systems.
-
-🔗 Try the free demo: <a href="https://demo.snapmeasureai.com">demo.snapmeasureai.com</a><br>
-📬 Contact us: info@snapmeasureai.com for a demo, licensing, or partnership opportunities<br>
-🌐 Learn more: <a href="https://snapmeasureai.com/">snapmeasureai.com</a>
-
-| Mesh-Aligned | Realistic AI-Generated Images | With Annotations |
-:-------------------------:|:-------------------------:|:-------------------------:
-![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_control.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_keypoints.webp)
+## Get Started
+- **Try the demo:** [demo.snapmeasureai.com](http://demo.snapmeasureai.com)  
+- **Request a walkthrough or partnership:** info@snapmeasureai.com  
+- **Learn more:** [snapmeasureai.com](http://snapmeasureai.com)  
 
 <div align="center">
   <video src="https://github.com/user-attachments/assets/a87d42d6-53d2-41b0-a57c-cd6b5a22a1ab" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
 </div>
+
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/7a7f5ac7-7863-4039-9499-d8ff223350b6" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
+</div>
+
+| Mesh-Aligned | Realistic AI-Generated Images | With Annotations |
+:-------------------------:|:-------------------------:|:-------------------------:
+![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_control.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_keypoints.webp)
 
 # Contact Us
 
