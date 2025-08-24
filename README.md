@@ -1,8 +1,8 @@
 <h1 align="center"><strong>SnapMeasureAI</strong></h1>
 
-# Make measuring and motion capture easy — no special gear, no guessing
+## Accurate 3D body measurements and motion capture from photos and video
 
-SnapMeasureAI turns two phone photos or a short video into reliable body measurements and 3D motion data — fast, private, and affordable. No suits, no manual labeling, no complicated setup.
+Turn two phone photos into full-body measurements, or a short video into 3D skeletal motion — no mocap suits, scanners, or manual labeling.
 
 ## Key Benefits
 - **Simple for anyone** — Take two photos or a short video with your phone, we do the rest.  
