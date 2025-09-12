@@ -1,6 +1,6 @@
 <h1 align="center"><strong>SnapMeasureAI</strong></h1>
 
-## Accurate 3D body measurements and motion capture from photos and video
+## Accurate 3D body measurements and video-based motion capture
 
 Turn two phone photos into full-body measurements, or a short video into 3D skeletal motion — no mocap suits, scanners, or manual labeling.
 
