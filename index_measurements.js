@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+/*
   // Tab and pagination logic
   const tabs = document.querySelectorAll(".models__tab");
   const paginationItems = document.querySelectorAll(".models__pagination-item");
@@ -128,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
       closeImageModal();
     }
   });
+*/
 
 /*
   // Modal logic for videos
