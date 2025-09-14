@@ -1930,3 +1930,43 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
     -ms-transform : translate(-50%, -50%);
     transform : translate(-50%, -50%);
 }
+
+/* Base nav styling assumed */
+.header__nav-item {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* below parent */
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 0;
+  list-style: none;
+  min-width: 220px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.dropdown-menu li {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  background: #f4f4f4;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
