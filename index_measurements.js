@@ -32,16 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const prevButtonDesk = document.getElementById("prev-button-desk");
   const nextButtonDesk = document.getElementById("next-button-desk");
   const modelImage = document.getElementById("model-image");
-  let currentIndex = 2;
+  let currentIndex = 1;
   const totalTabs = tabs.length;
 
   const imageTexts = {
-    1: "SnapMeasureAI can handle any body type, pose or background. Notice the multiple doors, outlets, rug, and desk in the background.",
-    2: "Measurement accuracy within a centimeter (about ⅓ inch). Accurate across all length and circumference measurement types.",
-    3: "After uploading images or a video, the output is an accurate 3D body avatar and precise body measurements.",
-    4: "This body pose differs from the first image. SnapMeasureAI can handle any body pose.",
-    5: "The user is turned around in this image. You can see the overlaid body model is also turned around, as the nose is not visible.",
-    6: "SnapMeasureAI makes predictions of non-visible body parts. The final body model is a combination of all views. Visible body parts from other views have higher weights.",
+    1: "Measurement accuracy within an inch. Accurate across all length and circumference measurement types.",
+    2: "After uploading images or a video, the output is an accurate 3D body avatar and precise body measurements.",
   };
 
   function updateActiveTab(index) {
