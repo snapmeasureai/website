@@ -214,6 +214,10 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   text-decoration: none;
 }
 
+.header__nav-list-mobile {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .header {
     padding: 19px 30px;
@@ -223,6 +227,10 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 @media (max-width: 768px) {
   .header__nav-list {
     display: none;
+  }
+
+  .header__nav-list-mobile {
+    display: block;
   }
 
   .header__button a {
@@ -1966,7 +1974,19 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   background: #f4f4f4;
 }
 
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-menu {
+/* Hide menus by default */
+.dropdown-menu {
+  display: none;
+}
+
+/* Desktop: show on hover */
+@media (min-width: 769px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+/* Mobile: show when checkbox is checked */
+.dropdown-toggle:checked ~ .dropdown-menu {
   display: block;
 }
