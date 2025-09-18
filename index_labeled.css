@@ -233,6 +233,10 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
     display: block;
   }
 
+  .header__nav-link:hover {
+    text-decoration: none;
+  }
+
   .header__button a {
     font-size: 12px;
     padding: 6px 13px;
