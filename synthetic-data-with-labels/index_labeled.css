@@ -742,7 +742,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 }
 
 .video__description-item {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
   color: #8283a9;
   text-align: center;
@@ -750,7 +750,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 .video__description-white {
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
 }
 
