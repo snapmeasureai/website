@@ -20,7 +20,9 @@ Turn two phone photos into full-body measurements, or a short video into 3D skel
 ## Get Started
 - **Try the demo:** [demo.snapmeasureai.com](http://demo.snapmeasureai.com)  
 - **Request a walkthrough or partnership:** info@snapmeasureai.com  
-- **Learn more:** [snapmeasureai.com](http://snapmeasureai.com)  
+- [Accurate AI body measurements from two images](https://snapmeasureai.com)
+- [3D motion capture from any video](https://snapmeasureai.com/motion-capture-from-video/)
+- [Synthetic data for computer vision](https://snapmeasureai.com/synthetic-data-with-labels/)
 
 <div align="center">
   <video src="https://github.com/user-attachments/assets/a87d42d6-53d2-41b0-a57c-cd6b5a22a1ab" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
