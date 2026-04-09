@@ -344,7 +344,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
   padding: 12px 0px;
   text-decoration: none !important;
 }
-.intro__button-more a {
+.intro__button-more span {
   color: #02031c;
   cursor: pointer;
 }
@@ -381,7 +381,7 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
     }
 
     .intro__button-more,
-      .intro__buttons > a {
+      .intro__buttons > span {
         width: 100%;         /* full width when stacked */
         max-width: none;
         min-width: auto;
@@ -389,10 +389,13 @@ html { scroll-padding-top: 105px; min-height: 100vh;}
 
 .intro__button-more{background-color: #e4dbf7;}
 
-  .intro__button a,
-  .intro__button-more a {
+  .intro__button ,
+  .intro__button-more  {
     /* padding: 6px 0px; */
     font-size: 14px;
+    display: block;
+    padding: 12px 0px;
+    text-decoration: none !important;
   }
 
   .intro-bg-image {
