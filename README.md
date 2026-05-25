@@ -1,41 +1,93 @@
 <h1 align="center"><strong>SnapMeasureAI</strong></h1>
 
-## Accurate 3D body measurements and video-based motion capture
+<p align="center">
+  <strong>Patent-backed AI body measurement for better fit, fewer returns, and smarter sizing.</strong>
+</p>
 
-Turn two phone photos into full-body measurements, or a short video into 3D skeletal motion — no mocap suits, scanners, or manual labeling.
+<p align="center">
+  Turn two smartphone photos into precise 3D body measurements.
+</p>
+
+---
+
+## What SnapMeasureAI Does
+
+SnapMeasureAI helps retailers and apparel brands improve fit accuracy with AI body measurements from two photos.
+
+Our technology is designed to support:
+- **Better size recommendations**
+- **Lower return rates**
+- **Higher conversion**
+- **Reduced apparel waste**
+- **More consistent fit experiences at scale**
+
+---
+
+## Why It Matters
+
+Poor fit is one of the biggest drivers of abandoned purchases and costly returns.
+
+SnapMeasureAI gives teams a scalable way to measure the body without a tape measure, scanning booth, or in-person fitting.
+
+With a simple photo-based workflow, brands can deliver a better sizing experience while reducing friction for shoppers.
+
+---
 
 ## Key Benefits
-- **Simple for anyone** — Take two photos or a short video with your phone, we do the rest.  
-- **Accurate measurements** — Get precise, consistent body measurements without visiting a lab or fitting room.  
-- **Instant motion capture** — Record natural movement on any device and get 3D skeletal output for analysis, coaching, or animation.  
-- **Cost & time savings** — Replace expensive hardware, studio time, or manual annotation with automated processing.  
-- **Privacy-minded & scalable** — Automated pipelines reduce human exposure to images and let businesses scale quickly.
 
-## Use Cases
-- **Retail** — Improve fit recommendations and reduce returns.  
-- **Fitness & Health** — Track progress objectively from photos or video.  
-- **Animation & AR** — Generate realistic, rig-ready motion without a mocap studio.  
-- **Security & Analytics** — Capture posture and movement cues at scale with less infrastructure.
+- **Fast and simple** — Users take two photos on a phone, and the system generates body measurements automatically.
+- **Accurate and consistent** — Produce repeatable measurements without manual measuring or lab equipment.
+- **Commercial impact** — Improve fit guidance, increase conversion, reduce returns, and lower operational waste.
+- **Patent-backed technology** — Built on proprietary, protected methods for 3D body measurement.
 
-## Get Started
-- **Try the demo:** [demo.snapmeasureai.com](http://demo.snapmeasureai.com)  
-- **Request a walkthrough or partnership:** info@snapmeasureai.com  
+---
+
+## Primary Use Case
+
+### Retail and Apparel
+
+SnapMeasureAI is designed for fashion, ecommerce, and fit-focused retail experiences where accurate sizing matters most.
+
+Common applications include:
+- size recommendation
+- fit personalization
+- return reduction
+- customer experience improvement
+- merchandising and sizing analytics
+
+---
+
+## Additional Capabilities
+
+SnapMeasureAI also supports:
+- **markerless motion capture from video**
+- **synthetic labeled datasets for computer vision and AI**
+
+These capabilities extend the platform, but the core product focus remains body measurement for fit and sizing.
+
+---
+
+## Getting Started
+
+- **Try the demo:** [demo.snapmeasureai.com](http://demo.snapmeasureai.com)
+- **Request a walkthrough or partnership:** info@snapmeasureai.com
+
+---
+
+## Learn More
+
 - [Accurate AI body measurements from two images](https://snapmeasureai.com)
 - [3D motion capture from any video](https://snapmeasureai.com/motion-capture-from-video/)
 - [Synthetic data for computer vision](https://snapmeasureai.com/synthetic-data-with-labels/)
+
+---
 
 <div align="center">
   <video src="https://github.com/user-attachments/assets/bf46e9cc-4c5e-44e5-bfc6-de5777af760b" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
 </div>
 
-<div align="center">
-  <video src="https://github.com/user-attachments/assets/7a7f5ac7-7863-4039-9499-d8ff223350b6" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
-</div>
+---
 
-| Mesh-Aligned | Realistic AI-Generated Images | With Annotations |
-:-------------------------:|:-------------------------:|:-------------------------:
-![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_control.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image.webp) | ![](https://github.com/snapmeasureai/website/blob/main/img/synthetic_image_keypoints.webp)
-
-# Contact Us
+## Contact
 
 Reach us at info@snapmeasureai.com for more information.
