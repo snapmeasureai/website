@@ -1,12 +1,8 @@
 /* Global */
 
-:root {
-    /* touch-action: pan-x pan-y; */
-    overflow:hidden visible !important;
-}
-
-* {
-    /* touch-action: pan-x pan-y; */
+body {
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
 }
 
 html, body {

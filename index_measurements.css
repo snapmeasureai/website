@@ -1,17 +1,8 @@
 /* Global */
 
-:root {
-    touch-action: pan-x pan-y pinch-zoom;
-    overflow:hidden visible !important;
-}
-
-* {
-    touch-action: pan-x pan-y pinch-zoom;
-}
-
-html, body {
+body {
     overflow-x: hidden;
-    overflow:hidden visible !important;
+    overscroll-behavior-y: none;
 }
 
 html { scroll-padding-top: 105px; min-height: 100vh;}
