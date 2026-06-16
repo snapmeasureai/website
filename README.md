@@ -71,7 +71,7 @@ Automate remote fitting, reduce remake costs, and standardize sizing across dist
 ---
 
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/bf46e9cc-4c5e-44e5-bfc6-de5777af760b" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
+  <video src="https://github.com/user-attachments/assets/94e3991c-2e1f-43bf-a519-3e28f898d52b" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
 </div>
 
 ---
