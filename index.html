@@ -643,7 +643,23 @@
       .hero__stats { gap: 24px; }
       .specs-grid { grid-template-columns: 1fr; }
       .hero__actions { flex-direction: column; align-items: flex-start; }
-      .btn--scan, .btn--api { width: 100%; justify-content: center; }
+      /* Smaller font + tight padding + no-wrap keeps scan button one line */
+      .btn--scan { font-size: 13px; padding: 10px 14px; white-space: nowrap; }
+      .btn--api  { font-size: 13px; padding: 10px 14px; }
+      /* Nav primary button stays compact on mobile */
+      .nav .btn--primary { font-size: 12px; padding: 11px 11px; white-space: nowrap; margin-left: 11px; }
+      /* Mobile menu buttons — inline width, not stretched */
+      .nav__mobile-menu .btn--primary,
+      .nav__mobile-menu .btn--outline { width: auto; align-self: flex-start; font-size: 14px; }
+      /* Stack videos vertically on mobile */
+      .video-grid { grid-template-columns: 1fr !important; }
+      /* Footer: 3-column grid so each link fits on one line */
+      .footer__inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer__links {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        gap: 10px 20px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -856,7 +872,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <!-- Video demo -->
-    <div style="margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div class="video-grid" style="margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
       <div style="background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; max-height:480px; display:flex; align-items:center;">
         <video webkit-playsinline playsinline controls preload="metadata" muted
                poster="/assets/images/3D-body-scan.jpg"
@@ -963,7 +979,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="section section--alt" id="technology">
   <div class="container">
     <p class="section__eyebrow">Technology</p>
-    <h2 class="section__title">Built on a decade of computer vision research.</h2>
+    <h2 class="section__title">Serious computer vision research, practically applied.</h2>
     <p class="section__sub">
       Not a wrapper around a general model. A purpose-built neural network trained
       specifically on human body reconstruction, with patented methodology and
@@ -1028,7 +1044,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p class="section__eyebrow">FAQs</p>
     <h2 class="section__title">Common questions</h2>
 
-    <div class="faqs" style="max-width:760px; margin-top:40px;">
+    <div class="faqs" style="max-width:760px; margin-top:40px; margin-left:auto; margin-right:auto;">
 
       <div class="faq-item">
         <div class="faq-item__q" onclick="toggleFaq(this)">
@@ -1194,7 +1210,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function toggleFaq(el) {
     el.parentElement.classList.toggle('open');
   }
-  // Close mobile menu on outside click
   document.addEventListener('click', function(e) {
     const menu = document.getElementById('mobile-menu');
     const nav = document.getElementById('nav');
@@ -1202,7 +1217,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       menu.classList.remove('open');
     }
   });
-  // Smooth anchor scroll offset for fixed nav
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function(e) {
       const id = this.getAttribute('href').slice(1);
@@ -1215,6 +1229,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   });
 </script>
-
 </body>
 </html>
