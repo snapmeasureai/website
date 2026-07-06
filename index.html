@@ -196,7 +196,7 @@
     /* ---- HERO ---- */
     .hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 0 100px; position: relative; overflow: hidden;
+      padding: 100px 0 60px; position: relative; overflow: hidden;
     }
     .hero__bg {
       position: absolute; inset: 0; pointer-events: none;
@@ -224,7 +224,7 @@
     }
     .hero__title-accent { color: var(--teal); }
 
-    /* ---- TICKER — fade approach, no scroll, fully reliable ---- */
+    /* ---- TICKER — fade, three items, clean math ---- */
     .hero__ticker-wrap {
       position: relative;
       height: 2.2em;
@@ -232,32 +232,36 @@
     }
     .hero__ticker-item {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%;
+      top: 0; left: 0; width: 100%;
       line-height: 2.2em;
       font-size: clamp(15px, 2.2vw, 22px);
-      font-weight: 500;
-      color: var(--text-2);
+      font-weight: 500; color: var(--text-2);
       opacity: 0;
-      animation: ticker-fade 9s linear infinite;
     }
-    .hero__ticker-item:nth-child(1) { animation-delay: 0s; }
-    .hero__ticker-item:nth-child(2) { animation-delay: 3s; }
-    .hero__ticker-item:nth-child(3) { animation-delay: 6s; }
     .hero__ticker-item em { font-style: normal; color: var(--text); }
-    /*
-      Each item: visible for 3s out of a 9s cycle.
-      Fade in 0.4s, hold ~2.2s, fade out 0.4s.
-      Expressed as % of 9s total.
-    */
-    @keyframes ticker-fade {
-      0%          { opacity: 0; }
-      4%          { opacity: 1; }   /* fade in  ~0.4s */
-      30%         { opacity: 1; }   /* hold     ~2.3s */
-      34%         { opacity: 0; }   /* fade out ~0.4s */
-      100%        { opacity: 0; }   /* wait for next cycle */
+
+    /* Each item runs a 9s cycle, staggered 3s apart.
+       Active window: 0s–3s (first 33% of cycle).
+       0.5s fade in, 2s hold, 0.5s fade out.
+       linear — no easing surprises at loop boundary. */
+    .hero__ticker-item:nth-child(1) {
+      animation: ticker-fade 9s linear 0s infinite;
     }
-    /* Mobile: allow two lines, taller wrap */
+    .hero__ticker-item:nth-child(2) {
+      animation: ticker-fade 9s linear 3s infinite;
+    }
+    .hero__ticker-item:nth-child(3) {
+      animation: ticker-fade 9s linear 6s infinite;
+    }
+
+    @keyframes ticker-fade {
+      0%     { opacity: 0; }   /* start invisible          */
+      5.5%   { opacity: 1; }   /* 0.5s — fully visible     */
+      27.5%  { opacity: 1; }   /* 2.5s — start fading out  */
+      33%    { opacity: 0; }   /* 3s   — invisible         */
+      100%   { opacity: 0; }   /* wait 6s for next cycle   */
+    }
+
     @media (max-width: 600px) {
       .hero__ticker-wrap { height: 3em; }
       .hero__ticker-item { line-height: 1.5; padding-top: 0.25em; }
@@ -293,7 +297,7 @@
     .proof-divider { color: var(--border-hi); }
 
     /* ---- SECTIONS ---- */
-    .section { padding: 55px 0; }
+    .section { padding: 50px 0; }
     .section--alt { background: var(--bg2); }
     .section__eyebrow { font-size: 16px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
     .section__title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 16px; }
@@ -341,7 +345,7 @@
     .faq-item.open .faq-item__a { display: block; }
 
     /* ---- CTA ---- */
-    .cta-section { padding: 80px 0; text-align: center; }
+    .cta-section { padding: 50px 0; text-align: center; }
     .cta-section__title { font-size: clamp(30px, 4.5vw, 52px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 16px; }
     .cta-section__sub { font-size: 17px; color: var(--text-2); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; }
     .cta-section__actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -394,10 +398,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero__ticker-item {opacity: 1; position: static; display: block; }
-      .hero__ticker-item:nth-child(2),
-      .hero__ticker-item:nth-child(3) { display: none; }
-      /* .hero__eyebrow-dot { animation: none; } */
+      .hero__ticker-item { animation-play-state: paused; opacity: 0; }
+      .hero__ticker-item:nth-child(1) { opacity: 1; }
+      .hero__eyebrow-dot { animation-play-state: paused; }
     }
   </style>
 </head>
@@ -460,8 +463,8 @@
     </div>
 
     <h1 class="hero__title">
-      See what a scale<br>
-      <span class="hero__title-accent">can't tell you.</span>
+      Two photos, a precise<br>
+      <span class="hero__title-accent">3D scan of your body.</span>
     </h1>
 
     <!-- Rotating use-case ticker — pure CSS -->
