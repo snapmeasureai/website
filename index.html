@@ -227,22 +227,25 @@
     /* ---- TICKER — pure CSS, em-based, responsive ---- */
     .hero__ticker-wrap {
       margin-bottom: 28px;
-      height: 2.4em;   /* taller — no clipping of descenders */
+      height: 2.4em;
       overflow: hidden;
+      position: relative;   /* ensures overflow:hidden is respected */
     }
     .hero__ticker {
       display: flex; flex-direction: column;
-      /* linear + sharp keyframe percentages = clear hold then fast slide */
-      animation: ticker-scroll 12s linear infinite;
+      /* 8s total: ~2s hold per item, 0.24s snappy slide */
+      animation: ticker-scroll 8s linear infinite;
+      will-change: transform;
     }
     .hero__ticker-item {
       height: 2.4em; line-height: 2.4em; flex-shrink: 0;
+      min-height: 0;   /* prevents flex children from expanding wrap */
       font-size: clamp(15px, 2.2vw, 22px); font-weight: 500; color: var(--text-2);
     }
     .hero__ticker-item em { font-style: normal; color: var(--text); }
     /*
-      4 items (3 real + 1 duplicate of first) each = 25% of cycle.
-      Hold 22%, slide 3% — sharp and readable.
+      4 items × 25% = 100%. Hold 22%, slide 3% with snappy easing.
+      translateY values = multiples of 2.4em slot height.
     */
     @keyframes ticker-scroll {
       0%        { transform: translateY(0); }
@@ -251,9 +254,9 @@
       47%       { transform: translateY(-2.4em); }
       50%       { transform: translateY(-4.8em); }
       72%       { transform: translateY(-4.8em); }
-      75%       { transform: translateY(-7.2em); }  /* duplicate of item 1 */
+      75%       { transform: translateY(-7.2em); }
       97%       { transform: translateY(-7.2em); }
-      100%      { transform: translateY(0); }        /* snap — hidden by wrap */
+      100%      { transform: translateY(0); }
     }
 
     .hero__sub { font-size: 17px; color: var(--text-2); max-width: 560px; margin-bottom: 16px; line-height: 1.7; }
@@ -373,9 +376,9 @@
       .specs-grid { grid-template-columns: 1fr; }
       .hero__actions { flex-direction: column; align-items: flex-start; }
       .hero__also { flex-wrap: wrap; }
-      /* Ticker: taller slot for text wrap on mobile */
-      .hero__ticker-wrap { height: 3.2em; }
-      .hero__ticker-item { height: 3.2em; line-height: 1.4; display: flex; align-items: center; }
+      /* Ticker mobile: wider slot for wrapped lines, strict overflow clip */
+      .hero__ticker-wrap { height: 3.2em; overflow: hidden; }
+      .hero__ticker-item { height: 3.2em; min-height: 0; line-height: 1.4; display: flex; align-items: center; }
       @keyframes ticker-scroll {
         0%        { transform: translateY(0); }
         22%       { transform: translateY(0); }
@@ -488,7 +491,7 @@
     <div class="hero__also">
       <span class="hero__also-label">Also</span>
       <span class="hero__also-tag">Fitness &amp; progress tracking</span>
-      <span class="hero__also-tag">Apparel sizing</span>
+      <span class="hero__also-tag">Apparel returns</span>
       <span class="hero__also-tag">Uniform &amp; workwear sizing</span>
       <span class="hero__also-tag">3D digital twins</span>
     </div>
@@ -527,13 +530,9 @@
   <div class="container">
     <div class="proof-strip__inner">
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Built on Cambridge research</div>
-      <span class="proof-divider">|</span>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>2 issued patents + 1 pending</div>
-      <span class="proof-divider">|</span>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Works on any smartphone camera</div>
-      <span class="proof-divider">|</span>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Any body type, skin tone, background</div>
-      <span class="proof-divider">|</span>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Web-based — no installation needed</div>
     </div>
   </div>
