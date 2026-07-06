@@ -124,8 +124,8 @@
       --indigo:    #6C63FF;
       --indigo-dim:rgba(108,99,255,0.12);
       --text:      #F0F4F8;
-      --text-2:    #8FA3B8;
-      --text-3:    #566878;
+      --text-2:    #AABDCF;  /* was #8FA3B8 — noticeably lighter */
+      --text-3:    #7A96AA;  /* was #566878 — lifted for dark bg legibility */
       --radius:    10px;
       --radius-lg: 18px;
       --max:       1120px;
@@ -136,7 +136,7 @@
     body {
       background: var(--bg); color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+      font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
@@ -227,29 +227,36 @@
     /* ---- TICKER — pure CSS, em-based, responsive ---- */
     .hero__ticker-wrap {
       margin-bottom: 28px;
-      height: 1.9em;
+      height: 2.4em;   /* taller — no clipping of descenders */
       overflow: hidden;
     }
     .hero__ticker {
       display: flex; flex-direction: column;
-      animation: ticker-scroll 10.5s ease-in-out infinite;
+      /* linear + sharp keyframe percentages = clear hold then fast slide */
+      animation: ticker-scroll 12s linear infinite;
     }
     .hero__ticker-item {
-      height: 1.9em; line-height: 1.9em; flex-shrink: 0;
+      height: 2.4em; line-height: 2.4em; flex-shrink: 0;
       font-size: clamp(15px, 2.2vw, 22px); font-weight: 500; color: var(--text-2);
     }
     .hero__ticker-item em { font-style: normal; color: var(--text); }
+    /*
+      4 items (3 real + 1 duplicate of first) each = 25% of cycle.
+      Hold 22%, slide 3% — sharp and readable.
+    */
     @keyframes ticker-scroll {
-      0%       { transform: translateY(0); }
-      28%      { transform: translateY(0); }
-      33%      { transform: translateY(-1.9em); }
-      61%      { transform: translateY(-1.9em); }
-      66%      { transform: translateY(-3.8em); }
-      94%      { transform: translateY(-3.8em); }
-      99%,100% { transform: translateY(0); }
+      0%        { transform: translateY(0); }
+      22%       { transform: translateY(0); }
+      25%       { transform: translateY(-2.4em); }
+      47%       { transform: translateY(-2.4em); }
+      50%       { transform: translateY(-4.8em); }
+      72%       { transform: translateY(-4.8em); }
+      75%       { transform: translateY(-7.2em); }  /* duplicate of item 1 */
+      97%       { transform: translateY(-7.2em); }
+      100%      { transform: translateY(0); }        /* snap — hidden by wrap */
     }
 
-    .hero__sub { font-size: 16px; color: var(--text-2); max-width: 560px; margin-bottom: 16px; line-height: 1.7; }
+    .hero__sub { font-size: 17px; color: var(--text-2); max-width: 560px; margin-bottom: 16px; line-height: 1.7; }
     .hero__also {
       display: flex; flex-wrap: nowrap; gap: 8px; align-items: center;
       max-width: 680px; margin-bottom: 40px; padding-top: 20px; border-top: 1px solid var(--border);
@@ -269,11 +276,11 @@
     .btn--api:hover { border-color: var(--teal); color: var(--teal); }
     .hero__stats { display: flex; gap: 40px; flex-wrap: wrap; padding-top: 48px; border-top: 1px solid var(--border); margin-top: 8px; }
     .hero__stat-value { font-size: 32px; font-weight: 700; color: var(--teal); letter-spacing: -0.02em; }
-    .hero__stat-label { font-size: 13px; color: var(--text-3); margin-top: 2px; }
+    .hero__stat-label { font-size: 14px; color: var(--text-3); margin-top: 2px; }
 
     /* ---- PROOF STRIP ---- */
     .proof-strip { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; }
-    .proof-strip__inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 13px; color: var(--text-3); }
+    .proof-strip__inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 14px; color: var(--text-3); }
     .proof-strip__item { display: flex; align-items: center; gap: 8px; }
     .proof-strip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
     .proof-divider { color: var(--border-hi); }
@@ -290,7 +297,7 @@
     .step { background: var(--bg); padding: 36px 32px; }
     .step__num { font-size: 14px; font-weight: 700; letter-spacing: .1em; color: var(--teal); text-transform: uppercase; margin-bottom: 16px; }
     .step__title { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-    .step__body { font-size: 14px; color: var(--text-2); line-height: 1.7; }
+    .step__body { font-size: 15px; color: var(--text-2); line-height: 1.7; }
 
     /* ---- AUDIENCE CARDS ---- */
     .audiences { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -302,19 +309,19 @@
     .tag--fitness { background: var(--indigo-dim); color: #A9A4FF; }
     .tag--retail { background: rgba(239,159,39,0.14); color: #EF9F27; }
     .audience-card__title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
-    .audience-card__body { font-size: 14px; color: var(--text-2); line-height: 1.7; margin-bottom: 24px; }
+    .audience-card__body { font-size: 15px; color: var(--text-2); line-height: 1.7; margin-bottom: 24px; }
     .audience-card__list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
-    .audience-card__list li { font-size: 13px; color: var(--text-2); display: flex; align-items: flex-start; gap: 10px; }
+    .audience-card__list li { font-size: 14px; color: var(--text-2); display: flex; align-items: flex-start; gap: 10px; }
     .audience-card__list li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-    .audience-card__cta { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--teal); }
+    .audience-card__cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--teal); }
     .audience-card__cta:hover { opacity: .75; }
 
     /* ---- TECH SPECS ---- */
     .specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .spec-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
-    .spec-item__label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+    .spec-item__label { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
     .spec-item__value { font-size: 20px; font-weight: 700; color: var(--text); }
-    .spec-item__note { font-size: 13px; color: var(--text-2); margin-top: 4px; }
+    .spec-item__note { font-size: 14px; color: var(--text-2); margin-top: 4px; }
 
     /* ---- FAQ ---- */
     .faqs { display: flex; flex-direction: column; }
@@ -323,7 +330,7 @@
     .faq-item__q:hover { color: var(--teal); }
     .faq-item__icon { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border-hi); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-2); margin-top: 2px; transition: transform .2s; }
     .faq-item.open .faq-item__icon { transform: rotate(45deg); color: var(--teal); border-color: var(--teal); }
-    .faq-item__a { font-size: 15px; color: var(--text-2); line-height: 1.75; margin-top: 14px; display: none; }
+    .faq-item__a { font-size: 16px; color: var(--text-2); line-height: 1.75; margin-top: 14px; display: none; }
     .faq-item.open .faq-item__a { display: block; }
 
     /* ---- CTA ---- */
@@ -367,16 +374,18 @@
       .hero__actions { flex-direction: column; align-items: flex-start; }
       .hero__also { flex-wrap: wrap; }
       /* Ticker: taller slot for text wrap on mobile */
-      .hero__ticker-wrap { height: 2.8em; }
-      .hero__ticker-item { height: 2.8em; line-height: 1.35; display: flex; align-items: center; }
+      .hero__ticker-wrap { height: 3.2em; }
+      .hero__ticker-item { height: 3.2em; line-height: 1.4; display: flex; align-items: center; }
       @keyframes ticker-scroll {
-        0%       { transform: translateY(0); }
-        28%      { transform: translateY(0); }
-        33%      { transform: translateY(-2.8em); }
-        61%      { transform: translateY(-2.8em); }
-        66%      { transform: translateY(-5.6em); }
-        94%      { transform: translateY(-5.6em); }
-        99%,100% { transform: translateY(0); }
+        0%        { transform: translateY(0); }
+        22%       { transform: translateY(0); }
+        25%       { transform: translateY(-3.2em); }
+        47%       { transform: translateY(-3.2em); }
+        50%       { transform: translateY(-6.4em); }
+        72%       { transform: translateY(-6.4em); }
+        75%       { transform: translateY(-9.6em); }
+        97%       { transform: translateY(-9.6em); }
+        100%      { transform: translateY(0); }
       }
       /* Buttons — compact, no wrap */
       .btn--scan { font-size: 13px; padding: 10px 14px; white-space: nowrap; }
@@ -479,8 +488,8 @@
     <div class="hero__also">
       <span class="hero__also-label">Also</span>
       <span class="hero__also-tag">Fitness &amp; progress tracking</span>
-      <span class="hero__also-tag">Uniform &amp; workwear sizing</span>
       <span class="hero__also-tag">Apparel sizing</span>
+      <span class="hero__also-tag">Uniform &amp; workwear sizing</span>
       <span class="hero__also-tag">3D digital twins</span>
     </div>
 
