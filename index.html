@@ -348,8 +348,14 @@
     .cta-section { padding: 50px 0; text-align: center; }
     .cta-section__title { font-size: clamp(30px, 4.5vw, 52px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 16px; }
     .cta-section__sub { font-size: 17px; color: var(--text-2); max-width: 480px; margin: 0 auto 40px; line-height: 1.7; }
-    .cta-section__actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-    .cta-section__email { font-size: 14px; color: var(--text-3); }
+    .cta-section__actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: nowrap; /* change from wrap to nowrap */
+      margin-bottom: 20px;
+    }
+    .cta-section__email { font-size: 15px; color: var(--text-3); }
     .cta-section__email a { color: var(--teal); }
 
     /* ---- FOOTER ---- */
@@ -727,8 +733,8 @@
     <h2 class="cta-section__title">Ready to add body scanning<br>to your platform?</h2>
     <p class="cta-section__sub">Try the free scan yourself, or reach out to discuss licensing, custom integration, and partnership opportunities.</p>
     <div class="cta-section__actions">
-      <a href="https://demo.snapmeasureai.com/" class="btn btn--scan" style="font-size:16px;padding:14px 32px;">Try the free body scan →</a>
-      <a href="mailto:info@snapmeasureai.com" class="btn btn--api" style="font-size:16px;padding:14px 32px;">Contact us</a>
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--scan">Try the free body scan →</a>
+      <a href="mailto:info@snapmeasureai.com" class="btn btn--api">Contact us</a>
     </div>
     <p class="cta-section__email">Or write to us directly: <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a></p>
 
