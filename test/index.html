@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SnapMeasureAI Demo: AI Measurements | 3D Scan, 2 Photos</title>
+  <meta name="author" content="SnapMeasureAI">
+  <meta name="description" content="Patented 3D body scanning — 2 photos, 10 seconds, 100+ measurements. Cuts apparel returns, tracks GLP-1 body changes, and powers 3D digital twins.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://demo.snapmeasureai.com/">
+  <link rel="icon" href="https://snapmeasureai.com/assets/images/favicon.png">
+  <meta property="og:title" content="SnapMeasureAI Demo: AI Measurements | 3D Scan, 2 Photos">
+  <meta property="og:description" content="Patented 3D body scanning — 2 photos, 10 seconds, 100+ measurements. Cuts apparel returns, tracks GLP-1 body changes, and powers 3D digital twins.">
+  <meta property="og:type" content="video.other">
+  <meta property="og:url" content="https://demo.snapmeasureai.com/">
+  <meta property="og:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
+  <meta property="og:video" content="https://snapmeasureai.com/img/body_measurements.mp4">
+  <meta property="og:video:secure_url" content="https://snapmeasureai.com/img/body_measurements.mp4">
+  <meta property="og:video:type" content="video/mp4">
+  <meta property="og:video:width" content="720">
+  <meta property="og:video:height" content="1280">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SnapMeasureAI Demo: AI Measurements | 3D Scan, 2 Photos">
+  <meta name="twitter:description" content="Patented 3D body scanning — 2 photos, 10 seconds, 100+ measurements. Cuts apparel returns, tracks GLP-1 body changes, and powers 3D digital twins.">
+  <meta name="twitter:image" content="https://snapmeasureai.com/img/body_measurement_poster.webp">
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS — matched to snapmeasureai.com landing page
+       ============================================================ */
+    :root {
+      --bg:        #080C10;
+      --bg2:       #0E1419;
+      --bg3:       #141C24;
+      --surface:   #1A2330;
+      --border:    rgba(255,255,255,0.08);
+      --border-hi: rgba(255,255,255,0.15);
+      --teal:      #0ABFA3;
+      --teal-dim:  rgba(10,191,163,0.12);
+      --teal-glow: rgba(10,191,163,0.25);
+      --indigo:    #6C63FF;
+      --indigo-dim:rgba(108,99,255,0.12);
+      --text:      #F0F4F8;
+      --text-2:    #AABDCF;
+      --text-3:    #7A96AA;
+      --ok:        #0ABFA3;
+      --err:       #FF7A66;
+      --radius:    10px;
+      --radius-lg: 18px;
+      --max:       1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    body {
+      margin: 0;
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    .eyebrow {
+      font-size: 13px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--teal); margin: 0 0 12px;
+    }
+    .section__title {
+      font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+      letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 16px;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(8,12,16,.88); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-header .container { display: flex; align-items: center; gap: 28px; height: 64px; }
+    .nav__logo { display: flex; align-items: center; gap: 10px; }
+    .nav__logo img { height: 32px; }
+    .nav__logo .demo-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--teal); border: 1px solid var(--teal-glow); background: var(--teal-dim);
+      padding: 3px 8px; border-radius: 100px;
+    }
+    .site-nav { margin-left: auto; display: flex; align-items: center; gap: 24px; font-size: 14px; }
+    .site-nav a { color: var(--text-2); }
+    .site-nav a:hover { color: var(--text); }
+    .site-nav .nav-cta {
+      background: var(--teal); color: #050E0C; font-weight: 700;
+      padding: 9px 18px; border-radius: var(--radius);
+    }
+    .site-nav .nav-cta:hover { opacity: .88; color: #050E0C; }
+    @media (max-width: 760px) { .site-nav a:not(.nav-cta) { display: none; } }
+
+    /* ============================================================
+       HERO — the demo itself is the hero
+       ============================================================ */
+    .hero { padding: 56px 0 72px; }
+    .hero .container {
+      display: grid; grid-template-columns: minmax(0,1fr) minmax(0,480px);
+      gap: 56px; align-items: start;
+    }
+    @media (max-width: 960px) { .hero .container { grid-template-columns: 1fr; gap: 40px; } }
+    .hero__badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--teal-glow); background: var(--teal-dim);
+      border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600;
+      color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .hero__badge::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+    }
+    .hero h1 {
+      font-size: clamp(34px, 4.6vw, 54px); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.07; margin: 0 0 16px;
+    }
+    .hero h1 em { font-style: normal; color: var(--teal); }
+    .hero .lede { font-size: 18.5px; color: var(--text-2); max-width: 56ch; margin: 0 0 14px; }
+    .hero .lede strong { color: var(--text); font-weight: 600; }
+    .hero .b2b-line {
+      font-size: 15px; color: var(--text-2); max-width: 56ch;
+      border-left: 2px solid var(--indigo); padding-left: 14px; margin: 22px 0 26px;
+    }
+    .trust-chips { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+    .trust-chips li {
+      font-size: 13px; color: var(--text-2);
+      border: 1px solid var(--border-hi); border-radius: 6px; padding: 5px 12px; white-space: nowrap;
+    }
+    .trust-chips li b { color: var(--text); font-weight: 600; }
+
+    /* ============================================================
+       SCAN CARD
+       ============================================================ */
+    .scan-card {
+      background: var(--surface); border: 1px solid var(--border-hi);
+      border-radius: var(--radius-lg); padding: 26px 26px 30px;
+      box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), 0 0 60px -30px var(--teal-glow);
+    }
+    .scan-card h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 4px; }
+    .scan-card .card-sub { color: var(--text-3); font-size: 14.5px; margin: 0 0 20px; }
+
+    .stepper { display: flex; gap: 6px; margin-bottom: 20px; }
+    .stepper span {
+      flex: 1; font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-3);
+      border-top: 3px solid var(--border); padding-top: 8px;
+    }
+    .stepper span.active { color: var(--text); border-top-color: var(--teal); }
+
+    fieldset { border: 0; padding: 0; margin: 0 0 20px; }
+    legend { font-weight: 700; font-size: 15.5px; padding: 0; margin-bottom: 4px; }
+    .field-hint { font-size: 13.5px; color: var(--text-3); margin: 0 0 12px; }
+    .field-hint a { color: var(--teal); }
+
+    .cam-open { width: 100%; }
+    .or-divider {
+      display: flex; align-items: center; gap: 12px; margin: 12px 0;
+      color: var(--text-3); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .or-divider::before, .or-divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 420px) { .photo-grid { grid-template-columns: 1fr; } }
+    .dropzone {
+      position: relative; border: 2px dashed var(--border-hi); border-radius: var(--radius);
+      background: var(--bg3); min-height: 168px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 6px; text-align: center; padding: 14px; cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+    .dropzone:hover, .dropzone.dragover { border-color: var(--teal); background: rgba(10,191,163,0.06); }
+    .dropzone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .dropzone .dz-label { font-weight: 700; font-size: 15px; color: var(--text); }
+    .dropzone .dz-sub { font-size: 12.5px; color: var(--text-3); }
+    .dropzone .dz-icon { font-size: 26px; line-height: 1; }
+    .dropzone.filled { border-style: solid; border-color: var(--teal); padding: 0; overflow: hidden; }
+    .dropzone.filled img.preview { width: 100%; height: 168px; object-fit: cover; }
+    .dropzone .dz-badge {
+      position: absolute; left: 8px; top: 8px; z-index: 2;
+      font-size: 11px; font-weight: 700; letter-spacing: .06em;
+      background: rgba(8,12,16,.85); color: var(--teal);
+      padding: 4px 8px; border-radius: 6px;
+    }
+    .dz-remove {
+      position: absolute; right: 8px; top: 8px; z-index: 2;
+      border: 0; background: rgba(8,12,16,.85); color: var(--text);
+      width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-size: 15px; line-height: 1;
+    }
+    .dz-remove:hover { background: var(--err); color: #fff; }
+
+    label.lbl { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; color: var(--text); }
+    .unit-toggle { display: inline-flex; border: 1px solid var(--border-hi); border-radius: 8px; overflow: hidden; margin-left: 10px; vertical-align: middle; }
+    .unit-toggle button {
+      border: 0; background: var(--bg3); color: var(--text-3);
+      font-size: 12px; font-weight: 700; padding: 4px 12px; cursor: pointer;
+    }
+    .unit-toggle button[aria-pressed="true"] { background: var(--teal); color: #050E0C; }
+    input[type="number"], select {
+      width: 100%; padding: 12px; font: inherit; color: var(--text);
+      border: 1px solid var(--border-hi); border-radius: 8px; background: var(--bg3);
+    }
+    input[type="number"]:focus, select:focus { border-color: var(--teal); outline: none; box-shadow: 0 0 0 3px var(--teal-dim); }
+    .ftin { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--text-3); margin: 4px 0 18px; }
+    .consent input { margin-top: 4px; width: 16px; height: 16px; accent-color: var(--teal); flex: none; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font: inherit; font-weight: 700; font-size: 16px;
+      padding: 14px 24px; border-radius: var(--radius); border: 0; cursor: pointer;
+      transition: opacity .15s, background .15s, transform .05s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--teal); color: #050E0C; width: 100%; }
+    .btn-primary:hover { opacity: .88; }
+    .btn-primary:disabled { background: var(--bg3); color: var(--text-3); cursor: not-allowed; opacity: 1; }
+    .btn-indigo {
+      background: var(--indigo-dim); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF;
+      font-size: 15px; padding: 12px 20px;
+    }
+    .btn-indigo:hover { background: rgba(108,99,255,0.25); color: #C4C0FF; }
+    .btn-ghost {
+      background: transparent; color: var(--text-2); border: 1px solid var(--border-hi);
+      font-size: 14.5px; padding: 11px 18px;
+    }
+    .btn-ghost:hover { border-color: var(--text-3); color: var(--text); }
+
+    .form-error {
+      display: none; background: rgba(255,122,102,0.1); border: 1px solid rgba(255,122,102,0.4);
+      color: #FFB0A3; border-radius: 8px; padding: 10px 14px; font-size: 14px; margin-bottom: 14px;
+    }
+    .form-error.show { display: block; }
+
+    .status { display: none; margin-top: 18px; border-top: 1px solid var(--border); padding-top: 16px; }
+    .status.show { display: block; }
+    .status ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .status li { font-size: 14px; color: var(--text-3); display: flex; align-items: center; gap: 10px; }
+    .status li::before { content: "○"; color: var(--border-hi); }
+    .status li.doing { color: var(--text-2); }
+    .status li.doing::before { content: "◐"; color: var(--teal); animation: spin 1.1s linear infinite; display: inline-block; }
+    .status li.done { color: var(--text); }
+    .status li.done::before { content: "●"; color: var(--teal); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ============================================================
+       GUIDED CAMERA CAPTURE — full-screen on mobile, large on desktop.
+       Text is oversized on purpose: the user is standing METERS away.
+       ============================================================ */
+    .cam-modal {
+      position: fixed; inset: 0; z-index: 100; display: flex;
+      background: rgba(4,8,12,.95);
+    }
+    .cam-modal[hidden] { display: none; }
+    .cam-panel {
+      display: flex; flex-direction: column;
+      width: 100%; height: 100dvh; background: var(--bg2);
+    }
+    @media (min-width: 761px) {
+      .cam-panel {
+        margin: auto; width: min(820px, 94vw); height: auto; max-height: 94vh;
+        border: 1px solid var(--border-hi); border-radius: var(--radius-lg); overflow: hidden;
+      }
+    }
+    .cam-head {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+    }
+    .cam-head h3 { margin: 0; font-size: 17px; font-weight: 700; }
+    .slot-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      color: var(--teal); background: var(--teal-dim); border: 1px solid var(--teal-glow);
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .cam-select-row { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .cam-select-row label { font-size: 13px; color: var(--text-3); font-weight: 600; }
+    .cam-select-row select {
+      width: auto; max-width: 46vw; padding: 7px 10px; font-size: 13px;
+      background: var(--bg3); border: 1px solid var(--border-hi); border-radius: 8px; color: var(--text);
+    }
+    .cam-close {
+      border: 0; background: var(--bg3); color: var(--text);
+      width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 18px; line-height: 1;
+    }
+    .cam-close:hover { background: var(--err); color: #fff; }
+    .cam-error {
+      margin: 12px 16px 0; background: rgba(255,122,102,0.1); border: 1px solid rgba(255,122,102,0.4);
+      color: #FFB0A3; border-radius: 8px; padding: 12px 14px; font-size: 15px;
+    }
+    .cam-stage { position: relative; flex: 1; min-height: 0; background: #000; }
+    @media (min-width: 761px) { .cam-stage { flex: none; height: 58vh; } }
+    #camVideo { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
+    #camVideo.mirrored { transform: scaleX(-1); }
+    .cam-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; pointer-events: none; }
+    .cam-instruction {
+      background: linear-gradient(transparent, rgba(4,8,12,.92) 40%);
+      padding: 56px 20px 18px; text-align: center;
+    }
+    .cam-instruction h4 {
+      margin: 0 0 6px; font-size: clamp(24px, 5.5vw, 30px);
+      font-weight: 700; letter-spacing: -0.02em; color: var(--text);
+      text-shadow: 0 2px 12px rgba(0,0,0,.8);
+    }
+    .cam-instruction p {
+      margin: 0 auto; max-width: 56ch; font-size: clamp(16px, 4vw, 19px); line-height: 1.5;
+      color: var(--text-2); text-shadow: 0 1px 8px rgba(0,0,0,.8);
+    }
+    .cam-count {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: clamp(150px, 42vw, 280px); font-weight: 800; letter-spacing: -0.04em;
+      color: var(--teal); text-shadow: 0 0 60px var(--teal-glow), 0 4px 24px rgba(0,0,0,.7);
+      font-variant-numeric: tabular-nums;
+    }
+    .cam-count[hidden] { display: none; }
+    .cam-count.final { color: #fff; }
+    .cam-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .35s; }
+    .cam-flash.on { opacity: .85; transition: none; }
+    .cam-status {
+      margin: 0; padding: 10px 16px 0; font-size: 15px; color: var(--text-2); text-align: center;
+    }
+    .cam-foot { display: flex; gap: 10px; padding: 12px 16px 16px; }
+    .cam-foot .btn-primary { flex: 1; font-size: 18px; padding: 16px 24px; }
+    .cam-foot .btn-ghost { flex: none; }
+
+    /* ============================================================
+       RESULT SECTION
+       ============================================================ */
+    #result { display: none; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 64px; }
+    #result.show { display: block; }
+    .result-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .result-bar h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+    .result-bar .meta { font-size: 13px; color: var(--text-3); }
+    .result-bar .actions { margin-left: auto; display: flex; flex-wrap: wrap; gap: 10px; }
+    .result-frame-wrap { border: 1px solid var(--border-hi); border-radius: var(--radius-lg); overflow: hidden; background: #000; }
+    #resultFrame { display: block; width: 100%; height: min(78vh, 760px); border: 0; background: #000; }
+
+    .measure-panel {
+      margin-top: 18px; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .measure-panel[hidden] { display: none; }
+    .measure-panel summary {
+      cursor: pointer; list-style: none; padding: 16px 20px; font-weight: 700; font-size: 15.5px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .measure-panel summary::-webkit-details-marker { display: none; }
+    .measure-panel summary .count-tag {
+      font-size: 12px; font-weight: 700; color: var(--teal);
+      background: var(--teal-dim); border: 1px solid var(--teal-glow);
+      padding: 2px 10px; border-radius: 100px;
+    }
+    .measure-panel summary .chev { margin-left: auto; color: var(--text-3); transition: transform .15s; }
+    .measure-panel[open] summary .chev { transform: rotate(180deg); }
+    .measure-panel .measure-note {
+      padding: 0 20px 12px; margin: 0; font-size: 13.5px; color: var(--text-3); max-width: 76ch;
+    }
+    .measure-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px; background: var(--border); border-top: 1px solid var(--border);
+    }
+    .measure-grid .cell { background: var(--bg3); padding: 12px 20px; }
+    .measure-grid .m-name { font-size: 12.5px; color: var(--text-3); text-transform: capitalize; }
+    .measure-grid .m-val { font-size: 18px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+    .measure-grid .m-val small { font-size: 12px; font-weight: 600; color: var(--teal); margin-left: 3px; }
+    .measure-actions { padding: 12px 20px; border-top: 1px solid var(--border); }
+
+    .result-cta {
+      margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+      background: var(--surface); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); padding: 18px 20px;
+    }
+    .result-cta p { margin: 0; color: var(--text-2); font-size: 15px; max-width: 60ch; }
+    .result-cta p b { color: var(--text); }
+    .result-cta .btn { margin-left: auto; width: auto; }
+
+    .history { margin-top: 26px; }
+    .history h3 { font-size: 15px; margin: 0 0 4px; }
+    .history .history-note { font-size: 13px; color: var(--text-3); margin: 0 0 12px; }
+    .history-list { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+    .history-list li {
+      display: flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border-hi); border-radius: 100px; padding: 6px 8px 6px 14px;
+      font-size: 13px; color: var(--text-2);
+    }
+    .history-list button { border: 0; background: transparent; color: var(--text); cursor: pointer; font: inherit; font-size: 13px; padding: 2px 6px; }
+    .history-list button:hover { color: var(--teal); }
+    .history-list button.del:hover { color: var(--err); }
+
+    /* ============================================================
+       CONTENT SECTIONS
+       ============================================================ */
+    section.pad { padding: 80px 0; border-top: 1px solid var(--border); }
+    .section-head { max-width: 680px; margin-bottom: 48px; }
+    .section-head p.sub { color: var(--text-2); margin: 0; }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      background: var(--border); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+    .step { background: var(--bg3); padding: 32px 28px; counter-increment: step; }
+    .step .step__num {
+      font-size: 13px; font-weight: 700; letter-spacing: .1em;
+      color: var(--teal); text-transform: uppercase; margin: 0 0 14px;
+    }
+    .step h3 { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
+    .step p { margin: 0; font-size: 15px; color: var(--text-2); }
+
+    .verticals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 860px) { .verticals-grid { grid-template-columns: 1fr; } }
+    .audience-card {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 32px 28px; transition: border-color .2s;
+    }
+    .audience-card:hover { border-color: var(--teal-glow); }
+    .audience-card .eyebrow { font-size: 12px; margin-bottom: 8px; }
+    .audience-card h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; }
+    .audience-card p { margin: 0 0 10px; font-size: 15px; color: var(--text-2); }
+    .audience-card .payoff { font-weight: 600; color: var(--text); font-size: 15px; }
+
+    .faq-list { max-width: 800px; }
+    .faq-list details { border-bottom: 1px solid var(--border); }
+    .faq-list summary {
+      cursor: pointer; font-weight: 600; font-size: 16.5px; padding: 18px 40px 18px 0;
+      list-style: none; position: relative; color: var(--text);
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after {
+      content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+      font-size: 20px; color: var(--teal); background: var(--teal-dim); border: 1px solid var(--teal-glow);
+      width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; line-height: 1;
+    }
+    .faq-list details[open] summary::after { content: "–"; }
+    .faq-list .answer { padding: 0 0 20px; color: var(--text-2); font-size: 15.5px; max-width: 72ch; }
+    .faq-list .answer p { margin: 0 0 10px; }
+    .faq-list .answer p:last-child { margin-bottom: 0; }
+    .faq-list .answer a { color: var(--teal); }
+
+    .cta-section { padding: 90px 0; border-top: 1px solid var(--border); text-align: center; }
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.1; margin: 0 0 14px;
+    }
+    .cta-section p { color: var(--text-2); max-width: 58ch; margin: 0 auto 28px; }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .cta-actions .btn-primary { width: auto; padding: 14px 28px; }
+
+    .site-footer { border-top: 1px solid var(--border); padding: 32px 0 44px; font-size: 14px; color: var(--text-3); }
+    .site-footer .container { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }
+    .site-footer a:hover { color: var(--text); }
+    .site-footer .foot-note { flex-basis: 100%; font-size: 13px; margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container">
+    <a href="https://snapmeasureai.com/" class="nav__logo">
+      <img src="https://snapmeasureai.com/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI">
+      <span class="demo-tag">Live demo</span>
+    </a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="#how">How it works</a>
+      <a href="#uses">Use cases</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="https://snapmeasureai.com/#contact">Contact us</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO + SCAN CARD ================= -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <span class="hero__badge">Live demo — runs on the real API</span>
+      <h1>A full 3D body scan from <em>two photos</em>.</h1>
+      <p class="lede">Take a front and a side photo, enter your height, and get an <strong>interactive 3D model of your body</strong> with its key measurements in about 10 seconds. In your browser — no app, no hardware, no account.</p>
+      <p class="b2b-line">This demo returns ~20 of the most-used measurements. The API can return any measurement defined on the 3D model — teams use it for apparel sizing, GLP&#8209;1 progress tracking, and digital twins.</p>
+      <ul class="trust-chips">
+        <li><b>Patented</b> 3D reconstruction</li>
+        <li>Photos <b>encrypted in transit</b></li>
+        <li><b>Deleted</b> right after processing</li>
+        <li><b>No account</b>, nothing stored</li>
+      </ul>
+    </div>
+
+    <!-- ============ THE SCAN CARD ============ -->
+    <form class="scan-card" id="scanForm" novalidate>
+      <h2>Scan yourself now</h2>
+      <p class="card-sub">Two photos and your height. That's the whole input.</p>
+
+      <div class="stepper" aria-hidden="true">
+        <span class="active" id="step1Tab">01 Photos</span>
+        <span id="step2Tab">02 Height</span>
+        <span id="step3Tab">03 3D result</span>
+      </div>
+
+      <div class="form-error" id="formError" role="alert"></div>
+
+      <fieldset>
+        <legend>Photos</legend>
+        <p class="field-hint">Full body in frame, arms slightly away from your sides, fitted clothing. <a href="#faq-photos">Photo tips&nbsp;→</a></p>
+        <button type="button" class="btn btn-indigo cam-open" id="openCameraBtn">&#128247;&ensp;Use my camera — guided capture with timer</button>
+        <div class="or-divider">or upload photos</div>
+        <div class="photo-grid">
+          <label class="dropzone" id="dzFront">
+            <input type="file" id="fileFront" accept="image/*" aria-label="Front photo">
+            <span class="dz-badge">FRONT</span>
+            <span class="dz-icon" aria-hidden="true">&#128247;</span>
+            <span class="dz-label">Front photo</span>
+            <span class="dz-sub">Tap to upload or drop a file</span>
+          </label>
+          <label class="dropzone" id="dzSide">
+            <input type="file" id="fileSide" accept="image/*" aria-label="Side photo">
+            <span class="dz-badge">SIDE</span>
+            <span class="dz-icon" aria-hidden="true">&#128247;</span>
+            <span class="dz-label">Side photo</span>
+            <span class="dz-sub">Tap to upload or drop a file</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Height</legend>
+        <div>
+          <label class="lbl" for="heightCm">Your height
+            <span class="unit-toggle" role="group" aria-label="Height units">
+              <button type="button" id="unitCm" aria-pressed="true">cm</button>
+              <button type="button" id="unitFt" aria-pressed="false">ft / in</button>
+            </span>
+          </label>
+          <input type="number" id="heightCm" inputmode="decimal" min="90" max="230" step="0.5" placeholder="e.g. 175">
+          <div class="ftin" id="ftinWrap" style="display:none">
+            <input type="number" id="heightFt" inputmode="numeric" min="3" max="7" step="1" placeholder="ft" aria-label="Height, feet">
+            <input type="number" id="heightIn" inputmode="decimal" min="0" max="11.5" step="0.5" placeholder="in" aria-label="Height, inches">
+          </div>
+        </div>
+      </fieldset>
+
+      <label class="consent">
+        <input type="checkbox" id="consent">
+        <span>I agree my photos will be processed to generate my measurements and 3D model, and understand they're deleted immediately after processing.</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary" id="submitBtn">Generate my 3D scan</button>
+
+      <div class="status" id="statusPanel" aria-live="polite">
+        <ol>
+          <li id="stResize">Preparing photos on your device</li>
+          <li id="stUpload">Sending securely to the measurement engine</li>
+          <li id="stBuild">Reconstructing your 3D body &amp; measurements</li>
+        </ol>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= RESULT ================= -->
+<section id="result" aria-live="polite">
+  <div class="container">
+    <div class="result-bar">
+      <h2>Your 3D scan</h2>
+      <span class="meta" id="resultMeta"></span>
+      <div class="actions">
+        <button class="btn btn-ghost" id="saveBtn" type="button">Save on this device</button>
+        <button class="btn btn-ghost" id="downloadBtn" type="button">Download (.html)</button>
+        <button class="btn btn-ghost" id="newScanBtn" type="button">New scan</button>
+      </div>
+    </div>
+    <div class="result-frame-wrap">
+      <iframe id="resultFrame" title="Interactive 3D body scan and measurements" sandbox="allow-scripts"></iframe>
+    </div>
+
+    <details class="measure-panel" id="measurePanel" hidden>
+      <summary>
+        Measurement data
+        <span class="count-tag" id="measureCount"></span>
+        <span class="chev" aria-hidden="true">&#9662;</span>
+      </summary>
+      <p class="measure-note">These are the demo's ~20 predefined measurements. Through the API, any measurement can be returned from the 3D body model — you define the set your product needs.</p>
+      <div class="measure-grid" id="measureGrid"></div>
+      <div class="measure-actions">
+        <button class="btn btn-ghost" id="copyMeasureBtn" type="button">Copy as JSON</button>
+      </div>
+    </details>
+
+    <div class="result-cta">
+      <p><b>Want this inside your product?</b> The model and measurements above came back from one API call — the same call your app would make, returning whichever measurements you specify.</p>
+      <a class="btn btn-primary" href="https://snapmeasureai.com/#contact">Contact us about the API</a>
+    </div>
+    <div class="history" id="historyBlock" hidden>
+      <h3>Scans saved on this device</h3>
+      <p class="history-note">No account needed — saved scans live only in this browser. Re-scan any time to compare how your measurements change.</p>
+      <ul class="history-list" id="historyList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="pad" id="how">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2 class="section__title">From two photos to a measured 3D model</h2>
+      <p class="sub">No depth sensors, no turntables, no measuring tape. The pipeline runs on any modern phone or laptop browser.</p>
+    </div>
+    <div class="steps">
+      <article class="step">
+        <p class="step__num">Step 01</p>
+        <h3>Capture two photos</h3>
+        <p>A front and a side photo in fitted clothing — use the guided camera with its countdown timer, or upload from your camera roll. Your height gives the model real-world scale.</p>
+      </article>
+      <article class="step">
+        <p class="step__num">Step 02</p>
+        <h3>Send securely</h3>
+        <p>Photos travel over an encrypted connection (TLS) and are deleted the moment processing finishes. They're also downscaled on your device first, so less of your data leaves your phone at all.</p>
+      </article>
+      <article class="step">
+        <p class="step__num">Step 03</p>
+        <h3>Explore your 3D twin</h3>
+        <p>In about 10 seconds you get an interactive 3D model you can spin and zoom, annotated with ~20 of the most-used measurements. Via the API, any measurement can be returned from the model.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USE CASES ================= -->
+<section class="pad" id="uses">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Who builds on this</p>
+      <h2 class="section__title">One scan, three industries</h2>
+      <p class="sub">The demo above is consumer-simple on purpose. Under it sits an API that teams integrate in days, not quarters.</p>
+    </div>
+    <div class="verticals-grid">
+      <article class="audience-card">
+        <p class="eyebrow">Apparel &amp; uniforms</p>
+        <h3>Right size, first order</h3>
+        <p>Match a customer's true measurements to your size charts and made-to-measure patterns at checkout — no tape measure, no guessing between M and L.</p>
+        <p class="payoff">Fewer returns, fewer exchanges, higher conversion.</p>
+      </article>
+      <article class="audience-card">
+        <p class="eyebrow">Health &amp; GLP&#8209;1 programs</p>
+        <h3>Progress the scale can't show</h3>
+        <p>Waist, hip, thigh, and full-body shape change tell the story weight alone hides — especially during GLP&#8209;1 treatment and body recomposition.</p>
+        <p class="payoff">Members see change, stay motivated, stay enrolled.</p>
+      </article>
+      <article class="audience-card">
+        <p class="eyebrow">Digital twins &amp; fitness</p>
+        <h3>An avatar that's actually you</h3>
+        <p>The scan returns a true-to-scale 3D body mesh — ready for virtual try-on, game and fitness avatars, and personalized product experiences.</p>
+        <p class="payoff">Real bodies in, believable twins out.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="pad" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="section__title">Questions people ask before they scan</h2>
+    </div>
+    <div class="faq-list">
+      <details id="faq-photos">
+        <summary>What kind of photos work best?</summary>
+        <div class="answer">
+          <p>Easiest way: use the guided camera on this page. Prop your phone upright at roughly hip height (a shelf or a friend works), tap start when you can see yourself head to toe, and the countdown gives you time to get into place — front view first, then it walks you through the side view.</p>
+          <p>Fitted clothing — leggings, shorts, a fitted top — gives the most accurate results; baggy clothes hide your outline. Plain backgrounds and even lighting help, but the reconstruction is robust to normal rooms.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What happens to my photos?</summary>
+        <div class="answer">
+          <p>They're sent over an encrypted connection (TLS), used once to compute your model and measurements, and then deleted. They're also downscaled on your device before upload, so the full-resolution originals never leave your phone. We don't build a profile of you — there are no accounts on this demo.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Why does my browser ask for camera permission?</summary>
+        <div class="answer">
+          <p>That prompt comes from your browser, not from us — every website that wants to use your camera must ask, and there's no way around it. Nothing is captured until you start the countdown, the preview stays on your device, and your browser remembers your choice for this site so you're normally only asked once. If you'd rather not grant it, uploading photos works just as well.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How accurate is it?</summary>
+        <div class="answer">
+          <p>The reconstruction is patented and built for real-world photos — no special hardware or calibration objects. <!-- TODO: replace with your validated accuracy figures + link to methodology when available. Enterprise buyers will quote this page back to you. --> Accuracy details and methodology are available on request for teams evaluating the API.</p>
+        </div>
+      </details>
+      <details>
+        <summary>What measurements do I get?</summary>
+        <div class="answer">
+          <p>This demo returns about 20 of the most commonly used measurements — chest/bust, waist, hips, inseam, arm length, thigh, neck, and more — each shown on your interactive 3D model.</p>
+          <p>That set is just the demo default. Because the output is a full 3D body model, the API can return <em>any</em> measurement defined on it: custom landmarks, garment-specific dimensions, circumferences at any height — whatever your product needs.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Do I need to install anything?</summary>
+        <div class="answer">
+          <p>No. The demo runs entirely in your browser on any modern phone, tablet, or laptop. For production integrations there's a REST API, and the 3D viewer you see here can be embedded in your own app or site.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I track my progress over time?</summary>
+        <div class="answer">
+          <p>This demo has no accounts, so nothing is stored on our side. You can save each scan on your device or download it as a standalone file, then re-scan in a few weeks and compare. Hosted progress tracking — history, deltas, trend charts — is available to API partners building it into their own products.</p>
+        </div>
+      </details>
+      <details>
+        <summary>I'm evaluating this for my company. What does integration look like?</summary>
+        <div class="answer">
+          <p>One HTTPS endpoint. Your app sends two photos and a height; the API returns the 3D model plus the measurement set you specify — as structured data, or as the embeddable viewer you see on this page. Most teams have a working prototype in a day. <a href="https://snapmeasureai.com/#contact">Contact us</a> for a technical walkthrough and we'll integrate against your use case live.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Something didn't work — what should I check?</summary>
+        <div class="answer">
+          <p>Make sure both photos show your full body head-to-toe, your height is entered, and you're on a reasonably recent browser. Very dark photos or heavy occlusion (long coats, other people in frame) can fail reconstruction. If it still fails, try re-taking the photos — and if you're a developer hitting an integration snag, <a href="mailto:info@snapmeasureai.com">get in touch</a>.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta-section">
+  <div class="container">
+    <p class="eyebrow">For product &amp; engineering teams</p>
+    <h2>Ready to add body scanning to your product?</h2>
+    <p>Sizing at checkout, progress tracking in your health app, avatars in your platform — it's the same API call this page just made, returning any measurements you define. Reach out to discuss licensing, custom integration, and partnerships.</p>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="https://snapmeasureai.com/#contact">Contact us</a>
+      <a class="btn btn-indigo" href="https://snapmeasureai.com/">Learn more at snapmeasureai.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 SnapMeasureAI</span>
+    <a href="https://snapmeasureai.com/">snapmeasureai.com</a>
+    <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a>
+    <span class="foot-note">Photos are processed to generate measurements and deleted immediately afterwards. This demo stores nothing server-side; scans you choose to save live only in your browser.</span>
+  </div>
+</footer>
+
+<!-- ================= GUIDED CAMERA MODAL ================= -->
+<div class="cam-modal" id="camModal" hidden role="dialog" aria-modal="true" aria-labelledby="camTitle">
+  <div class="cam-panel">
+    <div class="cam-head">
+      <h3 id="camTitle">Guided capture</h3>
+      <span class="slot-tag" id="camSlotTag">FRONT</span>
+      <div class="cam-select-row" id="camSelectRow">
+        <label for="camSelect">Camera</label>
+        <select id="camSelect" aria-label="Choose camera"></select>
+      </div>
+      <button type="button" class="cam-close" id="camClose" aria-label="Close camera">&#215;</button>
+    </div>
+    <div class="cam-error" id="camError" hidden></div>
+    <div class="cam-stage">
+      <video id="camVideo" autoplay playsinline muted></video>
+      <div class="cam-overlay">
+        <div class="cam-instruction" id="camInstruction">
+          <h4 id="camInstrTitle">Face the camera</h4>
+          <p id="camInstrText"></p>
+        </div>
+        <div class="cam-count" id="camCount" hidden>10</div>
+      </div>
+      <div class="cam-flash" id="camFlash"></div>
+    </div>
+    <p class="cam-status" id="camStatus"></p>
+    <div class="cam-foot">
+      <button type="button" class="btn btn-primary" id="camStart">Start 10-second countdown</button>
+      <button type="button" class="btn btn-ghost" id="camCancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   SnapMeasureAI demo — application logic
+   ----------------------------------------------------------------------------
+   Everything a developer needs to touch lives in CONFIG below.
+   Flow: capture/upload → downscale on-device → base64 → POST JSON → render.
+
+   API RESPONSE CONTRACT (from POST /body/analyze):
+     {
+       "data": "{'height': 174.0, 'head circumf': 59.46, ...}",  // ~20 measurements
+       "html": "<!DOCTYPE html> ..."                              // three.js viewer
+     }
+   The html field renders into a sandboxed <iframe> (so it no longer overwrites
+   this page); the data field is parsed into the measurement panel.
+
+   About the OPTIONS request you'll see in DevTools: that's the browser's
+   automatic CORS preflight (demo.snapmeasureai.com → api.snapmeasureai.com
+   with Content-Type: application/json is a cross-origin, "non-simple"
+   request). It's expected. To stop the browser re-preflighting every scan,
+   have the API return  Access-Control-Max-Age: 86400  on the OPTIONS reply.
+   ========================================================================== */
+
+const CONFIG = {
+  API_ENDPOINT: "https://api.snapmeasureai.com/body/analyze",
+  COMPANY: "",                        // sent as the payload's `company` field
+  HEADERS: { "Content-Type": "application/json" },
+  REQUEST_TIMEOUT_MS: 120000,
+
+  /* ── IMAGE PIPELINE ─────────────────────────────────────────────────
+     Downscale only — longest side capped at maxDimension. JPEG quality
+     stays at 1.0 (visually lossless; resolution beyond 720px doesn't
+     improve reconstruction accuracy).                                  */
+  IMAGE: {
+    maxDimension: 720,
+    jpegQuality: 1.0,
+    maxUploadBytesRaw: 25 * 1024 * 1024,
+  },
+
+  /* ── GUIDED CAMERA ──────────────────────────────────────────────────── */
+  CAMERA: {
+    frontCountdown: 10,       // seconds to get into place for the first shot
+    sideCountdown: 7,         // shorter — the user is already in position
+    sideInstructionMs: 3500,  // how long the "turn to your side" card shows
+  },
+
+  MEASUREMENT_UNIT: "cm",     // unit label shown next to measurement values
+
+  /* ── ON-DEVICE SCAN HISTORY (no accounts needed) ────────────────────── */
+  HISTORY_KEY: "smai_demo_scans",
+  HISTORY_LIMIT: 5            // viewer blobs are big; localStorage ≈ 5 MB.
+                              // Outgrowing it? Move to IndexedDB.
+};
+
+/* ── DOM handles ─────────────────────────────────────────────────────── */
+const $ = (id) => document.getElementById(id);
+const els = {
+  form: $("scanForm"), error: $("formError"), submit: $("submitBtn"),
+  dzFront: $("dzFront"), dzSide: $("dzSide"),
+  fileFront: $("fileFront"), fileSide: $("fileSide"),
+  heightCm: $("heightCm"), ftinWrap: $("ftinWrap"),
+  heightFt: $("heightFt"), heightIn: $("heightIn"),
+  unitCm: $("unitCm"), unitFt: $("unitFt"),
+  consent: $("consent"),
+  status: $("statusPanel"),
+  st: { resize: $("stResize"), upload: $("stUpload"), build: $("stBuild") },
+  tabs: [$("step1Tab"), $("step2Tab"), $("step3Tab")],
+  result: $("result"), resultFrame: $("resultFrame"), resultMeta: $("resultMeta"),
+  measurePanel: $("measurePanel"), measureGrid: $("measureGrid"),
+  measureCount: $("measureCount"), copyMeasureBtn: $("copyMeasureBtn"),
+  saveBtn: $("saveBtn"), downloadBtn: $("downloadBtn"), newScanBtn: $("newScanBtn"),
+  historyBlock: $("historyBlock"), historyList: $("historyList"),
+  openCameraBtn: $("openCameraBtn"),
+  cam: {
+    modal: $("camModal"), video: $("camVideo"),
+    selectRow: $("camSelectRow"), select: $("camSelect"),
+    slotTag: $("camSlotTag"), instruction: $("camInstruction"),
+    instrTitle: $("camInstrTitle"), instrText: $("camInstrText"),
+    count: $("camCount"), flash: $("camFlash"), status: $("camStatus"),
+    start: $("camStart"), cancel: $("camCancel"), close: $("camClose"),
+    error: $("camError"),
+  },
+};
+
+const state = {
+  unit: "cm",
+  photos: { front: null, side: null },   // { dataUrl, width, height, fileName }
+  lastResult: null,                       // { html, measurements, heightLabel, dateISO }
+  busy: false,
+};
+
+/* ============================================================================
+   HEIGHT — the API expects "174cm" or "68in"; the trailing two letters are
+   stripped server-side. ft/in entries are converted to total inches.
+   ========================================================================== */
+function setUnit(unit) {
+  state.unit = unit;
+  els.unitCm.setAttribute("aria-pressed", unit === "cm");
+  els.unitFt.setAttribute("aria-pressed", unit === "ft");
+  els.heightCm.style.display = unit === "cm" ? "" : "none";
+  els.ftinWrap.style.display = unit === "ft" ? "" : "none";
+}
+els.unitCm.addEventListener("click", () => setUnit("cm"));
+els.unitFt.addEventListener("click", () => setUnit("ft"));
+
+const trimNum = (n) => String(Math.round(n));
+
+/* Returns "174cm" / "68in", or null (missing), or { err, val } (out of range). */
+function readHeight() {
+  if (state.unit === "cm") {
+    const cm = parseFloat(els.heightCm.value);
+    if (isNaN(cm)) return null;
+    if (cm < 90 || cm > 230) return { err: "range", val: trimNum(cm) + " cm" };
+    return trimNum(cm) + "cm";
+  }
+  const ft = parseFloat(els.heightFt.value);
+  const inch = parseFloat(els.heightIn.value || "0");
+  if (isNaN(ft)) return null;
+  const totalIn = ft * 12 + (isNaN(inch) ? 0 : inch);
+  if (totalIn < 36 || totalIn > 90) return { err: "range", val: trimNum(totalIn) + " in" };
+  return trimNum(totalIn) + "in";
+}
+
+/* ============================================================================
+   IMAGE PIPELINE — downscale on-device (720px longest side), no visible
+   quality loss (JPEG q=1.0). Modern browsers apply EXIF orientation when
+   decoding, so portrait phone shots come out upright.
+   ========================================================================== */
+function scaleToJpeg(source, srcW, srcH) {
+  const { maxDimension, jpegQuality } = CONFIG.IMAGE;
+  const scale = Math.min(1, maxDimension / Math.max(srcW, srcH));
+  const w = Math.round(srcW * scale), h = Math.round(srcH * scale);
+  const canvas = document.createElement("canvas");
+  canvas.width = w; canvas.height = h;
+  canvas.getContext("2d").drawImage(source, 0, 0, w, h);
+  return { dataUrl: canvas.toDataURL("image/jpeg", jpegQuality), width: w, height: h };
+}
+
+function fileToPhoto(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const out = scaleToJpeg(img, img.naturalWidth, img.naturalHeight);
+        URL.revokeObjectURL(url);
+        resolve({ ...out, fileName: file.name || "photo.jpg" });
+      } catch (e) { URL.revokeObjectURL(url); reject(e); }
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("decode failed")); };
+    img.src = url;
+  });
+}
+
+/* ============================================================================
+   DROPZONES — preview, drag & drop, replace, remove
+   ========================================================================== */
+const zoneRenderers = {};
+function wireDropzone(zone, input, slot) {
+  const render = () => {
+    const p = state.photos[slot];
+    zone.classList.toggle("filled", !!p);
+    zone.querySelectorAll(".preview, .dz-remove").forEach(n => n.remove());
+    zone.querySelectorAll(".dz-icon, .dz-label, .dz-sub")
+        .forEach(n => n.style.display = p ? "none" : "");
+    if (p) {
+      const img = document.createElement("img");
+      img.className = "preview";
+      img.alt = slot + " photo preview";
+      img.src = p.dataUrl;
+      zone.appendChild(img);
+      const rm = document.createElement("button");
+      rm.type = "button"; rm.className = "dz-remove";
+      rm.setAttribute("aria-label", "Remove " + slot + " photo");
+      rm.textContent = "\u00D7";
+      rm.addEventListener("click", (e) => {
+        e.preventDefault(); e.stopPropagation();
+        state.photos[slot] = null; input.value = ""; render();
+      });
+      zone.appendChild(rm);
+    }
+  };
+  zoneRenderers[slot] = render;
+
+  async function accept(file) {
+    hideError();
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      return showError("That file isn't an image. Please choose a JPG, PNG, or HEIC photo.");
+    }
+    if (file.size > CONFIG.IMAGE.maxUploadBytesRaw) {
+      return showError("That photo is over 25 MB. Please choose a smaller one.");
+    }
+    try {
+      state.photos[slot] = await fileToPhoto(file);
+      render();
+    } catch (err) {
+      console.error(err);
+      showError("We couldn't read that photo. Please try a different one.");
+    }
+  }
+
+  input.addEventListener("change", () => accept(input.files[0]));
+  ["dragover", "dragenter"].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); zone.classList.add("dragover");
+  }));
+  ["dragleave", "drop"].forEach(ev => zone.addEventListener(ev, e => {
+    e.preventDefault(); zone.classList.remove("dragover");
+    if (ev === "drop") accept(e.dataTransfer.files[0]);
+  }));
+}
+wireDropzone(els.dzFront, els.fileFront, "front");
+wireDropzone(els.dzSide,  els.fileSide,  "side");
+
+/* ============================================================================
+   GUIDED CAMERA CAPTURE
+   Opens the camera (front-facing by default on mobile), lets the user switch
+   camera via the selector in the header, gives them time to frame up, then
+   runs a countdown per view. The preview is mirrored for front cameras
+   (selfie feel); the captured frame itself is never mirrored.
+   NOTE: getUserMedia requires HTTPS and a user permission grant — that
+   prompt is browser-enforced and cannot be skipped. Browsers remember the
+   grant per-site, so users are normally asked only once.
+   ========================================================================== */
+const CAM_COPY = {
+  front: {
+    tag: "FRONT",
+    title: "Face the camera",
+    text: "Prop your device upright and step back until you're in frame head to toe, arms slightly away from your sides. Press start when it looks right — the countdown gives you time to get into place.",
+  },
+  side: {
+    tag: "SIDE",
+    title: "Now turn to your side",
+    text: "Turn 90\u00B0 so the camera sees your profile, arms relaxed and slightly forward of your body. Hold still — the countdown starts in a moment\u2026",
+  },
+};
+
+const cam = { stream: null, queue: [], totalSlots: 0, active: false, timers: [] };
+
+function camClearTimers() {
+  cam.timers.forEach(t => clearTimeout(t));
+  cam.timers = [];
+}
+function camAfter(ms, fn) { cam.timers.push(setTimeout(fn, ms)); }
+
+async function startStream(deviceId) {
+  stopStream();
+  const constraints = deviceId
+    ? { video: { deviceId: { exact: deviceId }, width: { ideal: 1280 }, height: { ideal: 720 } } }
+    : { video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } } };
+  cam.stream = await navigator.mediaDevices.getUserMedia(constraints);
+  els.cam.video.srcObject = cam.stream;
+
+  const track = cam.stream.getVideoTracks()[0];
+  const settings = track.getSettings();
+  const label = (track.label || "").toLowerCase();
+  const isFront = settings.facingMode === "user" ||
+                  label.includes("front") || label.includes("user") ||
+                  (!settings.facingMode && !label.includes("back"));
+  els.cam.video.classList.toggle("mirrored", isFront);
+}
+
+function stopStream() {
+  if (cam.stream) cam.stream.getTracks().forEach(t => t.stop());
+  cam.stream = null;
+  els.cam.video.srcObject = null;
+}
+
+/* The selector is always visible while the camera is open, so users can see
+   the option exists; it's disabled when the device has only one camera. */
+async function populateCameraList() {
+  try {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const cams = devices.filter(d => d.kind === "videoinput");
+    const currentId = cam.stream && cam.stream.getVideoTracks()[0].getSettings().deviceId;
+    els.cam.select.innerHTML = "";
+    if (cams.length === 0) {
+      const opt = document.createElement("option");
+      opt.textContent = "Default camera";
+      els.cam.select.appendChild(opt);
+    }
+    cams.forEach((d, i) => {
+      const opt = document.createElement("option");
+      opt.value = d.deviceId;
+      opt.textContent = d.label || ("Camera " + (i + 1));
+      if (d.deviceId === currentId) opt.selected = true;
+      els.cam.select.appendChild(opt);
+    });
+    els.cam.select.disabled = cams.length < 2;
+  } catch (e) { console.error(e); }
+}
+
+els.cam.select.addEventListener("change", async () => {
+  try { await startStream(els.cam.select.value); }
+  catch (e) { showCamError(e); }
+});
+
+function camShowInstruction(slot) {
+  const c = CAM_COPY[slot];
+  els.cam.slotTag.textContent = c.tag;
+  els.cam.instrTitle.textContent = c.title;
+  els.cam.instrText.textContent = c.text;
+  els.cam.instruction.style.display = "";
+  els.cam.count.hidden = true;
+}
+
+function camCountdown(seconds, onDone) {
+  els.cam.instruction.style.display = "none";
+  els.cam.count.hidden = false;
+  let n = seconds;
+  const tick = () => {
+    els.cam.count.textContent = n;
+    els.cam.count.classList.toggle("final", n <= 3);
+    if (n === 0) { onDone(); return; }
+    n -= 1;
+    camAfter(1000, tick);
+  };
+  tick();
+}
+
+function captureFrame(slot) {
+  const v = els.cam.video;
+  if (!v.videoWidth) return;
+  const out = scaleToJpeg(v, v.videoWidth, v.videoHeight);
+  state.photos[slot] = { ...out, fileName: slot + ".jpg" };
+  zoneRenderers[slot]();
+  els.cam.flash.classList.add("on");
+  camAfter(60, () => els.cam.flash.classList.remove("on"));
+}
+
+function camRunSlot(slot, auto) {
+  camShowInstruction(slot);
+  const stepNum = cam.totalSlots - cam.queue.length + 1;
+  els.cam.status.textContent =
+    "Step " + stepNum + " of " + cam.totalSlots +
+    " \u00B7 " + CAM_COPY[slot].tag.toLowerCase() + " view";
+  /* First shot of a session gets the long countdown (time to prop the phone
+     and step back); auto-continued shots get the short one — the person is
+     already in frame. Retaking only the side photo therefore still gets 10s. */
+  const secs = auto ? CONFIG.CAMERA.sideCountdown : CONFIG.CAMERA.frontCountdown;
+  const go = () => camCountdown(secs, () => {
+    captureFrame(slot);
+    cam.queue.shift();
+    if (cam.queue.length) {
+      camRunSlot(cam.queue[0], /*auto=*/true);       // side view auto-continues
+    } else {
+      els.cam.count.hidden = true;
+      els.cam.status.textContent = "All set \u2014 photos added below.";
+      camAfter(700, closeCamera);
+    }
+  });
+  if (auto) {
+    camAfter(CONFIG.CAMERA.sideInstructionMs, go);   // brief read time, then count
+  } else {
+    els.cam.start.hidden = false;
+    els.cam.start.disabled = false;
+    els.cam.start.textContent = "Start " + secs + "-second countdown";
+    els.cam.start.onclick = () => { els.cam.start.hidden = true; go(); };
+  }
+}
+
+async function openCamera(slots) {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    return showError("This browser can't open the camera — please upload your photos instead.");
+  }
+  hideError();
+  cam.queue = slots.slice();
+  cam.totalSlots = slots.length;
+  cam.active = true;
+  els.cam.error.hidden = true;
+  els.cam.start.hidden = false;
+  els.cam.start.disabled = false;
+  els.cam.modal.hidden = false;
+  document.body.style.overflow = "hidden";
+  try {
+    await startStream();               // defaults to the front-facing camera
+    await populateCameraList();        // labels become available post-permission
+    camRunSlot(cam.queue[0], /*auto=*/false);
+  } catch (e) {
+    showCamError(e);
+  }
+}
+
+function showCamError(e) {
+  console.error(e);
+  els.cam.error.hidden = false;
+  els.cam.error.textContent =
+    (e && e.name === "NotAllowedError")
+      ? "Camera permission was denied. You can allow it in your browser's site settings, or close this and upload photos instead."
+      : "We couldn't start the camera on this device. Close this window and upload photos instead.";
+  els.cam.start.disabled = true;
+}
+
+function closeCamera() {
+  cam.active = false;
+  camClearTimers();
+  stopStream();
+  els.cam.modal.hidden = true;
+  els.cam.status.textContent = "";
+  document.body.style.overflow = "";
+}
+
+els.openCameraBtn.addEventListener("click", () => {
+  /* Only capture what's missing; if both photos exist, treat it as a full retake. */
+  const missing = ["front", "side"].filter(s => !state.photos[s]);
+  openCamera(missing.length ? missing : ["front", "side"]);
+});
+els.cam.cancel.addEventListener("click", closeCamera);
+els.cam.close.addEventListener("click", closeCamera);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && cam.active) closeCamera();
+});
+
+/* ============================================================================
+   VALIDATION
+   ========================================================================== */
+function showError(msg) {
+  els.error.textContent = msg;
+  els.error.classList.add("show");
+  els.error.scrollIntoView({ block: "nearest", behavior: "smooth" });
+}
+function hideError() { els.error.classList.remove("show"); }
+
+function validate() {
+  if (!state.photos.front) return "Add your front photo to continue.";
+  if (!state.photos.side)  return "Add your side photo to continue.";
+  const h = readHeight();
+  if (h === null) return "Enter your height — it gives the 3D model real-world scale.";
+  if (typeof h === "object") return "That height looks off (" + h.val +
+    "). Please enter a height between 90\u2013230 cm (3\u20320\u2033\u20137\u20326\u2033).";
+  if (!els.consent.checked) return "Please confirm you're OK with your photos being processed (they're deleted right after).";
+  return null;
+}
+
+/* ============================================================================
+   SUBMIT → API CALL
+   Payload contract (matches /body/analyze):
+   {
+     height:  "174cm" | "68in",     // unit suffix stripped server-side
+     company: "",
+     images:  [ { data: "<raw base64, no data-url prefix>", fileName: "front.jpg" },
+                { data: "...", fileName: "side.jpg" } ]   // front first, side second
+   }
+   ========================================================================== */
+function buildPayload(heightLabel) {
+  const raw = (p) => p.dataUrl.split(",")[1];   // strip "data:image/jpeg;base64,"
+  return {
+    height: heightLabel,
+    company: CONFIG.COMPANY,
+    images: [
+      { data: raw(state.photos.front), fileName: state.photos.front.fileName },
+      { data: raw(state.photos.side),  fileName: state.photos.side.fileName  },
+    ],
+  };
+}
+
+function setStep(i) {
+  els.tabs.forEach((t, idx) => t.classList.toggle("active", idx === i));
+}
+function setStatus(id, phase) {  // phase: "doing" | "done" | ""
+  const li = els.st[id];
+  li.classList.remove("doing", "done");
+  if (phase) li.classList.add(phase);
+}
+
+/* Parse the response's `data` field: a Python-repr style dict string like
+   "{'height': 174.0, 'head circumf': 59.46, ...}". Tolerant by design. */
+function parseMeasurements(d) {
+  if (!d) return null;
+  if (typeof d === "object") return d;
+  if (typeof d !== "string") return null;
+  try { return JSON.parse(d); } catch (e) { /* not JSON — try Python repr */ }
+  try {
+    return JSON.parse(
+      d.replace(/'/g, '"')
+       .replace(/\bNone\b/g, "null")
+       .replace(/\bTrue\b/g, "true")
+       .replace(/\bFalse\b/g, "false")
+    );
+  } catch (e) { return null; }
+}
+
+els.form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (state.busy) return;
+  hideError();
+
+  const problem = validate();
+  if (problem) return showError(problem);
+
+  const heightLabel = readHeight();
+  state.busy = true;
+  els.submit.disabled = true;
+  els.submit.textContent = "Working\u2026";
+  els.status.classList.add("show");
+  setStep(1);
+  setStatus("resize", "done");          // photos were downscaled at pick time
+  setStatus("upload", "doing");
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), CONFIG.REQUEST_TIMEOUT_MS);
+
+  try {
+    const res = await fetch(CONFIG.API_ENDPOINT, {
+      method: "POST",
+      headers: CONFIG.HEADERS,
+      body: JSON.stringify(buildPayload(heightLabel)),
+      signal: controller.signal,
+    });
+    setStatus("upload", "done");
+    setStatus("build", "doing");
+
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      throw new Error("API " + res.status + (detail ? ": " + detail.slice(0, 300) : ""));
+    }
+
+    /* Response envelope: { data: "<measurement dict string>", html: "<viewer>" }.
+       Falls back gracefully if the endpoint ever returns raw HTML. */
+    const rawText = await res.text();
+    let env = null;
+    try { env = JSON.parse(rawText); } catch (e) { /* raw HTML fallback below */ }
+    const html = env && typeof env.html === "string" ? env.html
+               : rawText.trim().startsWith("<") ? rawText
+               : null;
+    if (!html) throw new Error("Unexpected response format from API");
+
+    setStatus("build", "done");
+    setStep(2);
+
+    state.lastResult = {
+      html,
+      measurements: parseMeasurements(env && env.data),
+      heightLabel,
+      dateISO: new Date().toISOString(),
+    };
+    renderResult(state.lastResult);
+  } catch (err) {
+    console.error(err);
+    setStatus("upload", ""); setStatus("build", "");
+    setStep(0);
+    showError(err.name === "AbortError"
+      ? "The scan took too long and was cancelled. Check your connection and try again."
+      : "The scan didn't complete. Retake the photos (full body, decent light) and try again \u2014 if it keeps failing, we'd like to hear about it: info@snapmeasureai.com");
+  } finally {
+    clearTimeout(timeout);
+    state.busy = false;
+    els.submit.disabled = false;
+    els.submit.textContent = "Generate my 3D scan";
+  }
+});
+
+/* ============================================================================
+   RESULT RENDERING
+   The viewer HTML renders in a sandboxed iframe (allow-scripts only) so the
+   three.js scene runs untouched while this page — nav, CTA, history — stays
+   alive around it. If the viewer ever needs same-origin resources, add
+   "allow-same-origin" to the iframe's sandbox attribute in the markup.
+   ========================================================================== */
+function renderResult(r, { scroll = true } = {}) {
+  els.resultFrame.srcdoc = r.html;
+  renderMeasurements(r.measurements);
+  els.resultMeta.textContent =
+    new Date(r.dateISO).toLocaleString() + " \u00B7 height " + r.heightLabel;
+  els.result.classList.add("show");
+  if (scroll) els.result.scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMeasurements(m) {
+  const entries = m ? Object.entries(m) : [];
+  els.measurePanel.hidden = entries.length === 0;
+  if (!entries.length) return;
+  els.measureCount.textContent = entries.length + " values";
+  els.measureGrid.innerHTML = "";
+  entries.forEach(([name, val]) => {
+    const cell = document.createElement("div");
+    cell.className = "cell";
+    const n = document.createElement("div");
+    n.className = "m-name"; n.textContent = name;
+    const v = document.createElement("div");
+    v.className = "m-val";
+    if (typeof val === "number") {
+      v.textContent = (Math.round(val * 10) / 10).toString();
+      const u = document.createElement("small");
+      u.textContent = CONFIG.MEASUREMENT_UNIT;
+      v.appendChild(u);
+    } else {
+      v.textContent = String(val);
+    }
+    cell.append(n, v);
+    els.measureGrid.appendChild(cell);
+  });
+}
+
+els.copyMeasureBtn.addEventListener("click", async () => {
+  const m = state.lastResult && state.lastResult.measurements;
+  if (!m) return;
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(m, null, 2));
+    els.copyMeasureBtn.textContent = "Copied \u2713";
+  } catch (e) {
+    els.copyMeasureBtn.textContent = "Copy failed";
+  }
+  setTimeout(() => { els.copyMeasureBtn.textContent = "Copy as JSON"; }, 2000);
+});
+
+els.newScanBtn.addEventListener("click", () => {
+  setStep(0);
+  els.status.classList.remove("show");
+  ["resize","upload","build"].forEach(k => setStatus(k, ""));
+  document.querySelector(".hero").scrollIntoView({ behavior: "smooth" });
+});
+
+els.downloadBtn.addEventListener("click", () => {
+  if (!state.lastResult) return;
+  const r = state.lastResult;
+  const blob = new Blob([r.html], { type: "text/html" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "snapmeasureai-scan-" + r.dateISO.slice(0, 10) + ".html";
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ============================================================================
+   ON-DEVICE SCAN HISTORY — progress tracking without user accounts.
+   Stored in localStorage; capped and quota-guarded. Swap for IndexedDB
+   (or server-side profiles) when you build the real tracking product.
+   ========================================================================== */
+function loadHistory() {
+  try {
+    const items = JSON.parse(localStorage.getItem(CONFIG.HISTORY_KEY)) || [];
+    // migrate any pre-envelope items ({ body } → { html })
+    return items.map(it => it.html ? it : { ...it, html: it.body || "" });
+  } catch (e) { return []; }
+}
+function persistHistory(items) {
+  try {
+    localStorage.setItem(CONFIG.HISTORY_KEY, JSON.stringify(items));
+    return true;
+  } catch (e) {   // QuotaExceededError — viewer blobs are big
+    if (items.length > 1) return persistHistory(items.slice(0, -1)); // drop oldest
+    return false;
+  }
+}
+function renderHistory() {
+  const items = loadHistory();
+  els.historyBlock.hidden = items.length === 0;
+  els.historyList.innerHTML = "";
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    const label = document.createElement("span");
+    label.textContent = new Date(item.dateISO).toLocaleDateString() +
+      " \u00B7 " + item.heightLabel;
+    const open = document.createElement("button");
+    open.type = "button"; open.textContent = "View";
+    open.addEventListener("click", () => {
+      state.lastResult = item;
+      renderResult(item);
+    });
+    const del = document.createElement("button");
+    del.type = "button"; del.className = "del"; del.textContent = "\u00D7";
+    del.setAttribute("aria-label", "Delete saved scan from " +
+      new Date(item.dateISO).toLocaleDateString());
+    del.addEventListener("click", () => {
+      persistHistory(loadHistory().filter(x => x.id !== item.id));
+      renderHistory();
+    });
+    li.append(label, open, del);
+    els.historyList.appendChild(li);
+  });
+}
+els.saveBtn.addEventListener("click", () => {
+  if (!state.lastResult) return;
+  const items = loadHistory();
+  items.unshift({ id: Date.now().toString(36), ...state.lastResult });
+  const ok = persistHistory(items.slice(0, CONFIG.HISTORY_LIMIT));
+  els.saveBtn.textContent = ok ? "Saved \u2713" : "Too large to save \u2014 use Download";
+  setTimeout(() => { els.saveBtn.textContent = "Save on this device"; }, 2200);
+  renderHistory();
+});
+
+renderHistory();
+setUnit("cm");
+</script>
+</body>
+</html>
