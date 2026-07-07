@@ -382,11 +382,13 @@
     @media (max-width: 600px) {
       .hero__stats { gap: 24px; }
       .specs-grid { grid-template-columns: 1fr; }
-      .hero__actions { flex-direction: column; align-items: flex-start; }
+      .hero__actions { flex-wrap: wrap; flex-direction: row; align-items: center; }
       .hero__also { flex-wrap: wrap; }
       /* Buttons — compact, no wrap */
-      .btn--scan { font-size: 13px; padding: 10px 14px; white-space: nowrap; }
-      .btn--api  { font-size: 13px; padding: 10px 14px; }
+      .btn--scan, .btn--api { flex: 1; justify-content: center; font-size: 15px; padding: 13px 12px; }
+      .ph-badge { width: 100%; display: flex; justify-content: center; }
+      .btn--scan { font-size: 15px; padding: 13px 20px; white-space: nowrap; }
+      .btn--api  { font-size: 15px; padding: 13px 20px; }
       .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
       .nav__mobile-menu .btn--primary,
       .nav__mobile-menu .btn--outline { width: auto; align-self: flex-start; font-size: 14px; }
