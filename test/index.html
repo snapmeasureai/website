@@ -290,10 +290,6 @@
       width: 12px; height: 12px; background: var(--card-ink);
       transform: rotate(45deg); border-radius: 2px;
     }
-    .tip-box h5 { margin: 0 0 8px; font-size: 13px; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase; color: var(--teal); }
-    .tip-box ul { margin: 0; padding: 0 0 0 16px; }
-    .tip-box li { margin-bottom: 5px; }
     .tip-close {
       position: absolute; top: 8px; right: 8px; background: none; border: none;
       cursor: pointer; color: #aaa; font-size: 16px; line-height: 1; padding: 2px 5px;
@@ -404,9 +400,8 @@
     }
     .status li::before {
       content: ""; flex: none; width: 26px; height: 26px; border-radius: 50%;
-      background: #fff; border: 2px solid var(--card-line);
-      background-image: none;
-      transition: background .2s, border-color .2s;
+      background: transparent; border: 2px solid var(--card-line);
+      transition: border-color .2s;
     }
     .status li.doing {
       color: var(--card-ink); font-weight: 600;
@@ -415,9 +410,10 @@
       border-radius: 8px; padding: 4px 8px; margin: -4px -8px;
     }
     .status li.doing::before {
-      border-color: var(--teal-dim);
+      background: transparent;
+      border-color: rgba(10,191,163,.22);
       border-top-color: var(--teal);
-      animation: spin 0.9s linear infinite;
+      animation: spin 0.75s linear infinite;
     }
     .status li.done { color: var(--card-ink); }
     .status li.done::before {
@@ -469,30 +465,26 @@
       margin: 12px 16px 0; background: rgba(255,122,102,.1); border: 1px solid rgba(255,122,102,.4);
       color: #FFB0A3; border-radius: 8px; padding: 12px 14px; font-size: 15px;
     }
-    .cam-stage { position: relative; flex: 1; min-height: 0; background: #000; }
+    /* Teal outline on the stage itself = the framing guide.
+       Simple, no pseudo-elements, fills the whole camera view. */
+    .cam-stage {
+      position: relative; flex: 1; min-height: 0; background: #000;
+      outline: 3px solid var(--teal);
+      outline-offset: -3px;
+    }
     @media (min-width: 761px) { .cam-stage { flex: none; height: 58vh; } }
     #camVideo { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
     #camVideo.mirrored { transform: scaleX(-1); }
 
-    /* Framing guide — teal corner brackets at the EDGE of the video stage
-       (inset: -6px means they sit on/outside the video boundary, not shrinking
-       the usable area inside it). The message: "fill this whole space". */
-    .cam-guide {
-      position: absolute; inset: -6px; pointer-events: none; opacity: .9;
+    /* Small "Fit your full body in frame" label shown above the stage */
+    .cam-guide { display: none; }  /* corner-bracket version removed */
+    .cam-guide-label {
+      display: block; padding: 5px 16px;
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--teal); text-align: center; background: var(--bg2);
     }
-    .cam-guide[hidden] { display: none; }
-    .cam-guide::before, .cam-guide::after,
-    .cam-guide > span::before, .cam-guide > span::after {
-      content: ""; position: absolute; width: 28px; height: 28px;
-      border: 3px solid var(--teal-2);
-      filter: drop-shadow(0 0 8px rgba(10,191,163,.7));
-    }
-    .cam-guide::before { top: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: 6px 0 0 0; }
-    .cam-guide::after  { top: 0; right: 0; border-left: 0; border-bottom: 0; border-radius: 0 6px 0 0; }
-    .cam-guide > span::before { bottom: 0; left: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 6px; }
-    .cam-guide > span::after  { bottom: 0; right: 0; border-left: 0; border-top: 0; border-radius: 0 0 6px 0; }
 
-    /* Instruction overlay: compact single line at the bottom, max 25% of stage height */
+    /* Normal instruction: compact overlay at bottom of stage */
     .cam-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; pointer-events: none; }
     .cam-instruction {
       background: linear-gradient(transparent, rgba(4,8,12,.88) 50%);
@@ -507,6 +499,27 @@
       margin: 0 auto; max-width: 48ch; font-size: clamp(13px, 3.2vw, 15px); line-height: 1.4;
       color: var(--text-2); text-shadow: 0 1px 6px rgba(0,0,0,.9);
     }
+
+    /* Full-screen "TURN TO YOUR SIDE" takeover — shown for 3s before side countdown.
+       Huge text so the user can read it from 6 feet away. */
+    .cam-side-flash {
+      position: absolute; inset: 0; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(4,8,12,.92);
+      text-align: center; padding: 24px;
+      pointer-events: none;
+    }
+    .cam-side-flash[hidden] { display: none; }
+    .cam-side-flash h3 {
+      margin: 0 0 10px;
+      font-size: clamp(52px, 12vw, 88px);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+      color: var(--teal); text-shadow: 0 0 40px var(--teal-glow);
+    }
+    .cam-side-flash p {
+      font-size: clamp(20px, 5vw, 30px); color: var(--text-2); margin: 0;
+    }
+
     .cam-count {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
       font-size: clamp(150px, 42vw, 280px); font-weight: 800; letter-spacing: -0.04em;
@@ -517,9 +530,8 @@
     .cam-count.final { color: #fff; }
     .cam-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .35s; }
     .cam-flash.on { opacity: .85; transition: none; }
-    .cam-status { margin: 0; padding: 8px 16px 0; font-size: 14px; color: var(--text-2); text-align: center; }
+    .cam-status { margin: 0; padding: 6px 16px 0; font-size: 14px; color: var(--text-2); text-align: center; }
     .cam-foot { display: flex; gap: 10px; padding: 10px 16px 14px; }
-    /* Compact button on mobile — camera view is the priority */
     .cam-foot .btn-primary { flex: 1; font-size: clamp(14px, 3.5vw, 17px); padding: clamp(10px, 2.5vw, 14px) 16px; }
     .cam-foot .btn-ghost { flex: none; font-size: 14px; padding: 10px 14px; }
 
@@ -728,14 +740,7 @@
             <button type="button" class="tip-btn" id="tipBtn" aria-expanded="false" aria-controls="tipBox">Photo tips &#9432;</button>
             <span class="tip-box" id="tipBox" role="tooltip">
               <button type="button" class="tip-close" id="tipClose" aria-label="Close tips">&times;</button>
-              <h5>Best results</h5>
-              <ul>
-                <li>Use the guided camera button above — it times both shots for you</li>
-                <li>Prop your phone at hip height, step back until your full body is in frame</li>
-                <li>Fitted clothing (leggings, fitted top) — tuck in loose shirts</li>
-                <li>Arms slightly away from your sides so they aren't blended with your torso</li>
-                <li>Plain background and even lighting help, but aren't required</li>
-              </ul>
+              <p style="margin:0;font-size:14px;line-height:1.55;">Full body in frame, arms slightly away from sides, fitted clothing — tuck in loose shirts. Prop your phone at hip height and step back until your whole body is visible.</p>
             </span>
           </span>
         </p>
@@ -1035,19 +1040,20 @@
       <button type="button" class="cam-close" id="camClose" aria-label="Close camera">&#215;</button>
     </div>
     <div class="cam-error" id="camError" hidden></div>
+    <span class="cam-guide-label" id="camGuideLabel">Fit your full body in frame</span>
     <div class="cam-stage">
       <video id="camVideo" autoplay playsinline muted></video>
-      <!-- Framing guide: teal corner brackets (see CSS note above) -->
-      <div class="cam-guide" id="camGuide" aria-hidden="true">
-        <span class="cam-guide-label">Fit yourself inside</span>
-        <span></span>
-      </div>
       <div class="cam-overlay">
         <div class="cam-instruction" id="camInstruction">
           <h4 id="camInstrTitle">Face the camera</h4>
           <p id="camInstrText"></p>
         </div>
         <div class="cam-count" id="camCount" hidden>10</div>
+      </div>
+      <!-- Full-screen takeover shown between front capture and side countdown -->
+      <div class="cam-side-flash" id="camSideFlash" hidden>
+        <h3>TURN TO<br>YOUR SIDE</h3>
+        <p>90&deg; profile &mdash; arms relaxed</p>
       </div>
       <div class="cam-flash" id="camFlash"></div>
     </div>
@@ -1135,7 +1141,7 @@ const els = {
     instrTitle: $("camInstrTitle"), instrText: $("camInstrText"),
     count: $("camCount"), flash: $("camFlash"), status: $("camStatus"),
     start: $("camStart"), cancel: $("camCancel"), close: $("camClose"),
-    error: $("camError"), guide: $("camGuide"),
+    error: $("camError"), sideFlash: $("camSideFlash"),
   },
 };
 
@@ -1345,7 +1351,7 @@ function camShowInstruction(slot) {
   els.cam.instrText.textContent = c.text;
   els.cam.instruction.style.display = "";
   els.cam.count.hidden = true;
-  els.cam.guide.hidden = false;      // guide visible while user gets into place
+  els.cam.sideFlash.hidden = true;
 }
 
 function camCountdown(seconds, onDone) {
@@ -1374,7 +1380,6 @@ function captureFrame(slot) {
 }
 
 function camRunSlot(slot, auto) {
-  camShowInstruction(slot);
   const stepNum = cam.totalSlots - cam.queue.length + 1;
   els.cam.status.textContent =
     "Step " + stepNum + " of " + cam.totalSlots +
@@ -1384,16 +1389,28 @@ function camRunSlot(slot, auto) {
     captureFrame(slot);
     cam.queue.shift();
     if (cam.queue.length) {
-      camRunSlot(cam.queue[0], /*auto=*/true);
+      /* Show full-screen "TURN TO YOUR SIDE" takeover for 3s.
+         Big enough to read from 6 feet away. */
+      els.cam.sideFlash.hidden = false;
+      els.cam.instruction.style.display = "none";
+      els.cam.count.hidden = true;
+      camAfter(3000, () => {
+        els.cam.sideFlash.hidden = true;
+        camRunSlot(cam.queue[0], /*auto=*/true);
+      });
     } else {
-      els.cam.count.hidden = true; els.cam.guide.hidden = true;
+      els.cam.count.hidden = true;
+      els.cam.sideFlash.hidden = true;
       els.cam.status.textContent = "All set \u2014 photos added below.";
       camAfter(700, closeCamera);
     }
   });
   if (auto) {
-    camAfter(CONFIG.CAMERA.sideInstructionMs, go);
+    /* Side slot auto-continues: show compact instruction then start countdown */
+    camShowInstruction(slot);
+    go();
   } else {
+    camShowInstruction(slot);
     els.cam.start.hidden = false;
     els.cam.start.disabled = false;
     els.cam.start.textContent = "Start countdown";
@@ -1598,20 +1615,33 @@ function normalizeMeasurements(m) {
 }
 
 function renderResult(r, { scroll = true } = {}) {
-  /* Force a true navigation inside the iframe by blanking it first.
-     Without this, if the iframe already holds a document and we set srcdoc
-     to a new value, some browsers treat it as a same-document update and
-     the three.js scene never re-initialises (black screen). */
-  els.resultFrame.srcdoc = "";
-  requestAnimationFrame(() => {
-    els.resultFrame.srcdoc = r.html;
+  /* The three.js viewer's init scripts only run on a fresh document load.
+     Setting srcdoc directly on an already-loaded iframe can fail silently
+     (black screen) because the browser skips the navigation if the content
+     looks the same or if the previous document hasn't fully unloaded.
+     Fix: set srcdoc to "" first, wait for that blank page to finish loading,
+     then set the real content — guaranteeing a new document each time.
+     A 120ms fallback fires in case the load event is missed. */
+  const frame = els.resultFrame;
+  let done = false;
+  const applyContent = () => {
+    if (done) return;
+    done = true;
+    frame.srcdoc = r.html;
+  };
+  frame.addEventListener("load", function onLoad() {
+    frame.removeEventListener("load", onLoad);
+    applyContent();
   });
+  frame.srcdoc = "";
+  setTimeout(applyContent, 120);   // fallback
+
   renderMeasurements(r.measurements);
   els.resultMeta.textContent =
     new Date(r.dateISO).toLocaleString() + " \u00B7 " + r.heightLabel;
   els.result.classList.add("show");
   renderResultHistory(r);
-  if (scroll) setTimeout(() => els.result.scrollIntoView({ behavior: "smooth" }), 50);
+  if (scroll) setTimeout(() => els.result.scrollIntoView({ behavior: "smooth" }), 180);
 }
 
 function renderMeasurements(m) {
