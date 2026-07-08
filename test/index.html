@@ -330,11 +330,11 @@
     .dropzone .dz-sub { font-size: 12.5px; color: var(--card-muted); }
     .dropzone.filled {
       border-style: solid; border-color: var(--teal); padding: 0; overflow: hidden;
-      background: #0b1420;      /* letterbox color when the image isn't square */
+      background: transparent;
       min-height: 0;
     }
     .dropzone.filled img.preview {
-      display: block; width: 100%; height: auto; max-height: 460px; object-fit: contain;
+      display: block; width: 100%; height: auto; max-height: 380px; object-fit: cover;
     }
     .dropzone .dz-badge {
       position: absolute; left: 8px; top: 8px; z-index: 2;
@@ -735,7 +735,7 @@
 
       <fieldset>
         <legend>Photos</legend>
-        <p class="field-hint">Full body in frame, arms slightly away from your sides, fitted clothing.
+        <div class="field-hint">Full body in frame, arms slightly away from your sides, fitted clothing.
           <span class="tip-wrap">
             <button type="button" class="tip-btn" id="tipBtn" aria-expanded="false" aria-controls="tipBox">Photo tips &#9432;</button>
             <span class="tip-box" id="tipBox" role="tooltip">
@@ -743,7 +743,7 @@
               <p style="margin:0;font-size:14px;line-height:1.55;">Full body in frame, arms slightly away from sides, fitted clothing — tuck in loose shirts. Prop your phone at hip height and step back until your whole body is visible.</p>
             </span>
           </span>
-        </p>
+        </div>
         <button type="button" class="btn btn-primary cam-open" id="openCameraBtn">&#128247;&ensp;Use my camera — guided capture with timer</button>
         <div class="or-divider">or upload photos</div>
         <div class="photo-grid">
@@ -1371,8 +1371,22 @@ function camCountdown(seconds, onDone) {
 function captureFrame(slot) {
   const v = els.cam.video;
   if (!v.videoWidth) return;
-  const out = scaleToJpeg(v, v.videoWidth, v.videoHeight);
-  state.photos[slot] = { ...out, fileName: slot + ".jpg" };
+  const isMirrored = v.classList.contains("mirrored");
+  const { maxDimension, jpegQuality } = CONFIG.IMAGE;
+  const scale = Math.min(1, maxDimension / Math.max(v.videoWidth, v.videoHeight));
+  const w = Math.round(v.videoWidth * scale), h = Math.round(v.videoHeight * scale);
+  const canvas = document.createElement("canvas");
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  if (isMirrored) {
+    /* Undo the CSS mirror so the captured image is the real (unmirrored) frame.
+       The preview in the dropzone will also be unmirrored, matching the upload path. */
+    ctx.translate(w, 0);
+    ctx.scale(-1, 1);
+  }
+  ctx.drawImage(v, 0, 0, w, h);
+  const dataUrl = canvas.toDataURL("image/jpeg", jpegQuality);
+  state.photos[slot] = { dataUrl, width: w, height: h, fileName: slot + ".jpg" };
   zoneRenderers[slot]();
   refreshStep();
   els.cam.flash.classList.add("on");
