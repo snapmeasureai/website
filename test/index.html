@@ -10,8 +10,8 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://demo.snapmeasureai.com/">
   <link rel="icon" href="https://snapmeasureai.com/assets/images/favicon.png">
-  <meta property="og:title" content="SnapMeasureAI Free Demo | 3D Body Scan from 2 Photos">
-  <meta property="og:description" content="Two smartphone photos → 3D body model + 100+ measurements in under 10 seconds. Save scans on-device to compare progress over time. No account, no app.">
+  <meta property="og:title" content="SnapMeasureAI Demo: 3D Body Scan | 2 Photos, 10 Seconds">
+  <meta property="og:description" content="Patented 3D body scan from 2 photos. 100+ body measurements in 10 seconds. Try the live demo — save scans on-device and compare progress over time.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://demo.snapmeasureai.com/">
   <meta property="og:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
@@ -21,8 +21,8 @@
   <meta property="og:video:width" content="720">
   <meta property="og:video:height" content="1280">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SnapMeasureAI Free Demo | 3D Body Scan from 2 Photos">
-  <meta name="twitter:description" content="Two smartphone photos → 3D body model + 100+ measurements in under 10 seconds. Save scans on-device to compare progress over time.">
+  <meta name="twitter:title" content="SnapMeasureAI Demo: 3D Body Scan | 2 Photos, 10 Seconds">
+  <meta name="twitter:description" content="Patented 3D body scan from 2 photos. 100+ body measurements in 10 seconds. Try the live demo free.">
   <meta name="twitter:image" content="https://snapmeasureai.com/img/body_measurement_poster.webp">
 
   <!-- JSON-LD schema. Independent of the landing page's schema, but consistent
@@ -31,50 +31,64 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://snapmeasureai.com/#org",
-        "name": "SnapMeasureAI",
-        "url": "https://snapmeasureai.com/",
-        "logo": "https://snapmeasureai.com/assets/images/logo.svg",
-        "email": "info@snapmeasureai.com",
-        "sameAs": [
-          "https://www.linkedin.com/company/snapmeasureai",
-          "https://www.tiktok.com/@snapmeasureai",
-          "https://www.youtube.com/shorts/iqJmcGncGRA"
-        ]
-      },
-      {
-        "@type": "WebApplication",
-        "name": "SnapMeasureAI Body Scan (Live Demo)",
-        "url": "https://demo.snapmeasureai.com/",
-        "applicationCategory": "HealthApplication",
-        "operatingSystem": "Web",
-        "browserRequirements": "Requires a modern browser with camera and JavaScript",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "publisher": { "@id": "https://snapmeasureai.com/#org" },
-        "description": "Free browser-based demo of SnapMeasureAI 3D body scanning. Take two smartphone photos, receive a 3D body model and ~20 predefined measurements in about 10 seconds. Photos are processed and immediately deleted."
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          { "@type": "Question", "name": "What kind of photos work best?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Full body in frame, arms slightly away from your sides, wearing fitted clothing. Loose shirts should be tucked in. The guided camera on this page walks you through both views with a countdown timer." } },
-          { "@type": "Question", "name": "What happens to my photos?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Photos are processed immediately and deleted — they are not stored or retained. They travel over an encrypted connection and are downscaled on your device before upload. No personally identifiable information is linked to the scan." } },
-          { "@type": "Question", "name": "How accurate is the SnapMeasureAI body scan?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Typical error on major measurements is within half an inch — often much closer. The technology was built on Cambridge research and trained on over one million body scans, 400,000 backgrounds, and 90,000 body poses." } },
-          { "@type": "Question", "name": "What measurements are returned?",
-            "acceptedAnswer": { "@type": "Answer", "text": "This demo returns about 20 commonly used measurements — chest, waist, hips, thighs, biceps, calves, neck, shoulder width, inseam, torso lengths, and more. Through the API, any circumference or length between any points on the 3D body model can be generated." } },
-          { "@type": "Question", "name": "Can I track my progress over time without an account?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. This demo saves your scans on your device (in your browser) so you can reopen them and compare later — no account required. Hosted progress tracking with history, deltas, and month-over-month comparison is available to API partners." } },
-          { "@type": "Question", "name": "How do apparel and uniform teams use this?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Remote body measurements support size recommendations, made-to-measure workflows, and uniform programs where fit at scale matters operationally. The 3D body model exports to OBJ for pattern-making, CAD, and digital-twin pipelines." } },
-          { "@type": "Question", "name": "How does the scan help GLP-1 and weight loss programs?",
-            "acceptedAnswer": { "@type": "Answer", "text": "GLP-1 medications shift waist, hips, and body proportions in ways a scale never shows. Periodic scans give patients and clinicians a measurable, visual record of how the body is actually changing — no hardware or clinic visit required." } }
-        ]
-      }
+    "@type": "SoftwareApplication",
+    "name": "SnapMeasureAI Demo: 3D Body Scan",
+    "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "3D Body Measurement and Digital Twin Platform",
+    "description": "Free live demo of SnapMeasureAI patented 3D body scanning. Two smartphone photos produce a full 3D body model and 100+ measurements in 10 seconds. Powers GLP-1 tracking, fitness progress, apparel sizing, and digital twins.",
+    "url": "https://demo.snapmeasureai.com/",
+    "operatingSystem": "Web",
+    "browserRequirements": "Modern browser with camera support and JavaScript enabled",
+    "featureList": [
+      "100+ body measurements from two smartphone photos in 10 seconds",
+      "10,000-point 3D body model with OBJ export",
+      "Guided camera capture with countdown timer",
+      "On-device scan saving — compare progress over time without an account",
+      "Apparel sizing and returns reduction for e-commerce platforms",
+      "GLP-1 and weight loss body change tracking",
+      "Fitness progress and muscle circumference tracking",
+      "Uniform and workwear remote sizing",
+      "Works on any smartphone — no hardware required",
+      "Two issued patents, one pending"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free live demo. Technology licensing and API integration available for apparel, fitness, and enterprise platforms."
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "SnapMeasureAI",
+      "url": "https://snapmeasureai.com",
+      "email": "info@snapmeasureai.com",
+      "sameAs": [
+        "https://www.linkedin.com/company/snapmeasureai",
+        "https://www.tiktok.com/@snapmeasureai",
+        "https://www.youtube.com/shorts/iqJmcGncGRA"
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What body measurements does the AI body scan produce?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The scan produces a 10,000-point 3D body model, meaning any circumference or length measurement between any body points can be generated. This demo returns about 20 standard measurements including chest, waist, hips, thighs, biceps, calves, neck, shoulder width, inseam, and torso lengths. Custom measurement sets are available through the API." } },
+      { "@type": "Question", "name": "How accurate is AI body scanning compared to tape measurements?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SnapMeasureAI is typically accurate within half an inch on major measurements, and often much closer. The technology was built on Cambridge research and trained on over one million body scans, 400,000 backgrounds, and 90,000 body poses." } },
+      { "@type": "Question", "name": "What happens to my photos after scanning?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Photos are processed immediately and deleted. They travel over an encrypted connection and are downscaled on your device before upload. No personally identifiable information is linked to the scan." } },
+      { "@type": "Question", "name": "Can I track my body measurements over time without an account?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. This demo saves your scans in your browser so you can reopen them and compare later — no account required. Hosted progress tracking with history and comparison across devices is available to API partners." } },
+      { "@type": "Question", "name": "How does AI body scanning reduce apparel returns?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Poor fit accounts for over 52% of apparel returns. SnapMeasureAI gives shoppers precise body measurements from two smartphone photos in 10 seconds — no tape measure, no guessing. E-commerce platforms integrate the scan to deliver accurate size recommendations." } },
+      { "@type": "Question", "name": "How does SnapMeasureAI help track body changes on GLP-1 medications?",
+        "acceptedAnswer": { "@type": "Answer", "text": "GLP-1 medications drive body shape changes — shifts in waist, hips, and proportions — that a scale cannot capture. SnapMeasureAI generates a 3D body model and measurements from two smartphone photos in 10 seconds, letting patients and clinicians compare scans over time without any hardware." } },
+      { "@type": "Question", "name": "How can platforms integrate body measurement tracking via API?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SnapMeasureAI provides a REST API that accepts two photos and user height, then returns body measurements and an optional 3D OBJ model within 10 seconds. Fitness apps, apparel platforms, and enterprise tools integrate the API to deliver objective measurement tracking and visual 3D comparisons over time." } }
     ]
   }
   </script>
@@ -256,7 +270,35 @@
     fieldset { border: 0; padding: 0; margin: 0 0 20px; }
     legend { font-weight: 700; font-size: 15.5px; padding: 0; margin-bottom: 4px; }
     .field-hint { font-size: 13.5px; color: var(--card-muted); margin: 0 0 12px; }
-    .field-hint a { color: #067a68; font-weight: 600; }
+    /* Photo tips tooltip — appears on click (toggle), dismisses on click-outside */
+    .tip-wrap { position: relative; display: inline-block; }
+    .tip-btn {
+      background: none; border: none; padding: 0; cursor: pointer;
+      color: #067a68; font-weight: 600; font: inherit; font-size: inherit;
+      text-decoration: underline; text-decoration-style: dotted;
+    }
+    .tip-btn:hover { color: #045c52; }
+    .tip-box {
+      display: none; position: absolute; left: 0; top: calc(100% + 8px); z-index: 20;
+      width: min(320px, 90vw); background: var(--card-ink); color: var(--chalk, #f0f0f0);
+      border-radius: var(--radius); padding: 14px 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.45); font-size: 14px; line-height: 1.55;
+    }
+    .tip-box.open { display: block; }
+    .tip-box::before {
+      content: ""; position: absolute; top: -6px; left: 18px;
+      width: 12px; height: 12px; background: var(--card-ink);
+      transform: rotate(45deg); border-radius: 2px;
+    }
+    .tip-box h5 { margin: 0 0 8px; font-size: 13px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--teal); }
+    .tip-box ul { margin: 0; padding: 0 0 0 16px; }
+    .tip-box li { margin-bottom: 5px; }
+    .tip-close {
+      position: absolute; top: 8px; right: 8px; background: none; border: none;
+      cursor: pointer; color: #aaa; font-size: 16px; line-height: 1; padding: 2px 5px;
+    }
+    .tip-close:hover { color: #fff; }
 
     .cam-open { width: 100%; }
     .or-divider {
@@ -432,45 +474,38 @@
     #camVideo { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
     #camVideo.mirrored { transform: scaleX(-1); }
 
-    /* Framing guide — teal corner brackets, portrait-oriented, subtle.
-       Chose teal (brand) over red: less alarming for a self-photo moment,
-       reads as "align here" rather than "wrong". */
+    /* Framing guide — teal corner brackets at the EDGE of the video stage
+       (inset: -6px means they sit on/outside the video boundary, not shrinking
+       the usable area inside it). The message: "fill this whole space". */
     .cam-guide {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      width: min(58%, 70vh * 0.55); height: 88%; pointer-events: none;
-      opacity: .85;
+      position: absolute; inset: -6px; pointer-events: none; opacity: .9;
     }
     .cam-guide[hidden] { display: none; }
     .cam-guide::before, .cam-guide::after,
     .cam-guide > span::before, .cam-guide > span::after {
-      content: ""; position: absolute; width: 32px; height: 32px;
+      content: ""; position: absolute; width: 28px; height: 28px;
       border: 3px solid var(--teal-2);
-      filter: drop-shadow(0 0 6px rgba(10,191,163,.6));
+      filter: drop-shadow(0 0 8px rgba(10,191,163,.7));
     }
     .cam-guide::before { top: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: 6px 0 0 0; }
     .cam-guide::after  { top: 0; right: 0; border-left: 0; border-bottom: 0; border-radius: 0 6px 0 0; }
     .cam-guide > span::before { bottom: 0; left: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 6px; }
     .cam-guide > span::after  { bottom: 0; right: 0; border-left: 0; border-top: 0; border-radius: 0 0 6px 0; }
-    .cam-guide-label {
-      position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
-      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--teal-2); background: rgba(4,8,12,.75); padding: 3px 10px; border-radius: 100px;
-      white-space: nowrap;
-    }
 
+    /* Instruction overlay: compact single line at the bottom, max 25% of stage height */
     .cam-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; pointer-events: none; }
     .cam-instruction {
-      background: linear-gradient(transparent, rgba(4,8,12,.92) 40%);
-      padding: 56px 20px 18px; text-align: center;
+      background: linear-gradient(transparent, rgba(4,8,12,.88) 50%);
+      padding: 32px 16px 12px; text-align: center;
     }
     .cam-instruction h4 {
-      margin: 0 0 6px; font-size: clamp(24px, 5.5vw, 30px);
-      font-weight: 700; letter-spacing: -0.02em; color: var(--text);
-      text-shadow: 0 2px 12px rgba(0,0,0,.8);
+      margin: 0 0 2px; font-size: clamp(18px, 4.5vw, 24px);
+      font-weight: 700; color: var(--text);
+      text-shadow: 0 2px 10px rgba(0,0,0,.9);
     }
     .cam-instruction p {
-      margin: 0 auto; max-width: 56ch; font-size: clamp(16px, 4vw, 19px); line-height: 1.5;
-      color: var(--text-2); text-shadow: 0 1px 8px rgba(0,0,0,.8);
+      margin: 0 auto; max-width: 48ch; font-size: clamp(13px, 3.2vw, 15px); line-height: 1.4;
+      color: var(--text-2); text-shadow: 0 1px 6px rgba(0,0,0,.9);
     }
     .cam-count {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -482,10 +517,11 @@
     .cam-count.final { color: #fff; }
     .cam-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .35s; }
     .cam-flash.on { opacity: .85; transition: none; }
-    .cam-status { margin: 0; padding: 10px 16px 0; font-size: 15px; color: var(--text-2); text-align: center; }
-    .cam-foot { display: flex; gap: 10px; padding: 12px 16px 16px; }
-    .cam-foot .btn-primary { flex: 1; font-size: 18px; padding: 16px 24px; }
-    .cam-foot .btn-ghost { flex: none; }
+    .cam-status { margin: 0; padding: 8px 16px 0; font-size: 14px; color: var(--text-2); text-align: center; }
+    .cam-foot { display: flex; gap: 10px; padding: 10px 16px 14px; }
+    /* Compact button on mobile — camera view is the priority */
+    .cam-foot .btn-primary { flex: 1; font-size: clamp(14px, 3.5vw, 17px); padding: clamp(10px, 2.5vw, 14px) 16px; }
+    .cam-foot .btn-ghost { flex: none; font-size: 14px; padding: 10px 14px; }
 
     /* ============================================================
        RESULT SECTION
@@ -523,6 +559,22 @@
     .measure-grid .m-val { font-size: 18px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
     .measure-grid .m-val small { font-size: 12px; font-weight: 600; color: var(--teal); margin-left: 3px; }
     .measure-actions { padding: 12px 20px; border-top: 1px solid var(--border); }
+
+    /* Scan switcher inside result section */
+    .result-history { margin-top: 20px; }
+    .result-history[hidden] { display: none; }
+    .rh-label { font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--text-3); margin: 0 0 10px; }
+    .rh-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+    .rh-list li { display: flex; }
+    .rh-list button {
+      border: 1px solid var(--border-hi); border-radius: 100px; padding: 6px 14px;
+      background: var(--bg3); color: var(--text-2); font: inherit; font-size: 13px; cursor: pointer;
+    }
+    .rh-list button:hover { border-color: var(--teal-glow); color: var(--teal); }
+    .rh-list button.active { border-color: var(--teal); background: var(--teal-dim); color: var(--teal); font-weight: 700; }
+    .rh-list button.del-btn { border: 0; background: none; color: var(--text-3); padding: 6px 8px; border-radius: 6px; }
+    .rh-list button.del-btn:hover { color: var(--err); background: rgba(255,122,102,.1); }
 
     .result-cta {
       margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
@@ -671,7 +723,22 @@
 
       <fieldset>
         <legend>Photos</legend>
-        <p class="field-hint">Full body in frame, arms slightly away from your sides, fitted clothing. <a href="#faq-photos">Photo tips&nbsp;→</a></p>
+        <p class="field-hint">Full body in frame, arms slightly away from your sides, fitted clothing.
+          <span class="tip-wrap">
+            <button type="button" class="tip-btn" id="tipBtn" aria-expanded="false" aria-controls="tipBox">Photo tips &#9432;</button>
+            <span class="tip-box" id="tipBox" role="tooltip">
+              <button type="button" class="tip-close" id="tipClose" aria-label="Close tips">&times;</button>
+              <h5>Best results</h5>
+              <ul>
+                <li>Use the guided camera button above — it times both shots for you</li>
+                <li>Prop your phone at hip height, step back until your full body is in frame</li>
+                <li>Fitted clothing (leggings, fitted top) — tuck in loose shirts</li>
+                <li>Arms slightly away from your sides so they aren't blended with your torso</li>
+                <li>Plain background and even lighting help, but aren't required</li>
+              </ul>
+            </span>
+          </span>
+        </p>
         <button type="button" class="btn btn-primary cam-open" id="openCameraBtn">&#128247;&ensp;Use my camera — guided capture with timer</button>
         <div class="or-divider">or upload photos</div>
         <div class="photo-grid">
@@ -743,7 +810,7 @@
       <iframe id="resultFrame" title="Interactive 3D body scan and measurements" sandbox="allow-scripts"></iframe>
     </div>
 
-    <details class="measure-panel" id="measurePanel" hidden>
+    <details class="measure-panel" id="measurePanel" hidden open>
       <summary>
         Measurement data
         <span class="count-tag" id="measureCount"></span>
@@ -755,6 +822,12 @@
         <button class="btn btn-ghost" id="copyMeasureBtn" type="button">Copy as JSON</button>
       </div>
     </details>
+
+    <!-- Saved-scan switcher inside the result section, shown whenever ≥1 saved scan exists -->
+    <div class="result-history" id="resultHistory" hidden>
+      <p class="rh-label">Your saved scans</p>
+      <ul class="rh-list" id="rhList"></ul>
+    </div>
 
     <div class="result-cta">
       <p><b>Want this inside your product?</b> The model and measurements above came back from one API call — the same call your platform would make, with the measurement set you specify.</p>
@@ -980,7 +1053,7 @@
     </div>
     <p class="cam-status" id="camStatus"></p>
     <div class="cam-foot">
-      <button type="button" class="btn btn-primary" id="camStart">Start 10-second countdown</button>
+      <button type="button" class="btn btn-primary" id="camStart">Start countdown</button>
       <button type="button" class="btn btn-ghost" id="camCancel">Cancel</button>
     </div>
   </div>
@@ -1053,6 +1126,7 @@ const els = {
   measureCount: $("measureCount"), measureNote: $("measureNote"), copyMeasureBtn: $("copyMeasureBtn"),
   saveBtn: $("saveBtn"), downloadBtn: $("downloadBtn"), newScanBtn: $("newScanBtn"),
   savedPanel: $("savedPanel"), savedList: $("savedList"), savedCountLabel: $("savedCountLabel"),
+  resultHistory: $("resultHistory"), rhList: $("rhList"),
   openCameraBtn: $("openCameraBtn"),
   cam: {
     modal: $("camModal"), video: $("camVideo"),
@@ -1201,13 +1275,13 @@ wireDropzone(els.dzSide,  els.fileSide,  "side");
 const CAM_COPY = {
   front: {
     tag: "FRONT",
-    title: "Face the camera",
-    text: "Prop your device upright and step back until you're inside the frame head to toe, arms slightly away from your sides. Press start when it looks right — the countdown gives you time to get into place.",
+    title: "Face the camera — full body in frame",
+    text: "Arms slightly out, fitted clothing. Press start when you\u2019re ready.",
   },
   side: {
     tag: "SIDE",
-    title: "Now turn to your side",
-    text: "Turn 90\u00B0 so the camera sees your profile, arms relaxed and slightly forward of your body. Hold still — the countdown starts in a moment\u2026",
+    title: "Turn to your side",
+    text: "90\u00B0 profile, arms relaxed. Hold still.",
   },
 };
 
@@ -1322,7 +1396,7 @@ function camRunSlot(slot, auto) {
   } else {
     els.cam.start.hidden = false;
     els.cam.start.disabled = false;
-    els.cam.start.textContent = "Start " + secs + "-second countdown";
+    els.cam.start.textContent = "Start countdown";
     els.cam.start.onclick = () => { els.cam.start.hidden = true; go(); };
   }
 }
@@ -1524,12 +1598,20 @@ function normalizeMeasurements(m) {
 }
 
 function renderResult(r, { scroll = true } = {}) {
-  els.resultFrame.srcdoc = r.html;
+  /* Force a true navigation inside the iframe by blanking it first.
+     Without this, if the iframe already holds a document and we set srcdoc
+     to a new value, some browsers treat it as a same-document update and
+     the three.js scene never re-initialises (black screen). */
+  els.resultFrame.srcdoc = "";
+  requestAnimationFrame(() => {
+    els.resultFrame.srcdoc = r.html;
+  });
   renderMeasurements(r.measurements);
   els.resultMeta.textContent =
-    new Date(r.dateISO).toLocaleString() + " \u00B7 height " + r.heightLabel;
+    new Date(r.dateISO).toLocaleString() + " \u00B7 " + r.heightLabel;
   els.result.classList.add("show");
-  if (scroll) els.result.scrollIntoView({ behavior: "smooth" });
+  renderResultHistory(r);
+  if (scroll) setTimeout(() => els.result.scrollIntoView({ behavior: "smooth" }), 50);
 }
 
 function renderMeasurements(m) {
@@ -1548,7 +1630,7 @@ function renderMeasurements(m) {
     const n = document.createElement("div"); n.className = "m-name"; n.textContent = name;
     const v = document.createElement("div"); v.className = "m-val";
     if (typeof val === "number") {
-      v.textContent = (Math.round(val * 10) / 10).toString();
+      v.textContent = val.toFixed(1);
       const u = document.createElement("small"); u.textContent = CONFIG.MEASUREMENT_UNIT;
       v.appendChild(u);
     } else {
@@ -1578,13 +1660,18 @@ els.copyMeasureBtn.addEventListener("click", async () => {
    ========================================================================== */
 els.newScanBtn.addEventListener("click", () => {
   state.photos.front = null; state.photos.side = null;
+  state.lastResult = null;
   els.fileFront.value = ""; els.fileSide.value = "";
   zoneRenderers.front(); zoneRenderers.side();
+  /* Blank the iframe so the next srcdoc assignment always triggers a fresh load */
+  els.resultFrame.srcdoc = "";
   hideError();
   setStep(0);
   els.status.classList.remove("show");
   ["resize","upload","build"].forEach(k => setStatus(k, ""));
   els.result.classList.remove("show");
+  els.resultHistory.hidden = true;
+  refreshStep();
   document.querySelector(".scan-stage").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
@@ -1634,6 +1721,7 @@ function renderHistory() {
     open.addEventListener("click", () => {
       state.lastResult = item;
       renderResult(item);
+      renderResultHistory(item);
     });
     const del = document.createElement("button");
     del.type = "button"; del.className = "del"; del.textContent = "\u00D7";
@@ -1659,6 +1747,62 @@ els.saveBtn.addEventListener("click", () => {
   setTimeout(() => { els.saveBtn.textContent = "Save on this device"; }, 2200);
   renderHistory();
 });
+
+/* Render the scan-switcher strip inside the result section.
+   Active = currently displayed scan (highlighted pill). Switching a saved
+   scan re-renders the frame without scrolling (user is already in view). */
+function renderResultHistory(activeResult) {
+  const items = loadHistory();
+  els.resultHistory.hidden = items.length === 0;
+  if (!items.length) return;
+  els.rhList.innerHTML = "";
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent =
+      new Date(item.dateISO).toLocaleDateString(undefined, { month: "short", day: "numeric" }) +
+      " \u00B7 " + item.heightLabel;
+    const isActive = activeResult && item.dateISO === activeResult.dateISO;
+    if (isActive) btn.classList.add("active");
+    btn.addEventListener("click", () => {
+      state.lastResult = item;
+      renderResult(item, { scroll: false });
+    });
+    const del = document.createElement("button");
+    del.type = "button"; del.className = "del-btn"; del.textContent = "\u00D7";
+    del.setAttribute("aria-label", "Delete scan");
+    del.addEventListener("click", () => {
+      persistHistory(loadHistory().filter(x => x.id !== item.id));
+      renderHistory();
+      renderResultHistory(state.lastResult);
+    });
+    li.append(btn, del);
+    els.rhList.appendChild(li);
+  });
+}
+
+/* Photo tips tooltip */
+const tipBtn  = $("tipBtn");
+const tipBox  = $("tipBox");
+const tipClose = $("tipClose");
+if (tipBtn) {
+  tipBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = tipBox.classList.toggle("open");
+    tipBtn.setAttribute("aria-expanded", open);
+  });
+  tipClose.addEventListener("click", () => {
+    tipBox.classList.remove("open");
+    tipBtn.setAttribute("aria-expanded", "false");
+  });
+  document.addEventListener("click", (e) => {
+    if (!tipBtn.contains(e.target) && !tipBox.contains(e.target)) {
+      tipBox.classList.remove("open");
+      tipBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+}
 
 /* Render saved scans on page load, before any interaction. */
 renderHistory();
