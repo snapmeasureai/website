@@ -529,7 +529,7 @@
     /* ============================================================
        RESULT SECTION
        ============================================================ */
-    #result { display: none; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 64px; }
+    #result { display: none; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 64px; margin-bottom: 12px; }
     #result.show { display: block; }
     .result-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 18px; }
     .result-bar h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
@@ -564,7 +564,7 @@
     .measure-actions { padding: 12px 20px; border-top: 1px solid var(--border); }
 
     /* Scan switcher inside result section */
-    .result-history { margin-top: 20px; }
+    .result-history { margin: 12px 0; }
     .result-history[hidden] { display: none; }
     .rh-label { font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
       color: var(--text-3); margin: 0 0 10px; }
@@ -1088,7 +1088,7 @@ const CONFIG = {
 
   IMAGE: {
     maxDimension: 720,        // longest side; resolution beyond this doesn't
-    jpegQuality: 1.0,         // improve reconstruction accuracy
+    jpegQuality: 0.92,        // improve reconstruction accuracy
     maxUploadBytesRaw: 25 * 1024 * 1024,
   },
 
@@ -1554,6 +1554,12 @@ els.form.addEventListener("submit", async (e) => {
   els.status.classList.add("show");
   setStep(1);
   setStatus("resize", "done");
+
+  /* Yield to the browser so the resize ✓ and the upload spinner both paint
+     before the fetch call blocks the main thread. Without this, setStatus
+     calls in the same microtask get batched into one paint and the animation
+     never gets its first frame. */
+  await new Promise(r => setTimeout(r, 50));
   setStatus("upload", "doing");
 
   const controller = new AbortController();
@@ -1566,6 +1572,7 @@ els.form.addEventListener("submit", async (e) => {
       signal: controller.signal,
     });
     setStatus("upload", "done");
+    await new Promise(r => setTimeout(r, 50));
     setStatus("build", "doing");
 
     if (!res.ok) {
