@@ -718,7 +718,7 @@
         <span class="count-tag" id="measureCount"></span>
         <span class="chev" aria-hidden="true">&#9662;</span>
       </summary>
-      <p class="measure-note">This demo returns a standard set of about 20 measurements, sorted alphabetically. Because the output is a full 3D body model, any circumference or length between any points on the model can be generated — API partners define the measurement set their product needs.</p>
+      <p class="measure-note">This demo returns a standard set of about 20 measurements — height first, then alphabetical. Because the output is a full 3D body model, any circumference or length between any points on the model can be generated — API partners define the measurement set their product needs.</p>
       <div class="measure-grid" id="measureGrid"></div>
       <div class="measure-actions">
         <button class="btn btn-ghost" id="copyMeasureBtn" type="button">Copy as JSON</button>
@@ -842,7 +842,7 @@
       <details>
         <summary>What measurements do I get?</summary>
         <div class="answer">
-          <p>This demo returns a standard set of about 20 commonly used measurements &mdash; chest, waist, hips, thighs, biceps, calves, neck, shoulder width, inseam, torso lengths, and more &mdash; shown alphabetically alongside your interactive 3D model.</p>
+          <p>This demo returns a standard set of about 20 commonly used measurements &mdash; chest, waist, hips, thighs, biceps, calves, neck, shoulder width, inseam, torso lengths, and more &mdash; shown alongside your interactive 3D model with height first and the rest in alphabetical order.</p>
           <p>Because the scan produces a full 3D body model, any circumference or length between any points on the model can be generated. API partners configure custom measurement sets for apparel sizing, uniform fitting, fitness tracking, and health monitoring.</p>
         </div>
       </details>
@@ -1464,36 +1464,17 @@ els.form.addEventListener("submit", async (e) => {
 
 /* ============================================================================
    RESULT + MEASUREMENT RENDERING
-   Sorted alphabetically. The "waist circumf #1/#2" pair (the SUPR model
-   returns two waist candidates) collapses into a single "waist circumf"
-   whose value is the smaller of the two — the anatomically narrower waist,
-   which is what most consumers understand by "waist".
+   Height first, then everything else alphabetically (case-insensitive).
    ========================================================================== */
 function normalizeMeasurements(m) {
   if (!m) return [];
   const entries = Object.entries(m);
-  const out = [];
-  const waist = { seen: [], indices: [] };
-  entries.forEach(([k, v], i) => {
-    const key = k.toLowerCase().replace(/\s+/g, " ").trim();
-    // detect "waist circumf #1" / "waist circumf #2" (also tolerate "waist circumference #N")
-    if (/^waist\s+circumf(?:erence)?\s*#?\s*\d+$/.test(key)) {
-      waist.seen.push({ k, v });
-      waist.indices.push(i);
-      return;
-    }
-    out.push([k, v]);
-  });
-  if (waist.seen.length) {
-    const numeric = waist.seen.filter(x => typeof x.v === "number");
-    const chosen = numeric.length
-      ? Math.min(...numeric.map(x => x.v))
-      : waist.seen[0].v;
-    out.push(["waist circumf", chosen]);
-  }
-  // alphabetical, case-insensitive
-  out.sort((a, b) => a[0].toLowerCase().localeCompare(b[0].toLowerCase()));
-  return out;
+  const isHeight = ([k]) => k.trim().toLowerCase() === "height";
+  const heightEntry = entries.find(isHeight);
+  const rest = entries
+    .filter(e => !isHeight(e))
+    .sort((a, b) => a[0].toLowerCase().localeCompare(b[0].toLowerCase()));
+  return heightEntry ? [heightEntry, ...rest] : rest;
 }
 
 function renderResult(r, { scroll = true } = {}) {
