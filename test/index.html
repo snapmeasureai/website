@@ -1787,6 +1787,7 @@ els.saveBtn.addEventListener("click", () => {
   els.saveBtn.textContent = ok ? "Saved \u2713" : "Too large to save \u2014 use Download";
   setTimeout(() => { els.saveBtn.textContent = "Save on this device"; }, 2200);
   renderHistory();
+  renderResultHistory(state.lastResult);
 });
 
 /* Render the scan-switcher strip inside the result section.
