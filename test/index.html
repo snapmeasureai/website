@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SnapMeasureAI Demo: AI Measurements | 3D Scan, 2 Photos</title>
+  <title>SnapMeasureAI Free Demo | 3D Body Scan from 2 Photos, ~10 Seconds</title>
   <meta name="author" content="SnapMeasureAI">
-  <meta name="description" content="Patented 3D body scanning — 2 photos, 10 seconds, 100+ measurements. Cuts apparel returns, tracks GLP-1 body changes, and powers 3D digital twins.">
+  <meta name="description" content="Try the SnapMeasureAI live demo — take two smartphone photos and get a precise 3D body model and 100+ measurements in about 10 seconds. Save scans on your device and compare progress over time. Free, no account.">
+  <meta name="keywords" content="3D body scan, body measurements, AI body scanner, GLP-1 progress tracking, apparel sizing, digital twin, remote fitting, body scan demo">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://demo.snapmeasureai.com/">
   <link rel="icon" href="https://snapmeasureai.com/assets/images/favicon.png">
-  <meta property="og:title" content="SnapMeasureAI Demo: AI Measurements | 3D Scan, 2 Photos">
-  <meta property="og:description" content="Patented 3D body scanning — 2 photos, 10 seconds, 100+ measurements. Cuts apparel returns, tracks GLP-1 body changes, and powers 3D digital twins.">
-  <meta property="og:type" content="video.other">
+  <meta property="og:title" content="SnapMeasureAI Free Demo | 3D Body Scan from 2 Photos">
+  <meta property="og:description" content="Two smartphone photos → 3D body model + 100+ measurements in under 10 seconds. Save scans on-device to compare progress over time. No account, no app.">
+  <meta property="og:type" content="website">
   <meta property="og:url" content="https://demo.snapmeasureai.com/">
   <meta property="og:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
   <meta property="og:video" content="https://snapmeasureai.com/img/body_measurements.mp4">
@@ -20,15 +21,69 @@
   <meta property="og:video:width" content="720">
   <meta property="og:video:height" content="1280">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SnapMeasureAI Demo: AI Measurements | 3D Scan, 2 Photos">
-  <meta name="twitter:description" content="Patented 3D body scanning — 2 photos, 10 seconds, 100+ measurements. Cuts apparel returns, tracks GLP-1 body changes, and powers 3D digital twins.">
+  <meta name="twitter:title" content="SnapMeasureAI Free Demo | 3D Body Scan from 2 Photos">
+  <meta name="twitter:description" content="Two smartphone photos → 3D body model + 100+ measurements in under 10 seconds. Save scans on-device to compare progress over time.">
   <meta name="twitter:image" content="https://snapmeasureai.com/img/body_measurement_poster.webp">
+
+  <!-- JSON-LD schema. Independent of the landing page's schema, but consistent
+       with its claims. If your landing page emits Organization or Product schema
+       that should be canonical, remove those blocks here to avoid conflict. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://snapmeasureai.com/#org",
+        "name": "SnapMeasureAI",
+        "url": "https://snapmeasureai.com/",
+        "logo": "https://snapmeasureai.com/assets/images/logo.svg",
+        "email": "info@snapmeasureai.com",
+        "sameAs": [
+          "https://www.linkedin.com/company/snapmeasureai",
+          "https://www.tiktok.com/@snapmeasureai",
+          "https://www.youtube.com/shorts/iqJmcGncGRA"
+        ]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "SnapMeasureAI Body Scan (Live Demo)",
+        "url": "https://demo.snapmeasureai.com/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires a modern browser with camera and JavaScript",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "publisher": { "@id": "https://snapmeasureai.com/#org" },
+        "description": "Free browser-based demo of SnapMeasureAI 3D body scanning. Take two smartphone photos, receive a 3D body model and ~20 predefined measurements in about 10 seconds. Photos are processed and immediately deleted."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What kind of photos work best?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Full body in frame, arms slightly away from your sides, wearing fitted clothing. Loose shirts should be tucked in. The guided camera on this page walks you through both views with a countdown timer." } },
+          { "@type": "Question", "name": "What happens to my photos?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Photos are processed immediately and deleted — they are not stored or retained. They travel over an encrypted connection and are downscaled on your device before upload. No personally identifiable information is linked to the scan." } },
+          { "@type": "Question", "name": "How accurate is the SnapMeasureAI body scan?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Typical error on major measurements is within half an inch — often much closer. The technology was built on Cambridge research and trained on over one million body scans, 400,000 backgrounds, and 90,000 body poses." } },
+          { "@type": "Question", "name": "What measurements are returned?",
+            "acceptedAnswer": { "@type": "Answer", "text": "This demo returns about 20 commonly used measurements — chest, waist, hips, thighs, biceps, calves, neck, shoulder width, inseam, torso lengths, and more. Through the API, any circumference or length between any points on the 3D body model can be generated." } },
+          { "@type": "Question", "name": "Can I track my progress over time without an account?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. This demo saves your scans on your device (in your browser) so you can reopen them and compare later — no account required. Hosted progress tracking with history, deltas, and month-over-month comparison is available to API partners." } },
+          { "@type": "Question", "name": "How do apparel and uniform teams use this?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Remote body measurements support size recommendations, made-to-measure workflows, and uniform programs where fit at scale matters operationally. The 3D body model exports to OBJ for pattern-making, CAD, and digital-twin pipelines." } },
+          { "@type": "Question", "name": "How does the scan help GLP-1 and weight loss programs?",
+            "acceptedAnswer": { "@type": "Answer", "text": "GLP-1 medications shift waist, hips, and body proportions in ways a scale never shows. Periodic scans give patients and clinicians a measurable, visual record of how the body is actually changing — no hardware or clinic visit required." } }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <style>
     /* ============================================================
-       DESIGN TOKENS — matched to snapmeasureai.com landing page.
-       One deliberate exception: the scan card is LIGHT, so the demo's
-       single interactive object is unmissable on the dark page.
+       DESIGN TOKENS — matched to snapmeasureai.com landing.
+       Deliberate exception: the scan card is LIGHT, so the page's
+       one interactive object is unmissable on the dark background.
        ============================================================ */
     :root {
       --bg:        #080C10;
@@ -38,15 +93,14 @@
       --border:    rgba(255,255,255,0.08);
       --border-hi: rgba(255,255,255,0.15);
       --teal:      #0ABFA3;
+      --teal-2:    #16D9BB;
       --teal-dim:  rgba(10,191,163,0.12);
       --teal-glow: rgba(10,191,163,0.25);
       --indigo:    #6C63FF;
-      --indigo-dim:rgba(108,99,255,0.12);
       --text:      #F0F4F8;
       --text-2:    #AABDCF;
       --text-3:    #7A96AA;
       --err:       #FF7A66;
-      /* light scan card */
       --card:      #F5F8FB;
       --card-ink:  #101820;
       --card-muted:#50657A;
@@ -63,8 +117,7 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
     body {
-      margin: 0;
-      background: var(--bg); color: var(--text);
+      margin: 0; background: var(--bg); color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
     }
@@ -83,35 +136,42 @@
     }
 
     /* ============================================================
-       HEADER
+       HEADER — properly sized CTA on mobile
        ============================================================ */
     .site-header {
       position: sticky; top: 0; z-index: 50;
       background: rgba(8,12,16,.88); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
-    .site-header .container { display: flex; align-items: center; gap: 28px; height: 64px; }
+    .site-header .container { display: flex; align-items: center; gap: 20px; height: 64px; }
     .nav__logo { display: flex; align-items: center; gap: 10px; }
-    .nav__logo img { height: 32px; }
+    .nav__logo img { height: 30px; }
     .nav__logo .demo-tag {
-      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
       color: var(--teal); border: 1px solid var(--teal-glow); background: var(--teal-dim);
-      padding: 3px 8px; border-radius: 100px;
+      padding: 3px 8px; border-radius: 100px; white-space: nowrap;
     }
-    .site-nav { margin-left: auto; display: flex; align-items: center; gap: 24px; font-size: 14px; }
+    .site-nav { margin-left: auto; display: flex; align-items: center; gap: 22px; font-size: 14px; }
     .site-nav a { color: var(--text-2); }
     .site-nav a:hover { color: var(--text); }
     .site-nav .nav-cta {
-      background: var(--teal); color: #050E0C; font-weight: 700;
-      padding: 9px 18px; border-radius: var(--radius);
+      background: var(--teal); color: #050E0C; font-weight: 700; font-size: 13.5px;
+      padding: 8px 14px; border-radius: 8px; line-height: 1; white-space: nowrap;
     }
     .site-nav .nav-cta:hover { opacity: .88; color: #050E0C; }
-    @media (max-width: 760px) { .site-nav a:not(.nav-cta) { display: none; } }
+    @media (max-width: 760px) {
+      .site-header .container { gap: 12px; }
+      .site-nav { gap: 12px; }
+      .site-nav a:not(.nav-cta) { display: none; }
+      .site-nav .nav-cta { padding: 7px 12px; font-size: 13px; }
+      .nav__logo img { height: 26px; }
+      .nav__logo .demo-tag { display: none; }
+    }
 
     /* ============================================================
        HERO — three short lines, then straight into the scan card
        ============================================================ */
-    .hero-lite { padding: 48px 0 8px; text-align: center; }
+    .hero-lite { padding: 44px 0 8px; text-align: center; }
     .hero__badge {
       display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid var(--teal-glow); background: var(--teal-dim);
@@ -120,11 +180,12 @@
     }
     .hero__badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
     .hero-lite h1 {
-      font-size: clamp(30px, 4.4vw, 48px); font-weight: 700;
+      font-size: clamp(30px, 4.4vw, 46px); font-weight: 700;
       letter-spacing: -0.03em; line-height: 1.08; margin: 0 auto 12px; max-width: 20ch;
     }
     .hero-lite h1 em { font-style: normal; color: var(--teal); }
-    .hero-lite .lede { font-size: 17.5px; color: var(--text-2); max-width: 62ch; margin: 0 auto; }
+    .hero-lite .lede { font-size: 17.5px; color: var(--text-2); max-width: 64ch; margin: 0 auto; }
+    .hero-lite .lede b { color: var(--text); font-weight: 600; }
     .proof-strip {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px;
       padding: 18px 0 0; margin: 0; list-style: none; font-size: 13px; color: var(--text-2);
@@ -133,9 +194,41 @@
     .proof-strip li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex: none; }
 
     /* ============================================================
+       SAVED-SCANS PANEL — persistent, always shown when scans exist,
+       right below the hero so returning users see their progress
+       immediately (before scrolling anywhere).
+       ============================================================ */
+    .saved-panel { padding: 22px 0 0; }
+    .saved-panel[hidden] { display: none; }
+    .saved-card {
+      max-width: 900px; margin: 0 auto;
+      background: linear-gradient(135deg, rgba(10,191,163,.10), rgba(108,99,255,.06));
+      border: 1px solid var(--teal-glow); border-radius: var(--radius-lg);
+      padding: 20px 22px; display: grid; gap: 14px;
+    }
+    .saved-card .saved-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .saved-card .saved-head h3 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+    .saved-card .saved-head p { margin: 0; font-size: 14px; color: var(--text-2); }
+    .saved-card .saved-head p b { color: var(--text); font-weight: 700; }
+    .saved-list { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+    .saved-list li {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--bg2); border: 1px solid var(--border-hi); border-radius: 100px;
+      padding: 6px 8px 6px 14px; font-size: 13px; color: var(--text-2);
+    }
+    .saved-list li b { color: var(--text); font-weight: 600; }
+    .saved-list button {
+      border: 0; background: transparent; color: var(--teal); cursor: pointer;
+      font: inherit; font-size: 13px; font-weight: 600; padding: 4px 8px; border-radius: 6px;
+    }
+    .saved-list button:hover { background: var(--teal-dim); }
+    .saved-list button.del { color: var(--text-3); font-weight: 400; padding: 2px 6px; }
+    .saved-list button.del:hover { color: var(--err); background: rgba(255,122,102,.1); }
+
+    /* ============================================================
        SCAN CARD — light on dark: the page's one bright object
        ============================================================ */
-    .scan-stage { padding: 26px 0 72px; }
+    .scan-stage { padding: 20px 0 72px; }
     .scan-card {
       max-width: 720px; margin: 0 auto;
       background: var(--card); color: var(--card-ink);
@@ -168,7 +261,11 @@
     }
     .or-divider::before, .or-divider::after { content: ""; flex: 1; height: 1px; background: var(--card-line); }
 
-    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    /* ---------------------------------------------------------------
+       Dropzones flex to the actual photo's aspect ratio (with a cap),
+       so portrait phone shots aren't cropped by a fixed square box.
+       --------------------------------------------------------------- */
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
     @media (max-width: 420px) { .photo-grid { grid-template-columns: 1fr; } }
     .dropzone {
       position: relative; border: 2px dashed rgba(10,191,163,.6); border-radius: var(--radius);
@@ -189,8 +286,14 @@
     }
     .dropzone .dz-label { font-weight: 700; font-size: 15px; color: var(--card-ink); }
     .dropzone .dz-sub { font-size: 12.5px; color: var(--card-muted); }
-    .dropzone.filled { border-style: solid; border-color: var(--teal); padding: 0; overflow: hidden; }
-    .dropzone.filled img.preview { width: 100%; height: 172px; object-fit: cover; }
+    .dropzone.filled {
+      border-style: solid; border-color: var(--teal); padding: 0; overflow: hidden;
+      background: #0b1420;      /* letterbox color when the image isn't square */
+      min-height: 0;
+    }
+    .dropzone.filled img.preview {
+      display: block; width: 100%; height: auto; max-height: 460px; object-fit: contain;
+    }
     .dropzone .dz-badge {
       position: absolute; left: 8px; top: 8px; z-index: 2;
       font-size: 11px; font-weight: 700; letter-spacing: .06em;
@@ -231,9 +334,7 @@
     .btn-primary { background: var(--teal); color: #050E0C; width: 100%; }
     .btn-primary:hover { opacity: .88; }
     .btn-primary:disabled { background: var(--card-line); color: var(--card-muted); cursor: not-allowed; opacity: 1; }
-    .btn-indigo {
-      background: var(--indigo); color: #fff; font-size: 15px; padding: 12px 20px;
-    }
+    .btn-indigo { background: var(--indigo); color: #fff; font-size: 15px; padding: 12px 20px; }
     .btn-indigo:hover { opacity: .88; color: #fff; }
     .btn-ghost {
       background: transparent; color: var(--text-2); border: 1px solid var(--border-hi);
@@ -259,8 +360,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ============================================================
-       GUIDED CAMERA CAPTURE — full-screen on mobile, large on desktop.
-       Text is oversized on purpose: the user is standing METERS away.
+       GUIDED CAMERA CAPTURE
        ============================================================ */
     .cam-modal { position: fixed; inset: 0; z-index: 100; display: flex; background: rgba(4,8,12,.95); }
     .cam-modal[hidden] { display: none; }
@@ -293,13 +393,40 @@
     }
     .cam-close:hover { background: var(--err); color: #fff; }
     .cam-error {
-      margin: 12px 16px 0; background: rgba(255,122,102,0.1); border: 1px solid rgba(255,122,102,0.4);
+      margin: 12px 16px 0; background: rgba(255,122,102,.1); border: 1px solid rgba(255,122,102,.4);
       color: #FFB0A3; border-radius: 8px; padding: 12px 14px; font-size: 15px;
     }
     .cam-stage { position: relative; flex: 1; min-height: 0; background: #000; }
     @media (min-width: 761px) { .cam-stage { flex: none; height: 58vh; } }
     #camVideo { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
     #camVideo.mirrored { transform: scaleX(-1); }
+
+    /* Framing guide — teal corner brackets, portrait-oriented, subtle.
+       Chose teal (brand) over red: less alarming for a self-photo moment,
+       reads as "align here" rather than "wrong". */
+    .cam-guide {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: min(58%, 70vh * 0.55); height: 88%; pointer-events: none;
+      opacity: .85;
+    }
+    .cam-guide[hidden] { display: none; }
+    .cam-guide::before, .cam-guide::after,
+    .cam-guide > span::before, .cam-guide > span::after {
+      content: ""; position: absolute; width: 32px; height: 32px;
+      border: 3px solid var(--teal-2);
+      filter: drop-shadow(0 0 6px rgba(10,191,163,.6));
+    }
+    .cam-guide::before { top: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: 6px 0 0 0; }
+    .cam-guide::after  { top: 0; right: 0; border-left: 0; border-bottom: 0; border-radius: 0 6px 0 0; }
+    .cam-guide > span::before { bottom: 0; left: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 6px; }
+    .cam-guide > span::after  { bottom: 0; right: 0; border-left: 0; border-top: 0; border-radius: 0 0 6px 0; }
+    .cam-guide-label {
+      position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--teal-2); background: rgba(4,8,12,.75); padding: 3px 10px; border-radius: 100px;
+      white-space: nowrap;
+    }
+
     .cam-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; pointer-events: none; }
     .cam-instruction {
       background: linear-gradient(transparent, rgba(4,8,12,.92) 40%);
@@ -374,19 +501,6 @@
     .result-cta p b { color: var(--text); }
     .result-cta .btn { margin-left: auto; width: auto; }
 
-    .history { margin-top: 26px; }
-    .history h3 { font-size: 15px; margin: 0 0 4px; }
-    .history .history-note { font-size: 13px; color: var(--text-3); margin: 0 0 12px; }
-    .history-list { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
-    .history-list li {
-      display: flex; align-items: center; gap: 8px;
-      border: 1px solid var(--border-hi); border-radius: 100px; padding: 6px 8px 6px 14px;
-      font-size: 13px; color: var(--text-2);
-    }
-    .history-list button { border: 0; background: transparent; color: var(--text); cursor: pointer; font: inherit; font-size: 13px; padding: 2px 6px; }
-    .history-list button:hover { color: var(--teal); }
-    .history-list button.del:hover { color: var(--err); }
-
     /* ============================================================
        CONTENT SECTIONS
        ============================================================ */
@@ -394,25 +508,14 @@
     .section-head { max-width: 700px; margin-bottom: 48px; }
     .section-head p.sub { color: var(--text-2); margin: 0; }
 
-    .steps {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-      background: var(--border); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); overflow: hidden;
-    }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
     @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
     .step { background: var(--bg3); padding: 32px 28px; }
-    .step .step__num {
-      font-size: 13px; font-weight: 700; letter-spacing: .1em;
-      color: var(--teal); text-transform: uppercase; margin: 0 0 14px;
-    }
+    .step .step__num { font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--teal); text-transform: uppercase; margin: 0 0 14px; }
     .step h3 { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
     .step p { margin: 0; font-size: 15px; color: var(--text-2); }
 
-    .fact-strip {
-      margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px; background: var(--border); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); overflow: hidden;
-    }
+    .fact-strip { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
     @media (max-width: 860px) { .fact-strip { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .fact-strip { grid-template-columns: 1fr; } }
     .fact { background: var(--bg2); padding: 18px 20px; }
@@ -421,10 +524,7 @@
 
     .verticals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     @media (max-width: 860px) { .verticals-grid { grid-template-columns: 1fr; } }
-    .audience-card {
-      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg);
-      padding: 32px 28px; transition: border-color .2s; display: flex; flex-direction: column;
-    }
+    .audience-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 28px; transition: border-color .2s; display: flex; flex-direction: column; }
     .audience-card:hover { border-color: var(--teal-glow); }
     .audience-card .eyebrow { font-size: 12px; margin-bottom: 8px; }
     .audience-card h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; }
@@ -434,10 +534,7 @@
 
     .faq-list { max-width: 800px; }
     .faq-list details { border-bottom: 1px solid var(--border); }
-    .faq-list summary {
-      cursor: pointer; font-weight: 600; font-size: 16.5px; padding: 18px 40px 18px 0;
-      list-style: none; position: relative; color: var(--text);
-    }
+    .faq-list summary { cursor: pointer; font-weight: 600; font-size: 16.5px; padding: 18px 40px 18px 0; list-style: none; position: relative; color: var(--text); }
     .faq-list summary::-webkit-details-marker { display: none; }
     .faq-list summary::after {
       content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
@@ -450,19 +547,33 @@
     .faq-list .answer p:last-child { margin-bottom: 0; }
     .faq-list .answer a { color: var(--teal); }
 
+    /* Contact / final CTA */
     .cta-section { padding: 90px 0; border-top: 1px solid var(--border); text-align: center; }
-    .cta-section h2 {
-      font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.025em;
-      line-height: 1.1; margin: 0 0 14px;
-    }
-    .cta-section p { color: var(--text-2); max-width: 58ch; margin: 0 auto 28px; }
+    .cta-section h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 14px; }
+    .cta-section p { color: var(--text-2); max-width: 58ch; margin: 0 auto 24px; }
     .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
     .cta-actions .btn-primary { width: auto; padding: 14px 28px; }
+    .cta-section .direct-line {
+      margin-top: 22px; font-size: 15px; color: var(--text-3);
+    }
+    .cta-section .direct-line a { color: var(--teal); font-weight: 600; }
 
-    .site-footer { border-top: 1px solid var(--border); padding: 32px 0 44px; font-size: 14px; color: var(--text-3); }
-    .site-footer .container { display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; }
-    .site-footer a:hover { color: var(--text); }
-    .site-footer .foot-note { flex-basis: 100%; font-size: 13px; margin-top: 4px; }
+    /* Footer with social links */
+    .site-footer { border-top: 1px solid var(--border); padding: 40px 0 44px; font-size: 14px; color: var(--text-3); }
+    .site-footer .foot-top {
+      display: flex; flex-wrap: wrap; gap: 20px 32px; align-items: center; margin-bottom: 18px;
+    }
+    .site-footer .foot-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .site-footer .foot-links a:hover { color: var(--text); }
+    .site-footer .foot-social { margin-left: auto; display: flex; gap: 10px; }
+    .site-footer .foot-social a {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: grid; place-items: center;
+      border: 1px solid var(--border-hi); color: var(--text-2);
+    }
+    .site-footer .foot-social a:hover { color: var(--teal); border-color: var(--teal-glow); background: var(--teal-dim); }
+    .site-footer .foot-social svg { width: 16px; height: 16px; fill: currentColor; }
+    .site-footer .foot-note { font-size: 13px; margin-top: 6px; padding-top: 18px; border-top: 1px solid var(--border); }
   </style>
 </head>
 <body>
@@ -478,7 +589,7 @@
       <a href="#how">How it works</a>
       <a href="#uses">Use cases</a>
       <a href="#faq">FAQ</a>
-      <a class="nav-cta" href="https://snapmeasureai.com/#contact">Contact us</a>
+      <a class="nav-cta" href="#contact">Contact us</a>
     </nav>
   </div>
 </header>
@@ -488,12 +599,27 @@
   <div class="container">
     <span class="hero__badge">Free live demo</span>
     <h1>Two photos, a precise <em>3D scan</em> of your body.</h1>
-    <p class="lede">Take a front and a side photo, add your height — get your 3D body model and its key measurements in about 10 seconds. No app, no account.</p>
+    <p class="lede">Take a front and a side photo, add your height — get your 3D body model and its key measurements in about 10 seconds. <b>Save your scans on this device and compare them over time</b>, no account needed.</p>
     <ul class="proof-strip">
       <li>Patented, built on Cambridge research</li>
       <li>Typically within &frac12; inch on major measurements</li>
       <li>Photos deleted immediately after processing</li>
     </ul>
+  </div>
+</section>
+
+<!-- ================= PROMINENT SAVED-SCANS PANEL =================
+     Renders on page load (not just after a fresh scan) so returning
+     users immediately see their history. Hidden when empty. -->
+<section class="saved-panel" id="savedPanel" hidden aria-label="Saved scans on this device">
+  <div class="container">
+    <div class="saved-card">
+      <div class="saved-head">
+        <h3>Your saved scans</h3>
+        <p><b id="savedCountLabel">0 scans</b> on this device &middot; reopen any to see the 3D body model and its measurements. Add a new scan below to compare progress.</p>
+      </div>
+      <ul class="saved-list" id="savedList"></ul>
+    </div>
   </div>
 </section>
 
@@ -579,7 +705,7 @@
       <div class="actions">
         <button class="btn btn-ghost" id="saveBtn" type="button">Save on this device</button>
         <button class="btn btn-ghost" id="downloadBtn" type="button">Download (.html)</button>
-        <button class="btn btn-ghost" id="newScanBtn" type="button">New scan</button>
+        <button class="btn btn-ghost" id="newScanBtn" type="button">Start a new scan</button>
       </div>
     </div>
     <div class="result-frame-wrap">
@@ -592,7 +718,7 @@
         <span class="count-tag" id="measureCount"></span>
         <span class="chev" aria-hidden="true">&#9662;</span>
       </summary>
-      <p class="measure-note">This demo returns a standard set of about 20 measurements. Because the output is a full 3D body model, any circumference or length between any points on the model can be generated — API partners define the measurement set their product needs.</p>
+      <p class="measure-note">This demo returns a standard set of about 20 measurements, sorted alphabetically. Because the output is a full 3D body model, any circumference or length between any points on the model can be generated — API partners define the measurement set their product needs.</p>
       <div class="measure-grid" id="measureGrid"></div>
       <div class="measure-actions">
         <button class="btn btn-ghost" id="copyMeasureBtn" type="button">Copy as JSON</button>
@@ -601,12 +727,7 @@
 
     <div class="result-cta">
       <p><b>Want this inside your product?</b> The model and measurements above came back from one API call — the same call your platform would make, with the measurement set you specify.</p>
-      <a class="btn btn-primary" href="https://snapmeasureai.com/#contact">Contact us about the API</a>
-    </div>
-    <div class="history" id="historyBlock" hidden>
-      <h3>Scans saved on this device</h3>
-      <p class="history-note">No account needed — saved scans live only in this browser. Re-scan any time to compare how your measurements change.</p>
-      <ul class="history-list" id="historyList"></ul>
+      <a class="btn btn-primary" href="#contact">Contact us about the API</a>
     </div>
   </div>
 </section>
@@ -621,17 +742,17 @@
     </div>
     <div class="steps">
       <article class="step">
-        <p class="step__num">Step 01 — Capture</p>
+        <p class="step__num">Step 01 &mdash; Capture</p>
         <h3>Front photo + side photo</h3>
-        <p>One photo from the front and one from the side, in fitted clothing — use the guided camera with its countdown timer, or upload from your camera roll. No special pose or controlled environment required.</p>
+        <p>One photo from the front and one from the side, in fitted clothing &mdash; use the guided camera with its countdown timer, or upload from your camera roll. No special pose or controlled environment required.</p>
       </article>
       <article class="step">
-        <p class="step__num">Step 02 — Reconstruct</p>
+        <p class="step__num">Step 02 &mdash; Reconstruct</p>
         <h3>AI builds the 3D model</h3>
-        <p>A patented neural network — trained on over one million body scans, 400,000 backgrounds, and 90,000 poses — fuses both views into a precise 3D body model. Photos travel encrypted and are deleted the moment processing finishes.</p>
+        <p>A patented neural network &mdash; trained on over one million body scans, 400,000 backgrounds, and 90,000 poses &mdash; fuses both views into a precise 3D body model. Photos travel encrypted and are deleted the moment processing finishes.</p>
       </article>
       <article class="step">
-        <p class="step__num">Step 03 — Deliver</p>
+        <p class="step__num">Step 03 &mdash; Deliver</p>
         <h3>Measurements + 3D model</h3>
         <p>This demo returns your interactive 3D model with a standard set of about 20 measurements. Through the API: 100+ measurements, any point-to-point value on the model, and 3D export (OBJ) for downstream tools.</p>
       </article>
@@ -653,26 +774,26 @@
     <div class="section-head">
       <p class="eyebrow">Who it's built for</p>
       <h2 class="section__title">One technology. Three high-value markets.</h2>
-      <p class="sub">The demo above is consumer-simple on purpose. Under it sits the same scan technology that powers each of these — through one API.</p>
+      <p class="sub">The demo above is consumer-simple on purpose. Under it sits the same scan technology that powers each of these &mdash; through one API.</p>
     </div>
     <div class="verticals-grid">
       <article class="audience-card">
         <p class="eyebrow">GLP&#8209;1 &amp; weight loss programs</p>
-        <h3>See body change — not just the number on a scale</h3>
-        <p>GLP&#8209;1 medications shift waist, hips, and proportions in ways a scale never shows. Periodic scans give patients and clinicians a measurable, visual record of how the body is changing — no hardware, no clinic visit.</p>
-        <a class="card-link" href="https://snapmeasureai.com/#contact">Talk to us about integration &rarr;</a>
+        <h3>See body change &mdash; not just the number on a scale</h3>
+        <p>GLP&#8209;1 medications shift waist, hips, and proportions in ways a scale never shows. Periodic scans give patients and clinicians a measurable, visual record of how the body is changing &mdash; no hardware, no clinic visit.</p>
+        <a class="card-link" href="#contact">Talk to us about integration &rarr;</a>
       </article>
       <article class="audience-card">
         <p class="eyebrow">Fitness &amp; personal training</p>
         <h3>Give clients proof of progress</h3>
-        <p>Studios pay thousands for hardware body scanners. The same circumference tracking and 3D before-and-after comparison can run from any smartphone — no kiosk, no capital investment.</p>
-        <a class="card-link" href="https://snapmeasureai.com/#contact">Talk to us about integration &rarr;</a>
+        <p>Studios pay thousands for hardware body scanners. The same circumference tracking and 3D before-and-after comparison can run from any smartphone &mdash; no kiosk, no capital investment.</p>
+        <a class="card-link" href="#contact">Talk to us about integration &rarr;</a>
       </article>
       <article class="audience-card">
         <p class="eyebrow">Apparel &amp; uniforms</p>
         <h3>Accurate sizing without a fitting room</h3>
         <p>Remote body measurements support size recommendations, made-to-measure workflows, and uniform programs where fit at scale matters. The 3D body model exports to OBJ for pattern-making, CAD, and digital-twin pipelines.</p>
-        <a class="card-link" href="https://snapmeasureai.com/#contact">Talk to us about integration &rarr;</a>
+        <a class="card-link" href="#contact">Talk to us about integration &rarr;</a>
       </article>
     </div>
   </div>
@@ -689,39 +810,46 @@
       <details id="faq-photos">
         <summary>What kind of photos work best?</summary>
         <div class="answer">
-          <p>Easiest way: use the guided camera on this page. Prop your phone upright at roughly hip height (a shelf or a friend works), tap start when you can see yourself head to toe, and the countdown gives you time to get into place — front view first, then it walks you through the side view.</p>
-          <p>Fitted clothing gives the most accurate results — loose shirts should be tucked in. No special pose, lighting, or background is required.</p>
+          <p>Easiest way: use the guided camera on this page. Prop your phone upright at roughly hip height (a shelf or a friend works), tap start when you can see yourself head to toe, and the countdown gives you time to get into place &mdash; front view first, then it walks you through the side view.</p>
+          <p>Fitted clothing gives the most accurate results &mdash; loose shirts should be tucked in. No special pose, lighting, or background is required.</p>
         </div>
       </details>
       <details>
         <summary>What happens to my photos?</summary>
         <div class="answer">
-          <p>Photos are processed immediately and deleted — they are not stored or retained, and no personally identifiable information is linked to the scan. They travel over an encrypted connection (TLS) and are downscaled on your device before upload, so the full-resolution originals never leave your phone. There are no accounts on this demo.</p>
+          <p>Photos are processed immediately and deleted &mdash; they are not stored or retained, and no personally identifiable information is linked to the scan. They travel over an encrypted connection (TLS) and are downscaled on your device before upload, so the full-resolution originals never leave your phone.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can I compare scans over time without an account?</summary>
+        <div class="answer">
+          <p>Yes &mdash; that's the point of the "Save on this device" button on your results. Saved scans live in your browser (not on our servers), and reappear at the top of this page next time you visit, so you can reopen any scan to see the 3D body model and compare measurements to a fresh one.</p>
+          <p>Hosted progress tracking with history, deltas, and month-over-month comparison across devices is available to API partners building it into their own products.</p>
         </div>
       </details>
       <details>
         <summary>Why does my browser ask for camera permission?</summary>
         <div class="answer">
-          <p>That prompt comes from your browser, not from us — every website that wants to use your camera must ask, and there's no way around it. Nothing is captured until you start the countdown, the preview stays on your device, and your browser remembers your choice for this site so you're normally only asked once. If you'd rather not grant it, uploading photos works just as well.</p>
+          <p>That prompt comes from your browser, not from us &mdash; every website that wants to use your camera must ask, and there's no way around it. Nothing is captured until you start the countdown, the preview stays on your device, and your browser remembers your choice for this site so you're normally only asked once. If you'd rather not grant it, uploading photos works just as well.</p>
         </div>
       </details>
       <details>
         <summary>How accurate is it?</summary>
         <div class="answer">
-          <p>Typical error on major measurements is within half an inch — often much closer. The technology was built on Cambridge research and trained on over one million body scans, 400,000 backgrounds, and 90,000 body poses, which makes it consistent across body types, skin tones, and environments.</p>
+          <p>Typical error on major measurements is within half an inch &mdash; often much closer. The technology was built on Cambridge research and trained on over one million body scans, 400,000 backgrounds, and 90,000 body poses, which makes it consistent across body types, skin tones, and environments.</p>
         </div>
       </details>
       <details>
         <summary>What measurements do I get?</summary>
         <div class="answer">
-          <p>This demo returns a standard set of about 20 commonly used measurements — chest, waist, hips, thighs, biceps, calves, neck, shoulder width, inseam, torso lengths, and more — shown alongside your interactive 3D model.</p>
+          <p>This demo returns a standard set of about 20 commonly used measurements &mdash; chest, waist, hips, thighs, biceps, calves, neck, shoulder width, inseam, torso lengths, and more &mdash; shown alphabetically alongside your interactive 3D model.</p>
           <p>Because the scan produces a full 3D body model, any circumference or length between any points on the model can be generated. API partners configure custom measurement sets for apparel sizing, uniform fitting, fitness tracking, and health monitoring.</p>
         </div>
       </details>
       <details>
         <summary>Can I export or reuse the 3D model?</summary>
         <div class="answer">
-          <p>Yes — the underlying 10,000-point mesh can be exported as an OBJ file for CAD, pattern-making, visualization, and digital-twin applications (available to API partners). One honest note: it's a measurement-grade body model, not a textured lookalike avatar — built for accurate dimensions rather than appearance.</p>
+          <p>Yes &mdash; the underlying 10,000-point mesh can be exported as an OBJ file for CAD, pattern-making, visualization, and digital-twin applications (available to API partners). One honest note: it's a measurement-grade body model, not a textured lookalike avatar &mdash; built for accurate dimensions rather than appearance.</p>
         </div>
       </details>
       <details>
@@ -731,47 +859,62 @@
         </div>
       </details>
       <details>
-        <summary>Can I track my progress over time?</summary>
-        <div class="answer">
-          <p>This demo has no accounts, so nothing is stored on our side. You can save each scan on your device or download it as a standalone file, then re-scan in a few weeks and compare. Hosted progress tracking — history, deltas, month-over-month comparison — is available to API partners building it into their own products.</p>
-        </div>
-      </details>
-      <details>
         <summary>I'm evaluating this for my company. What does integration look like?</summary>
         <div class="answer">
-          <p>One HTTPS endpoint. Your platform sends two photos and a height; the API returns the 3D model plus the measurement set you specify — as structured data, or as the embeddable viewer you see on this page. Custom outputs and white-label experiences are available. <a href="https://snapmeasureai.com/#contact">Contact us</a> for a technical walkthrough.</p>
+          <p>One HTTPS endpoint. Your platform sends two photos and a height; the API returns the 3D model plus the measurement set you specify &mdash; as structured data, or as the embeddable viewer you see on this page. Custom outputs and white-label experiences are available. <a href="#contact">Contact us</a> for a technical walkthrough.</p>
         </div>
       </details>
       <details>
-        <summary>Something didn't work — what should I check?</summary>
+        <summary>Something didn't work &mdash; what should I check?</summary>
         <div class="answer">
-          <p>Make sure both photos show your full body head-to-toe, your height is entered, and you're on a reasonably recent browser. Very dark photos or heavy occlusion (long coats, other people in frame) can fail reconstruction. If it still fails, try re-taking the photos — and if you're a developer hitting an integration snag, <a href="mailto:info@snapmeasureai.com">get in touch</a>.</p>
+          <p>Make sure both photos show your full body head-to-toe, your height is entered, and you're on a reasonably recent browser. Very dark photos or heavy occlusion (long coats, other people in frame) can fail reconstruction. If it still fails, try re-taking the photos &mdash; and if you're a developer hitting an integration snag, <a href="mailto:info@snapmeasureai.com">get in touch</a>.</p>
         </div>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ================= CTA ================= -->
-<section class="cta-section">
+<!-- ================= CONTACT / FINAL CTA ================= -->
+<section class="cta-section" id="contact">
   <div class="container">
     <p class="eyebrow">For product &amp; engineering teams</p>
     <h2>Ready to add body scanning to your platform?</h2>
-    <p>You've just run the same API call your platform would make. Reach out to discuss licensing, custom integration, and partnership opportunities.</p>
+    <p>You've just run the same API call your platform would make. Reach out to discuss licensing, custom integration, white-label deployments, and partnership opportunities.</p>
     <div class="cta-actions">
-      <a class="btn btn-primary" href="https://snapmeasureai.com/#contact">Contact us</a>
+      <a class="btn btn-primary" href="mailto:info@snapmeasureai.com?subject=SnapMeasureAI%20integration%20inquiry">Email us: info@snapmeasureai.com</a>
       <a class="btn btn-indigo" href="https://snapmeasureai.com/">Learn more at snapmeasureai.com</a>
     </div>
+    <p class="direct-line">Or write to us directly: <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a></p>
   </div>
 </section>
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer">
   <div class="container">
-    <span>&copy; 2026 SnapMeasureAI</span>
-    <a href="https://snapmeasureai.com/">snapmeasureai.com</a>
-    <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a>
-    <span class="foot-note">Photos are processed to generate measurements and deleted immediately afterwards. This demo stores nothing server-side; scans you choose to save live only in your browser.</span>
+    <div class="foot-top">
+      <span>&copy; 2026 SnapMeasureAI</span>
+      <div class="foot-links">
+        <a href="https://snapmeasureai.com/">3D body scan</a>
+        <a href="https://snapmeasureai.com/motion-capture-from-video">Motion capture</a>
+        <a href="https://snapmeasureai.com/synthetic-data-with-labels">Synthetic data</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="foot-social" aria-label="Social">
+        <a href="https://www.linkedin.com/company/snapmeasureai" aria-label="LinkedIn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.4v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.11 2.06 2.06 0 0 1 0 4.11zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@snapmeasureai" aria-label="TikTok" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.72a8.16 8.16 0 0 0 4.77 1.52V6.79a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/shorts/iqJmcGncGRA" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.4-1.9.5-5.8.5-5.8s-.1-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+        </a>
+        <a href="https://www.producthunt.com/products/snapmeasureai" aria-label="Product Hunt" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm1.6 13.7H10v3.6H7.7V6.7h5.9c1.9 0 3.5 1.6 3.5 3.5s-1.6 3.5-3.5 3.5zm0-5.2H10v3.4h3.6a1.7 1.7 0 0 0 0-3.4z"/></svg>
+        </a>
+      </div>
+    </div>
+    <p class="foot-note">Photos are processed to generate measurements and deleted immediately afterwards. This demo stores nothing server-side; scans you choose to save live only in your browser.</p>
   </div>
 </footer>
 
@@ -790,6 +933,11 @@
     <div class="cam-error" id="camError" hidden></div>
     <div class="cam-stage">
       <video id="camVideo" autoplay playsinline muted></video>
+      <!-- Framing guide: teal corner brackets (see CSS note above) -->
+      <div class="cam-guide" id="camGuide" aria-hidden="true">
+        <span class="cam-guide-label">Fit yourself inside</span>
+        <span></span>
+      </div>
       <div class="cam-overlay">
         <div class="cam-instruction" id="camInstruction">
           <h4 id="camInstrTitle">Face the camera</h4>
@@ -820,43 +968,39 @@
        "html": "<!DOCTYPE html> ..."                              // three.js viewer
      }
    The html field renders into a sandboxed <iframe> (so it no longer overwrites
-   this page); the data field is parsed into the measurement panel.
+   this page); the data field is parsed into the measurement panel — sorted
+   alphabetically, with the "Waist Circumf #1/#2" pair collapsed to the smaller
+   value shown as just "Waist Circumf".
 
-   About the OPTIONS request you'll see in DevTools: that's the browser's
-   automatic CORS preflight (demo.snapmeasureai.com → api.snapmeasureai.com
-   with Content-Type: application/json is a cross-origin, "non-simple"
-   request). It's expected. To stop the browser re-preflighting every scan,
-   have the API return  Access-Control-Max-Age: 86400  on the OPTIONS reply.
+   OPTIONS request in DevTools: that's the browser's automatic CORS preflight
+   (cross-origin + Content-Type: application/json). Expected. To stop the
+   browser re-preflighting every scan, have the API return
+     Access-Control-Max-Age: 86400
+   on the OPTIONS reply.
    ========================================================================== */
 
 const CONFIG = {
   API_ENDPOINT: "https://api.snapmeasureai.com/body/analyze",
-  COMPANY: "",                        // sent as the payload's `company` field
+  COMPANY: "",
   HEADERS: { "Content-Type": "application/json" },
   REQUEST_TIMEOUT_MS: 120000,
 
-  /* ── IMAGE PIPELINE ─────────────────────────────────────────────────
-     Downscale only — longest side capped at maxDimension. JPEG quality
-     stays at 1.0 (visually lossless; resolution beyond 720px doesn't
-     improve reconstruction accuracy).                                  */
   IMAGE: {
-    maxDimension: 720,
-    jpegQuality: 1.0,
+    maxDimension: 720,        // longest side; resolution beyond this doesn't
+    jpegQuality: 1.0,         // improve reconstruction accuracy
     maxUploadBytesRaw: 25 * 1024 * 1024,
   },
 
-  /* ── GUIDED CAMERA ──────────────────────────────────────────────────── */
   CAMERA: {
-    frontCountdown: 10,       // seconds to get into place for the first shot
-    sideCountdown: 7,         // shorter — the user is already in position
+    frontCountdown: 10,       // seconds for the first shot (time to set up)
+    sideCountdown: 7,         // auto-continued shots — user's already in frame
     sideInstructionMs: 3500,  // how long the "turn to your side" card shows
   },
 
-  MEASUREMENT_UNIT: "cm",     // unit label shown next to measurement values
+  MEASUREMENT_UNIT: "cm",
 
-  /* ── ON-DEVICE SCAN HISTORY (no accounts needed) ────────────────────── */
   HISTORY_KEY: "smai_demo_scans",
-  HISTORY_LIMIT: 5            // viewer blobs are big; localStorage ≈ 5 MB.
+  HISTORY_LIMIT: 5,           // viewer blobs are big; localStorage ≈ 5 MB.
                               // Outgrowing it? Move to IndexedDB.
 };
 
@@ -877,7 +1021,7 @@ const els = {
   measurePanel: $("measurePanel"), measureGrid: $("measureGrid"),
   measureCount: $("measureCount"), copyMeasureBtn: $("copyMeasureBtn"),
   saveBtn: $("saveBtn"), downloadBtn: $("downloadBtn"), newScanBtn: $("newScanBtn"),
-  historyBlock: $("historyBlock"), historyList: $("historyList"),
+  savedPanel: $("savedPanel"), savedList: $("savedList"), savedCountLabel: $("savedCountLabel"),
   openCameraBtn: $("openCameraBtn"),
   cam: {
     modal: $("camModal"), video: $("camVideo"),
@@ -886,20 +1030,20 @@ const els = {
     instrTitle: $("camInstrTitle"), instrText: $("camInstrText"),
     count: $("camCount"), flash: $("camFlash"), status: $("camStatus"),
     start: $("camStart"), cancel: $("camCancel"), close: $("camClose"),
-    error: $("camError"),
+    error: $("camError"), guide: $("camGuide"),
   },
 };
 
 const state = {
   unit: "cm",
-  photos: { front: null, side: null },   // { dataUrl, width, height, fileName }
-  lastResult: null,                       // { html, measurements, heightLabel, dateISO }
+  photos: { front: null, side: null },
+  lastResult: null,
   busy: false,
 };
 
 /* ============================================================================
-   HEIGHT — the API expects "174cm" or "68in"; the trailing two letters are
-   stripped server-side. ft/in entries are converted to total inches.
+   HEIGHT — API expects "174cm" or "68in" (trailing two letters stripped
+   server-side). Feet/inches convert to total inches.
    ========================================================================== */
 function setUnit(unit) {
   state.unit = unit;
@@ -913,7 +1057,6 @@ els.unitFt.addEventListener("click", () => setUnit("ft"));
 
 const trimNum = (n) => String(Math.round(n));
 
-/* Returns "174cm" / "68in", or null (missing), or { err, val } (out of range). */
 function readHeight() {
   if (state.unit === "cm") {
     const cm = parseFloat(els.heightCm.value);
@@ -930,9 +1073,8 @@ function readHeight() {
 }
 
 /* ============================================================================
-   IMAGE PIPELINE — downscale on-device (720px longest side), no visible
-   quality loss (JPEG q=1.0). Modern browsers apply EXIF orientation when
-   decoding, so portrait phone shots come out upright.
+   IMAGE PIPELINE — downscale only (720px longest side), no visible quality
+   loss (JPEG q=1.0). Modern browsers apply EXIF orientation on decode.
    ========================================================================== */
 function scaleToJpeg(source, srcW, srcH) {
   const { maxDimension, jpegQuality } = CONFIG.IMAGE;
@@ -961,7 +1103,8 @@ function fileToPhoto(file) {
 }
 
 /* ============================================================================
-   DROPZONES — preview, drag & drop, replace, remove
+   DROPZONES — preview flexes to the photo's natural aspect ratio (see CSS),
+   with drag & drop, replace, remove.
    ========================================================================== */
 const zoneRenderers = {};
 function wireDropzone(zone, input, slot) {
@@ -973,14 +1116,11 @@ function wireDropzone(zone, input, slot) {
         .forEach(n => n.style.display = p ? "none" : "");
     if (p) {
       const img = document.createElement("img");
-      img.className = "preview";
-      img.alt = slot + " photo preview";
-      img.src = p.dataUrl;
+      img.className = "preview"; img.alt = slot + " photo preview"; img.src = p.dataUrl;
       zone.appendChild(img);
       const rm = document.createElement("button");
       rm.type = "button"; rm.className = "dz-remove";
-      rm.setAttribute("aria-label", "Remove " + slot + " photo");
-      rm.textContent = "\u00D7";
+      rm.setAttribute("aria-label", "Remove " + slot + " photo"); rm.textContent = "\u00D7";
       rm.addEventListener("click", (e) => {
         e.preventDefault(); e.stopPropagation();
         state.photos[slot] = null; input.value = ""; render();
@@ -1022,19 +1162,12 @@ wireDropzone(els.dzSide,  els.fileSide,  "side");
 
 /* ============================================================================
    GUIDED CAMERA CAPTURE
-   Opens the camera (front-facing by default on mobile), lets the user switch
-   camera via the selector in the header, gives them time to frame up, then
-   runs a countdown per view. The preview is mirrored for front cameras
-   (selfie feel); the captured frame itself is never mirrored.
-   NOTE: getUserMedia requires HTTPS and a user permission grant — that
-   prompt is browser-enforced and cannot be skipped. Browsers remember the
-   grant per-site, so users are normally asked only once.
    ========================================================================== */
 const CAM_COPY = {
   front: {
     tag: "FRONT",
     title: "Face the camera",
-    text: "Prop your device upright and step back until you're in frame head to toe, arms slightly away from your sides. Press start when it looks right — the countdown gives you time to get into place.",
+    text: "Prop your device upright and step back until you're inside the frame head to toe, arms slightly away from your sides. Press start when it looks right — the countdown gives you time to get into place.",
   },
   side: {
     tag: "SIDE",
@@ -1045,10 +1178,7 @@ const CAM_COPY = {
 
 const cam = { stream: null, queue: [], totalSlots: 0, active: false, timers: [] };
 
-function camClearTimers() {
-  cam.timers.forEach(t => clearTimeout(t));
-  cam.timers = [];
-}
+function camClearTimers() { cam.timers.forEach(t => clearTimeout(t)); cam.timers = []; }
 function camAfter(ms, fn) { cam.timers.push(setTimeout(fn, ms)); }
 
 async function startStream(deviceId) {
@@ -1067,15 +1197,12 @@ async function startStream(deviceId) {
                   (!settings.facingMode && !label.includes("back"));
   els.cam.video.classList.toggle("mirrored", isFront);
 }
-
 function stopStream() {
   if (cam.stream) cam.stream.getTracks().forEach(t => t.stop());
   cam.stream = null;
   els.cam.video.srcObject = null;
 }
 
-/* The selector is always visible while the camera is open, so users can see
-   the option exists; it's disabled when the device has only one camera. */
 async function populateCameraList() {
   try {
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -1097,7 +1224,6 @@ async function populateCameraList() {
     els.cam.select.disabled = cams.length < 2;
   } catch (e) { console.error(e); }
 }
-
 els.cam.select.addEventListener("change", async () => {
   try { await startStream(els.cam.select.value); }
   catch (e) { showCamError(e); }
@@ -1110,6 +1236,7 @@ function camShowInstruction(slot) {
   els.cam.instrText.textContent = c.text;
   els.cam.instruction.style.display = "";
   els.cam.count.hidden = true;
+  els.cam.guide.hidden = false;      // guide visible while user gets into place
 }
 
 function camCountdown(seconds, onDone) {
@@ -1142,23 +1269,20 @@ function camRunSlot(slot, auto) {
   els.cam.status.textContent =
     "Step " + stepNum + " of " + cam.totalSlots +
     " \u00B7 " + CAM_COPY[slot].tag.toLowerCase() + " view";
-  /* First shot of a session gets the long countdown (time to prop the phone
-     and step back); auto-continued shots get the short one — the person is
-     already in frame. Retaking only the side photo therefore still gets 10s. */
   const secs = auto ? CONFIG.CAMERA.sideCountdown : CONFIG.CAMERA.frontCountdown;
   const go = () => camCountdown(secs, () => {
     captureFrame(slot);
     cam.queue.shift();
     if (cam.queue.length) {
-      camRunSlot(cam.queue[0], /*auto=*/true);       // side view auto-continues
+      camRunSlot(cam.queue[0], /*auto=*/true);
     } else {
-      els.cam.count.hidden = true;
+      els.cam.count.hidden = true; els.cam.guide.hidden = true;
       els.cam.status.textContent = "All set \u2014 photos added below.";
       camAfter(700, closeCamera);
     }
   });
   if (auto) {
-    camAfter(CONFIG.CAMERA.sideInstructionMs, go);   // brief read time, then count
+    camAfter(CONFIG.CAMERA.sideInstructionMs, go);
   } else {
     els.cam.start.hidden = false;
     els.cam.start.disabled = false;
@@ -1172,21 +1296,16 @@ async function openCamera(slots) {
     return showError("This browser can't open the camera — please upload your photos instead.");
   }
   hideError();
-  cam.queue = slots.slice();
-  cam.totalSlots = slots.length;
-  cam.active = true;
+  cam.queue = slots.slice(); cam.totalSlots = slots.length; cam.active = true;
   els.cam.error.hidden = true;
-  els.cam.start.hidden = false;
-  els.cam.start.disabled = false;
+  els.cam.start.hidden = false; els.cam.start.disabled = false;
   els.cam.modal.hidden = false;
   document.body.style.overflow = "hidden";
   try {
-    await startStream();               // defaults to the front-facing camera
-    await populateCameraList();        // labels become available post-permission
+    await startStream();
+    await populateCameraList();
     camRunSlot(cam.queue[0], /*auto=*/false);
-  } catch (e) {
-    showCamError(e);
-  }
+  } catch (e) { showCamError(e); }
 }
 
 function showCamError(e) {
@@ -1200,16 +1319,12 @@ function showCamError(e) {
 }
 
 function closeCamera() {
-  cam.active = false;
-  camClearTimers();
-  stopStream();
-  els.cam.modal.hidden = true;
-  els.cam.status.textContent = "";
+  cam.active = false; camClearTimers(); stopStream();
+  els.cam.modal.hidden = true; els.cam.status.textContent = "";
   document.body.style.overflow = "";
 }
 
 els.openCameraBtn.addEventListener("click", () => {
-  /* Only capture what's missing; if both photos exist, treat it as a full retake. */
   const missing = ["front", "side"].filter(s => !state.photos[s]);
   openCamera(missing.length ? missing : ["front", "side"]);
 });
@@ -1244,10 +1359,9 @@ function validate() {
    SUBMIT → API CALL
    Payload contract (matches /body/analyze):
    {
-     height:  "174cm" | "68in",     // unit suffix stripped server-side
+     height:  "174cm" | "68in",
      company: "",
-     images:  [ { data: "<raw base64, no data-url prefix>", fileName: "front.jpg" },
-                { data: "...", fileName: "side.jpg" } ]   // front first, side second
+     images:  [ { data, fileName }, { data, fileName } ]   // front first
    }
    ========================================================================== */
 function buildPayload(heightLabel) {
@@ -1262,28 +1376,23 @@ function buildPayload(heightLabel) {
   };
 }
 
-function setStep(i) {
-  els.tabs.forEach((t, idx) => t.classList.toggle("active", idx === i));
-}
-function setStatus(id, phase) {  // phase: "doing" | "done" | ""
-  const li = els.st[id];
-  li.classList.remove("doing", "done");
+function setStep(i) { els.tabs.forEach((t, idx) => t.classList.toggle("active", idx === i)); }
+function setStatus(id, phase) {
+  const li = els.st[id]; li.classList.remove("doing", "done");
   if (phase) li.classList.add(phase);
 }
 
-/* Parse the response's `data` field: a Python-repr style dict string like
+/* Parse the response's `data` field: a Python-repr dict string like
    "{'height': 174.0, 'head circumf': 59.46, ...}". Tolerant by design. */
 function parseMeasurements(d) {
   if (!d) return null;
   if (typeof d === "object") return d;
   if (typeof d !== "string") return null;
-  try { return JSON.parse(d); } catch (e) { /* not JSON — try Python repr */ }
+  try { return JSON.parse(d); } catch (e) {}
   try {
     return JSON.parse(
-      d.replace(/'/g, '"')
-       .replace(/\bNone\b/g, "null")
-       .replace(/\bTrue\b/g, "true")
-       .replace(/\bFalse\b/g, "false")
+      d.replace(/'/g, '"').replace(/\bNone\b/g, "null")
+       .replace(/\bTrue\b/g, "true").replace(/\bFalse\b/g, "false")
     );
   } catch (e) { return null; }
 }
@@ -1302,7 +1411,7 @@ els.form.addEventListener("submit", async (e) => {
   els.submit.textContent = "Working\u2026";
   els.status.classList.add("show");
   setStep(1);
-  setStatus("resize", "done");          // photos were downscaled at pick time
+  setStatus("resize", "done");
   setStatus("upload", "doing");
 
   const controller = new AbortController();
@@ -1310,8 +1419,7 @@ els.form.addEventListener("submit", async (e) => {
 
   try {
     const res = await fetch(CONFIG.API_ENDPOINT, {
-      method: "POST",
-      headers: CONFIG.HEADERS,
+      method: "POST", headers: CONFIG.HEADERS,
       body: JSON.stringify(buildPayload(heightLabel)),
       signal: controller.signal,
     });
@@ -1323,14 +1431,11 @@ els.form.addEventListener("submit", async (e) => {
       throw new Error("API " + res.status + (detail ? ": " + detail.slice(0, 300) : ""));
     }
 
-    /* Response envelope: { data: "<measurement dict string>", html: "<viewer>" }.
-       Falls back gracefully if the endpoint ever returns raw HTML. */
     const rawText = await res.text();
     let env = null;
-    try { env = JSON.parse(rawText); } catch (e) { /* raw HTML fallback below */ }
+    try { env = JSON.parse(rawText); } catch (e) {}
     const html = env && typeof env.html === "string" ? env.html
-               : rawText.trim().startsWith("<") ? rawText
-               : null;
+               : rawText.trim().startsWith("<") ? rawText : null;
     if (!html) throw new Error("Unexpected response format from API");
 
     setStatus("build", "done");
@@ -1339,8 +1444,7 @@ els.form.addEventListener("submit", async (e) => {
     state.lastResult = {
       html,
       measurements: parseMeasurements(env && env.data),
-      heightLabel,
-      dateISO: new Date().toISOString(),
+      heightLabel, dateISO: new Date().toISOString(),
     };
     renderResult(state.lastResult);
   } catch (err) {
@@ -1359,12 +1463,39 @@ els.form.addEventListener("submit", async (e) => {
 });
 
 /* ============================================================================
-   RESULT RENDERING
-   The viewer HTML renders in a sandboxed iframe (allow-scripts only) so the
-   three.js scene runs untouched while this page — nav, CTA, history — stays
-   alive around it. If the viewer ever needs same-origin resources, add
-   "allow-same-origin" to the iframe's sandbox attribute in the markup.
+   RESULT + MEASUREMENT RENDERING
+   Sorted alphabetically. The "waist circumf #1/#2" pair (the SUPR model
+   returns two waist candidates) collapses into a single "waist circumf"
+   whose value is the smaller of the two — the anatomically narrower waist,
+   which is what most consumers understand by "waist".
    ========================================================================== */
+function normalizeMeasurements(m) {
+  if (!m) return [];
+  const entries = Object.entries(m);
+  const out = [];
+  const waist = { seen: [], indices: [] };
+  entries.forEach(([k, v], i) => {
+    const key = k.toLowerCase().replace(/\s+/g, " ").trim();
+    // detect "waist circumf #1" / "waist circumf #2" (also tolerate "waist circumference #N")
+    if (/^waist\s+circumf(?:erence)?\s*#?\s*\d+$/.test(key)) {
+      waist.seen.push({ k, v });
+      waist.indices.push(i);
+      return;
+    }
+    out.push([k, v]);
+  });
+  if (waist.seen.length) {
+    const numeric = waist.seen.filter(x => typeof x.v === "number");
+    const chosen = numeric.length
+      ? Math.min(...numeric.map(x => x.v))
+      : waist.seen[0].v;
+    out.push(["waist circumf", chosen]);
+  }
+  // alphabetical, case-insensitive
+  out.sort((a, b) => a[0].toLowerCase().localeCompare(b[0].toLowerCase()));
+  return out;
+}
+
 function renderResult(r, { scroll = true } = {}) {
   els.resultFrame.srcdoc = r.html;
   renderMeasurements(r.measurements);
@@ -1375,22 +1506,18 @@ function renderResult(r, { scroll = true } = {}) {
 }
 
 function renderMeasurements(m) {
-  const entries = m ? Object.entries(m) : [];
+  const entries = normalizeMeasurements(m);
   els.measurePanel.hidden = entries.length === 0;
   if (!entries.length) return;
   els.measureCount.textContent = entries.length + " values";
   els.measureGrid.innerHTML = "";
   entries.forEach(([name, val]) => {
-    const cell = document.createElement("div");
-    cell.className = "cell";
-    const n = document.createElement("div");
-    n.className = "m-name"; n.textContent = name;
-    const v = document.createElement("div");
-    v.className = "m-val";
+    const cell = document.createElement("div"); cell.className = "cell";
+    const n = document.createElement("div"); n.className = "m-name"; n.textContent = name;
+    const v = document.createElement("div"); v.className = "m-val";
     if (typeof val === "number") {
       v.textContent = (Math.round(val * 10) / 10).toString();
-      const u = document.createElement("small");
-      u.textContent = CONFIG.MEASUREMENT_UNIT;
+      const u = document.createElement("small"); u.textContent = CONFIG.MEASUREMENT_UNIT;
       v.appendChild(u);
     } else {
       v.textContent = String(val);
@@ -1403,20 +1530,30 @@ function renderMeasurements(m) {
 els.copyMeasureBtn.addEventListener("click", async () => {
   const m = state.lastResult && state.lastResult.measurements;
   if (!m) return;
+  const normalized = Object.fromEntries(normalizeMeasurements(m));
   try {
-    await navigator.clipboard.writeText(JSON.stringify(m, null, 2));
+    await navigator.clipboard.writeText(JSON.stringify(normalized, null, 2));
     els.copyMeasureBtn.textContent = "Copied \u2713";
-  } catch (e) {
-    els.copyMeasureBtn.textContent = "Copy failed";
-  }
+  } catch (e) { els.copyMeasureBtn.textContent = "Copy failed"; }
   setTimeout(() => { els.copyMeasureBtn.textContent = "Copy as JSON"; }, 2000);
 });
 
+/* ============================================================================
+   "Start a new scan" — the intent is a true reset: clear both photos, hide
+   the previous result, reset the stepper, and scroll to the scan card.
+   Height and consent are left as-is so you can quickly scan again without
+   re-typing (same person is the common case).
+   ========================================================================== */
 els.newScanBtn.addEventListener("click", () => {
+  state.photos.front = null; state.photos.side = null;
+  els.fileFront.value = ""; els.fileSide.value = "";
+  zoneRenderers.front(); zoneRenderers.side();
+  hideError();
   setStep(0);
   els.status.classList.remove("show");
   ["resize","upload","build"].forEach(k => setStatus(k, ""));
-  document.querySelector(".hero").scrollIntoView({ behavior: "smooth" });
+  els.result.classList.remove("show");
+  document.querySelector(".scan-stage").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 els.downloadBtn.addEventListener("click", () => {
@@ -1431,37 +1568,37 @@ els.downloadBtn.addEventListener("click", () => {
 });
 
 /* ============================================================================
-   ON-DEVICE SCAN HISTORY — progress tracking without user accounts.
-   Stored in localStorage; capped and quota-guarded. Swap for IndexedDB
-   (or server-side profiles) when you build the real tracking product.
+   ON-DEVICE SCAN HISTORY — always visible when scans exist, so returning
+   users see their progress the moment the page loads (not only after a
+   fresh scan). Stored in localStorage; capped and quota-guarded.
    ========================================================================== */
 function loadHistory() {
   try {
     const items = JSON.parse(localStorage.getItem(CONFIG.HISTORY_KEY)) || [];
-    // migrate any pre-envelope items ({ body } → { html })
     return items.map(it => it.html ? it : { ...it, html: it.body || "" });
   } catch (e) { return []; }
 }
 function persistHistory(items) {
-  try {
-    localStorage.setItem(CONFIG.HISTORY_KEY, JSON.stringify(items));
-    return true;
-  } catch (e) {   // QuotaExceededError — viewer blobs are big
-    if (items.length > 1) return persistHistory(items.slice(0, -1)); // drop oldest
+  try { localStorage.setItem(CONFIG.HISTORY_KEY, JSON.stringify(items)); return true; }
+  catch (e) {
+    if (items.length > 1) return persistHistory(items.slice(0, -1));
     return false;
   }
 }
 function renderHistory() {
   const items = loadHistory();
-  els.historyBlock.hidden = items.length === 0;
-  els.historyList.innerHTML = "";
+  els.savedPanel.hidden = items.length === 0;
+  if (!items.length) return;
+  els.savedCountLabel.textContent = items.length + (items.length === 1 ? " scan" : " scans");
+  els.savedList.innerHTML = "";
   items.forEach((item) => {
     const li = document.createElement("li");
     const label = document.createElement("span");
-    label.textContent = new Date(item.dateISO).toLocaleDateString() +
-      " \u00B7 " + item.heightLabel;
+    label.innerHTML = "<b>" +
+      new Date(item.dateISO).toLocaleDateString(undefined, { month: "short", day: "numeric" }) +
+      "</b> &middot; " + item.heightLabel;
     const open = document.createElement("button");
-    open.type = "button"; open.textContent = "View";
+    open.type = "button"; open.textContent = "View 3D";
     open.addEventListener("click", () => {
       state.lastResult = item;
       renderResult(item);
@@ -1475,19 +1612,23 @@ function renderHistory() {
       renderHistory();
     });
     li.append(label, open, del);
-    els.historyList.appendChild(li);
+    els.savedList.appendChild(li);
   });
 }
 els.saveBtn.addEventListener("click", () => {
   if (!state.lastResult) return;
   const items = loadHistory();
-  items.unshift({ id: Date.now().toString(36), ...state.lastResult });
+  // De-dupe: if we're re-saving the same result (same dateISO), skip
+  if (!items.some(x => x.dateISO === state.lastResult.dateISO)) {
+    items.unshift({ id: Date.now().toString(36), ...state.lastResult });
+  }
   const ok = persistHistory(items.slice(0, CONFIG.HISTORY_LIMIT));
   els.saveBtn.textContent = ok ? "Saved \u2713" : "Too large to save \u2014 use Download";
   setTimeout(() => { els.saveBtn.textContent = "Save on this device"; }, 2200);
   renderHistory();
 });
 
+/* Render saved scans on page load, before any interaction. */
 renderHistory();
 setUnit("cm");
 </script>
