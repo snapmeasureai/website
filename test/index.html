@@ -334,7 +334,7 @@
       min-height: 0;
     }
     .dropzone.filled img.preview {
-      display: block; width: 100%; height: auto; max-height: 380px; object-fit: cover;
+      display: block; width: 100%; height: auto; object-fit: fill;
     }
     .dropzone .dz-badge {
       position: absolute; left: 8px; top: 8px; z-index: 2;
@@ -396,37 +396,28 @@
     .status li {
       font-size: 15.5px; font-weight: 500; color: var(--card-muted);
       display: flex; align-items: center; gap: 14px; min-height: 32px;
-      transition: color .2s;
     }
     .status li::before {
       content: ""; flex: none; width: 26px; height: 26px; border-radius: 50%;
-      background: transparent; border: 2px solid var(--card-line);
-      transition: border-color .2s;
-    }
-    .status li.doing {
-      color: var(--card-ink); font-weight: 600;
-      background: linear-gradient(90deg, transparent, rgba(10,191,163,.08), transparent);
-      background-size: 200% 100%; animation: statusPulse 1.8s linear infinite;
-      border-radius: 8px; padding: 4px 8px; margin: -4px -8px;
-    }
-    .status li.doing::before {
       background: transparent;
-      border-color: rgba(10,191,163,.22);
+      border: 2.5px solid rgba(16,32,48,.18);
+      /* NO transition here — it suppresses the spin animation when .doing is added */
+    }
+    .status li.doing { color: var(--card-ink); font-weight: 600; }
+    .status li.doing::before {
+      border-color: rgba(10,191,163,.25);
       border-top-color: var(--teal);
-      animation: spin 0.75s linear infinite;
+      will-change: transform;
+      animation: spinRing 0.75s linear infinite;
     }
     .status li.done { color: var(--card-ink); }
     .status li.done::before {
       background: var(--teal); border-color: var(--teal);
-      /* white check drawn via inline SVG background */
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M4 10.5l4 4 8-8'/></svg>");
       background-repeat: no-repeat; background-position: center; background-size: 18px;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes statusPulse {
-      0%   { background-position: -100% 0; }
-      100% { background-position:  100% 0; }
-    }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
+    /* Remove old spin + statusPulse — replaced above */
 
     /* ============================================================
        GUIDED CAMERA CAPTURE
@@ -811,6 +802,12 @@
         <button class="btn btn-ghost" id="newScanBtn" type="button">Start a new scan</button>
       </div>
     </div>
+    <!-- Saved-scan switcher inside the result section, shown whenever ≥1 saved scan exists -->
+    <div class="result-history" id="resultHistory" hidden>
+      <p class="rh-label">Your saved scans</p>
+      <ul class="rh-list" id="rhList"></ul>
+    </div>
+
     <div class="result-frame-wrap">
       <iframe id="resultFrame" title="Interactive 3D body scan and measurements" sandbox="allow-scripts"></iframe>
     </div>
@@ -827,12 +824,6 @@
         <button class="btn btn-ghost" id="copyMeasureBtn" type="button">Copy as JSON</button>
       </div>
     </details>
-
-    <!-- Saved-scan switcher inside the result section, shown whenever ≥1 saved scan exists -->
-    <div class="result-history" id="resultHistory" hidden>
-      <p class="rh-label">Your saved scans</p>
-      <ul class="rh-list" id="rhList"></ul>
-    </div>
 
     <div class="result-cta">
       <p><b>Want this inside your product?</b> The model and measurements above came back from one API call — the same call your platform would make, with the measurement set you specify.</p>
