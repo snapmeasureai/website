@@ -163,8 +163,12 @@
       .site-header .container { gap: 12px; }
       .site-nav { gap: 12px; }
       .site-nav a:not(.nav-cta) { display: none; }
-      .site-nav .nav-cta { padding: 7px 12px; font-size: 13px; }
+      .site-nav .nav-cta { padding: 10px 16px; font-size: 14.5px; border-radius: 9px; }
       .nav__logo img { height: 26px; }
+      .nav__logo .demo-tag { font-size: 10px; padding: 3px 7px; }
+    }
+    @media (max-width: 400px) {
+      /* Very narrow phones — hide the tag to keep the CTA readable */
       .nav__logo .demo-tag { display: none; }
     }
 
@@ -266,7 +270,7 @@
        so portrait phone shots aren't cropped by a fixed square box.
        --------------------------------------------------------------- */
     .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
-    @media (max-width: 420px) { .photo-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .photo-grid { grid-template-columns: 1fr; } }
     .dropzone {
       position: relative; border: 2px dashed rgba(10,191,163,.6); border-radius: var(--radius);
       background: #fff; min-height: 172px;
@@ -348,16 +352,43 @@
     }
     .form-error.show { display: block; }
 
-    .status { display: none; margin-top: 18px; border-top: 1px solid var(--card-line); padding-top: 16px; }
+    .status { display: none; margin-top: 18px; border-top: 1px solid var(--card-line); padding-top: 20px; }
     .status.show { display: block; }
-    .status ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-    .status li { font-size: 14px; color: var(--card-muted); display: flex; align-items: center; gap: 10px; }
-    .status li::before { content: "○"; color: var(--card-line); }
-    .status li.doing { color: var(--card-ink); }
-    .status li.doing::before { content: "◐"; color: var(--teal); animation: spin 1.1s linear infinite; display: inline-block; }
+    .status ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .status li {
+      font-size: 15.5px; font-weight: 500; color: var(--card-muted);
+      display: flex; align-items: center; gap: 14px; min-height: 32px;
+      transition: color .2s;
+    }
+    .status li::before {
+      content: ""; flex: none; width: 26px; height: 26px; border-radius: 50%;
+      background: #fff; border: 2px solid var(--card-line);
+      background-image: none;
+      transition: background .2s, border-color .2s;
+    }
+    .status li.doing {
+      color: var(--card-ink); font-weight: 600;
+      background: linear-gradient(90deg, transparent, rgba(10,191,163,.08), transparent);
+      background-size: 200% 100%; animation: statusPulse 1.8s linear infinite;
+      border-radius: 8px; padding: 4px 8px; margin: -4px -8px;
+    }
+    .status li.doing::before {
+      border-color: var(--teal-dim);
+      border-top-color: var(--teal);
+      animation: spin 0.9s linear infinite;
+    }
     .status li.done { color: var(--card-ink); }
-    .status li.done::before { content: "●"; color: var(--teal); }
+    .status li.done::before {
+      background: var(--teal); border-color: var(--teal);
+      /* white check drawn via inline SVG background */
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M4 10.5l4 4 8-8'/></svg>");
+      background-repeat: no-repeat; background-position: center; background-size: 18px;
+    }
     @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes statusPulse {
+      0%   { background-position: -100% 0; }
+      100% { background-position:  100% 0; }
+    }
 
     /* ============================================================
        GUIDED CAMERA CAPTURE
@@ -484,7 +515,7 @@
     .measure-panel[open] summary .chev { transform: rotate(180deg); }
     .measure-panel .measure-note { padding: 0 20px 12px; margin: 0; font-size: 13.5px; color: var(--text-3); max-width: 78ch; }
     .measure-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1px; background: var(--border); border-top: 1px solid var(--border);
     }
     .measure-grid .cell { background: var(--bg3); padding: 12px 20px; }
@@ -718,7 +749,7 @@
         <span class="count-tag" id="measureCount"></span>
         <span class="chev" aria-hidden="true">&#9662;</span>
       </summary>
-      <p class="measure-note">This demo returns a standard set of about 20 measurements — height first, then alphabetical. Because the output is a full 3D body model, any circumference or length between any points on the model can be generated — API partners define the measurement set their product needs.</p>
+      <p class="measure-note" id="measureNote">This demo returns a standard set of measurements — height first, then alphabetical. Because the output is a full 3D body model, any circumference or length between any points on the model can be generated — API partners define the measurement set their product needs.</p>
       <div class="measure-grid" id="measureGrid"></div>
       <div class="measure-actions">
         <button class="btn btn-ghost" id="copyMeasureBtn" type="button">Copy as JSON</button>
@@ -1019,7 +1050,7 @@ const els = {
   tabs: [$("step1Tab"), $("step2Tab"), $("step3Tab")],
   result: $("result"), resultFrame: $("resultFrame"), resultMeta: $("resultMeta"),
   measurePanel: $("measurePanel"), measureGrid: $("measureGrid"),
-  measureCount: $("measureCount"), copyMeasureBtn: $("copyMeasureBtn"),
+  measureCount: $("measureCount"), measureNote: $("measureNote"), copyMeasureBtn: $("copyMeasureBtn"),
   saveBtn: $("saveBtn"), downloadBtn: $("downloadBtn"), newScanBtn: $("newScanBtn"),
   savedPanel: $("savedPanel"), savedList: $("savedList"), savedCountLabel: $("savedCountLabel"),
   openCameraBtn: $("openCameraBtn"),
@@ -1052,8 +1083,11 @@ function setUnit(unit) {
   els.heightCm.style.display = unit === "cm" ? "" : "none";
   els.ftinWrap.style.display = unit === "ft" ? "" : "none";
 }
-els.unitCm.addEventListener("click", () => setUnit("cm"));
-els.unitFt.addEventListener("click", () => setUnit("ft"));
+els.unitCm.addEventListener("click", () => { setUnit("cm"); refreshStep(); });
+els.unitFt.addEventListener("click", () => { setUnit("ft"); refreshStep(); });
+["heightCm", "heightFt", "heightIn"].forEach(id => {
+  document.getElementById(id).addEventListener("input", refreshStep);
+});
 
 const trimNum = (n) => String(Math.round(n));
 
@@ -1123,10 +1157,11 @@ function wireDropzone(zone, input, slot) {
       rm.setAttribute("aria-label", "Remove " + slot + " photo"); rm.textContent = "\u00D7";
       rm.addEventListener("click", (e) => {
         e.preventDefault(); e.stopPropagation();
-        state.photos[slot] = null; input.value = ""; render();
+        state.photos[slot] = null; input.value = ""; render(); refreshStep();
       });
       zone.appendChild(rm);
     }
+    refreshStep();
   };
   zoneRenderers[slot] = render;
 
@@ -1259,6 +1294,7 @@ function captureFrame(slot) {
   const out = scaleToJpeg(v, v.videoWidth, v.videoHeight);
   state.photos[slot] = { ...out, fileName: slot + ".jpg" };
   zoneRenderers[slot]();
+  refreshStep();
   els.cam.flash.classList.add("on");
   camAfter(60, () => els.cam.flash.classList.remove("on"));
 }
@@ -1377,6 +1413,16 @@ function buildPayload(heightLabel) {
 }
 
 function setStep(i) { els.tabs.forEach((t, idx) => t.classList.toggle("active", idx === i)); }
+
+/* Derive current step from form state so the stepper reflects reality when
+   the user uploads instead of captures (and any time state changes).
+   0 = photos, 1 = height, 2 = 3D result / processing */
+function refreshStep() {
+  if (state.busy || state.lastResult) return setStep(2);
+  const bothPhotos = state.photos.front && state.photos.side;
+  if (!bothPhotos) return setStep(0);
+  return setStep(1);
+}
 function setStatus(id, phase) {
   const li = els.st[id]; li.classList.remove("doing", "done");
   if (phase) li.classList.add(phase);
@@ -1491,6 +1537,11 @@ function renderMeasurements(m) {
   els.measurePanel.hidden = entries.length === 0;
   if (!entries.length) return;
   els.measureCount.textContent = entries.length + " values";
+  els.measureNote.textContent =
+    "This demo returns " + entries.length +
+    " measurements — height first, then alphabetical. Because the output is a full 3D body model, " +
+    "any circumference or length between any points on the model can be generated — " +
+    "API partners define the measurement set their product needs.";
   els.measureGrid.innerHTML = "";
   entries.forEach(([name, val]) => {
     const cell = document.createElement("div"); cell.className = "cell";
