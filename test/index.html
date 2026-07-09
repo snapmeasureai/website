@@ -1173,6 +1173,7 @@ els.unitFt.addEventListener("click", () => { setUnit("ft"); refreshStep(); });
 ["heightCm", "heightFt", "heightIn"].forEach(id => {
   document.getElementById(id).addEventListener("input", refreshStep);
 });
+document.getElementById("consent").addEventListener("change", refreshStep);
 
 const trimNum = (n) => String(Math.round(n));
 
@@ -1287,19 +1288,35 @@ const CAM_COPY = {
   front: {
     tag: "FRONT",
     title: "Face the camera — full body in frame",
-    text: "Arms slightly out, fitted clothing. Press start when you\u2019re ready. 10-second countdown.",
+    text: "Arms slightly out, fitted clothing. Press start when you\u2019re ready.",
   },
   side: {
     tag: "SIDE",
     title: "Turn to your side",
-    text: "90\u00B0 turn, arms relaxed. Hold still.",
+    text: "90\u00B0 profile, arms relaxed. Hold still.",
   },
 };
 
-const cam = { stream: null, queue: [], totalSlots: 0, active: false, timers: [] };
+const cam = { stream: null, queue: [], totalSlots: 0, active: false, timers: [], gen: 0 };
 
 function camClearTimers() { cam.timers.forEach(t => clearTimeout(t)); cam.timers = []; }
 function camAfter(ms, fn) { cam.timers.push(setTimeout(fn, ms)); }
+
+function camCountdown(seconds, onDone) {
+  els.cam.instruction.style.display = "none";
+  els.cam.count.hidden = false;
+  const myGen = cam.gen;   // snapshot — if cam reopens, gen increments and old ticks bail
+  let n = seconds;
+  const tick = () => {
+    if (cam.gen !== myGen) return;   // stale countdown from a previous session — stop
+    els.cam.count.textContent = n;
+    els.cam.count.classList.toggle("final", n <= 3);
+    if (n === 0) { onDone(); return; }
+    n -= 1;
+    camAfter(1000, tick);
+  };
+  tick();
+}
 
 async function startStream(deviceId) {
   stopStream();
@@ -1357,20 +1374,6 @@ function camShowInstruction(slot) {
   els.cam.instruction.style.display = "";
   els.cam.count.hidden = true;
   els.cam.sideFlash.hidden = true;
-}
-
-function camCountdown(seconds, onDone) {
-  els.cam.instruction.style.display = "none";
-  els.cam.count.hidden = false;
-  let n = seconds;
-  const tick = () => {
-    els.cam.count.textContent = n;
-    els.cam.count.classList.toggle("final", n <= 3);
-    if (n === 0) { onDone(); return; }
-    n -= 1;
-    camAfter(1000, tick);
-  };
-  tick();
 }
 
 function captureFrame(slot) {
@@ -1442,6 +1445,7 @@ async function openCamera(slots) {
     return showError("This browser can't open the camera — please upload your photos instead.");
   }
   hideError();
+  cam.gen++;                         // invalidate any running countdown
   cam.queue = slots.slice(); cam.totalSlots = slots.length; cam.active = true;
   els.cam.error.hidden = true;
   els.cam.start.hidden = false; els.cam.start.disabled = false;
@@ -1465,8 +1469,15 @@ function showCamError(e) {
 }
 
 function closeCamera() {
+  cam.gen++;                         // stop any in-flight countdown ticks
   cam.active = false; camClearTimers(); stopStream();
-  els.cam.modal.hidden = true; els.cam.status.textContent = "";
+  els.cam.modal.hidden = true;
+  els.cam.status.textContent = "";
+  els.cam.count.hidden = true;
+  els.cam.count.textContent = "";
+  els.cam.count.classList.remove("final");
+  els.cam.sideFlash.hidden = true;
+  els.cam.instruction.style.display = "";
   document.body.style.overflow = "";
 }
 
@@ -1486,7 +1497,7 @@ document.addEventListener("keydown", (e) => {
 function showError(msg) {
   els.error.textContent = msg;
   els.error.classList.add("show");
-  els.error.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  setTimeout(() => els.error.scrollIntoView({ block: "start", behavior: "smooth" }), 30);
 }
 function hideError() { els.error.classList.remove("show"); }
 
@@ -1528,10 +1539,14 @@ function setStep(i) { els.tabs.forEach((t, idx) => t.classList.toggle("active", 
    the user uploads instead of captures (and any time state changes).
    0 = photos, 1 = height, 2 = 3D result / processing */
 function refreshStep() {
-  if (state.busy || state.lastResult) return setStep(2);
+  if (state.busy || state.lastResult) { setStep(2); return; }
   const bothPhotos = state.photos.front && state.photos.side;
-  if (!bothPhotos) return setStep(0);
-  return setStep(1);
+  const h = readHeight();
+  const heightOk = h !== null && typeof h !== "object";
+  const ready = bothPhotos && heightOk && els.consent.checked;
+  els.submit.disabled = !ready;
+  if (!bothPhotos) { setStep(0); return; }
+  setStep(1);
 }
 function setStatus(id, phase) {
   const li = els.st[id]; li.classList.remove("doing", "done");
@@ -1864,6 +1879,7 @@ if (tipBtn) {
 /* Render saved scans on page load, before any interaction. */
 renderHistory();
 setUnit("cm");
+refreshStep();   // sets initial button disabled state
 </script>
 </body>
 </html>
