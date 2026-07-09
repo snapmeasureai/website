@@ -469,12 +469,13 @@
       margin: 12px 16px 0; background: rgba(255,122,102,.1); border: 1px solid rgba(255,122,102,.4);
       color: #FFB0A3; border-radius: 8px; padding: 12px 14px; font-size: 15px;
     }
-    /* Teal outline on the stage itself = the framing guide.
-       Simple, no pseudo-elements, fills the whole camera view. */
+    /* Teal border box around the camera video — simple, visible, gives the modal
+       some pop against the dark background. outline was sometimes not rendering
+       on certain browsers/GPUs, so using border on a wrapper instead. */
     .cam-stage {
       position: relative; flex: 1; min-height: 0; background: #000;
-      outline: 3px solid var(--teal);
-      outline-offset: -3px;
+      border: 3px solid var(--teal);
+      box-shadow: 0 0 18px rgba(10,191,163,.35), 0 0 0 1px rgba(10,191,163,.15);
     }
     @media (min-width: 761px) { .cam-stage { flex: none; height: 58vh; } }
     #camVideo { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
@@ -1044,7 +1045,7 @@
       <button type="button" class="cam-close" id="camClose" aria-label="Close camera">&#215;</button>
     </div>
     <div class="cam-error" id="camError" hidden></div>
-    <span class="cam-guide-label" id="camGuideLabel">Fit your full body in frame</span>
+    <!-- <span class="cam-guide-label" id="camGuideLabel">Fit your full body in frame</span> -->
     <div class="cam-stage">
       <video id="camVideo" autoplay playsinline muted></video>
       <div class="cam-overlay">
@@ -1101,7 +1102,7 @@ const CONFIG = {
 
   IMAGE: {
     maxDimension: 720,        // longest side; resolution beyond this doesn't
-    jpegQuality: 0.92,        // improve reconstruction accuracy
+    jpegQuality: 1.0,         // visually lossless
     maxUploadBytesRaw: 25 * 1024 * 1024,
   },
 
@@ -1569,6 +1570,8 @@ els.form.addEventListener("submit", async (e) => {
   setStep(1);
   setStatus("resize", "done");
   setStatus("upload", "doing");
+
+  const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), CONFIG.REQUEST_TIMEOUT_MS);
 
   try {
@@ -1710,6 +1713,12 @@ els.newScanBtn.addEventListener("click", () => {
   state.lastResult = null;
   els.fileFront.value = ""; els.fileSide.value = "";
   zoneRenderers.front(); zoneRenderers.side();
+  // Clear height fields
+  els.heightCm.value = "";
+  els.heightFt.value = "";
+  els.heightIn.value = "";
+  // Uncheck consent
+  els.consent.checked = false;
   /* Blank the iframe so the next srcdoc assignment always triggers a fresh load */
   els.resultFrame.srcdoc = "";
   hideError();
