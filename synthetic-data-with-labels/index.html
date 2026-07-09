@@ -540,6 +540,9 @@
       .tri-panel-label:last-child { border-bottom: 1px solid var(--border); }
     }
 
+    /* ---- SCROLL OFFSET — accounts for sticky 64px nav ---- */
+    [id] { scroll-margin-top: 80px; }
+
     @media (prefers-reduced-motion: reduce) {
       .hero__ticker-item { animation-play-state: paused; opacity: 0; }
       .hero__ticker-item:nth-child(1) { opacity: 1; }
@@ -580,8 +583,8 @@
       <li><a href="#faqs">FAQs</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="mailto:info@snapmeasureai.com" class="btn btn--primary">Contact us →</a>
-      <a href="#contact" class="btn btn--outline">Get in touch</a>
+      <a href="#contact" class="btn btn--primary">Contact us →</a>
+      <a href="#how-it-works" class="btn btn--outline">How it works</a>
       <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
     </div>
   </div>
@@ -595,8 +598,8 @@
   <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
   <a href="https://snapmeasureai.com/motion-capture-from-video" style="padding-left:12px;" onclick="toggleMenu()">AI motion capture</a>
   <a href="https://snapmeasureai.com/synthetic-data-with-labels/" style="padding-left:12px;color:var(--teal);" onclick="toggleMenu()">Synthetic data (this page)</a>
-  <a href="mailto:info@snapmeasureai.com" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;">Contact us →</a>
-  <a href="#contact" class="btn btn--outline" style="text-align:center;" onclick="toggleMenu()">Get in touch</a>
+  <a href="#contact" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;" onclick="toggleMenu()">Contact us →</a>
+  <a href="#how-it-works" class="btn btn--outline" style="text-align:center;" onclick="toggleMenu()">How it works</a>
 </div>
 
 <!-- ==================== HERO ==================== -->
@@ -634,7 +637,7 @@
     </div>
 
     <div class="hero__actions">
-      <a href="mailto:info@snapmeasureai.com" class="btn btn--scan">Get in touch →</a>
+      <a href="#contact" class="btn btn--scan">Get in touch →</a>
       <a href="#how-it-works" class="btn btn--api">See how it works</a>
     </div>
 
@@ -1004,7 +1007,7 @@
     var handleB     = document.getElementById('handleB');
     var hint        = document.getElementById('triHint');
 
-    var posA = 47.0;   /* left handle — right edge of model overlay */
+    var posA = 46.5;   /* left handle — right edge of model overlay */
     var posB = 57.5;   /* right handle — left edge of labels overlay */
     var active      = null;
     var hasDragged  = false;
