@@ -390,8 +390,8 @@
     }
     .form-error.show { display: block; }
 
-    /* Processing status — steps only ever go pending → done (checkmark).
-       The spinner lives on the submit button itself while busy. */
+    /* Processing status — steps spin while active, get a checkmark when done.
+       The button also shows a spinner the whole time (belt-and-suspenders). */
     .status { display: none; margin-top: 18px; border-top: 1px solid var(--card-line); padding-top: 16px; }
     .status.show { display: block; }
     .status ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -403,6 +403,13 @@
       content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%;
       background: transparent; border: 2px solid rgba(16,32,48,.18);
     }
+    .status li.doing { color: var(--card-ink); font-weight: 600; }
+    .status li.doing::before {
+      border-color: rgba(10,191,163,.25);
+      border-top-color: var(--teal);
+      animation: stepSpin 0.75s linear infinite;
+    }
+    @keyframes stepSpin { to { transform: rotate(360deg); } }
     .status li.done { color: var(--card-ink); font-weight: 600; }
     .status li.done::before {
       background: var(--teal); border-color: var(--teal);
@@ -1037,7 +1044,7 @@
       <button type="button" class="cam-close" id="camClose" aria-label="Close camera">&#215;</button>
     </div>
     <div class="cam-error" id="camError" hidden></div>
-    <span class="cam-guide-label" id="camGuideLabel">Fit your full body in frame</span>
+    <!-- <span class="cam-guide-label" id="camGuideLabel">Fit your full body in frame</span> -->
     <div class="cam-stage">
       <video id="camVideo" autoplay playsinline muted></video>
       <div class="cam-overlay">
@@ -1094,7 +1101,7 @@ const CONFIG = {
 
   IMAGE: {
     maxDimension: 720,        // longest side; resolution beyond this doesn't
-    jpegQuality: 0.92,        // improve reconstruction accuracy
+    jpegQuality: 1.00,        // improve reconstruction accuracy
     maxUploadBytesRaw: 25 * 1024 * 1024,
   },
 
@@ -1561,8 +1568,7 @@ els.form.addEventListener("submit", async (e) => {
   els.status.classList.add("show");
   setStep(1);
   setStatus("resize", "done");
-
-  const controller = new AbortController();
+  setStatus("upload", "doing");
   const timeout = setTimeout(() => controller.abort(), CONFIG.REQUEST_TIMEOUT_MS);
 
   try {
@@ -1572,7 +1578,7 @@ els.form.addEventListener("submit", async (e) => {
       signal: controller.signal,
     });
     setStatus("upload", "done");
-    setStatus("build", "doing");  // no-op now but harmless; kept for future use
+    setStatus("build", "doing");
 
     if (!res.ok) {
       const detail = await res.text().catch(() => "");
