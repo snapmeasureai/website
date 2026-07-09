@@ -408,6 +408,9 @@
       /* video-grid already single column */
     }
 
+    /* ---- SCROLL OFFSET — accounts for sticky 64px nav ---- */
+    [id] { scroll-margin-top: 80px; }
+
     @media (prefers-reduced-motion: reduce) {
       .hero__ticker-item { animation-play-state: paused; opacity: 0; }
       .hero__ticker-item:nth-child(1) { opacity: 1; }
@@ -448,8 +451,8 @@
       <li><a href="#faqs">FAQs</a></li>
     </ul>
     <div class="nav__cta">
-      <a href="mailto:info@snapmeasureai.com" class="btn btn--primary">Contact us →</a>
-      <a href="#contact" class="btn btn--outline">Get in touch</a>
+      <a href="#contact" class="btn btn--primary">Contact us →</a>
+      <a href="#how-it-works" class="btn btn--outline">How it works</a>
       <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
     </div>
   </div>
@@ -463,8 +466,8 @@
   <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
   <a href="https://snapmeasureai.com/motion-capture-from-video" style="padding-left:12px;color:var(--teal);" onclick="toggleMenu()">AI motion capture (this page)</a>
   <a href="https://snapmeasureai.com/synthetic-data-with-labels" style="padding-left:12px;" onclick="toggleMenu()">Synthetic data</a>
-  <a href="mailto:info@snapmeasureai.com" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;">Contact us →</a>
-  <a href="#contact" class="btn btn--outline" style="text-align:center;" onclick="toggleMenu()">Get in touch</a>
+  <a href="#contact" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;" onclick="toggleMenu()">Contact us →</a>
+  <a href="#how-it-works" class="btn btn--outline" style="text-align:center;" onclick="toggleMenu()">How it works</a>
 </div>
 
 <!-- ==================== HERO ==================== -->
@@ -501,7 +504,7 @@
     </div>
 
     <div class="hero__actions">
-      <a href="mailto:info@snapmeasureai.com" class="btn btn--scan">Get in touch →</a>
+      <a href="#contact" class="btn btn--scan">Get in touch →</a>
       <a href="#how-it-works" class="btn btn--api">See how it works</a>
     </div>
 
@@ -577,7 +580,6 @@
       </div>
       <div>
         <video webkit-playsinline playsinline controls preload="none"
-          poster="/assets/images/pose_tracking_and_gait_analysis.jpg"
           style="width:100%;max-height:480px;object-fit:contain;display:block;">
           <source src="/img/pose_tracking_and_gait_analysis.mp4" type="video/mp4">
         </video>
