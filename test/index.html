@@ -391,7 +391,8 @@
     }
     .form-error.show { display: block; }
 
-    /* Processing status — single RAF-driven spinner, zero CSS animation dependency */
+    /* Processing status — RAF-driven spinner + three step pills.
+       pending=muted gray, doing=amber (active), done=teal checkmark */
     .status { display: none; margin-top: 18px; border-top: 1px solid var(--card-line); padding-top: 16px; }
     .status.show { display: flex; align-items: center; gap: 14px; }
     .raf-spinner {
@@ -400,14 +401,20 @@
       border-top-color: var(--teal);
       box-sizing: border-box;
     }
-    .status-lines { display: grid; gap: 4px; }
+    .status-lines { display: grid; gap: 6px; }
     .status-current { font-size: 14.5px; font-weight: 600; color: var(--card-ink); }
-    .status-steps { display: flex; gap: 10px; flex-wrap: wrap; }
+    .status-steps { display: flex; gap: 8px; flex-wrap: wrap; }
     .status-steps span {
-      font-size: 13px; color: var(--card-muted);
-      display: flex; align-items: center; gap: 5px;
+      font-size: 12.5px; color: var(--card-muted);
+      padding: 2px 8px; border-radius: 100px;
+      border: 1px solid rgba(16,32,48,.14);
     }
-    .status-steps span.done { color: var(--teal); }
+    .status-steps span.doing {
+      color: #7A5000; background: #FFF3CC; border-color: #F0C842; font-weight: 600;
+    }
+    .status-steps span.done {
+      color: #0A6653; background: rgba(10,191,163,.12); border-color: rgba(10,191,163,.4);
+    }
     .status-steps span.done::before { content: "✓ "; }
 
     /* Spinner on the submit button while processing */
@@ -527,7 +534,7 @@
       color: var(--teal); text-shadow: 0 0 40px var(--teal-glow);
     }
     .cam-side-flash p {
-      font-size: clamp(40px, 8vw, 60px); color: var(--text-2); margin: 0;
+      font-size: clamp(20px, 5vw, 30px); color: var(--text-2); margin: 0;
     }
 
     .cam-count {
@@ -1569,22 +1576,28 @@ function startSpinner() {
 }
 function stopSpinner() {
   if (_rafId) { cancelAnimationFrame(_rafId); _rafId = null; }
-  if (els.rafSpinner) els.rafSpinner.style.transform = "";
+  if (els.rafSpinner) {
+    els.rafSpinner.style.transform = "";
+    /* Reset to fully gray so it doesn't sit there with teal showing */
+    els.rafSpinner.style.borderTopColor = "rgba(16,32,48,.15)";
+  }
 }
 
 const STATUS_LABELS = {
-  resize: "Preparing photos",
+  resize: "Preparing photos…",
   upload: "Sending securely…",
   build:  "Reconstructing 3D body…",
 };
 function setStatus(id, phase) {
   const span = els.st[id];
   if (!span) return;
-  span.classList.toggle("done", phase === "done");
-  if (phase === "doing" && els.statusCurrent) {
-    els.statusCurrent.textContent = STATUS_LABELS[id] || "Working…";
+  span.classList.remove("doing", "done");
+  if (phase === "doing") {
+    span.classList.add("doing");
+    if (els.statusCurrent) els.statusCurrent.textContent = STATUS_LABELS[id] || "Working…";
+  } else if (phase === "done") {
+    span.classList.add("done");
   }
-  if (phase === "") span.classList.remove("done");
 }
 
 /* Derive current step from form state so the stepper reflects reality when
