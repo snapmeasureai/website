@@ -1131,8 +1131,11 @@ const CONFIG = {
   MEASUREMENT_UNIT: "cm",
 
   HISTORY_KEY: "smai_demo_scans",
-  HISTORY_LIMIT: 5,           // viewer blobs are big; localStorage ≈ 5 MB.
-                              // Outgrowing it? Move to IndexedDB.
+  HISTORY_LIMIT: 5,           // each three.js viewer is ~800 KB; 5 scans ≈ 4 MB,
+                              // safely within Safari's 5 MB localStorage quota.
+                              // Chrome/Firefox allow ~10 MB so could hold ~10 scans,
+                              // but 5 keeps it cross-browser safe. QuotaExceeded is
+                              // caught and handled gracefully if the limit is hit.
 };
 
 /* ── DOM handles ─────────────────────────────────────────────────────── */
