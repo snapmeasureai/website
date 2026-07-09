@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
-
+  <!-- End Google Tag Manager -->
   <title>SnapMeasureAI Demo: 3D Body Scan | 2 Photos, 10 Seconds</title>
   <meta name="author" content="SnapMeasureAI">
   <meta name="description" content="Try the SnapMeasureAI live demo — take two smartphone photos and get a precise 3D body model and 100+ measurements in about 10 seconds. Save scans on your device and compare progress over time. Free, no account.">
@@ -436,15 +434,10 @@
       width: 20px; height: 20px; border-radius: 50%;
       border: 2.5px solid rgba(5,14,12,.3);
       border-top-color: #050E0C;
-      will-change: transform;
-      animation: btnSpin 0.7s linear infinite;
-      animation-play-state: running;
+      box-sizing: border-box;
     }
     .btn-primary.busy .btn-spinner { display: block; }
-    @keyframes btnSpin {
-      from { transform: translateZ(0) rotate(0deg); }
-      to   { transform: translateZ(0) rotate(360deg); }
-    }
+    @keyframes btnSpin { to { transform: rotate(360deg); } }
 
     /* ============================================================
        GUIDED CAMERA CAPTURE
@@ -1580,9 +1573,12 @@ let _rafId = null, _rafAngle = 0;
 function startSpinner() {
   if (_rafId) return;
   const el = els.rafSpinner;
+  const btn = els.spinner;  // the btn-spinner inside the submit button
   function tick() {
     _rafAngle = (_rafAngle + 4) % 360;
-    el.style.transform = "rotate(" + _rafAngle + "deg)";
+    const t = "rotate(" + _rafAngle + "deg)";
+    if (el) el.style.transform = t;
+    if (btn && btn.style.display !== "none") btn.style.transform = t;
     _rafId = requestAnimationFrame(tick);
   }
   _rafId = requestAnimationFrame(tick);
@@ -1593,6 +1589,7 @@ function stopSpinner() {
     els.rafSpinner.style.transform = "";
     els.rafSpinner.style.display = "none";
   }
+  if (els.spinner) els.spinner.style.transform = "";
 }
 function resetSpinner() {
   if (els.rafSpinner) els.rafSpinner.style.display = "";
