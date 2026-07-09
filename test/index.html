@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
+
   <title>SnapMeasureAI Demo: 3D Body Scan | 2 Photos, 10 Seconds</title>
   <meta name="author" content="SnapMeasureAI">
   <meta name="description" content="Try the SnapMeasureAI live demo — take two smartphone photos and get a precise 3D body model and 100+ measurements in about 10 seconds. Save scans on your device and compare progress over time. Free, no account.">
@@ -689,6 +698,10 @@
   </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3T6T8SX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- ================= HEADER ================= -->
 <header class="site-header">
@@ -1576,7 +1589,13 @@ function startSpinner() {
 }
 function stopSpinner() {
   if (_rafId) { cancelAnimationFrame(_rafId); _rafId = null; }
-  if (els.rafSpinner) els.rafSpinner.style.transform = "";
+  if (els.rafSpinner) {
+    els.rafSpinner.style.transform = "";
+    els.rafSpinner.style.display = "none";
+  }
+}
+function resetSpinner() {
+  if (els.rafSpinner) els.rafSpinner.style.display = "";
 }
 
 const STATUS_LABELS = {
@@ -1648,6 +1667,7 @@ els.form.addEventListener("submit", async (e) => {
   ["resize", "upload", "build"].forEach(k => setStatus(k, ""));
   if (els.statusCurrent) els.statusCurrent.textContent = "Working…";
   els.status.classList.add("show");
+  resetSpinner();
   startSpinner();
   setStep(1);
   setStatus("resize", "done");
@@ -1809,6 +1829,7 @@ els.newScanBtn.addEventListener("click", () => {
   setStep(0);
   els.status.classList.remove("show");
   stopSpinner();
+  resetSpinner();
   if (els.statusCurrent) els.statusCurrent.textContent = "Working\u2026";
   ["resize","upload","build"].forEach(k => setStatus(k, ""));
   els.result.classList.remove("show");
