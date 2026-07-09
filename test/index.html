@@ -492,7 +492,7 @@
     @media (min-width: 761px) { .cam-stage { flex: none; height: 58vh; } }
     #camVideo {
       width: 100%; height: 100%; object-fit: contain; background: #000; display: block;
-      /* Suppress native browser video controls and iOS tap-to-pause overlay */
+      pointer-events: none;   /* taps pass through to the overlay, never pause the video */
       -webkit-media-controls: none;
     }
     #camVideo::-webkit-media-controls { display: none !important; }
@@ -1340,10 +1340,17 @@ function camCountdown(seconds, onDone) {
 async function startStream(deviceId) {
   stopStream();
   const constraints = deviceId
-    ? { video: { deviceId: { exact: deviceId }, width: { ideal: 1280 }, height: { ideal: 720 } } }
-    : { video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } } };
+    ? { video: { deviceId: { exact: deviceId }, width: { ideal: 1080 } } }
+    : { video: { facingMode: "user", width: { ideal: 1080 } } };
   cam.stream = await navigator.mediaDevices.getUserMedia(constraints);
   els.cam.video.srcObject = cam.stream;
+
+  /* Prevent the native pause overlay: if the browser pauses the video
+     (e.g. user taps on it, or iOS briefly pauses on stream start),
+     immediately resume. The play icon only appears when paused. */
+  els.cam.video.onpause = () => {
+    if (cam.active) els.cam.video.play().catch(() => {});
+  };
 
   const track = cam.stream.getVideoTracks()[0];
   const settings = track.getSettings();
