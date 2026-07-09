@@ -1044,7 +1044,7 @@
       <button type="button" class="cam-close" id="camClose" aria-label="Close camera">&#215;</button>
     </div>
     <div class="cam-error" id="camError" hidden></div>
-    <!-- <span class="cam-guide-label" id="camGuideLabel">Fit your full body in frame</span> -->
+    <span class="cam-guide-label" id="camGuideLabel">Fit your full body in frame</span>
     <div class="cam-stage">
       <video id="camVideo" autoplay playsinline muted></video>
       <div class="cam-overlay">
@@ -1101,7 +1101,7 @@ const CONFIG = {
 
   IMAGE: {
     maxDimension: 720,        // longest side; resolution beyond this doesn't
-    jpegQuality: 1.00,        // improve reconstruction accuracy
+    jpegQuality: 0.92,        // improve reconstruction accuracy
     maxUploadBytesRaw: 25 * 1024 * 1024,
   },
 
