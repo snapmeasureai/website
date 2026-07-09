@@ -566,7 +566,12 @@
     .result-frame-wrap { border: 1px solid var(--border-hi); border-radius: var(--radius-lg); overflow: hidden; background: #000; }
     #resultFrame { display: block; width: 100%; height: min(78vh, 760px); border: 0; background: #000; }
 
-    .measure-panel { margin-top: 18px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .measure-hint {
+      text-align: center; padding: 8px 0 2px;
+      font-size: 13px; font-weight: 600; color: var(--teal);
+      letter-spacing: .04em; cursor: pointer;
+    }
+    .measure-hint:hover { opacity: .8; } background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
     .measure-panel[hidden] { display: none; }
     .measure-panel summary {
       cursor: pointer; list-style: none; padding: 16px 20px; font-weight: 700; font-size: 15.5px;
@@ -848,7 +853,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <iframe id="resultFrame" title="Interactive 3D body scan and measurements" sandbox="allow-scripts"></iframe>
     </div>
 
-    <details class="measure-panel" id="measurePanel" hidden open>
+    <div class="measure-hint" id="measureHint" onclick="document.getElementById('measurePanel').open=true;this.style.display='none'">Measurements&ensp;&#8595;</div>
+
+    <details class="measure-panel" id="measurePanel" hidden>
       <summary>
         Measurement data
         <span class="count-tag" id="measureCount"></span>
@@ -1159,7 +1166,7 @@ const els = {
   tabs: [$("step1Tab"), $("step2Tab"), $("step3Tab")],
   result: $("result"), resultFrame: $("resultFrame"), resultMeta: $("resultMeta"),
   measurePanel: $("measurePanel"), measureGrid: $("measureGrid"),
-  measureCount: $("measureCount"), measureNote: $("measureNote"), copyMeasureBtn: $("copyMeasureBtn"),
+  measureCount: $("measureCount"), measureNote: $("measureNote"), measureHint: $("measureHint"), copyMeasureBtn: $("copyMeasureBtn"),
   saveBtn: $("saveBtn"), downloadBtn: $("downloadBtn"), newScanBtn: $("newScanBtn"),
   savedPanel: $("savedPanel"), savedList: $("savedList"), savedCountLabel: $("savedCountLabel"),
   resultHistory: $("resultHistory"), rhList: $("rhList"),
@@ -1969,6 +1976,13 @@ if (tipBtn) {
 renderHistory();
 setUnit("cm");
 refreshStep();   // sets initial button disabled state
+
+/* Sync the "Measurements ↓" hint with the panel's open state */
+if (els.measurePanel && els.measureHint) {
+  els.measurePanel.addEventListener("toggle", () => {
+    els.measureHint.style.display = els.measurePanel.open ? "none" : "";
+  });
+}
 </script>
 </body>
 </html>
