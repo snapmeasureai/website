@@ -1616,6 +1616,7 @@ els.form.addEventListener("submit", async (e) => {
     state.lastResult = {
       html,
       measurements: parseMeasurements(env && env.data),
+      measureUnit: heightLabel.endsWith("in") ? "in" : "cm",
       heightLabel, dateISO: new Date().toISOString(),
     };
     renderResult(state.lastResult);
@@ -1650,13 +1651,7 @@ function normalizeMeasurements(m) {
 }
 
 function renderResult(r, { scroll = true } = {}) {
-  /* The three.js viewer's init scripts only run on a fresh document load.
-     Setting srcdoc directly on an already-loaded iframe can fail silently
-     (black screen) because the browser skips the navigation if the content
-     looks the same or if the previous document hasn't fully unloaded.
-     Fix: set srcdoc to "" first, wait for that blank page to finish loading,
-     then set the real content — guaranteeing a new document each time.
-     A 120ms fallback fires in case the load event is missed. */
+  /* The three.js viewer's init scripts only run on a fresh document load. */
   const frame = els.resultFrame;
   let done = false;
   const applyContent = () => {
@@ -1669,9 +1664,9 @@ function renderResult(r, { scroll = true } = {}) {
     applyContent();
   });
   frame.srcdoc = "";
-  setTimeout(applyContent, 120);   // fallback
+  setTimeout(applyContent, 120);
 
-  renderMeasurements(r.measurements);
+  renderMeasurements(r.measurements, r.measureUnit || "cm");
   els.resultMeta.textContent =
     new Date(r.dateISO).toLocaleString() + " \u00B7 " + r.heightLabel;
   els.result.classList.add("show");
@@ -1679,14 +1674,15 @@ function renderResult(r, { scroll = true } = {}) {
   if (scroll) setTimeout(() => els.result.scrollIntoView({ behavior: "smooth" }), 180);
 }
 
-function renderMeasurements(m) {
+function renderMeasurements(m, unit) {
+  unit = unit || "cm";
   const entries = normalizeMeasurements(m);
   els.measurePanel.hidden = entries.length === 0;
   if (!entries.length) return;
   els.measureCount.textContent = entries.length + " values";
   els.measureNote.textContent =
     "This demo returns " + entries.length +
-    " measurements — height first, then alphabetical. Because the output is a full 3D body model, " +
+    " measurements in " + unit + " — height first, then alphabetical. Because the output is a full 3D body model, " +
     "any circumference or length between any points on the model can be generated — " +
     "API partners define the measurement set their product needs.";
   els.measureGrid.innerHTML = "";
@@ -1696,7 +1692,7 @@ function renderMeasurements(m) {
     const v = document.createElement("div"); v.className = "m-val";
     if (typeof val === "number") {
       v.textContent = val.toFixed(1);
-      const u = document.createElement("small"); u.textContent = CONFIG.MEASUREMENT_UNIT;
+      const u = document.createElement("small"); u.textContent = unit;
       v.appendChild(u);
     } else {
       v.textContent = String(val);
@@ -1707,11 +1703,12 @@ function renderMeasurements(m) {
 }
 
 els.copyMeasureBtn.addEventListener("click", async () => {
-  const m = state.lastResult && state.lastResult.measurements;
-  if (!m) return;
-  const normalized = Object.fromEntries(normalizeMeasurements(m));
+  const r = state.lastResult;
+  if (!r) return;
+  const normalized = Object.fromEntries(normalizeMeasurements(r.measurements));
+  const payload = { unit: r.measureUnit || "cm", measurements: normalized };
   try {
-    await navigator.clipboard.writeText(JSON.stringify(normalized, null, 2));
+    await navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
     els.copyMeasureBtn.textContent = "Copied \u2713";
   } catch (e) { els.copyMeasureBtn.textContent = "Copy failed"; }
   setTimeout(() => { els.copyMeasureBtn.textContent = "Copy as JSON"; }, 2000);
