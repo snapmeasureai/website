@@ -1113,7 +1113,7 @@ const CONFIG = {
   REQUEST_TIMEOUT_MS: 120000,
 
   IMAGE: {
-    maxDimension: 720,        // longest side; resolution beyond this doesn't
+    maxDimension: 800,        // longest side — matches the reference API cap
     jpegQuality: 1.0,         // visually lossless
     maxUploadBytesRaw: 25 * 1024 * 1024,
   },
@@ -1205,7 +1205,7 @@ function readHeight() {
 }
 
 /* ============================================================================
-   IMAGE PIPELINE — downscale only (720px longest side), no visible quality
+   IMAGE PIPELINE — downscale only (800px longest side), no visible quality
    loss (JPEG q=1.0). Modern browsers apply EXIF orientation on decode.
    ========================================================================== */
 function scaleToJpeg(source, srcW, srcH) {
@@ -1333,8 +1333,8 @@ function camCountdown(seconds, onDone) {
 async function startStream(deviceId) {
   stopStream();
   const constraints = deviceId
-    ? { video: { deviceId: { exact: deviceId }, width: { ideal: 1280 }, height: { ideal: 720 } } }
-    : { video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } } };
+    ? { video: { deviceId: { exact: deviceId }, width: { ideal: 1600 }, height: { ideal: 1200 } } }
+    : { video: { facingMode: "user", width: { ideal: 1600 }, height: { ideal: 1200 } } };
   cam.stream = await navigator.mediaDevices.getUserMedia(constraints);
   els.cam.video.srcObject = cam.stream;
 
