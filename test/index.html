@@ -189,7 +189,7 @@
     /* ============================================================
        HERO — three short lines, then straight into the scan card
        ============================================================ */
-    .hero-lite { padding: 16px 0 8px; text-align: center; }
+    .hero-lite { padding: 44px 0 8px; text-align: center; }
     .hero__badge {
       display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid var(--teal-glow); background: var(--teal-dim);
@@ -391,35 +391,24 @@
     }
     .form-error.show { display: block; }
 
-    /* Processing status — real DOM spinner elements, not ::before pseudo-elements.
-       Mobile Safari does not reliably animate ::before on light-background cards. */
+    /* Processing status — single RAF-driven spinner, zero CSS animation dependency */
     .status { display: none; margin-top: 18px; border-top: 1px solid var(--card-line); padding-top: 16px; }
-    .status.show { display: block; }
-    .status ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-    .status li {
-      font-size: 14.5px; color: var(--card-muted);
-      display: flex; align-items: center; gap: 12px;
-    }
-    .step-icon {
-      flex: none; width: 22px; height: 22px; border-radius: 50%;
-      border: 2.5px solid rgba(16,32,48,.18);
-      background: transparent; display: block;
+    .status.show { display: flex; align-items: center; gap: 14px; }
+    .raf-spinner {
+      flex: none; width: 26px; height: 26px; border-radius: 50%;
+      border: 3px solid rgba(16,32,48,.15);
+      border-top-color: var(--teal);
       box-sizing: border-box;
     }
-    .status li.doing { color: var(--card-ink); font-weight: 600; }
-    .status li.doing .step-icon {
-      border-color: rgba(10,191,163,.25);
-      border-top-color: var(--teal);
-      animation: stepSpin 0.75s linear infinite;
+    .status-lines { display: grid; gap: 4px; }
+    .status-current { font-size: 14.5px; font-weight: 600; color: var(--card-ink); }
+    .status-steps { display: flex; gap: 10px; flex-wrap: wrap; }
+    .status-steps span {
+      font-size: 13px; color: var(--card-muted);
+      display: flex; align-items: center; gap: 5px;
     }
-    @keyframes stepSpin { to { transform: rotate(360deg); } }
-    .status li.done { color: var(--card-ink); font-weight: 600; }
-    .status li.done .step-icon {
-      background: var(--teal); border-color: var(--teal);
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M4 10.5l4 4 8-8'/></svg>");
-      background-repeat: no-repeat; background-position: center; background-size: 14px;
-      animation: none;
-    }
+    .status-steps span.done { color: var(--teal); }
+    .status-steps span.done::before { content: "✓ "; }
 
     /* Spinner on the submit button while processing */
     .btn-primary.busy {
@@ -538,7 +527,7 @@
       color: var(--teal); text-shadow: 0 0 40px var(--teal-glow);
     }
     .cam-side-flash p {
-      font-size: clamp(20px, 5vw, 60px); color: var(--text-2); margin: 0;
+      font-size: clamp(40px, 8vw, 60px); color: var(--text-2); margin: 0;
     }
 
     .cam-count {
@@ -559,7 +548,7 @@
     /* ============================================================
        RESULT SECTION
        ============================================================ */
-    #result { display: none; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 64px; margin-bottom: 12px; scroll-margin-top: 20px; }
+    #result { display: none; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 64px; margin-bottom: 12px; scroll-margin-top: 72px; }
     #result.show { display: block; }
     .result-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 18px; }
     .result-bar h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
@@ -810,11 +799,15 @@
       <button type="submit" class="btn btn-primary" id="submitBtn"><span class="btn-spinner" id="btnSpinner"></span>Generate my 3D scan</button>
 
       <div class="status" id="statusPanel" aria-live="polite">
-        <ol>
-          <li id="stResize"><span class="step-icon"></span>Preparing photos on your device</li>
-          <li id="stUpload"><span class="step-icon"></span>Sending securely to the measurement engine</li>
-          <li id="stBuild"><span class="step-icon"></span>Reconstructing your 3D body &amp; measurements</li>
-        </ol>
+        <div class="raf-spinner" id="rafSpinner"></div>
+        <div class="status-lines">
+          <div class="status-current" id="statusCurrent">Working…</div>
+          <div class="status-steps">
+            <span id="stResize">Preparing photos</span>
+            <span id="stUpload">Sending</span>
+            <span id="stBuild">Reconstructing</span>
+          </div>
+        </div>
       </div>
     </form>
   </div>
@@ -1148,7 +1141,7 @@ const els = {
   heightFt: $("heightFt"), heightIn: $("heightIn"),
   unitCm: $("unitCm"), unitFt: $("unitFt"),
   consent: $("consent"),
-  status: $("statusPanel"),
+  status: $("statusPanel"), rafSpinner: $("rafSpinner"), statusCurrent: $("statusCurrent"),
   st: { resize: $("stResize"), upload: $("stUpload"), build: $("stBuild") },
   tabs: [$("step1Tab"), $("step2Tab"), $("step3Tab")],
   result: $("result"), resultFrame: $("resultFrame"), resultMeta: $("resultMeta"),
@@ -1561,6 +1554,39 @@ function buildPayload(heightLabel) {
 
 function setStep(i) { els.tabs.forEach((t, idx) => t.classList.toggle("active", idx === i)); }
 
+/* RAF-driven spinner — works on all browsers/devices regardless of CSS animation support.
+   Rotates a border-top div using requestAnimationFrame so the OS cannot stall it. */
+let _rafId = null, _rafAngle = 0;
+function startSpinner() {
+  if (_rafId) return;
+  const el = els.rafSpinner;
+  function tick() {
+    _rafAngle = (_rafAngle + 4) % 360;
+    el.style.transform = "rotate(" + _rafAngle + "deg)";
+    _rafId = requestAnimationFrame(tick);
+  }
+  _rafId = requestAnimationFrame(tick);
+}
+function stopSpinner() {
+  if (_rafId) { cancelAnimationFrame(_rafId); _rafId = null; }
+  if (els.rafSpinner) els.rafSpinner.style.transform = "";
+}
+
+const STATUS_LABELS = {
+  resize: "Preparing photos",
+  upload: "Sending securely…",
+  build:  "Reconstructing 3D body…",
+};
+function setStatus(id, phase) {
+  const span = els.st[id];
+  if (!span) return;
+  span.classList.toggle("done", phase === "done");
+  if (phase === "doing" && els.statusCurrent) {
+    els.statusCurrent.textContent = STATUS_LABELS[id] || "Working…";
+  }
+  if (phase === "") span.classList.remove("done");
+}
+
 /* Derive current step from form state so the stepper reflects reality when
    the user uploads instead of captures (and any time state changes).
    0 = photos, 1 = height, 2 = 3D result / processing */
@@ -1611,7 +1637,9 @@ els.form.addEventListener("submit", async (e) => {
   els.submit.querySelector(".btn-spinner") && (els.submit.querySelector(".btn-spinner").style.display = "");
   // Reset status indicators to blank before each run
   ["resize", "upload", "build"].forEach(k => setStatus(k, ""));
+  if (els.statusCurrent) els.statusCurrent.textContent = "Working…";
   els.status.classList.add("show");
+  startSpinner();
   setStep(1);
   setStatus("resize", "done");
   setStatus("upload", "doing");
@@ -1662,6 +1690,7 @@ els.form.addEventListener("submit", async (e) => {
     state.busy = false;
     els.submit.disabled = false;
     els.submit.classList.remove("busy");
+    stopSpinner();
   }
 });
 
@@ -1766,6 +1795,7 @@ els.newScanBtn.addEventListener("click", () => {
   hideError();
   setStep(0);
   els.status.classList.remove("show");
+  stopSpinner();
   ["resize","upload","build"].forEach(k => setStatus(k, ""));
   els.result.classList.remove("show");
   els.resultHistory.hidden = true;
