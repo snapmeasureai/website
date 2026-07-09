@@ -391,8 +391,8 @@
     }
     .form-error.show { display: block; }
 
-    /* Processing status — steps spin while active, get a checkmark when done.
-       The button also shows a spinner the whole time (belt-and-suspenders). */
+    /* Processing status — real DOM spinner elements, not ::before pseudo-elements.
+       Mobile Safari does not reliably animate ::before on light-background cards. */
     .status { display: none; margin-top: 18px; border-top: 1px solid var(--card-line); padding-top: 16px; }
     .status.show { display: block; }
     .status ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -400,28 +400,25 @@
       font-size: 14.5px; color: var(--card-muted);
       display: flex; align-items: center; gap: 12px;
     }
-    .status li::before {
-      content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%;
-      background: transparent; border: 2px solid rgba(16,32,48,.18);
+    .step-icon {
+      flex: none; width: 22px; height: 22px; border-radius: 50%;
+      border: 2.5px solid rgba(16,32,48,.18);
+      background: transparent; display: block;
+      box-sizing: border-box;
     }
     .status li.doing { color: var(--card-ink); font-weight: 600; }
-    .status li.doing::before {
+    .status li.doing .step-icon {
       border-color: rgba(10,191,163,.25);
       border-top-color: var(--teal);
-      will-change: transform;
-      transform: translateZ(0);   /* force GPU compositing layer */
       animation: stepSpin 0.75s linear infinite;
-      animation-play-state: running;
     }
-    @keyframes stepSpin {
-      from { transform: translateZ(0) rotate(0deg); }
-      to   { transform: translateZ(0) rotate(360deg); }
-    }
+    @keyframes stepSpin { to { transform: rotate(360deg); } }
     .status li.done { color: var(--card-ink); font-weight: 600; }
-    .status li.done::before {
+    .status li.done .step-icon {
       background: var(--teal); border-color: var(--teal);
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M4 10.5l4 4 8-8'/></svg>");
       background-repeat: no-repeat; background-position: center; background-size: 14px;
+      animation: none;
     }
 
     /* Spinner on the submit button while processing */
@@ -814,9 +811,9 @@
 
       <div class="status" id="statusPanel" aria-live="polite">
         <ol>
-          <li id="stResize">Preparing photos on your device</li>
-          <li id="stUpload">Sending securely to the measurement engine</li>
-          <li id="stBuild">Reconstructing your 3D body &amp; measurements</li>
+          <li id="stResize"><span class="step-icon"></span>Preparing photos on your device</li>
+          <li id="stUpload"><span class="step-icon"></span>Sending securely to the measurement engine</li>
+          <li id="stBuild"><span class="step-icon"></span>Reconstructing your 3D body &amp; measurements</li>
         </ol>
       </div>
     </form>
