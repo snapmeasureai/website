@@ -567,7 +567,7 @@
     #resultFrame { display: block; width: 100%; height: min(78vh, 760px); border: 0; background: #000; }
 
     .measure-hint {
-      text-align: center; padding: 8px 0 2px;
+      text-align: center; padding: 2px 0 8px;
       font-size: 13px; font-weight: 600; color: var(--teal);
       letter-spacing: .04em; cursor: pointer;
     }
@@ -849,11 +849,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="rh-list" id="rhList"></ul>
     </div>
 
+    <div class="measure-hint" id="measureHint" onclick="document.getElementById('measurePanel').open=true;this.style.display='none'">Measurements&ensp;&#8595;</div>
+
     <div class="result-frame-wrap">
       <iframe id="resultFrame" title="Interactive 3D body scan and measurements" sandbox="allow-scripts"></iframe>
     </div>
-
-    <div class="measure-hint" id="measureHint" onclick="document.getElementById('measurePanel').open=true;this.style.display='none'">Measurements&ensp;&#8595;</div>
 
     <details class="measure-panel" id="measurePanel" hidden>
       <summary>
