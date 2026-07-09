@@ -1539,12 +1539,13 @@ function setStep(i) { els.tabs.forEach((t, idx) => t.classList.toggle("active", 
    the user uploads instead of captures (and any time state changes).
    0 = photos, 1 = height, 2 = 3D result / processing */
 function refreshStep() {
-  if (state.busy || state.lastResult) { setStep(2); return; }
+  if (state.busy) { setStep(2); return; }
   const bothPhotos = state.photos.front && state.photos.side;
   const h = readHeight();
   const heightOk = h !== null && typeof h !== "object";
   const ready = bothPhotos && heightOk && els.consent.checked;
   els.submit.disabled = !ready;
+  if (state.lastResult && !ready) { setStep(2); return; }  // viewing a result, not yet ready to re-scan
   if (!bothPhotos) { setStep(0); return; }
   setStep(1);
 }
@@ -1578,9 +1579,12 @@ els.form.addEventListener("submit", async (e) => {
 
   const heightLabel = readHeight();
   state.busy = true;
+  state.lastResult = null;
   els.submit.disabled = true;
   els.submit.classList.add("busy");
   els.submit.querySelector(".btn-spinner") && (els.submit.querySelector(".btn-spinner").style.display = "");
+  // Reset status indicators to blank before each run
+  ["resize", "upload", "build"].forEach(k => setStatus(k, ""));
   els.status.classList.add("show");
   setStep(1);
   setStatus("resize", "done");
