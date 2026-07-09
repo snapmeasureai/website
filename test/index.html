@@ -189,7 +189,7 @@
     /* ============================================================
        HERO — three short lines, then straight into the scan card
        ============================================================ */
-    .hero-lite { padding: 16px 0 8px; text-align: center; }
+    .hero-lite { padding: 44px 0 8px; text-align: center; }
     .hero__badge {
       display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid var(--teal-glow); background: var(--teal-dim);
@@ -408,9 +408,15 @@
     .status li.doing::before {
       border-color: rgba(10,191,163,.25);
       border-top-color: var(--teal);
+      will-change: transform;
+      transform: translateZ(0);   /* force GPU compositing layer */
       animation: stepSpin 0.75s linear infinite;
+      animation-play-state: running;
     }
-    @keyframes stepSpin { to { transform: rotate(360deg); } }
+    @keyframes stepSpin {
+      from { transform: translateZ(0) rotate(0deg); }
+      to   { transform: translateZ(0) rotate(360deg); }
+    }
     .status li.done { color: var(--card-ink); font-weight: 600; }
     .status li.done::before {
       background: var(--teal); border-color: var(--teal);
@@ -428,10 +434,15 @@
       width: 20px; height: 20px; border-radius: 50%;
       border: 2.5px solid rgba(5,14,12,.3);
       border-top-color: #050E0C;
+      will-change: transform;
       animation: btnSpin 0.7s linear infinite;
+      animation-play-state: running;
     }
     .btn-primary.busy .btn-spinner { display: block; }
-    @keyframes btnSpin { to { transform: rotate(360deg); } }
+    @keyframes btnSpin {
+      from { transform: translateZ(0) rotate(0deg); }
+      to   { transform: translateZ(0) rotate(360deg); }
+    }
 
     /* ============================================================
        GUIDED CAMERA CAPTURE
@@ -544,7 +555,7 @@
     /* ============================================================
        RESULT SECTION
        ============================================================ */
-    #result { display: none; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 64px; margin-bottom: 12px; }
+    #result { display: none; background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 64px; margin-bottom: 12px; scroll-margin-top: 72px; }
     #result.show { display: block; }
     .result-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 18px; }
     .result-bar h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
@@ -605,7 +616,7 @@
     /* ============================================================
        CONTENT SECTIONS
        ============================================================ */
-    section.pad { padding: 40px 0; border-top: 1px solid var(--border); }
+    section.pad { padding: 40px 0 80px; border-top: 1px solid var(--border); }
     .section-head { max-width: 700px; margin-bottom: 48px; }
     .section-head p.sub { color: var(--text-2); margin: 0; }
 
