@@ -1576,11 +1576,7 @@ function startSpinner() {
 }
 function stopSpinner() {
   if (_rafId) { cancelAnimationFrame(_rafId); _rafId = null; }
-  if (els.rafSpinner) {
-    els.rafSpinner.style.transform = "";
-    /* Reset to fully gray so it doesn't sit there with teal showing */
-    els.rafSpinner.style.borderTopColor = "rgba(16,32,48,.15)";
-  }
+  if (els.rafSpinner) els.rafSpinner.style.transform = "";
 }
 
 const STATUS_LABELS = {
@@ -1683,6 +1679,8 @@ els.form.addEventListener("submit", async (e) => {
 
     setStatus("build", "done");
     setStep(2);
+    if (els.statusCurrent) els.statusCurrent.textContent = "Done \u2713";
+    stopSpinner();
 
     state.lastResult = {
       html,
@@ -1694,6 +1692,8 @@ els.form.addEventListener("submit", async (e) => {
   } catch (err) {
     console.error(err);
     setStatus("upload", ""); setStatus("build", "");
+    if (els.statusCurrent) els.statusCurrent.textContent = "Scan failed";
+    stopSpinner();
     setStep(0);
     showError(err.name === "AbortError"
       ? "The scan took too long and was cancelled. Check your connection and try again."
@@ -1809,6 +1809,7 @@ els.newScanBtn.addEventListener("click", () => {
   setStep(0);
   els.status.classList.remove("show");
   stopSpinner();
+  if (els.statusCurrent) els.statusCurrent.textContent = "Working\u2026";
   ["resize","upload","build"].forEach(k => setStatus(k, ""));
   els.result.classList.remove("show");
   els.resultHistory.hidden = true;
