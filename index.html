@@ -171,10 +171,14 @@
     .nav__dropdown-toggle svg { transition: transform .2s; }
     .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
     .nav__dropdown-menu {
-      display: none; position: absolute; top: calc(100% + 12px); left: 50%;
+      display: none; position: absolute; top: 100%; left: 50%;
       transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
       border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    /* Invisible padding bridges the gap between button and menu */
+    .nav__dropdown-menu::before {
+      content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px;
     }
     .nav__dropdown:hover .nav__dropdown-menu { display: block; }
     .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
