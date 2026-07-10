@@ -169,18 +169,14 @@
     }
     .nav__dropdown-toggle:hover { color: var(--text); }
     .nav__dropdown-toggle svg { transition: transform .2s; }
-    .nav__dropdown.open .nav__dropdown-toggle svg { transform: rotate(180deg); }
+    .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
     .nav__dropdown-menu {
-      display: none; position: absolute; top: calc(100% + 4px); left: 50%;
+      display: none; position: absolute; top: calc(100% + 12px); left: 50%;
       transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
       border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     }
-    /* Bridge the gap so moving the mouse downward doesn't close the menu */
-    .nav__dropdown-menu::before {
-      content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px;
-    }
-    .nav__dropdown.open .nav__dropdown-menu { display: block; }
+    .nav__dropdown:hover .nav__dropdown-menu { display: block; }
     .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
     .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
     .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
@@ -837,20 +833,6 @@
         window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
       }
     });
-  });
-  // Dropdown: click to open, click outside or second click to close
-  document.querySelectorAll('.nav__dropdown').forEach(function(dropdown) {
-    var toggle = dropdown.querySelector('.nav__dropdown-toggle');
-    toggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      var isOpen = dropdown.classList.contains('open');
-      // Close all dropdowns first
-      document.querySelectorAll('.nav__dropdown').forEach(function(d) { d.classList.remove('open'); });
-      if (!isOpen) dropdown.classList.add('open');
-    });
-  });
-  document.addEventListener('click', function() {
-    document.querySelectorAll('.nav__dropdown').forEach(function(d) { d.classList.remove('open'); });
   });
 </script>
 </body>
