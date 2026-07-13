@@ -1,12 +1,15 @@
-<h1 align="center"><strong>SnapMeasureAI</strong></h1>
+<div align="center">
+  <img width="1400" height="260" alt="SnapMeasureAI" src="https://github.com/user-attachments/assets/135fcf06-772d-4049-8c5f-5fcbe75ef4b2" />
 
-<p align="center">
   <strong>Two photos, a precise 3D scan of your body — 100+ measurements in under 10 seconds.</strong>
-</p>
 
-<p align="center">
   Built for GLP-1 weight loss programs, fitness platforms, and apparel & uniform sizing.
-</p>
+
+  <br/>
+
+[![Live demo](https://img.shields.io/badge/Live_demo-→-1D9E75?style=for-the-badge)](https://demo.snapmeasureai.com)
+[![Contact us](https://img.shields.io/badge/Contact_us-info%40snapmeasureai.com-0F6E56?style=for-the-badge)](mailto:info@snapmeasureai.com)
+</div>
 
 ---
 
