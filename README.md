@@ -5,8 +5,6 @@
 
   Built for GLP-1 weight loss programs, fitness platforms, and apparel & uniform sizing.
 
-  <br/>
-
 [![Live demo](https://img.shields.io/badge/Live_demo-→-1D9E75?style=for-the-badge)](https://demo.snapmeasureai.com)
 [![Contact us](https://img.shields.io/badge/Contact_us-info%40snapmeasureai.com-0F6E56?style=for-the-badge)](mailto:info@snapmeasureai.com)
 </div>
