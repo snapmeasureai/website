@@ -76,7 +76,7 @@ The scan interface accepts two photos (front and side) and a user height. Result
 ---
 
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/94e3991c-2e1f-43bf-a519-3e28f898d52b" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
+  <video src="https://github.com/user-attachments/assets/8c962d20-5444-46cc-9b0f-b88c1815fa91" controls="controls" muted="muted" playsinline="playsinline" style="clip-path: inset(1px 1px);"/>
 </div>
 
 ---
