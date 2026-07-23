@@ -25,8 +25,8 @@
   <meta property="og:title" content="SnapMeasureAI: 3D Body Scan | 100+ Measurements, 2 Photos">
   <meta property="og:description" content="Patented 3D body scan from 2 photos. Powers GLP-1 tracking, fitness progress, apparel sizing, and digital twins. 100+ body measurements in 10 seconds.">
   <meta property="og:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
-  <meta property="og:video" content="https://snapmeasureai.com/img/body_measurements.mp4">
-  <meta property="og:video:secure_url" content="https://snapmeasureai.com/img/body_measurements.mp4">
+  <meta property="og:video" content="https://snapmeasureai.com/img/3D_body_scan_mobile.mp4">
+  <meta property="og:video:secure_url" content="https://snapmeasureai.com/img/3D_body_scan_mobile.mp4">
   <meta property="og:video:type" content="video/mp4">
   <meta property="og:video:width" content="720">
   <meta property="og:video:height" content="1280">
@@ -609,8 +609,8 @@
     <div style="margin-top:48px;max-width:1280px;margin-left:auto;margin-right:auto;">
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
         <video webkit-playsinline playsinline autoplay loop muted preload="auto" style="width:100%;display:block;">
-          <source src="/img/3D_body_scan_mobile.mp4#t=0.001" type="video/mp4" media="(max-width: 767px)">
-          <source src="/img/3D_body_scan.mp4#t=0.001" type="video/mp4">
+          <source src="/img/3D_body_scan_mobile.mp4" type="video/mp4" media="(max-width: 767px)">
+          <source src="/img/3D_body_scan.mp4" type="video/mp4">
         </video>
       </div>
     </div>
@@ -847,6 +847,10 @@
       }
     });
   });
+const video = document.querySelector('video');
+video.poster = window.innerWidth <= 767
+  ? "/img/3D_body_scan_mobile.jpg"
+  : "/img/3D_body_scan.jpg";
 </script>
 </body>
 </html>
