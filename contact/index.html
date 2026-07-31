@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
+
+  <title>Contact Us | SnapMeasureAI</title>
+  <meta name="description" content="Get in touch with the SnapMeasureAI team about licensing, API integration, partnerships, and enterprise opportunities.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://snapmeasureai.com/contact">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  <style>
+    :root {
+      --bg:        #080C10;
+      --bg2:       #0E1419;
+      --bg3:       #141C24;
+      --surface:   #1A2330;
+      --border:    rgba(255,255,255,0.08);
+      --border-hi: rgba(255,255,255,0.15);
+      --teal:      #0ABFA3;
+      --teal-dim:  rgba(10,191,163,0.12);
+      --teal-glow: rgba(10,191,163,0.25);
+      --indigo:    #6C63FF;
+      --indigo-dim:rgba(108,99,255,0.12);
+      --text:      #F0F4F8;
+      --text-2:    #AABDCF;
+      --text-3:    #7A96AA;
+      --radius:    10px;
+      --radius-lg: 18px;
+      --max:       1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,12,16,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); height: 64px;
+      display: flex; align-items: center;
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav__logo img { height: 32px; }
+    .nav__links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 14px; color: var(--text-2); }
+    .nav__links a:hover { color: var(--text); }
+    .nav__dropdown { position: relative; }
+    .nav__dropdown-toggle {
+      display: flex; align-items: center; gap: 5px; cursor: pointer;
+      color: var(--text-2); font-size: 14px; background: none; border: none; padding: 0; font-family: inherit;
+    }
+    .nav__dropdown-toggle:hover { color: var(--text); }
+    .nav__dropdown-toggle svg { transition: transform .2s; }
+    .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
+    .nav__dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
+      border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .nav__dropdown-menu::before {
+      content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px;
+    }
+    .nav__dropdown:hover .nav__dropdown-menu { display: block; }
+    .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
+    .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
+    .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
+    .nav__cta { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: opacity .15s, transform .1s; border: none;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn--outline { background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF; }
+    .btn--outline:hover { background: rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.8); color: #fff; }
+    .btn--primary { background: var(--teal); color: #050E0C; font-weight: 600; }
+    .btn--primary:hover { opacity: .88; }
+    .nav__hamburger { display: none; }
+    .nav__mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); padding: 32px 24px; flex-direction: column; gap: 24px; z-index: 99;
+    }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a { font-size: 18px; color: var(--text-2); }
+    .nav__mobile-menu a:hover { color: var(--teal); }
+
+    /* ---- PAGE HERO ---- */
+    .page-hero {
+      padding: 120px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 60% at 80% 30%, rgba(10,191,163,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 15% 70%, rgba(108,99,255,0.06) 0%, transparent 70%);
+    }
+    .page-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-dim); border: 1px solid rgba(10,191,163,0.25);
+      border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600;
+      color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .page-hero__eyebrow-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform: scale(1); }
+      50% { opacity:.5; transform: scale(0.8); }
+    }
+    .page-hero__title {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.07; margin-bottom: 16px;
+    }
+    .page-hero__title-accent { color: var(--teal); }
+    .page-hero__sub {
+      font-size: 17px; color: var(--text-2); max-width: 520px; line-height: 1.7;
+    }
+
+    /* ---- CONTACT LAYOUT ---- */
+    .contact-section {
+      padding: 0 0 96px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ---- SIDEBAR ---- */
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .contact-info-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .contact-info-block__label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 10px;
+    }
+    .contact-info-block__value {
+      font-size: 15px; color: var(--text-2); line-height: 1.65;
+    }
+    .contact-info-block__value a { color: var(--teal); }
+    .contact-info-block__value a:hover { opacity: .8; }
+    .contact-use-cases {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .contact-use-cases__label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 16px;
+    }
+    .contact-use-cases__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .contact-use-cases__list li {
+      font-size: 14px; color: var(--text-2);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .contact-use-cases__list li::before {
+      content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .contact-demo-cta {
+      background: linear-gradient(135deg, rgba(10,191,163,0.10) 0%, rgba(108,99,255,0.08) 100%);
+      border: 1px solid rgba(10,191,163,0.22);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      text-align: center;
+    }
+    .contact-demo-cta__title {
+      font-size: 16px; font-weight: 600; margin-bottom: 8px;
+    }
+    .contact-demo-cta__sub {
+      font-size: 14px; color: var(--text-2); margin-bottom: 18px; line-height: 1.6;
+    }
+    .btn--scan {
+      background: var(--teal); color: #050E0C; font-weight: 600;
+      font-size: 14px; padding: 11px 22px; border-radius: var(--radius);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: opacity .15s;
+    }
+    .btn--scan:hover { opacity: .88; }
+
+    /* ---- FORM CARD ---- */
+    .contact-form-card {
+      background: var(--bg2);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--radius-lg);
+      padding: 44px 40px;
+    }
+    .contact-form-card__title {
+      font-size: 22px; font-weight: 700; margin-bottom: 6px;
+    }
+    .contact-form-card__sub {
+      font-size: 15px; color: var(--text-2); margin-bottom: 32px; line-height: 1.6;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+    .form-group:last-of-type { margin-bottom: 0; }
+    .form-label {
+      font-size: 13px; font-weight: 600; color: var(--text-2);
+      letter-spacing: .02em;
+    }
+    .form-label span { color: var(--teal); margin-left: 2px; }
+    .form-input, .form-textarea, .form-select {
+      background: var(--bg3);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 15px;
+      padding: 12px 16px;
+      transition: border-color .15s, box-shadow .15s;
+      width: 100%;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-3); }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-dim);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6;
+    }
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%237A96AA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .form-select option { background: var(--bg3); color: var(--text); }
+
+    .form-submit-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .btn--submit {
+      background: var(--teal);
+      color: #050E0C;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity .15s, transform .1s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .btn--submit:hover { opacity: .88; }
+    .btn--submit:active { transform: scale(0.98); }
+    .btn--submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .form-privacy {
+      font-size: 13px; color: var(--text-3); line-height: 1.55; flex: 1; min-width: 180px;
+    }
+    .form-privacy a { color: var(--teal); }
+
+    /* ---- SUCCESS / ERROR STATES ---- */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .form-success__icon {
+      width: 56px; height: 56px;
+      background: var(--teal-dim);
+      border: 1px solid rgba(10,191,163,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 20px;
+    }
+    .form-success__title {
+      font-size: 22px; font-weight: 700; margin-bottom: 10px;
+    }
+    .form-success__sub {
+      font-size: 15px; color: var(--text-2); max-width: 360px; margin: 0 auto 28px; line-height: 1.65;
+    }
+    .form-error-msg {
+      display: none;
+      background: rgba(239,68,68,0.1);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #FCA5A5;
+      margin-bottom: 20px;
+    }
+    .form-error-msg.visible { display: block; }
+
+    /* ---- FOOTER ---- */
+    .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer__logo img { height: 24px; opacity: .6; }
+    .footer__links { display: flex; gap: 24px; list-style: none; }
+    .footer__links a { font-size: 13px; color: var(--text-3); }
+    .footer__links a:hover { color: var(--teal); }
+    .footer__copy { font-size: 12px; color: var(--text-3); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-sidebar { order: 2; }
+      .contact-form-card { order: 1; }
+      .nav__links { display: none; }
+      .nav__cta .btn--outline { display: none; }
+      .nav__hamburger {
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; cursor: pointer; color: var(--text-2); font-size: 22px;
+        background: none; border: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .contact-form-card { padding: 28px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-submit-row { flex-direction: column; align-items: stretch; }
+      .btn--submit { justify-content: center; }
+      .footer__inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer__links { display: grid; grid-template-columns: repeat(3, auto); gap: 10px 20px; }
+      .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3T6T8SX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="https://snapmeasureai.com/" class="nav__logo">
+      <img src="/assets/images/logo.png" alt="SnapMeasureAI">
+    </a>
+    <ul class="nav__links">
+      <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
+      <li><a href="https://snapmeasureai.com/#use-cases">Use cases</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Technologies
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">AI technologies</span>
+          <a href="https://snapmeasureai.com/">3D body scan</a>
+          <a href="https://snapmeasureai.com/motion-capture-from-video">AI motion capture</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels">Synthetic data</a>
+        </div>
+      </li>
+      <li><a href="https://snapmeasureai.com/#faqs">FAQs</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--primary">Try free scan →</a>
+      <a href="https://snapmeasureai.com/contact" class="btn btn--outline" aria-current="page">Contact us</a>
+      <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile-menu" id="mobile-menu">
+  <a href="https://snapmeasureai.com/#how-it-works" onclick="toggleMenu()">How it works</a>
+  <a href="https://snapmeasureai.com/#use-cases" onclick="toggleMenu()">Use cases</a>
+  <a href="https://snapmeasureai.com/#faqs" onclick="toggleMenu()">FAQs</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
+  <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
+  <a href="https://snapmeasureai.com/motion-capture-from-video" style="padding-left:12px;" onclick="toggleMenu()">AI motion capture</a>
+  <a href="https://snapmeasureai.com/synthetic-data-with-labels" style="padding-left:12px;" onclick="toggleMenu()">Synthetic data</a>
+  <a href="https://demo.snapmeasureai.com/" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;">Try free scan →</a>
+</div>
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="page-hero">
+  <div class="page-hero__bg"></div>
+  <div class="container">
+    <div class="page-hero__eyebrow">
+      <span class="page-hero__eyebrow-dot"></span>
+      Get in touch
+    </div>
+    <h1 class="page-hero__title">
+      Let's talk about<br>
+      <span class="page-hero__title-accent">what we can build together.</span>
+    </h1>
+    <p class="page-hero__sub">
+      Whether you're exploring API licensing, a custom integration, or a partnership — we respond to every message, usually within one business day.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== CONTACT SECTION ==================== -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- SIDEBAR -->
+      <aside class="contact-sidebar">
+
+        <div class="contact-info-block">
+          <p class="contact-info-block__label">Email us directly</p>
+          <p class="contact-info-block__value">
+            Prefer to write directly?<br>
+            <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a>
+          </p>
+        </div>
+
+        <div class="contact-use-cases">
+          <p class="contact-use-cases__label">Common reasons to reach out</p>
+          <ul class="contact-use-cases__list">
+            <li>API licensing &amp; pricing</li>
+            <li>Custom integration scoping</li>
+            <li>GLP-1 / health platform partnerships</li>
+            <li>Apparel &amp; e-commerce sizing</li>
+            <li>Uniform &amp; workwear remote sizing</li>
+            <li>Fitness app &amp; personal trainer tools</li>
+            <li>Enterprise &amp; white-label deployments</li>
+            <li>Press &amp; research inquiries</li>
+          </ul>
+        </div>
+
+        <div class="contact-demo-cta">
+          <p class="contact-demo-cta__title">Try it before you ask</p>
+          <p class="contact-demo-cta__sub">Run a live scan yourself — two photos, 10 seconds, 100+ measurements. No sign-up needed.</p>
+          <a href="https://demo.snapmeasureai.com/" class="btn--scan">Try the free body scan →</a>
+        </div>
+
+      </aside>
+
+      <!-- FORM CARD -->
+      <div class="contact-form-card">
+        <h2 class="contact-form-card__title">Send us a message</h2>
+        <p class="contact-form-card__sub">Fill in the form and your message will go straight to our team at info@snapmeasureai.com.</p>
+
+        <div class="form-error-msg" id="form-error">
+          Something went wrong sending your message. Please try again or email us directly at <a href="mailto:info@snapmeasureai.com" style="color:var(--teal)">info@snapmeasureai.com</a>.
+        </div>
+
+        <!-- Web3Forms — replace YOUR_ACCESS_KEY below with the key emailed to you after verifying info@snapmeasureai.com -->
+        <!-- To set up: go to web3forms.com, enter info@snapmeasureai.com, verify the email, and paste the access key here -->
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+
+          <!-- Web3Forms routing -->
+          <input type="hidden" name="access_key" value="4ab32938-b2d0-4d8a-a24d-b3dd534b9157">
+          <input type="hidden" name="subject" value="New contact form submission — SnapMeasureAI">
+          <input type="hidden" name="from_name" value="SnapMeasureAI Contact Form">
+          <!-- Honeypot spam trap -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="first-name">First name <span>*</span></label>
+              <input class="form-input" type="text" id="first-name" name="first_name" placeholder="Alex" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="last-name">Last name <span>*</span></label>
+              <input class="form-input" type="text" id="last-name" name="last_name" placeholder="Johnson" required autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email <span>*</span></label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="you@company.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="company">Company / organization</label>
+            <input class="form-input" type="text" id="company" name="company" placeholder="Acme Health Inc." autocomplete="organization">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="topic">Topic</label>
+            <select class="form-select form-input" id="topic" name="topic">
+              <option value="" disabled selected>Select a topic…</option>
+              <option value="api-licensing">API licensing &amp; pricing</option>
+              <option value="integration">Custom integration</option>
+              <option value="health-glp1">Health / GLP-1 platform</option>
+              <option value="fitness">Fitness app or personal training</option>
+              <option value="apparel">Apparel &amp; e-commerce sizing</option>
+              <option value="uniform">Uniform &amp; workwear sizing</option>
+              <option value="enterprise">Enterprise / white-label</option>
+              <option value="press">Press or research</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="message">Message <span>*</span></label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your platform, your use case, and what you're hoping to build…" required></textarea>
+          </div>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn--submit" id="submit-btn">
+              Send message
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M2 8h12M9 4l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <p class="form-privacy">
+              Your information is only used to respond to your enquiry and is never sold or shared.
+            </p>
+          </div>
+
+        </form>
+
+        <!-- Success state (shown after submit) -->
+        <div class="form-success" id="form-success">
+          <div class="form-success__icon">✓</div>
+          <h3 class="form-success__title">Message sent!</h3>
+          <p class="form-success__sub">Thanks for reaching out. Our team usually replies within one business day — keep an eye on your inbox.</p>
+          <a href="https://demo.snapmeasureai.com/" class="btn--scan">Try the free scan while you wait →</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <a href="https://snapmeasureai.com/" class="footer__logo">
+        <img src="/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI">
+      </a>
+      <ul class="footer__links">
+        <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/motion-capture-from-video">Motion capture</a></li>
+        <li><a href="https://snapmeasureai.com/synthetic-data-with-labels">Synthetic data</a></li>
+        <li><a href="https://demo.snapmeasureai.com/">Free demo</a></li>
+        <li><a href="https://snapmeasureai.com/contact" style="color:var(--teal)">Contact</a></li>
+      </ul>
+      <span class="footer__copy">© 2026 SnapMeasureAI</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== JS ==================== -->
+<script>
+  /* Nav */
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobile-menu');
+    const nav  = document.getElementById('nav');
+    if (menu.classList.contains('open') && !nav.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  /* Form submission */
+  const form      = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const successEl = document.getElementById('form-success');
+  const errorEl   = document.getElementById('form-error');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    /* Basic client-side validation */
+    const required = form.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(function(field) {
+      if (!field.value.trim()) {
+        field.style.borderColor = 'rgba(239,68,68,0.6)';
+        field.style.boxShadow   = '0 0 0 3px rgba(239,68,68,0.12)';
+        valid = false;
+        field.addEventListener('input', function() {
+          field.style.borderColor = '';
+          field.style.boxShadow   = '';
+        }, { once: true });
+      }
+    });
+    if (!valid) return;
+
+    submitBtn.disabled   = true;
+    submitBtn.textContent = 'Sending…';
+    errorEl.classList.remove('visible');
+
+    try {
+      const data = new FormData(form);
+      const res  = await fetch(form.action, {
+        method:  'POST',
+        body:    data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display    = 'none';
+        successEl.style.display = 'block';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch (err) {
+      submitBtn.disabled   = false;
+      submitBtn.innerHTML  = 'Send message <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      errorEl.classList.add('visible');
+    }
+  });
+</script>
+</body>
+</html>
