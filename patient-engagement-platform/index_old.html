@@ -1,4 +1,6 @@
-<html lang="en-US"><head>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -244,12 +246,23 @@
 
   .figure-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 6px 0 16px; }
   .figure { width: 100%; max-width: 150px; height: auto; }
+  .fig-body { fill: none; stroke: rgba(170,189,207,.28); stroke-width: 1.1; stroke-dasharray: 3.5 4; stroke-linecap: round; }
+  .fig-ghost { fill: none; stroke: rgba(170,189,207,.11); stroke-width: 1; }
+  .fig-band { fill: rgba(10,191,163,.04); stroke: rgba(10,191,163,.30); stroke-width: 1.4; transition: stroke .22s, stroke-width .22s, fill .22s; }
+  .fig-band.is-on { stroke: var(--teal); stroke-width: 2.2; fill: rgba(10,191,163,.14); filter: drop-shadow(0 0 7px var(--teal-glow)); }
   .fig-note {
     white-space: nowrap; font-family: var(--mono); font-size: 9.5px; letter-spacing: .07em;
     text-transform: uppercase; color: var(--text-3); background: rgba(8,12,16,.6);
     border: 1px solid var(--border); border-radius: 100px; padding: 3px 11px;
   }
 
+  .import-tag {
+    display: flex; align-items: center; gap: 8px; justify-content: center;
+    font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--teal); background: var(--teal-dim); border: 1px dashed rgba(10,191,163,.4);
+    border-radius: var(--radius); padding: 9px 10px; margin-bottom: 16px;
+  }
+  .import-tag i { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse-dot 2.4s ease-in-out infinite; flex-shrink: 0; }
 
   .rows { display: flex; flex-direction: column; }
   .row {
@@ -426,48 +439,6 @@
     .nav__mobile-menu .btn--primary, .nav__mobile-menu .btn--outline { align-self: flex-start; }
     .footer__inner { flex-direction: column; align-items: flex-start; }
   }
-  /* ---- 3D BODY MODEL (month cards) ---- */
-  .figure { width: 100%; max-width: 192px; height: auto; display: block; margin: 0 auto; }
-  .figure .mesh-lines path, .figure .mesh-lines line { fill: none; stroke: rgba(255,255,255,.13); stroke-width: .5; }
-  .mband-back { fill: none; stroke: rgba(10,191,163,.28); stroke-width: 1.3; transition: stroke .22s, stroke-width .22s; }
-  .mband-front { fill: none; stroke: rgba(10,191,163,.72); stroke-width: 2; transition: stroke .22s, stroke-width .22s, filter .22s; }
-  .mband--limb .mband-back { stroke: rgba(10,191,163,.15); }
-  .mband--limb .mband-front { stroke: rgba(10,191,163,.4); stroke-width: 1.6; }
-  .mband.is-on .mband-front { stroke: #16E8C6; stroke-width: 2.6; filter: drop-shadow(0 0 5px rgba(10,191,163,.75)); }
-  .mband.is-on .mband-back { stroke: rgba(10,191,163,.5); }
-
-  /* ---- CAPTURE POSE GUIDE ---- */
-  .capture-slot__fig { position: relative; height: 88%; width: auto; }
-
-  /* ---- PHOTO CAPTURE WIDGET ---- */
-  .capture-widget {
-    background: var(--bg3); border: 1px solid var(--border-hi);
-    border-radius: var(--radius); padding: 13px 14px 10px; margin-bottom: 14px;
-  }
-  .capture-widget__label {
-    font-family: var(--mono); font-size: 9px; letter-spacing: .11em; text-transform: uppercase;
-    color: var(--teal); display: flex; align-items: center; gap: 6px; margin-bottom: 10px;
-  }
-  .capture-widget__label i { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); display: inline-block; animation: pulse-dot 2.2s ease-in-out infinite; flex-shrink: 0; }
-  .capture-slots { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 9px; }
-  .capture-slot {
-    position: relative; background: var(--bg2); border: 1px dashed rgba(10,191,163,.38);
-    border-radius: 9px; height: 128px; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .capture-slot__grid { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .13; pointer-events: none; }
-  .capture-slot__tag {
-    position: absolute; bottom: 7px; left: 50%; transform: translateX(-50%); white-space: nowrap;
-    font-family: var(--mono); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--teal);
-  }
-  .capture-widget__note {
-    text-align: center; font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--text-3); line-height: 1.6;
-  }
-  @media (max-width: 900px) {
-    .capture-slot { height: 150px; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
     html { scroll-behavior: auto; }
@@ -482,8 +453,9 @@
 <nav class="nav" id="nav">
   <div class="container">
     <a href="https://snapmeasureai.com/" class="nav__logo" aria-label="SnapMeasureAI home">
-      <img src="/assets/images/logo.png" alt="SnapMeasureAI" id="logo-img" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='inline';" style="display: none;">
-      <span class="nav__logo-text" id="logo-fallback" style="display: inline;">SnapMeasure<i>AI</i></span>
+      <img src="/assets/images/logo.png" alt="SnapMeasureAI" id="logo-img"
+           onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='inline';">
+      <span class="nav__logo-text" id="logo-fallback" style="display:none;">SnapMeasure<i>AI</i></span>
     </a>
     <ul class="nav__links">
       <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
@@ -493,7 +465,7 @@
         <button class="nav__dropdown-toggle">
           Technologies
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
         <div class="nav__dropdown-menu">
@@ -575,7 +547,7 @@
     <span class="proof-divider">·</span>
     <span class="proof-strip__item"><span class="proof-strip__dot"></span> No PII retained</span>
     <span class="proof-divider">·</span>
-    <span class="proof-strip__item"><span class="proof-strip__dot"></span> Shared cloud, dedicated cloud, or on‑premise</span>
+    <span class="proof-strip__item"><span class="proof-strip__dot"></span> Shared cloud, dedicated cloud, or on&#8209;premise</span>
     <span class="proof-divider">·</span>
     <span class="proof-strip__item"><span class="proof-strip__dot"></span> 2 issued patents + 1 pending</span>
   </div>
@@ -596,8 +568,9 @@
         <div class="phone">
           <div class="phone__screen">
             <div class="phone__notch" aria-hidden="true"></div>
-            <video id="scan-video" muted="" loop="" playsinline="" autoplay="" preload="metadata" aria-label="How the SnapMeasureAI 3D body scan works" src="/assets/videos/SnapMeasureAI.mp4" style="display: none;"></video>
-            <div class="vid-missing show" id="vid-missing">
+            <video id="scan-video" muted loop playsinline autoplay preload="metadata"
+                   aria-label="How the SnapMeasureAI 3D body scan works"></video>
+            <div class="vid-missing" id="vid-missing">
               <strong style="color:var(--text-2);font-size:14px;">Video file not found</strong>
               <span>Upload the clip to the site and point this player at it:<br><code>/img/SnapMeasureAI.mp4</code></span>
             </div>
@@ -655,11 +628,10 @@
     <div class="section__eyebrow">Longitudinal progress tracking</div>
     <h2 class="section__title">Month over month — rendered from your record, not ours.</h2>
     <p class="section__sub">
-      This is the patient-facing view. Each month begins with two photos — front and side — that return a
-      full measurement set in seconds and are deleted on delivery. The body model narrows as the numbers do,
-      so a patient on a GLP-1 or weight-management program watches their own shape change over time. Every
-      value shown is drawn at load time from the record your platform holds; we supply the numbers once, then
-      forget them. The measurement readouts below stay masked because this is a demo with no patient data.
+      This is the patient-facing view. The measurement rows, the deltas, the model — every value on this
+      screen is drawn at load time from the data your platform already holds. We supply the numbers once,
+      then forget them. What you see below is the view before your import: the shape of the product, with
+      the patient's side of it deliberately empty.
     </p>
 
     <!-- ===== PORTAL FRAME ===== -->
@@ -682,7 +654,7 @@
         <button class="rail__btn is-on" role="tab" aria-selected="true" data-month="1">Month 1</button>
         <button class="rail__btn" role="tab" aria-selected="false" data-month="2">Month 2</button>
         <button class="rail__btn" role="tab" aria-selected="false" data-month="3">Month 3</button>
-        <button class="rail__btn rail__btn--ghost" disabled="">Month n … no limit</button>
+        <button class="rail__btn rail__btn--ghost" disabled>Month n … no limit</button>
       </div>
 
       <div class="months" id="months">
@@ -691,52 +663,52 @@
         <article class="mcard is-on" data-month="1">
           <div class="mcard__top">
             <div class="mcard__month">Month 1</div>
-            <div class="mcard__date">Scan date captured</div>
+            <div class="mcard__date">Scan date imported</div>
           </div>
           <div class="figure-wrap">
-            <svg class="figure" viewBox="0 0 180 316" role="img" aria-label="Month 1 body model">
-  <defs>
-    <linearGradient id="bg_a" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="90" y2="316">
-      <stop offset="0" stop-color="#E4F3EF"></stop><stop offset=".30" stop-color="#A6D2DB"></stop>
-      <stop offset=".62" stop-color="#6396BA"></stop><stop offset="1" stop-color="#41678F"></stop>
-    </linearGradient>
-    <linearGradient id="arm_a" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="90" y2="316">
-      <stop offset="0" stop-color="#B9DBDD"></stop><stop offset=".30" stop-color="#7FB0C6"></stop>
-      <stop offset=".62" stop-color="#4E7CA6"></stop><stop offset="1" stop-color="#35567C"></stop>
-    </linearGradient>
-    <radialGradient id="sh_a" gradientUnits="userSpaceOnUse" cx="62" cy="100" r="145">
-      <stop offset="0" stop-color="#fff" stop-opacity=".52"></stop>
-      <stop offset=".45" stop-color="#fff" stop-opacity=".10"></stop>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
-    </radialGradient>
-    <linearGradient id="rim_a" gradientUnits="userSpaceOnUse" x1="28" y1="0" x2="152" y2="0">
-      <stop offset="0" stop-color="#16E8C6" stop-opacity=".6"></stop>
-      <stop offset=".5" stop-color="#E4F3EF" stop-opacity=".32"></stop>
-      <stop offset="1" stop-color="#7FD8FF" stop-opacity=".6"></stop>
-    </linearGradient>
-    <clipPath id="cp_a"><ellipse cx="90" cy="28" rx="15.5" ry="18.3"></ellipse><path d="M57.0,69.0 C54.2,66.0 46.6,73.5 44.8,78.0 C43.0,82.5 45.9,88.0 46.3,96.0 C46.7,104.0 46.2,116.2 46.9,126.0 C47.6,135.8 48.4,146.8 50.5,155.0 C52.5,163.2 57.6,170.0 59.4,175.0 C61.2,180.0 60.0,183.7 61.4,185.0 C62.8,186.3 67.1,184.7 68.0,183.0 C68.9,181.3 68.2,179.7 67.0,175.0 C65.8,170.3 61.7,163.2 60.5,155.0 C59.3,146.8 59.8,135.8 60.0,126.0 C60.2,116.2 62.0,105.5 61.5,96.0 C61.0,86.5 59.8,72.0 57.0,69.0 Z"></path><path d="M123.0,69.0 C125.8,66.0 133.4,73.5 135.2,78.0 C137.0,82.5 134.1,88.0 133.7,96.0 C133.3,104.0 133.8,116.2 133.1,126.0 C132.4,135.8 131.6,146.8 129.5,155.0 C127.5,163.2 122.4,170.0 120.6,175.0 C118.8,180.0 120.0,183.7 118.6,185.0 C117.2,186.3 112.9,184.7 112.0,183.0 C111.1,181.3 111.8,179.7 113.0,175.0 C114.2,170.3 118.3,163.2 119.5,155.0 C120.7,146.8 120.2,135.8 120.0,126.0 C119.8,116.2 118.0,105.5 118.5,96.0 C119.0,86.5 120.2,72.0 123.0,69.0 Z"></path><path d="M102.5,44.0 C107.2,46.0 103.8,53.0 105.5,56.0 C107.2,59.0 109.2,59.7 112.5,62.0 C115.8,64.3 123.7,66.0 125.0,70.0 C126.3,74.0 121.1,81.7 120.5,86.0 C119.9,90.3 120.9,91.8 121.5,96.0 C122.1,100.2 123.6,106.0 123.9,111.0 C124.1,116.0 122.9,121.1 123.0,126.0 C123.1,130.9 124.5,135.7 124.4,140.5 C124.3,145.3 123.3,150.9 122.5,155.0 C121.7,159.1 121.9,161.8 119.5,165.0 C117.1,168.2 112.5,173.2 107.9,174.0 C103.3,174.8 98.0,170.0 92.0,170.0 C86.0,170.0 77.4,174.8 72.1,174.0 C66.9,173.2 62.9,168.2 60.5,165.0 C58.1,161.8 58.3,159.1 57.5,155.0 C56.7,150.9 55.7,145.3 55.6,140.5 C55.5,135.7 56.9,130.9 57.0,126.0 C57.1,121.1 55.9,116.0 56.1,111.0 C56.4,106.0 57.9,100.2 58.5,96.0 C59.1,91.8 60.1,90.3 59.5,86.0 C58.9,81.7 53.7,74.0 55.0,70.0 C56.3,66.0 64.2,64.3 67.5,62.0 C70.8,59.7 72.8,59.0 74.5,56.0 C76.2,53.0 72.8,46.0 77.5,44.0 C82.2,42.0 97.8,42.0 102.5,44.0 Z"></path><path d="M62.5,160.0 C57.9,163.7 62.3,173.7 62.5,182.0 C62.8,190.3 63.5,201.3 64.0,210.0 C64.5,218.7 65.3,226.7 65.5,234.0 C65.8,241.3 65.0,247.0 65.5,254.0 C66.1,261.0 68.2,270.3 69.0,276.0 C69.9,281.7 70.8,284.7 70.5,288.0 C70.3,291.3 68.0,294.0 67.5,296.0 C67.1,298.0 65.5,299.3 68.0,300.0 C70.6,300.7 81.0,302.0 83.1,300.0 C85.3,298.0 80.9,295.7 81.1,288.0 C81.4,280.3 84.0,263.0 84.6,254.0 C85.3,245.0 84.6,241.3 84.9,234.0 C85.3,226.7 85.9,218.7 86.6,210.0 C87.3,201.3 88.6,190.3 89.1,182.0 C89.7,173.7 94.6,163.7 90.1,160.0 C85.7,156.3 67.1,156.3 62.5,160.0 Z"></path><path d="M117.5,160.0 C122.0,163.7 117.7,173.7 117.5,182.0 C117.2,190.3 116.5,201.3 116.0,210.0 C115.5,218.7 114.7,226.7 114.5,234.0 C114.2,241.3 115.0,247.0 114.5,254.0 C113.9,261.0 111.8,270.3 111.0,276.0 C110.1,281.7 109.2,284.7 109.5,288.0 C109.7,291.3 112.0,294.0 112.5,296.0 C112.9,298.0 114.5,299.3 112.0,300.0 C109.4,300.7 99.0,302.0 96.9,300.0 C94.7,298.0 99.1,295.7 98.9,288.0 C98.6,280.3 96.0,263.0 95.4,254.0 C94.7,245.0 95.4,241.3 95.1,234.0 C94.7,226.7 94.1,218.7 93.4,210.0 C92.7,201.3 91.4,190.3 90.9,182.0 C90.3,173.7 85.4,163.7 89.9,160.0 C94.3,156.3 112.9,156.3 117.5,160.0 Z"></path></clipPath>
-  </defs>
-  <ellipse cx="90" cy="303" rx="42" ry="6" fill="#0ABFA3" opacity=".13"></ellipse>
-  <g class="body-layers"><g fill="url(#bg_a)" stroke="url(#rim_a)" stroke-width="1.3"><path d="M62.5,160.0 C57.9,163.7 62.3,173.7 62.5,182.0 C62.8,190.3 63.5,201.3 64.0,210.0 C64.5,218.7 65.3,226.7 65.5,234.0 C65.8,241.3 65.0,247.0 65.5,254.0 C66.1,261.0 68.2,270.3 69.0,276.0 C69.9,281.7 70.8,284.7 70.5,288.0 C70.3,291.3 68.0,294.0 67.5,296.0 C67.1,298.0 65.5,299.3 68.0,300.0 C70.6,300.7 81.0,302.0 83.1,300.0 C85.3,298.0 80.9,295.7 81.1,288.0 C81.4,280.3 84.0,263.0 84.6,254.0 C85.3,245.0 84.6,241.3 84.9,234.0 C85.3,226.7 85.9,218.7 86.6,210.0 C87.3,201.3 88.6,190.3 89.1,182.0 C89.7,173.7 94.6,163.7 90.1,160.0 C85.7,156.3 67.1,156.3 62.5,160.0 Z"></path></g><g fill="url(#bg_a)" stroke="url(#rim_a)" stroke-width="1.3"><path d="M117.5,160.0 C122.0,163.7 117.7,173.7 117.5,182.0 C117.2,190.3 116.5,201.3 116.0,210.0 C115.5,218.7 114.7,226.7 114.5,234.0 C114.2,241.3 115.0,247.0 114.5,254.0 C113.9,261.0 111.8,270.3 111.0,276.0 C110.1,281.7 109.2,284.7 109.5,288.0 C109.7,291.3 112.0,294.0 112.5,296.0 C112.9,298.0 114.5,299.3 112.0,300.0 C109.4,300.7 99.0,302.0 96.9,300.0 C94.7,298.0 99.1,295.7 98.9,288.0 C98.6,280.3 96.0,263.0 95.4,254.0 C94.7,245.0 95.4,241.3 95.1,234.0 C94.7,226.7 94.1,218.7 93.4,210.0 C92.7,201.3 91.4,190.3 90.9,182.0 C90.3,173.7 85.4,163.7 89.9,160.0 C94.3,156.3 112.9,156.3 117.5,160.0 Z"></path></g><g fill="url(#bg_a)" stroke="url(#rim_a)" stroke-width="1.3"><path d="M102.5,44.0 C107.2,46.0 103.8,53.0 105.5,56.0 C107.2,59.0 109.2,59.7 112.5,62.0 C115.8,64.3 123.7,66.0 125.0,70.0 C126.3,74.0 121.1,81.7 120.5,86.0 C119.9,90.3 120.9,91.8 121.5,96.0 C122.1,100.2 123.6,106.0 123.9,111.0 C124.1,116.0 122.9,121.1 123.0,126.0 C123.1,130.9 124.5,135.7 124.4,140.5 C124.3,145.3 123.3,150.9 122.5,155.0 C121.7,159.1 121.9,161.8 119.5,165.0 C117.1,168.2 112.5,173.2 107.9,174.0 C103.3,174.8 98.0,170.0 92.0,170.0 C86.0,170.0 77.4,174.8 72.1,174.0 C66.9,173.2 62.9,168.2 60.5,165.0 C58.1,161.8 58.3,159.1 57.5,155.0 C56.7,150.9 55.7,145.3 55.6,140.5 C55.5,135.7 56.9,130.9 57.0,126.0 C57.1,121.1 55.9,116.0 56.1,111.0 C56.4,106.0 57.9,100.2 58.5,96.0 C59.1,91.8 60.1,90.3 59.5,86.0 C58.9,81.7 53.7,74.0 55.0,70.0 C56.3,66.0 64.2,64.3 67.5,62.0 C70.8,59.7 72.8,59.0 74.5,56.0 C76.2,53.0 72.8,46.0 77.5,44.0 C82.2,42.0 97.8,42.0 102.5,44.0 Z"></path></g><g fill="url(#arm_a)" stroke="url(#rim_a)" stroke-width="1.3"><path d="M57.0,69.0 C54.2,66.0 46.6,73.5 44.8,78.0 C43.0,82.5 45.9,88.0 46.3,96.0 C46.7,104.0 46.2,116.2 46.9,126.0 C47.6,135.8 48.4,146.8 50.5,155.0 C52.5,163.2 57.6,170.0 59.4,175.0 C61.2,180.0 60.0,183.7 61.4,185.0 C62.8,186.3 67.1,184.7 68.0,183.0 C68.9,181.3 68.2,179.7 67.0,175.0 C65.8,170.3 61.7,163.2 60.5,155.0 C59.3,146.8 59.8,135.8 60.0,126.0 C60.2,116.2 62.0,105.5 61.5,96.0 C61.0,86.5 59.8,72.0 57.0,69.0 Z"></path></g><g fill="url(#arm_a)" stroke="url(#rim_a)" stroke-width="1.3"><path d="M123.0,69.0 C125.8,66.0 133.4,73.5 135.2,78.0 C137.0,82.5 134.1,88.0 133.7,96.0 C133.3,104.0 133.8,116.2 133.1,126.0 C132.4,135.8 131.6,146.8 129.5,155.0 C127.5,163.2 122.4,170.0 120.6,175.0 C118.8,180.0 120.0,183.7 118.6,185.0 C117.2,186.3 112.9,184.7 112.0,183.0 C111.1,181.3 111.8,179.7 113.0,175.0 C114.2,170.3 118.3,163.2 119.5,155.0 C120.7,146.8 120.2,135.8 120.0,126.0 C119.8,116.2 118.0,105.5 118.5,96.0 C119.0,86.5 120.2,72.0 123.0,69.0 Z"></path></g><g fill="url(#bg_a)" stroke="url(#rim_a)" stroke-width="1.3"><ellipse cx="90" cy="28" rx="15.5" ry="18.3"></ellipse></g></g>
-  <g clip-path="url(#cp_a)" class="mesh-lines">
-    <path d="M20,16 Q90,21 160,16"></path><path d="M20,26 Q90,31 160,26"></path><path d="M20,36 Q90,41 160,36"></path><path d="M20,46 Q90,51 160,46"></path><path d="M20,56 Q90,61 160,56"></path><path d="M20,66 Q90,71 160,66"></path><path d="M20,76 Q90,81 160,76"></path><path d="M20,86 Q90,91 160,86"></path><path d="M20,96 Q90,101 160,96"></path><path d="M20,106 Q90,111 160,106"></path><path d="M20,116 Q90,121 160,116"></path><path d="M20,126 Q90,131 160,126"></path><path d="M20,136 Q90,141 160,136"></path><path d="M20,146 Q90,151 160,146"></path><path d="M20,156 Q90,161 160,156"></path><path d="M20,166 Q90,171 160,166"></path><path d="M20,176 Q90,181 160,176"></path><path d="M20,186 Q90,191 160,186"></path><path d="M20,196 Q90,201 160,196"></path><path d="M20,206 Q90,211 160,206"></path><path d="M20,216 Q90,221 160,216"></path><path d="M20,226 Q90,231 160,226"></path><path d="M20,236 Q90,241 160,236"></path><path d="M20,246 Q90,251 160,246"></path><path d="M20,256 Q90,261 160,256"></path><path d="M20,266 Q90,271 160,266"></path><path d="M20,276 Q90,281 160,276"></path><path d="M20,286 Q90,291 160,286"></path><path d="M20,296 Q90,301 160,296"></path>
-    <path d="M46,14 Q28,160 53,300"></path><path d="M62,14 Q51,160 66,300"></path><path d="M76,14 Q70,160 78,300"></path><path d="M90,14 Q90,160 90,300"></path><path d="M104,14 Q110,160 102,300"></path><path d="M118,14 Q129,160 114,300"></path><path d="M134,14 Q152,160 127,300"></path>
-  </g>
-  <g clip-path="url(#cp_a)"><rect width="180" height="316" fill="url(#sh_a)"></rect></g>
-  <g class="bands">
-    <g class="mband mband--trunk" data-band="chest"><ellipse class="mband-back" cx="90.0" cy="96" rx="32.5" ry="8.5"></ellipse><path class="mband-front" d="M57.5,96 A32.5,8.5 0 0 0 122.5,96"></path></g>
-    <g class="mband mband--trunk is-on" data-band="waist"><ellipse class="mband-back" cx="90.0" cy="126" rx="34.0" ry="8.0"></ellipse><path class="mband-front" d="M56.0,126 A34.0,8.0 0 0 0 124.0,126"></path></g>
-    <g class="mband mband--trunk" data-band="hips"><ellipse class="mband-back" cx="90.0" cy="155" rx="33.5" ry="8.5"></ellipse><path class="mband-front" d="M56.5,155 A33.5,8.5 0 0 0 123.5,155"></path></g>
-    <g class="mband mband--limb" data-band="thigh"><ellipse class="mband-back" cx="103.7" cy="198" rx="13.0" ry="4.4"></ellipse><path class="mband-front" d="M90.7,198 A13.0,4.4 0 0 0 116.7,198"></path><ellipse class="mband-back" cx="76.3" cy="198" rx="13.0" ry="4.4"></ellipse><path class="mband-front" d="M63.3,198 A13.0,4.4 0 0 0 89.3,198"></path></g>
-    <g class="mband mband--limb" data-band="arm"><ellipse class="mband-back" cx="126.4" cy="102" rx="7.4" ry="3.4"></ellipse><path class="mband-front" d="M119.0,102 A7.4,3.4 0 0 0 133.8,102"></path><ellipse class="mband-back" cx="53.6" cy="102" rx="7.4" ry="3.4"></ellipse><path class="mband-front" d="M46.2,102 A7.4,3.4 0 0 0 61.0,102"></path></g>
-  </g>
-</svg>
+            <svg class="figure" viewBox="0 0 140 272" role="img" aria-label="Abstract body cross-sections at each measured site">
+              <g class="fig-body">
+                <ellipse cx="70" cy="15" rx="11" ry="12"/>
+                <ellipse cx="70" cy="33" rx="11" ry="3.5"/>
+                <path d="M59,33 C50,42 32,53 30,68 C29,84 36,96 38,110 C39,128 33,139 32,152 C32,168 39,180 39,196 C39,222 43,234 43,252"/>
+                <path d="M81,33 C90,42 108,53 110,68 C111,84 104,96 102,110 C101,128 107,139 108,152 C108,168 101,180 101,196 C101,222 97,234 97,252"/>
+                <path d="M70,160 C70,178 71,182 71,196 C71,222 67,234 67,252"/>
+                <path d="M70,160 C70,178 69,182 69,196 C69,222 73,234 73,252"/>
+                <path d="M34,66 C28,82 23,102 21,124 C20,136 19,146 19,153"/>
+                <path d="M45,70 C39,86 33,106 31,127 C30,139 30,147 30,153"/>
+                <path d="M106,66 C112,82 117,102 119,124 C120,136 121,146 121,153"/>
+                <path d="M95,70 C101,86 107,106 109,127 C110,139 110,147 110,153"/>
+                <path d="M19,153 C19,159 30,159 30,153"/>
+                <path d="M121,153 C121,159 110,159 110,153"/>
+                <path d="M43,252 C43,259 67,259 67,252"/>
+                <path d="M97,252 C97,259 73,259 73,252"/>
+              </g>
+              <g class="fig-ghost">
+                <ellipse cx="70" cy="48"  rx="31" ry="7"/>
+                <ellipse cx="70" cy="88"  rx="36" ry="8"/>
+                <ellipse cx="70" cy="130" rx="35" ry="8"/>
+                <ellipse cx="55" cy="224" rx="13" ry="3.5"/>
+                <ellipse cx="85" cy="224" rx="13" ry="3.5"/>
+                <ellipse cx="25"  cy="90"  rx="8" ry="2.6"/>
+                <ellipse cx="115" cy="90"  rx="8" ry="2.6"/>
+              </g>
+              <g class="fig-band-set">
+                <ellipse class="fig-band" data-band="chest" cx="70" cy="68"  rx="40" ry="9"/>
+                <ellipse class="fig-band" data-band="waist" cx="70" cy="110" rx="32" ry="8"/>
+                <ellipse class="fig-band" data-band="hips"  cx="70" cy="152" rx="38" ry="9"/>
+                <ellipse class="fig-band" data-band="thigh" cx="55" cy="196" rx="16" ry="4.5"/>
+                <ellipse class="fig-band" data-band="thigh" cx="85" cy="196" rx="16" ry="4.5"/>
+                <ellipse class="fig-band" data-band="arm"   cx="25"  cy="118" rx="7" ry="3"/>
+                <ellipse class="fig-band" data-band="arm"   cx="115" cy="118" rx="7" ry="3"/>
+              </g>
+            </svg>
+            <span class="fig-note">Patient's own model renders here</span>
           </div>
 
-          
+          <div class="import-tag"><i></i> Patient data imported here</div>
 
           <div class="rows">
-            <div class="row is-on" data-band="waist"><span class="row__label">Waist</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta row__delta--base">Baseline</span></div>
+            <div class="row" data-band="waist"><span class="row__label">Waist</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta row__delta--base">Baseline</span></div>
             <div class="row" data-band="hips"><span class="row__label">Hips</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta row__delta--base">Baseline</span></div>
             <div class="row" data-band="chest"><span class="row__label">Chest</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta row__delta--base">Baseline</span></div>
             <div class="row" data-band="thigh"><span class="row__label">Thigh</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta row__delta--base">Baseline</span></div>
@@ -748,52 +720,52 @@
         <article class="mcard" data-month="2">
           <div class="mcard__top">
             <div class="mcard__month">Month 2</div>
-            <div class="mcard__date">Scan date captured</div>
+            <div class="mcard__date">Scan date imported</div>
           </div>
           <div class="figure-wrap">
-            <svg class="figure" viewBox="0 0 180 316" role="img" aria-label="Month 2 body model">
-  <defs>
-    <linearGradient id="bg_b" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="90" y2="316">
-      <stop offset="0" stop-color="#E4F3EF"></stop><stop offset=".30" stop-color="#A6D2DB"></stop>
-      <stop offset=".62" stop-color="#6396BA"></stop><stop offset="1" stop-color="#41678F"></stop>
-    </linearGradient>
-    <linearGradient id="arm_b" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="90" y2="316">
-      <stop offset="0" stop-color="#B9DBDD"></stop><stop offset=".30" stop-color="#7FB0C6"></stop>
-      <stop offset=".62" stop-color="#4E7CA6"></stop><stop offset="1" stop-color="#35567C"></stop>
-    </linearGradient>
-    <radialGradient id="sh_b" gradientUnits="userSpaceOnUse" cx="62" cy="100" r="145">
-      <stop offset="0" stop-color="#fff" stop-opacity=".52"></stop>
-      <stop offset=".45" stop-color="#fff" stop-opacity=".10"></stop>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
-    </radialGradient>
-    <linearGradient id="rim_b" gradientUnits="userSpaceOnUse" x1="28" y1="0" x2="152" y2="0">
-      <stop offset="0" stop-color="#16E8C6" stop-opacity=".6"></stop>
-      <stop offset=".5" stop-color="#E4F3EF" stop-opacity=".32"></stop>
-      <stop offset="1" stop-color="#7FD8FF" stop-opacity=".6"></stop>
-    </linearGradient>
-    <clipPath id="cp_b"><ellipse cx="90" cy="28" rx="15.2" ry="17.9"></ellipse><path d="M57.8,69.0 C55.2,66.0 49.4,73.5 48.4,78.0 C47.4,82.5 50.6,88.0 51.6,96.0 C52.6,104.0 53.8,116.2 54.3,126.0 C54.9,135.8 53.6,146.8 55.0,155.0 C56.5,163.2 61.3,170.0 63.0,175.0 C64.6,180.0 63.8,183.7 65.0,185.0 C66.2,186.3 69.5,184.7 70.2,183.0 C70.9,181.3 70.3,179.7 69.2,175.0 C68.0,170.3 63.9,163.2 63.2,155.0 C62.5,146.8 64.9,135.8 65.0,126.0 C65.1,116.2 65.2,105.5 64.0,96.0 C62.8,86.5 60.4,72.0 57.8,69.0 Z"></path><path d="M122.2,69.0 C124.8,66.0 130.6,73.5 131.6,78.0 C132.6,82.5 129.4,88.0 128.4,96.0 C127.4,104.0 126.2,116.2 125.7,126.0 C125.1,135.8 126.4,146.8 125.0,155.0 C123.5,163.2 118.7,170.0 117.0,175.0 C115.4,180.0 116.2,183.7 115.0,185.0 C113.8,186.3 110.5,184.7 109.8,183.0 C109.1,181.3 109.7,179.7 110.8,175.0 C112.0,170.3 116.1,163.2 116.8,155.0 C117.5,146.8 115.1,135.8 115.0,126.0 C114.9,116.2 114.8,105.5 116.0,96.0 C117.2,86.5 119.6,72.0 122.2,69.0 Z"></path><path d="M101.0,44.0 C105.2,46.0 102.3,53.0 104.0,56.0 C105.7,59.0 107.6,59.7 111.0,62.0 C114.4,64.3 123.0,66.0 124.2,70.0 C125.4,74.0 118.9,81.7 118.0,86.0 C117.1,90.3 118.9,91.8 119.0,96.0 C119.1,100.2 119.0,106.0 118.8,111.0 C118.6,116.0 117.9,121.1 118.0,126.0 C118.1,130.9 118.9,135.7 119.2,140.5 C119.5,145.3 120.2,150.9 119.8,155.0 C119.4,159.1 119.0,161.8 116.8,165.0 C114.6,168.2 110.5,173.2 106.4,174.0 C102.3,174.8 97.5,170.0 92.0,170.0 C86.5,170.0 78.4,174.8 73.6,174.0 C68.8,173.2 65.4,168.2 63.2,165.0 C61.0,161.8 60.6,159.1 60.2,155.0 C59.8,150.9 60.5,145.3 60.8,140.5 C61.1,135.7 61.9,130.9 62.0,126.0 C62.1,121.1 61.4,116.0 61.2,111.0 C61.0,106.0 60.9,100.2 61.0,96.0 C61.1,91.8 62.9,90.3 62.0,86.0 C61.1,81.7 54.6,74.0 55.8,70.0 C57.0,66.0 65.6,64.3 69.0,62.0 C72.4,59.7 74.3,59.0 76.0,56.0 C77.7,53.0 74.8,46.0 79.0,44.0 C83.2,42.0 96.8,42.0 101.0,44.0 Z"></path><path d="M65.7,160.0 C61.8,163.7 65.4,173.7 65.7,182.0 C65.9,190.3 66.8,201.3 67.2,210.0 C67.6,218.7 67.9,226.7 68.1,234.0 C68.3,241.3 67.7,247.0 68.2,254.0 C68.7,261.0 70.3,270.3 71.0,276.0 C71.7,281.7 72.7,284.7 72.5,288.0 C72.2,291.3 69.9,294.0 69.5,296.0 C69.1,298.0 67.7,299.3 70.0,300.0 C72.3,300.7 81.6,302.0 83.5,300.0 C85.4,298.0 81.4,295.7 81.5,288.0 C81.6,280.3 83.8,263.0 84.3,254.0 C84.8,245.0 84.4,241.3 84.7,234.0 C84.9,226.7 85.2,218.7 85.8,210.0 C86.4,201.3 87.7,190.3 88.3,182.0 C88.9,173.7 93.1,163.7 89.3,160.0 C85.5,156.3 69.6,156.3 65.7,160.0 Z"></path><path d="M114.3,160.0 C118.2,163.7 114.6,173.7 114.3,182.0 C114.1,190.3 113.2,201.3 112.8,210.0 C112.4,218.7 112.1,226.7 111.9,234.0 C111.7,241.3 112.3,247.0 111.8,254.0 C111.3,261.0 109.7,270.3 109.0,276.0 C108.3,281.7 107.3,284.7 107.5,288.0 C107.8,291.3 110.1,294.0 110.5,296.0 C110.9,298.0 112.3,299.3 110.0,300.0 C107.7,300.7 98.4,302.0 96.5,300.0 C94.6,298.0 98.6,295.7 98.5,288.0 C98.4,280.3 96.2,263.0 95.7,254.0 C95.2,245.0 95.6,241.3 95.3,234.0 C95.1,226.7 94.8,218.7 94.2,210.0 C93.6,201.3 92.3,190.3 91.7,182.0 C91.1,173.7 86.9,163.7 90.7,160.0 C94.5,156.3 110.4,156.3 114.3,160.0 Z"></path></clipPath>
-  </defs>
-  <ellipse cx="90" cy="303" rx="40" ry="6" fill="#0ABFA3" opacity=".13"></ellipse>
-  <g class="body-layers"><g fill="url(#bg_b)" stroke="url(#rim_b)" stroke-width="1.3"><path d="M65.7,160.0 C61.8,163.7 65.4,173.7 65.7,182.0 C65.9,190.3 66.8,201.3 67.2,210.0 C67.6,218.7 67.9,226.7 68.1,234.0 C68.3,241.3 67.7,247.0 68.2,254.0 C68.7,261.0 70.3,270.3 71.0,276.0 C71.7,281.7 72.7,284.7 72.5,288.0 C72.2,291.3 69.9,294.0 69.5,296.0 C69.1,298.0 67.7,299.3 70.0,300.0 C72.3,300.7 81.6,302.0 83.5,300.0 C85.4,298.0 81.4,295.7 81.5,288.0 C81.6,280.3 83.8,263.0 84.3,254.0 C84.8,245.0 84.4,241.3 84.7,234.0 C84.9,226.7 85.2,218.7 85.8,210.0 C86.4,201.3 87.7,190.3 88.3,182.0 C88.9,173.7 93.1,163.7 89.3,160.0 C85.5,156.3 69.6,156.3 65.7,160.0 Z"></path></g><g fill="url(#bg_b)" stroke="url(#rim_b)" stroke-width="1.3"><path d="M114.3,160.0 C118.2,163.7 114.6,173.7 114.3,182.0 C114.1,190.3 113.2,201.3 112.8,210.0 C112.4,218.7 112.1,226.7 111.9,234.0 C111.7,241.3 112.3,247.0 111.8,254.0 C111.3,261.0 109.7,270.3 109.0,276.0 C108.3,281.7 107.3,284.7 107.5,288.0 C107.8,291.3 110.1,294.0 110.5,296.0 C110.9,298.0 112.3,299.3 110.0,300.0 C107.7,300.7 98.4,302.0 96.5,300.0 C94.6,298.0 98.6,295.7 98.5,288.0 C98.4,280.3 96.2,263.0 95.7,254.0 C95.2,245.0 95.6,241.3 95.3,234.0 C95.1,226.7 94.8,218.7 94.2,210.0 C93.6,201.3 92.3,190.3 91.7,182.0 C91.1,173.7 86.9,163.7 90.7,160.0 C94.5,156.3 110.4,156.3 114.3,160.0 Z"></path></g><g fill="url(#bg_b)" stroke="url(#rim_b)" stroke-width="1.3"><path d="M101.0,44.0 C105.2,46.0 102.3,53.0 104.0,56.0 C105.7,59.0 107.6,59.7 111.0,62.0 C114.4,64.3 123.0,66.0 124.2,70.0 C125.4,74.0 118.9,81.7 118.0,86.0 C117.1,90.3 118.9,91.8 119.0,96.0 C119.1,100.2 119.0,106.0 118.8,111.0 C118.6,116.0 117.9,121.1 118.0,126.0 C118.1,130.9 118.9,135.7 119.2,140.5 C119.5,145.3 120.2,150.9 119.8,155.0 C119.4,159.1 119.0,161.8 116.8,165.0 C114.6,168.2 110.5,173.2 106.4,174.0 C102.3,174.8 97.5,170.0 92.0,170.0 C86.5,170.0 78.4,174.8 73.6,174.0 C68.8,173.2 65.4,168.2 63.2,165.0 C61.0,161.8 60.6,159.1 60.2,155.0 C59.8,150.9 60.5,145.3 60.8,140.5 C61.1,135.7 61.9,130.9 62.0,126.0 C62.1,121.1 61.4,116.0 61.2,111.0 C61.0,106.0 60.9,100.2 61.0,96.0 C61.1,91.8 62.9,90.3 62.0,86.0 C61.1,81.7 54.6,74.0 55.8,70.0 C57.0,66.0 65.6,64.3 69.0,62.0 C72.4,59.7 74.3,59.0 76.0,56.0 C77.7,53.0 74.8,46.0 79.0,44.0 C83.2,42.0 96.8,42.0 101.0,44.0 Z"></path></g><g fill="url(#arm_b)" stroke="url(#rim_b)" stroke-width="1.3"><path d="M57.8,69.0 C55.2,66.0 49.4,73.5 48.4,78.0 C47.4,82.5 50.6,88.0 51.6,96.0 C52.6,104.0 53.8,116.2 54.3,126.0 C54.9,135.8 53.6,146.8 55.0,155.0 C56.5,163.2 61.3,170.0 63.0,175.0 C64.6,180.0 63.8,183.7 65.0,185.0 C66.2,186.3 69.5,184.7 70.2,183.0 C70.9,181.3 70.3,179.7 69.2,175.0 C68.0,170.3 63.9,163.2 63.2,155.0 C62.5,146.8 64.9,135.8 65.0,126.0 C65.1,116.2 65.2,105.5 64.0,96.0 C62.8,86.5 60.4,72.0 57.8,69.0 Z"></path></g><g fill="url(#arm_b)" stroke="url(#rim_b)" stroke-width="1.3"><path d="M122.2,69.0 C124.8,66.0 130.6,73.5 131.6,78.0 C132.6,82.5 129.4,88.0 128.4,96.0 C127.4,104.0 126.2,116.2 125.7,126.0 C125.1,135.8 126.4,146.8 125.0,155.0 C123.5,163.2 118.7,170.0 117.0,175.0 C115.4,180.0 116.2,183.7 115.0,185.0 C113.8,186.3 110.5,184.7 109.8,183.0 C109.1,181.3 109.7,179.7 110.8,175.0 C112.0,170.3 116.1,163.2 116.8,155.0 C117.5,146.8 115.1,135.8 115.0,126.0 C114.9,116.2 114.8,105.5 116.0,96.0 C117.2,86.5 119.6,72.0 122.2,69.0 Z"></path></g><g fill="url(#bg_b)" stroke="url(#rim_b)" stroke-width="1.3"><ellipse cx="90" cy="28" rx="15.2" ry="17.9"></ellipse></g></g>
-  <g clip-path="url(#cp_b)" class="mesh-lines">
-    <path d="M20,16 Q90,21 160,16"></path><path d="M20,26 Q90,31 160,26"></path><path d="M20,36 Q90,41 160,36"></path><path d="M20,46 Q90,51 160,46"></path><path d="M20,56 Q90,61 160,56"></path><path d="M20,66 Q90,71 160,66"></path><path d="M20,76 Q90,81 160,76"></path><path d="M20,86 Q90,91 160,86"></path><path d="M20,96 Q90,101 160,96"></path><path d="M20,106 Q90,111 160,106"></path><path d="M20,116 Q90,121 160,116"></path><path d="M20,126 Q90,131 160,126"></path><path d="M20,136 Q90,141 160,136"></path><path d="M20,146 Q90,151 160,146"></path><path d="M20,156 Q90,161 160,156"></path><path d="M20,166 Q90,171 160,166"></path><path d="M20,176 Q90,181 160,176"></path><path d="M20,186 Q90,191 160,186"></path><path d="M20,196 Q90,201 160,196"></path><path d="M20,206 Q90,211 160,206"></path><path d="M20,216 Q90,221 160,216"></path><path d="M20,226 Q90,231 160,226"></path><path d="M20,236 Q90,241 160,236"></path><path d="M20,246 Q90,251 160,246"></path><path d="M20,256 Q90,261 160,256"></path><path d="M20,266 Q90,271 160,266"></path><path d="M20,276 Q90,281 160,276"></path><path d="M20,286 Q90,291 160,286"></path><path d="M20,296 Q90,301 160,296"></path>
-    <path d="M46,14 Q28,160 53,300"></path><path d="M62,14 Q51,160 66,300"></path><path d="M76,14 Q70,160 78,300"></path><path d="M90,14 Q90,160 90,300"></path><path d="M104,14 Q110,160 102,300"></path><path d="M118,14 Q129,160 114,300"></path><path d="M134,14 Q152,160 127,300"></path>
-  </g>
-  <g clip-path="url(#cp_b)"><rect width="180" height="316" fill="url(#sh_b)"></rect></g>
-  <g class="bands">
-    <g class="mband mband--trunk" data-band="chest"><ellipse class="mband-back" cx="90.0" cy="96" rx="30.0" ry="8.5"></ellipse><path class="mband-front" d="M60.0,96 A30.0,8.5 0 0 0 120.0,96"></path></g>
-    <g class="mband mband--trunk is-on" data-band="waist"><ellipse class="mband-back" cx="90.0" cy="126" rx="29.0" ry="8.0"></ellipse><path class="mband-front" d="M61.0,126 A29.0,8.0 0 0 0 119.0,126"></path></g>
-    <g class="mband mband--trunk" data-band="hips"><ellipse class="mband-back" cx="90.0" cy="155" rx="30.8" ry="8.5"></ellipse><path class="mband-front" d="M59.2,155 A30.8,8.5 0 0 0 120.8,155"></path></g>
-    <g class="mband mband--limb" data-band="thigh"><ellipse class="mband-back" cx="102.5" cy="198" rx="11.2" ry="4.4"></ellipse><path class="mband-front" d="M91.3,198 A11.2,4.4 0 0 0 113.7,198"></path><ellipse class="mband-back" cx="77.5" cy="198" rx="11.2" ry="4.4"></ellipse><path class="mband-front" d="M66.3,198 A11.2,4.4 0 0 0 88.7,198"></path></g>
-    <g class="mband mband--limb" data-band="arm"><ellipse class="mband-back" cx="122.0" cy="102" rx="6.1" ry="3.4"></ellipse><path class="mband-front" d="M115.9,102 A6.1,3.4 0 0 0 128.1,102"></path><ellipse class="mband-back" cx="58.0" cy="102" rx="6.1" ry="3.4"></ellipse><path class="mband-front" d="M51.9,102 A6.1,3.4 0 0 0 64.1,102"></path></g>
-  </g>
-</svg>
+            <svg class="figure" viewBox="0 0 140 272" role="img" aria-label="Abstract body cross-sections at each measured site">
+              <g class="fig-body">
+                <ellipse cx="70" cy="15" rx="11" ry="12"/>
+                <ellipse cx="70" cy="33" rx="11" ry="3.5"/>
+                <path d="M59,33 C50,42 32,53 30,68 C29,84 36,96 38,110 C39,128 33,139 32,152 C32,168 39,180 39,196 C39,222 43,234 43,252"/>
+                <path d="M81,33 C90,42 108,53 110,68 C111,84 104,96 102,110 C101,128 107,139 108,152 C108,168 101,180 101,196 C101,222 97,234 97,252"/>
+                <path d="M70,160 C70,178 71,182 71,196 C71,222 67,234 67,252"/>
+                <path d="M70,160 C70,178 69,182 69,196 C69,222 73,234 73,252"/>
+                <path d="M34,66 C28,82 23,102 21,124 C20,136 19,146 19,153"/>
+                <path d="M45,70 C39,86 33,106 31,127 C30,139 30,147 30,153"/>
+                <path d="M106,66 C112,82 117,102 119,124 C120,136 121,146 121,153"/>
+                <path d="M95,70 C101,86 107,106 109,127 C110,139 110,147 110,153"/>
+                <path d="M19,153 C19,159 30,159 30,153"/>
+                <path d="M121,153 C121,159 110,159 110,153"/>
+                <path d="M43,252 C43,259 67,259 67,252"/>
+                <path d="M97,252 C97,259 73,259 73,252"/>
+              </g>
+              <g class="fig-ghost">
+                <ellipse cx="70" cy="48"  rx="31" ry="7"/>
+                <ellipse cx="70" cy="88"  rx="36" ry="8"/>
+                <ellipse cx="70" cy="130" rx="35" ry="8"/>
+                <ellipse cx="55" cy="224" rx="13" ry="3.5"/>
+                <ellipse cx="85" cy="224" rx="13" ry="3.5"/>
+                <ellipse cx="25"  cy="90"  rx="8" ry="2.6"/>
+                <ellipse cx="115" cy="90"  rx="8" ry="2.6"/>
+              </g>
+              <g class="fig-band-set">
+                <ellipse class="fig-band" data-band="chest" cx="70" cy="68"  rx="40" ry="9"/>
+                <ellipse class="fig-band" data-band="waist" cx="70" cy="110" rx="32" ry="8"/>
+                <ellipse class="fig-band" data-band="hips"  cx="70" cy="152" rx="38" ry="9"/>
+                <ellipse class="fig-band" data-band="thigh" cx="55" cy="196" rx="16" ry="4.5"/>
+                <ellipse class="fig-band" data-band="thigh" cx="85" cy="196" rx="16" ry="4.5"/>
+                <ellipse class="fig-band" data-band="arm"   cx="25"  cy="118" rx="7" ry="3"/>
+                <ellipse class="fig-band" data-band="arm"   cx="115" cy="118" rx="7" ry="3"/>
+              </g>
+            </svg>
+            <span class="fig-note">Patient's own model renders here</span>
           </div>
 
-          
+          <div class="import-tag"><i></i> Patient data imported here</div>
 
           <div class="rows">
-            <div class="row is-on" data-band="waist"><span class="row__label">Waist</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
+            <div class="row" data-band="waist"><span class="row__label">Waist</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
             <div class="row" data-band="hips"><span class="row__label">Hips</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
             <div class="row" data-band="chest"><span class="row__label">Chest</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
             <div class="row" data-band="thigh"><span class="row__label">Thigh</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
@@ -805,52 +777,52 @@
         <article class="mcard" data-month="3">
           <div class="mcard__top">
             <div class="mcard__month">Month 3</div>
-            <div class="mcard__date">Scan date captured</div>
+            <div class="mcard__date">Scan date imported</div>
           </div>
           <div class="figure-wrap">
-            <svg class="figure" viewBox="0 0 180 316" role="img" aria-label="Month 3 body model">
-  <defs>
-    <linearGradient id="bg_c" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="90" y2="316">
-      <stop offset="0" stop-color="#E4F3EF"></stop><stop offset=".30" stop-color="#A6D2DB"></stop>
-      <stop offset=".62" stop-color="#6396BA"></stop><stop offset="1" stop-color="#41678F"></stop>
-    </linearGradient>
-    <linearGradient id="arm_c" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="90" y2="316">
-      <stop offset="0" stop-color="#B9DBDD"></stop><stop offset=".30" stop-color="#7FB0C6"></stop>
-      <stop offset=".62" stop-color="#4E7CA6"></stop><stop offset="1" stop-color="#35567C"></stop>
-    </linearGradient>
-    <radialGradient id="sh_c" gradientUnits="userSpaceOnUse" cx="62" cy="100" r="145">
-      <stop offset="0" stop-color="#fff" stop-opacity=".52"></stop>
-      <stop offset=".45" stop-color="#fff" stop-opacity=".10"></stop>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
-    </radialGradient>
-    <linearGradient id="rim_c" gradientUnits="userSpaceOnUse" x1="28" y1="0" x2="152" y2="0">
-      <stop offset="0" stop-color="#16E8C6" stop-opacity=".6"></stop>
-      <stop offset=".5" stop-color="#E4F3EF" stop-opacity=".32"></stop>
-      <stop offset="1" stop-color="#7FD8FF" stop-opacity=".6"></stop>
-    </linearGradient>
-    <clipPath id="cp_c"><ellipse cx="90" cy="28" rx="15.0" ry="17.7"></ellipse><path d="M58.5,69.0 C56.0,66.0 51.4,73.5 50.9,78.0 C50.4,82.5 53.9,88.0 55.6,96.0 C57.3,104.0 60.5,116.2 61.1,126.0 C61.7,135.8 58.2,146.8 59.0,155.0 C59.8,163.2 64.6,170.0 66.1,175.0 C67.6,180.0 67.0,183.7 68.1,185.0 C69.1,186.3 71.9,184.7 72.4,183.0 C73.0,181.3 72.5,179.7 71.4,175.0 C70.3,170.3 66.2,163.2 66.0,155.0 C65.8,146.8 70.2,135.8 70.2,126.0 C70.2,116.2 68.2,105.5 66.2,96.0 C64.2,86.5 61.0,72.0 58.5,69.0 Z"></path><path d="M121.5,69.0 C124.0,66.0 128.6,73.5 129.1,78.0 C129.6,82.5 126.1,88.0 124.4,96.0 C122.7,104.0 119.5,116.2 118.9,126.0 C118.3,135.8 121.8,146.8 121.0,155.0 C120.2,163.2 115.4,170.0 113.9,175.0 C112.4,180.0 113.0,183.7 111.9,185.0 C110.9,186.3 108.1,184.7 107.6,183.0 C107.0,181.3 107.5,179.7 108.6,175.0 C109.7,170.3 113.8,163.2 114.0,155.0 C114.2,146.8 109.8,135.8 109.8,126.0 C109.8,116.2 111.8,105.5 113.8,96.0 C115.8,86.5 119.0,72.0 121.5,69.0 Z"></path><path d="M100.0,44.0 C103.8,46.0 101.3,53.0 103.0,56.0 C104.7,59.0 106.6,59.7 110.0,62.0 C113.4,64.3 122.5,66.0 123.5,70.0 C124.5,74.0 116.9,81.7 115.8,86.0 C114.7,90.3 117.0,91.8 116.8,96.0 C116.6,100.2 115.0,106.0 114.3,111.0 C113.6,116.0 112.8,121.1 112.8,126.0 C112.8,130.9 113.7,135.7 114.4,140.5 C115.1,145.3 117.1,150.9 117.0,155.0 C116.9,159.1 116.0,161.8 114.0,165.0 C112.0,168.2 108.5,173.2 104.8,174.0 C101.2,174.8 97.0,170.0 92.0,170.0 C87.0,170.0 79.5,174.8 75.2,174.0 C70.8,173.2 68.0,168.2 66.0,165.0 C64.0,161.8 63.1,159.1 63.0,155.0 C62.9,150.9 64.9,145.3 65.6,140.5 C66.3,135.7 67.2,130.9 67.2,126.0 C67.2,121.1 66.4,116.0 65.7,111.0 C65.0,106.0 63.4,100.2 63.2,96.0 C63.0,91.8 65.3,90.3 64.2,86.0 C63.1,81.7 55.5,74.0 56.5,70.0 C57.5,66.0 66.6,64.3 70.0,62.0 C73.4,59.7 75.3,59.0 77.0,56.0 C78.7,53.0 76.2,46.0 80.0,44.0 C83.8,42.0 96.2,42.0 100.0,44.0 Z"></path><path d="M68.4,160.0 C64.9,163.7 68.1,173.7 68.4,182.0 C68.6,190.3 69.6,201.3 69.9,210.0 C70.2,218.7 70.1,226.7 70.2,234.0 C70.2,241.3 69.9,247.0 70.4,254.0 C70.8,261.0 72.0,270.3 72.7,276.0 C73.3,281.7 74.4,284.7 74.2,288.0 C73.9,291.3 71.6,294.0 71.2,296.0 C70.7,298.0 69.5,299.3 71.7,300.0 C73.8,300.7 82.4,302.0 84.2,300.0 C85.9,298.0 82.1,295.7 82.2,288.0 C82.2,280.3 84.0,263.0 84.5,254.0 C84.9,245.0 84.8,241.3 85.0,234.0 C85.1,226.7 85.0,218.7 85.5,210.0 C86.0,201.3 87.4,190.3 88.0,182.0 C88.5,173.7 92.2,163.7 89.0,160.0 C85.7,156.3 71.8,156.3 68.4,160.0 Z"></path><path d="M111.6,160.0 C115.1,163.7 111.9,173.7 111.6,182.0 C111.4,190.3 110.4,201.3 110.1,210.0 C109.8,218.7 109.9,226.7 109.8,234.0 C109.8,241.3 110.1,247.0 109.6,254.0 C109.2,261.0 108.0,270.3 107.3,276.0 C106.7,281.7 105.6,284.7 105.8,288.0 C106.1,291.3 108.4,294.0 108.8,296.0 C109.3,298.0 110.5,299.3 108.3,300.0 C106.2,300.7 97.6,302.0 95.8,300.0 C94.1,298.0 97.9,295.7 97.8,288.0 C97.8,280.3 96.0,263.0 95.5,254.0 C95.1,245.0 95.2,241.3 95.0,234.0 C94.9,226.7 95.0,218.7 94.5,210.0 C94.0,201.3 92.6,190.3 92.0,182.0 C91.5,173.7 87.8,163.7 91.0,160.0 C94.3,156.3 108.2,156.3 111.6,160.0 Z"></path></clipPath>
-  </defs>
-  <ellipse cx="90" cy="303" rx="37" ry="6" fill="#0ABFA3" opacity=".13"></ellipse>
-  <g class="body-layers"><g fill="url(#bg_c)" stroke="url(#rim_c)" stroke-width="1.3"><path d="M68.4,160.0 C64.9,163.7 68.1,173.7 68.4,182.0 C68.6,190.3 69.6,201.3 69.9,210.0 C70.2,218.7 70.1,226.7 70.2,234.0 C70.2,241.3 69.9,247.0 70.4,254.0 C70.8,261.0 72.0,270.3 72.7,276.0 C73.3,281.7 74.4,284.7 74.2,288.0 C73.9,291.3 71.6,294.0 71.2,296.0 C70.7,298.0 69.5,299.3 71.7,300.0 C73.8,300.7 82.4,302.0 84.2,300.0 C85.9,298.0 82.1,295.7 82.2,288.0 C82.2,280.3 84.0,263.0 84.5,254.0 C84.9,245.0 84.8,241.3 85.0,234.0 C85.1,226.7 85.0,218.7 85.5,210.0 C86.0,201.3 87.4,190.3 88.0,182.0 C88.5,173.7 92.2,163.7 89.0,160.0 C85.7,156.3 71.8,156.3 68.4,160.0 Z"></path></g><g fill="url(#bg_c)" stroke="url(#rim_c)" stroke-width="1.3"><path d="M111.6,160.0 C115.1,163.7 111.9,173.7 111.6,182.0 C111.4,190.3 110.4,201.3 110.1,210.0 C109.8,218.7 109.9,226.7 109.8,234.0 C109.8,241.3 110.1,247.0 109.6,254.0 C109.2,261.0 108.0,270.3 107.3,276.0 C106.7,281.7 105.6,284.7 105.8,288.0 C106.1,291.3 108.4,294.0 108.8,296.0 C109.3,298.0 110.5,299.3 108.3,300.0 C106.2,300.7 97.6,302.0 95.8,300.0 C94.1,298.0 97.9,295.7 97.8,288.0 C97.8,280.3 96.0,263.0 95.5,254.0 C95.1,245.0 95.2,241.3 95.0,234.0 C94.9,226.7 95.0,218.7 94.5,210.0 C94.0,201.3 92.6,190.3 92.0,182.0 C91.5,173.7 87.8,163.7 91.0,160.0 C94.3,156.3 108.2,156.3 111.6,160.0 Z"></path></g><g fill="url(#bg_c)" stroke="url(#rim_c)" stroke-width="1.3"><path d="M100.0,44.0 C103.8,46.0 101.3,53.0 103.0,56.0 C104.7,59.0 106.6,59.7 110.0,62.0 C113.4,64.3 122.5,66.0 123.5,70.0 C124.5,74.0 116.9,81.7 115.8,86.0 C114.7,90.3 117.0,91.8 116.8,96.0 C116.6,100.2 115.0,106.0 114.3,111.0 C113.6,116.0 112.8,121.1 112.8,126.0 C112.8,130.9 113.7,135.7 114.4,140.5 C115.1,145.3 117.1,150.9 117.0,155.0 C116.9,159.1 116.0,161.8 114.0,165.0 C112.0,168.2 108.5,173.2 104.8,174.0 C101.2,174.8 97.0,170.0 92.0,170.0 C87.0,170.0 79.5,174.8 75.2,174.0 C70.8,173.2 68.0,168.2 66.0,165.0 C64.0,161.8 63.1,159.1 63.0,155.0 C62.9,150.9 64.9,145.3 65.6,140.5 C66.3,135.7 67.2,130.9 67.2,126.0 C67.2,121.1 66.4,116.0 65.7,111.0 C65.0,106.0 63.4,100.2 63.2,96.0 C63.0,91.8 65.3,90.3 64.2,86.0 C63.1,81.7 55.5,74.0 56.5,70.0 C57.5,66.0 66.6,64.3 70.0,62.0 C73.4,59.7 75.3,59.0 77.0,56.0 C78.7,53.0 76.2,46.0 80.0,44.0 C83.8,42.0 96.2,42.0 100.0,44.0 Z"></path></g><g fill="url(#arm_c)" stroke="url(#rim_c)" stroke-width="1.3"><path d="M58.5,69.0 C56.0,66.0 51.4,73.5 50.9,78.0 C50.4,82.5 53.9,88.0 55.6,96.0 C57.3,104.0 60.5,116.2 61.1,126.0 C61.7,135.8 58.2,146.8 59.0,155.0 C59.8,163.2 64.6,170.0 66.1,175.0 C67.6,180.0 67.0,183.7 68.1,185.0 C69.1,186.3 71.9,184.7 72.4,183.0 C73.0,181.3 72.5,179.7 71.4,175.0 C70.3,170.3 66.2,163.2 66.0,155.0 C65.8,146.8 70.2,135.8 70.2,126.0 C70.2,116.2 68.2,105.5 66.2,96.0 C64.2,86.5 61.0,72.0 58.5,69.0 Z"></path></g><g fill="url(#arm_c)" stroke="url(#rim_c)" stroke-width="1.3"><path d="M121.5,69.0 C124.0,66.0 128.6,73.5 129.1,78.0 C129.6,82.5 126.1,88.0 124.4,96.0 C122.7,104.0 119.5,116.2 118.9,126.0 C118.3,135.8 121.8,146.8 121.0,155.0 C120.2,163.2 115.4,170.0 113.9,175.0 C112.4,180.0 113.0,183.7 111.9,185.0 C110.9,186.3 108.1,184.7 107.6,183.0 C107.0,181.3 107.5,179.7 108.6,175.0 C109.7,170.3 113.8,163.2 114.0,155.0 C114.2,146.8 109.8,135.8 109.8,126.0 C109.8,116.2 111.8,105.5 113.8,96.0 C115.8,86.5 119.0,72.0 121.5,69.0 Z"></path></g><g fill="url(#bg_c)" stroke="url(#rim_c)" stroke-width="1.3"><ellipse cx="90" cy="28" rx="15.0" ry="17.7"></ellipse></g></g>
-  <g clip-path="url(#cp_c)" class="mesh-lines">
-    <path d="M20,16 Q90,21 160,16"></path><path d="M20,26 Q90,31 160,26"></path><path d="M20,36 Q90,41 160,36"></path><path d="M20,46 Q90,51 160,46"></path><path d="M20,56 Q90,61 160,56"></path><path d="M20,66 Q90,71 160,66"></path><path d="M20,76 Q90,81 160,76"></path><path d="M20,86 Q90,91 160,86"></path><path d="M20,96 Q90,101 160,96"></path><path d="M20,106 Q90,111 160,106"></path><path d="M20,116 Q90,121 160,116"></path><path d="M20,126 Q90,131 160,126"></path><path d="M20,136 Q90,141 160,136"></path><path d="M20,146 Q90,151 160,146"></path><path d="M20,156 Q90,161 160,156"></path><path d="M20,166 Q90,171 160,166"></path><path d="M20,176 Q90,181 160,176"></path><path d="M20,186 Q90,191 160,186"></path><path d="M20,196 Q90,201 160,196"></path><path d="M20,206 Q90,211 160,206"></path><path d="M20,216 Q90,221 160,216"></path><path d="M20,226 Q90,231 160,226"></path><path d="M20,236 Q90,241 160,236"></path><path d="M20,246 Q90,251 160,246"></path><path d="M20,256 Q90,261 160,256"></path><path d="M20,266 Q90,271 160,266"></path><path d="M20,276 Q90,281 160,276"></path><path d="M20,286 Q90,291 160,286"></path><path d="M20,296 Q90,301 160,296"></path>
-    <path d="M46,14 Q28,160 53,300"></path><path d="M62,14 Q51,160 66,300"></path><path d="M76,14 Q70,160 78,300"></path><path d="M90,14 Q90,160 90,300"></path><path d="M104,14 Q110,160 102,300"></path><path d="M118,14 Q129,160 114,300"></path><path d="M134,14 Q152,160 127,300"></path>
-  </g>
-  <g clip-path="url(#cp_c)"><rect width="180" height="316" fill="url(#sh_c)"></rect></g>
-  <g class="bands">
-    <g class="mband mband--trunk" data-band="chest"><ellipse class="mband-back" cx="90.0" cy="96" rx="27.8" ry="8.5"></ellipse><path class="mband-front" d="M62.2,96 A27.8,8.5 0 0 0 117.8,96"></path></g>
-    <g class="mband mband--trunk is-on" data-band="waist"><ellipse class="mband-back" cx="90.0" cy="126" rx="23.8" ry="8.0"></ellipse><path class="mband-front" d="M66.2,126 A23.8,8.0 0 0 0 113.8,126"></path></g>
-    <g class="mband mband--trunk" data-band="hips"><ellipse class="mband-back" cx="90.0" cy="155" rx="28.0" ry="8.5"></ellipse><path class="mband-front" d="M62.0,155 A28.0,8.5 0 0 0 118.0,155"></path></g>
-    <g class="mband mband--limb" data-band="thigh"><ellipse class="mband-back" cx="101.3" cy="198" rx="9.8" ry="4.4"></ellipse><path class="mband-front" d="M91.5,198 A9.8,4.4 0 0 0 111.1,198"></path><ellipse class="mband-back" cx="78.7" cy="198" rx="9.8" ry="4.4"></ellipse><path class="mband-front" d="M68.9,198 A9.8,4.4 0 0 0 88.5,198"></path></g>
-    <g class="mband mband--limb" data-band="arm"><ellipse class="mband-back" cx="118.3" cy="102" rx="5.3" ry="3.4"></ellipse><path class="mband-front" d="M113.0,102 A5.3,3.4 0 0 0 123.6,102"></path><ellipse class="mband-back" cx="61.7" cy="102" rx="5.3" ry="3.4"></ellipse><path class="mband-front" d="M56.4,102 A5.3,3.4 0 0 0 67.0,102"></path></g>
-  </g>
-</svg>
+            <svg class="figure" viewBox="0 0 140 272" role="img" aria-label="Abstract body cross-sections at each measured site">
+              <g class="fig-body">
+                <ellipse cx="70" cy="15" rx="11" ry="12"/>
+                <ellipse cx="70" cy="33" rx="11" ry="3.5"/>
+                <path d="M59,33 C50,42 32,53 30,68 C29,84 36,96 38,110 C39,128 33,139 32,152 C32,168 39,180 39,196 C39,222 43,234 43,252"/>
+                <path d="M81,33 C90,42 108,53 110,68 C111,84 104,96 102,110 C101,128 107,139 108,152 C108,168 101,180 101,196 C101,222 97,234 97,252"/>
+                <path d="M70,160 C70,178 71,182 71,196 C71,222 67,234 67,252"/>
+                <path d="M70,160 C70,178 69,182 69,196 C69,222 73,234 73,252"/>
+                <path d="M34,66 C28,82 23,102 21,124 C20,136 19,146 19,153"/>
+                <path d="M45,70 C39,86 33,106 31,127 C30,139 30,147 30,153"/>
+                <path d="M106,66 C112,82 117,102 119,124 C120,136 121,146 121,153"/>
+                <path d="M95,70 C101,86 107,106 109,127 C110,139 110,147 110,153"/>
+                <path d="M19,153 C19,159 30,159 30,153"/>
+                <path d="M121,153 C121,159 110,159 110,153"/>
+                <path d="M43,252 C43,259 67,259 67,252"/>
+                <path d="M97,252 C97,259 73,259 73,252"/>
+              </g>
+              <g class="fig-ghost">
+                <ellipse cx="70" cy="48"  rx="31" ry="7"/>
+                <ellipse cx="70" cy="88"  rx="36" ry="8"/>
+                <ellipse cx="70" cy="130" rx="35" ry="8"/>
+                <ellipse cx="55" cy="224" rx="13" ry="3.5"/>
+                <ellipse cx="85" cy="224" rx="13" ry="3.5"/>
+                <ellipse cx="25"  cy="90"  rx="8" ry="2.6"/>
+                <ellipse cx="115" cy="90"  rx="8" ry="2.6"/>
+              </g>
+              <g class="fig-band-set">
+                <ellipse class="fig-band" data-band="chest" cx="70" cy="68"  rx="40" ry="9"/>
+                <ellipse class="fig-band" data-band="waist" cx="70" cy="110" rx="32" ry="8"/>
+                <ellipse class="fig-band" data-band="hips"  cx="70" cy="152" rx="38" ry="9"/>
+                <ellipse class="fig-band" data-band="thigh" cx="55" cy="196" rx="16" ry="4.5"/>
+                <ellipse class="fig-band" data-band="thigh" cx="85" cy="196" rx="16" ry="4.5"/>
+                <ellipse class="fig-band" data-band="arm"   cx="25"  cy="118" rx="7" ry="3"/>
+                <ellipse class="fig-band" data-band="arm"   cx="115" cy="118" rx="7" ry="3"/>
+              </g>
+            </svg>
+            <span class="fig-note">Patient's own model renders here</span>
           </div>
 
-          
+          <div class="import-tag"><i></i> Patient data imported here</div>
 
           <div class="rows">
-            <div class="row is-on" data-band="waist"><span class="row__label">Waist</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
+            <div class="row" data-band="waist"><span class="row__label">Waist</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
             <div class="row" data-band="hips"><span class="row__label">Hips</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
             <div class="row" data-band="chest"><span class="row__label">Chest</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
             <div class="row" data-band="thigh"><span class="row__label">Thigh</span><span class="mask mask--val"></span><span class="row__unit">in</span><span class="row__delta">Δ <span class="mask"></span></span></div>
@@ -874,27 +846,27 @@
         <div class="chart">
           <div class="chart__yl" id="chart-y">Waist circumference — inches</div>
           <svg viewBox="0 0 900 240" preserveAspectRatio="none" role="img" aria-label="Trend chart awaiting data import">
-            <line class="grid-line" x1="60" y1="30" x2="880" y2="30"></line>
-            <line class="grid-line" x1="60" y1="80" x2="880" y2="80"></line>
-            <line class="grid-line" x1="60" y1="130" x2="880" y2="130"></line>
-            <line class="grid-line" x1="60" y1="180" x2="880" y2="180"></line>
-            <line class="axis-line" x1="60" y1="205" x2="880" y2="205"></line>
-            <line class="axis-line" x1="60" y1="20" x2="60" y2="205"></line>
+            <line class="grid-line" x1="60" y1="30"  x2="880" y2="30"/>
+            <line class="grid-line" x1="60" y1="80"  x2="880" y2="80"/>
+            <line class="grid-line" x1="60" y1="130" x2="880" y2="130"/>
+            <line class="grid-line" x1="60" y1="180" x2="880" y2="180"/>
+            <line class="axis-line" x1="60" y1="205" x2="880" y2="205"/>
+            <line class="axis-line" x1="60" y1="20"  x2="60"  y2="205"/>
 
             <g fill="rgba(170,189,207,.16)">
-              <rect x="24" y="26" width="26" height="9" rx="2"></rect>
-              <rect x="24" y="76" width="26" height="9" rx="2"></rect>
-              <rect x="24" y="126" width="26" height="9" rx="2"></rect>
-              <rect x="24" y="176" width="26" height="9" rx="2"></rect>
+              <rect x="24" y="26"  width="26" height="9" rx="2"/>
+              <rect x="24" y="76"  width="26" height="9" rx="2"/>
+              <rect x="24" y="126" width="26" height="9" rx="2"/>
+              <rect x="24" y="176" width="26" height="9" rx="2"/>
             </g>
 
             <g>
-              <line class="slot-line" x1="222" y1="26" x2="222" y2="205"></line>
-              <line class="slot-line" x1="470" y1="26" x2="470" y2="205"></line>
-              <line class="slot-line" x1="718" y1="26" x2="718" y2="205"></line>
-              <circle class="slot-node" cx="222" cy="115" r="6"></circle>
-              <circle class="slot-node" cx="470" cy="115" r="6"></circle>
-              <circle class="slot-node" cx="718" cy="115" r="6"></circle>
+              <line class="slot-line" x1="222" y1="26" x2="222" y2="205"/>
+              <line class="slot-line" x1="470" y1="26" x2="470" y2="205"/>
+              <line class="slot-line" x1="718" y1="26" x2="718" y2="205"/>
+              <circle class="slot-node" cx="222" cy="115" r="6"/>
+              <circle class="slot-node" cx="470" cy="115" r="6"/>
+              <circle class="slot-node" cx="718" cy="115" r="6"/>
             </g>
 
             <g class="slot-text" text-anchor="middle">
@@ -924,7 +896,7 @@
     </div>
 
     <p class="boundary-label" style="margin-top:20px;">
-      Two photos in, measurements out, images gone — and <em>nothing retained</em> on our side after every scan.
+      This screen is <em>empty by design</em> — and it stays that way on our side after every scan.
     </p>
   </div>
 </section>
@@ -1197,7 +1169,7 @@
       none:  'Any of 100+ measured sites — inches'
     };
     function apply(band) {
-      document.querySelectorAll('.mband').forEach(function (b) {
+      document.querySelectorAll('.fig-band').forEach(function (b) {
         b.classList.toggle('is-on', b.dataset.band === band);
       });
       document.querySelectorAll('.row[data-band]').forEach(function (r) {
@@ -1215,6 +1187,5 @@
   })();
 </script>
 
-
-
-</body></html>
+</body>
+</html>
