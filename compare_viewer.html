@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your progress</title>
+<style>
+  :root {
+    --bg: #0B1116; --panel: rgba(18,26,33,0.92);
+    --border: rgba(255,255,255,0.10); --border-hi: rgba(255,255,255,0.20);
+    --text: #F0F4F8; --text-2: #AFBCC8; --text-3: #6F7E8C;
+    --teal: #0ABFA3; --teal-dim: rgba(10,191,163,0.16);
+    --cool: #48A2FF; --warm: #FF8A5C;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  #stage { position: absolute; inset: 0; }
+  canvas { display: block; }
+
+  /* ── The one sentence someone came for ───────────────────────────── */
+  #headline {
+    position: absolute; z-index: 20; top: 0; left: 0; right: 0;
+    padding: 26px 24px 40px; text-align: center; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(11,17,22,0.94) 40%, rgba(11,17,22,0));
+  }
+  #hl-main {
+    font-size: clamp(21px, 3.6vw, 34px); font-weight: 700;
+    letter-spacing: -0.025em; line-height: 1.2;
+  }
+  #hl-main .num { color: var(--teal); }
+  #hl-main .num.up { color: var(--warm); }
+  #hl-sub { font-size: 14.5px; color: var(--text-2); margin-top: 7px; }
+  #hl-note { font-size: 12.5px; color: var(--text-3); margin-top: 3px; }
+
+  /* ── Figures ─────────────────────────────────────────────────────── */
+  /* `bottom` is set from the measured layout; this is only a starting value. */
+  #figure-labels { position: absolute; z-index: 16; left: 0; right: 0; bottom: 128px; display: none; pointer-events: none; }
+  #figure-labels.on { display: block; }
+  #figure-labels span {
+    position: absolute; transform: translateX(-50%);
+    font-size: 14px; font-weight: 600; color: var(--text);
+    text-align: center; white-space: nowrap;
+  }
+  #figure-labels span small { display: block; font-size: 11.5px; font-weight: 400; color: var(--text-3); margin-top: 2px; }
+  /* Positioned in JS from the actual viewport rectangles — a percentage guess
+     drifts as soon as the sheet takes width off one side. */
+
+  /* ── Bottom controls ─────────────────────────────────────────────── */
+  #dock {
+    position: absolute; z-index: 20; left: 50%; bottom: 20px; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+    max-width: calc(100vw - 24px);
+  }
+  .seg { display: flex; background: var(--panel); border: 1px solid var(--border); border-radius: 999px; overflow: hidden;
+         backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .seg button {
+    padding: 10px 17px; background: none; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 13.5px; color: var(--text-3); white-space: nowrap;
+    transition: background .13s, color .13s;
+  }
+  .seg button + button { border-left: 1px solid var(--border); }
+  .seg button.active { background: var(--teal-dim); color: var(--teal); }
+  .toggle {
+    display: flex; align-items: center; gap: 9px; cursor: pointer;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
+    padding: 9px 17px; font-size: 13.5px; color: var(--text-2);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .toggle.on { color: var(--teal); border-color: rgba(10,191,163,0.42); background: var(--teal-dim); }
+  .toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--text-3); }
+  .toggle.on .dot { background: var(--teal); box-shadow: 0 0 8px rgba(10,191,163,0.6); }
+
+  /* ── Plain-language key for the tint ─────────────────────────────── */
+  #key {
+    position: absolute; z-index: 19; left: 50%; bottom: 74px; transform: translateX(-50%);
+    display: none; align-items: center; gap: 14px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 16px; font-size: 12.5px; color: var(--text-2);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); white-space: nowrap;
+  }
+  #key.on { display: flex; }
+  #key i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+
+  /* ── Measurements ────────────────────────────────────────────────── */
+  #sheet {
+    position: absolute; z-index: 21; right: 20px; top: 50%; transform: translateY(-50%);
+    width: 288px; max-height: 66vh; display: flex; flex-direction: column;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); overflow: hidden;
+  }
+  #sheet-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px 6px; cursor: default;
+  }
+  #sheet h3 { font-size: 13.5px; font-weight: 600; flex: 1; }
+  #sheet-toggle {
+    display: none; background: none; border: 0; cursor: pointer;
+    color: var(--text-2); font: inherit; font-size: 12.5px; padding: 4px 2px;
+  }
+  #sheet-toggle svg { width: 15px; height: 15px; vertical-align: -3px; transition: transform .22s; }
+  #sheet.open #sheet-toggle svg { transform: rotate(180deg); }
+  #sheet .sub { padding: 0 17px 10px; font-size: 12px; color: var(--text-3); }
+  #sheet-body { overflow-y: auto; padding: 0 9px 8px; }
+  #sheet-body::-webkit-scrollbar { width: 4px; }
+  #sheet-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+  .m { display: flex; align-items: baseline; gap: 10px; padding: 10px 9px; border-radius: 9px; }
+  .m + .m { border-top: 1px solid rgba(255,255,255,0.05); }
+  .m .nm { flex: 1; font-size: 13.5px; }
+  .m .was { font-family: var(--mono); font-size: 11px; color: var(--text-3); }
+  .m .dl { font-family: var(--mono); font-size: 14.5px; font-weight: 600; min-width: 62px; text-align: right; }
+  .down { color: var(--cool); } .up { color: var(--warm); } .flat { color: var(--text-3); }
+  #more {
+    display: block; width: calc(100% - 18px); margin: 6px 9px 4px;
+    background: none; border: 1px solid var(--border); border-radius: 9px;
+    color: var(--text-2); font: inherit; font-size: 12.5px; padding: 9px; cursor: pointer;
+  }
+  #more:hover { color: var(--text); border-color: var(--border-hi); }
+
+  #loading { position: absolute; inset: 0; z-index: 40; display: flex; align-items: center;
+             justify-content: center; flex-direction: column; gap: 14px; background: var(--bg); transition: opacity .45s; }
+  #loading.gone { opacity: 0; pointer-events: none; }
+  .spin { width: 26px; height: 26px; border: 2px solid rgba(255,255,255,0.13); border-top-color: var(--teal); border-radius: 50%; animation: sp .8s linear infinite; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+  #loading p { font-size: 13px; color: var(--text-3); }
+
+  #fatal { position: absolute; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 32px; text-align: center; }
+  #fatal.on { display: flex; }
+  #fatal p { max-width: 400px; font-size: 14px; color: var(--text-2); line-height: 1.65; }
+
+  /* ── Phones ──────────────────────────────────────────────────────
+     A portrait phone has height to spare and almost no width, and the
+     figures are the thing worth showing. So the sheet sits at the bottom
+     showing its top rows, and opens when tapped; the controls shrink to
+     one row; and the 3D reframes itself around whatever is left. */
+  @media (max-width: 900px) {
+    #headline { padding: 16px 14px 26px; }
+    #hl-sub { font-size: 13.5px; }
+    #hl-note { font-size: 11.5px; }
+
+    #sheet {
+      right: 0; left: 0; top: auto; bottom: 0; transform: none;
+      width: 100%; border-radius: 18px 18px 0 0;
+      border-left: 0; border-right: 0; border-bottom: 0;
+      max-height: 44vh; transition: max-height .26s ease;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    #sheet.open { max-height: 72vh; }
+    #sheet-head { cursor: pointer; padding: 12px 16px 4px; }
+    #sheet-toggle { display: block; }
+    #sheet .sub { padding: 0 16px 8px; }
+    .m { padding: 9px 9px; }
+
+    /* Controls are relocated into the sheet, so they lay out in flow rather
+       than floating over an edge something else already owns. */
+    #sheet-controls { padding: 12px 12px 4px; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+    #sheet-controls:empty { display: none; }
+    #sheet-controls #dock,
+    #sheet-controls #key {
+      position: static; transform: none; left: auto; bottom: auto;
+      max-width: 100%; gap: 6px;
+    }
+    #sheet-controls #key { margin: 0; }
+    .seg button { padding: 9px 12px; font-size: 12.5px; }
+    .toggle { padding: 9px 13px; font-size: 12.5px; }
+    .toggle .long { display: none; }
+    .toggle .short { display: inline; }
+    #key { padding: 7px 13px; font-size: 11.5px; gap: 10px; }
+    #figure-labels span { font-size: 12.5px; }
+    #figure-labels span small { font-size: 10.5px; }
+  }
+  .toggle .short { display: none; }
+
+  @media (max-height: 620px) {
+    #hl-main { font-size: 19px; } #hl-sub { font-size: 12.5px; } #hl-note { display: none; }
+    #headline { padding-bottom: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stage"></div>
+
+<div id="headline">
+  <div id="hl-main">Your progress</div>
+  <div id="hl-sub"></div>
+  <div id="hl-note"></div>
+</div>
+
+<div id="figure-labels">
+  <span class="fl-a"><b id="figA">Before</b><small id="figASub"></small></span>
+  <span class="fl-b"><b id="figB">Now</b><small id="figBSub"></small></span>
+</div>
+
+<div id="key">
+  <span><i style="background:#48A2FF"></i>Smaller</span>
+  <span><i style="background:#8C9AA6"></i>About the same</span>
+  <span><i style="background:#FF8A5C"></i>Larger</span>
+</div>
+
+<div id="dock">
+  <div class="seg" id="view">
+    <button data-v="side" class="active">Side by side</button>
+    <button data-v="stack">Overlaid</button>
+  </div>
+  <label class="toggle" id="tintToggle">
+    <input type="checkbox" id="tint" checked><span class="dot"></span>
+    <span class="long">Show where you changed</span><span class="short">Changes</span>
+  </label>
+  <div class="seg" id="units">
+    <button data-v="cm" class="active">cm</button>
+    <button data-v="in">in</button>
+  </div>
+</div>
+
+<div id="sheet">
+  <!-- On a phone the controls are moved in here. Left floating at the bottom
+       of the screen they sat underneath this sheet, which is anchored to the
+       same edge and painted above them. -->
+  <div id="sheet-controls"></div>
+  <div id="sheet-head">
+    <h3 id="sheet-title">What changed</h3>
+    <button type="button" id="sheet-toggle" aria-expanded="false">
+      <span id="sheet-toggle-label">More</span>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10l4-4 4 4"/></svg>
+    </button>
+  </div>
+  <div class="sub" id="sheet-sub"></div>
+  <div id="sheet-body"></div>
+</div>
+
+<div id="loading"><div class="spin"></div><p>Lining up your scans&hellip;</p></div>
+<div id="fatal"><p id="fatalMsg"></p></div>
+
+<div id="obj_a"></div>
+<div id="obj_b"></div>
+<div id="meta_json"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ═══ Mesh + comparison geometry ═══ */
+/* --------------------------------------------------------------------------
+   Small vector helpers (plain [x,y,z] arrays — keeps this file three.js-free
+   so it can be unit-tested in Node against trimesh/scipy)
+   ------------------------------------------------------------------------ */
+const v3 = {
+  sub: (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]],
+  add: (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]],
+  scale: (a, s) => [a[0] * s, a[1] * s, a[2] * s],
+  dot: (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2],
+  cross: (a, b) => [
+    a[1] * b[2] - a[2] * b[1],
+    a[2] * b[0] - a[0] * b[2],
+    a[0] * b[1] - a[1] * b[0],
+  ],
+  len: (a) => Math.hypot(a[0], a[1], a[2]),
+  dist: (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]),
+  norm: (a) => {
+    const l = Math.hypot(a[0], a[1], a[2]) || 1;
+    return [a[0] / l, a[1] / l, a[2] / l];
+  },
+  lerp: (a, b, t) => [
+    a[0] + (b[0] - a[0]) * t,
+    a[1] + (b[1] - a[1]) * t,
+    a[2] + (b[2] - a[2]) * t,
+  ],
+}
+
+/* --------------------------------------------------------------------------
+   OBJ parsing that PRESERVES the model's own vertex / face ordering.
+
+   This matters more than it looks. three.js' OBJLoader returns a triangle
+   soup and the template then re-welds it, which scrambles vertex ids. We need
+   ids that still line up with:
+     - LANDMARK_INDICES in measurement_definitions.py
+     - the face ids in smplx_body_parts_2_faces.json
+   so that a custom measurement defined here can be replayed server-side, and
+   on a different scan of a different person, and land on the same anatomy.
+   ------------------------------------------------------------------------ */
+function parseOBJIndexed(text) {
+  const positions = [];
+  const indices = [];
+  let nonTriangle = 0;
+
+  const lines = text.split('\n');
+  for (let li = 0; li < lines.length; li++) {
+    const line = lines[li];
+    // Fast reject: only 'v ' and 'f ' lines matter.
+    const c0 = line.charCodeAt(0);
+    if (c0 !== 118 /* v */ && c0 !== 102 /* f */) continue;
+    const c1 = line.charCodeAt(1);
+    if (c1 !== 32 && c1 !== 9) continue; // skip 'vn', 'vt', 'vp'
+
+    const parts = line.trim().split(/\s+/);
+    if (parts[0] === 'v') {
+      positions.push(+parts[1], +parts[2], +parts[3]);
+    } else if (parts[0] === 'f') {
+      const n = parts.length - 1;
+      if (n < 3) continue;
+      if (n > 3) nonTriangle++;
+      // OBJ indices are 1-based; negatives count back from the current end.
+      const vi = [];
+      for (let k = 1; k <= n; k++) {
+        let idx = parseInt(parts[k], 10); // "12/3/4" -> 12
+        if (idx < 0) idx = positions.length / 3 + idx;
+        else idx -= 1;
+        vi.push(idx);
+      }
+      // Fan-triangulate anything that isn't already a triangle.
+      for (let k = 1; k + 1 < vi.length; k++) {
+        indices.push(vi[0], vi[k], vi[k + 1]);
+      }
+    }
+  }
+
+  return {
+    positions: new Float32Array(positions),
+    indices: new Uint32Array(indices),
+    vertCount: positions.length / 3,
+    faceCount: indices.length / 3,
+    // If the file held quads, our triangle ids no longer match the source
+    // model's face ids, so face-based body-part filtering must be disabled.
+    topologyTrusted: nonTriangle === 0,
+  };
+}
+
+/* --------------------------------------------------------------------------
+   Mesh wrapper: caches the derived structures every slice/path needs.
+   ------------------------------------------------------------------------ */
+class MeasureMesh {
+  constructor(positions, indices, offset = [0, 0, 0]) {
+    this.vertCount = positions.length / 3;
+    this.faceCount = indices.length / 3;
+    this.indices = indices;
+
+    // Bake the render offset into a world-space copy once, so slicing, picking
+    // and drawing all share one coordinate frame and nothing has to remember
+    // to convert. Ground is then exactly y = 0.
+    const p = new Float64Array(positions.length);
+    for (let i = 0; i < this.vertCount; i++) {
+      p[i * 3] = positions[i * 3] + offset[0];
+      p[i * 3 + 1] = positions[i * 3 + 1] + offset[1];
+      p[i * 3 + 2] = positions[i * 3 + 2] + offset[2];
+    }
+    this.pos = p;
+
+    this._adj = null;   // lazy: vertex adjacency (CSR) for surface paths
+    this._bbox = null;
+  }
+
+  vert(i) {
+    return [this.pos[i * 3], this.pos[i * 3 + 1], this.pos[i * 3 + 2]];
+  }
+
+  bbox() {
+    if (this._bbox) return this._bbox;
+    const mn = [Infinity, Infinity, Infinity];
+    const mx = [-Infinity, -Infinity, -Infinity];
+    for (let i = 0; i < this.vertCount; i++) {
+      for (let a = 0; a < 3; a++) {
+        const x = this.pos[i * 3 + a];
+        if (x < mn[a]) mn[a] = x;
+        if (x > mx[a]) mx[a] = x;
+      }
+    }
+    return (this._bbox = { min: mn, max: mx });
+  }
+
+  faceVerts(f) {
+    return [this.indices[f * 3], this.indices[f * 3 + 1], this.indices[f * 3 + 2]];
+  }
+
+  faceCentroid(f) {
+    const [a, b, c] = this.faceVerts(f);
+    return [
+      (this.pos[a * 3] + this.pos[b * 3] + this.pos[c * 3]) / 3,
+      (this.pos[a * 3 + 1] + this.pos[b * 3 + 1] + this.pos[c * 3 + 1]) / 3,
+      (this.pos[a * 3 + 2] + this.pos[b * 3 + 2] + this.pos[c * 3 + 2]) / 3,
+    ];
+  }
+
+  /* Path graph in compressed-sparse-row form, built once and reused by every
+     surface-path query.
+
+     It holds the mesh edges PLUS one shortcut across each interior edge,
+     joining the two opposite vertices of the triangle pair. Without those
+     shortcuts a shortest path can only step along mesh edges and is forced to
+     zig-zag, which on this mesh overstates a geodesic by ~6% on average and
+     11% at worst — far too much for a garment measurement. The diagonals give
+     the path twice as many directions to choose from and bring the error down
+     to ~1.5%, for one extra edge per mesh edge. */
+  adjacency() {
+    if (this._adj) return this._adj;
+    const V = this.vertCount, I = this.indices;
+    const edgeOpp = new Map();          // edgeKey -> [oppositeVert, ...]
+    const key = (a, b) => (a < b ? a * V + b : b * V + a);
+
+    for (let f = 0; f < this.faceCount; f++) {
+      const a = I[f * 3], b = I[f * 3 + 1], c = I[f * 3 + 2];
+      const tri = [[a, b, c], [b, c, a], [c, a, b]];
+      for (const [x, y, opp] of tri) {
+        const k = key(x, y);
+        let e = edgeOpp.get(k);
+        if (!e) edgeOpp.set(k, (e = { x: Math.min(x, y), y: Math.max(x, y), opp: [] }));
+        e.opp.push(opp);
+      }
+    }
+
+    const pairs = [];
+    for (const e of edgeOpp.values()) {
+      pairs.push(e.x, e.y);
+      if (e.opp.length === 2 && e.opp[0] !== e.opp[1]) pairs.push(e.opp[0], e.opp[1]);
+    }
+
+    const deg = new Uint32Array(V);
+    for (let i = 0; i < pairs.length; i += 2) { deg[pairs[i]]++; deg[pairs[i + 1]]++; }
+    const start = new Uint32Array(V + 1);
+    for (let i = 0; i < V; i++) start[i + 1] = start[i] + deg[i];
+    const cursor = start.slice(0, V);
+    const nbr = new Uint32Array(start[V]);
+    for (let i = 0; i < pairs.length; i += 2) {
+      const a = pairs[i], b = pairs[i + 1];
+      nbr[cursor[a]++] = b;
+      nbr[cursor[b]++] = a;
+    }
+    return (this._adj = { start, nbr });
+  }
+
+  /* Vertex -> incident faces, in CSR form. Used by the path-straightening pass
+     to keep every point pinned to the surface as it slides. */
+  vertexFaces() {
+    if (this._vf) return this._vf;
+    const V = this.vertCount, I = this.indices, F = this.faceCount;
+    const deg = new Uint32Array(V);
+    for (let i = 0; i < F * 3; i++) deg[I[i]]++;
+    const start = new Uint32Array(V + 1);
+    for (let i = 0; i < V; i++) start[i + 1] = start[i] + deg[i];
+    const cursor = start.slice(0, V);
+    const faces = new Uint32Array(start[V]);
+    for (let f = 0; f < F; f++) {
+      faces[cursor[I[f * 3]]++] = f;
+      faces[cursor[I[f * 3 + 1]]++] = f;
+      faces[cursor[I[f * 3 + 2]]++] = f;
+    }
+    return (this._vf = { start, faces });
+  }
+
+  /* Closest point to `p` on triangle `f`, plus the squared distance. */
+  closestOnFace(f, p) {
+    const [ia, ib, ic] = this.faceVerts(f);
+    const a = this.vert(ia), b = this.vert(ib), c = this.vert(ic);
+    const ab = v3.sub(b, a), ac = v3.sub(c, a), ap = v3.sub(p, a);
+    const d1 = v3.dot(ab, ap), d2 = v3.dot(ac, ap);
+    if (d1 <= 0 && d2 <= 0) return { pt: a, d2: v3.dot(ap, ap) };
+    const bp = v3.sub(p, b);
+    const d3 = v3.dot(ab, bp), d4 = v3.dot(ac, bp);
+    if (d3 >= 0 && d4 <= d3) return { pt: b, d2: v3.dot(bp, bp) };
+    const vc = d1 * d4 - d3 * d2;
+    if (vc <= 0 && d1 >= 0 && d3 <= 0) {
+      const t = d1 / (d1 - d3), pt = v3.add(a, v3.scale(ab, t));
+      return { pt, d2: v3.dot(v3.sub(p, pt), v3.sub(p, pt)) };
+    }
+    const cp = v3.sub(p, c);
+    const d5 = v3.dot(ab, cp), d6 = v3.dot(ac, cp);
+    if (d6 >= 0 && d5 <= d6) return { pt: c, d2: v3.dot(cp, cp) };
+    const vb = d5 * d2 - d1 * d6;
+    if (vb <= 0 && d2 >= 0 && d6 <= 0) {
+      const t = d2 / (d2 - d6), pt = v3.add(a, v3.scale(ac, t));
+      return { pt, d2: v3.dot(v3.sub(p, pt), v3.sub(p, pt)) };
+    }
+    const va = d3 * d6 - d5 * d4;
+    if (va <= 0 && d4 - d3 >= 0 && d5 - d6 >= 0) {
+      const t = (d4 - d3) / ((d4 - d3) + (d5 - d6));
+      const pt = v3.add(b, v3.scale(v3.sub(c, b), t));
+      return { pt, d2: v3.dot(v3.sub(p, pt), v3.sub(p, pt)) };
+    }
+    const den = 1 / (va + vb + vc);
+    const v = vb * den, w = vc * den;
+    const pt = v3.add(a, v3.add(v3.scale(ab, v), v3.scale(ac, w)));
+    return { pt, d2: v3.dot(v3.sub(p, pt), v3.sub(p, pt)) };
+  }
+
+  /* Nearest surface point, searched only in the neighbourhood of `nearFace`.
+     Returns the point and the face it landed on, so the caller can walk. */
+  snapNear(p, nearFace) {
+    const { start, faces } = this.vertexFaces();
+    const cand = new Set([nearFace]);
+    for (const v of this.faceVerts(nearFace)) {
+      for (let k = start[v]; k < start[v + 1]; k++) cand.add(faces[k]);
+    }
+    let best = null, bestD = Infinity, bestF = nearFace;
+    for (const f of cand) {
+      const r = this.closestOnFace(f, p);
+      if (r.d2 < bestD) { bestD = r.d2; best = r.pt; bestF = f; }
+    }
+    return { pt: best, face: bestF };
+  }
+
+  /* Nearest vertex of a given face to an arbitrary point — used to snap a
+     raycast hit onto a real model vertex so the id is portable. */
+  nearestVertexOnFace(f, point) {
+    const vs = this.faceVerts(f);
+    let best = vs[0], bestD = Infinity;
+    for (const v of vs) {
+      const d = v3.dist(this.vert(v), point);
+      if (d < bestD) { bestD = d; best = v; }
+    }
+    return best;
+  }
+
+  /* Brute-force nearest vertex. Only used on the replay path (when a saved
+     definition is re-applied), never in a hot loop. */
+  nearestVertex(point) {
+    let best = 0, bestD = Infinity;
+    for (let i = 0; i < this.vertCount; i++) {
+      const dx = this.pos[i * 3] - point[0];
+      const dy = this.pos[i * 3 + 1] - point[1];
+      const dz = this.pos[i * 3 + 2] - point[2];
+      const d = dx * dx + dy * dy + dz * dz;
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    return best;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Alignment.
+
+   Both scans come out of the model in the same canonical pose and the same
+   coordinate frame, so no rotation or fitting is needed. Two adjustments only:
+   stand each on the floor, and centre both using the SAME horizontal offset —
+   taken from the baseline — because centring each on its own bounding box
+   would quietly absorb a real asymmetric change into the alignment.
+   ------------------------------------------------------------------------ */
+function alignmentOffsets(A, B) {
+  const bbA = A.bbox(), bbB = B.bbox();
+  const cx = (bbA.min[0] + bbA.max[0]) / 2;
+  const cz = (bbA.min[2] + bbA.max[2]) / 2;
+  return {
+    a: [-cx, -bbA.min[1], -cz],
+    b: [-cx, -bbB.min[1], -cz],
+    heightDeltaCm: ((bbB.max[1] - bbB.min[1]) - (bbA.max[1] - bbA.min[1])) * 100,
+  };
+}
+
+/* --------------------------------------------------------------------------
+   Per-vertex displacement, signed along the baseline surface normal.
+
+   Positive means the body moved outward at that point, negative inward. Using
+   the normal rather than raw distance is what makes the sign meaningful: a
+   waist coming in and a waist going out are both "distance moved", and only
+   the projection tells them apart.
+   ------------------------------------------------------------------------ */
+function vertexDisplacement(A, B, normalsA) {
+  const n = Math.min(A.vertCount, B.vertCount);
+  const out = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const dx = B.pos[i * 3] - A.pos[i * 3];
+    const dy = B.pos[i * 3 + 1] - A.pos[i * 3 + 1];
+    const dz = B.pos[i * 3 + 2] - A.pos[i * 3 + 2];
+    out[i] = dx * normalsA[i * 3] + dy * normalsA[i * 3 + 1] + dz * normalsA[i * 3 + 2];
+  }
+  return out;
+}
+
+function vertexNormals(mesh) {
+  const N = new Float32Array(mesh.vertCount * 3);
+  const I = mesh.indices, P = mesh.pos;
+  for (let f = 0; f < mesh.faceCount; f++) {
+    const a = I[f * 3], b = I[f * 3 + 1], c = I[f * 3 + 2];
+    const ax = P[a * 3], ay = P[a * 3 + 1], az = P[a * 3 + 2];
+    const e1x = P[b * 3] - ax, e1y = P[b * 3 + 1] - ay, e1z = P[b * 3 + 2] - az;
+    const e2x = P[c * 3] - ax, e2y = P[c * 3 + 1] - ay, e2z = P[c * 3 + 2] - az;
+    // Cross product length is twice the triangle area, so leaving it unnormalised
+    // weights each face by its size — small slivers stop dominating.
+    const nx = e1y * e2z - e1z * e2y;
+    const ny = e1z * e2x - e1x * e2z;
+    const nz = e1x * e2y - e1y * e2x;
+    for (const v of [a, b, c]) {
+      N[v * 3] += nx; N[v * 3 + 1] += ny; N[v * 3 + 2] += nz;
+    }
+  }
+  for (let i = 0; i < mesh.vertCount; i++) {
+    const x = N[i * 3], y = N[i * 3 + 1], z = N[i * 3 + 2];
+    const l = Math.hypot(x, y, z) || 1;
+    N[i * 3] = x / l; N[i * 3 + 1] = y / l; N[i * 3 + 2] = z / l;
+  }
+  return N;
+}
+
+/* --------------------------------------------------------------------------
+   Robust colour range.
+
+   A handful of vertices — usually around the hands, feet or hairline — move
+   far more than the rest and would otherwise set the scale for the whole map,
+   flattening the torso to a single colour. The range is taken from a high
+   percentile instead, and values beyond it clamp.
+   ------------------------------------------------------------------------ */
+function displacementRange(disp, percentile = 0.97) {
+  const mags = Float32Array.from(disp, Math.abs);
+  mags.sort();
+  const idx = Math.min(mags.length - 1, Math.floor(mags.length * percentile));
+  const r = mags[idx];
+  return r > 1e-5 ? r : 0.01;          // never collapse to zero
+}
+
+function displacementColor(d, range) {
+  const t = Math.max(-1, Math.min(1, d / range));
+  const stops = t < 0
+    ? [[0.16, 0.55, 0.95], [0.55, 0.72, 0.80]]     // inward
+    : [[0.55, 0.72, 0.80], [0.98, 0.45, 0.28]];    // outward
+  const k = Math.abs(t);
+  const [c0, c1] = stops;
+  return [
+    c0[0] + (c1[0] - c0[0]) * k,
+    c0[1] + (c1[1] - c0[1]) * k,
+    c0[2] + (c1[2] - c0[2]) * k,
+  ];
+}
+
+/* --------------------------------------------------------------------------
+   Measurement deltas.
+
+   Matched by name. Anything present in only one scan is reported rather than
+   dropped, because a measurement disappearing between scans is information.
+   ------------------------------------------------------------------------ */
+function measurementDeltas(mA, mB) {
+  const names = [...new Set([...Object.keys(mA || {}), ...Object.keys(mB || {})])];
+  const rows = names.map((name) => {
+    const a = mA ? mA[name] : undefined;
+    const b = mB ? mB[name] : undefined;
+    const both = typeof a === 'number' && typeof b === 'number';
+    return {
+      name,
+      a: typeof a === 'number' ? a : null,
+      b: typeof b === 'number' ? b : null,
+      delta: both ? b - a : null,
+      pct: both && Math.abs(a) > 1e-6 ? ((b - a) / a) * 100 : null,
+      // Words that could be shown to a patient, not internal ones.
+      onlyIn: both ? null : (typeof a === 'number' ? 'earlier' : 'latest'),
+    };
+  });
+  rows.sort((x, y) => {
+    if (x.delta === null) return 1;
+    if (y.delta === null) return -1;
+    return Math.abs(y.delta) - Math.abs(x.delta);
+  });
+  return rows;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   YOUR PROGRESS
+
+   Built for someone on a GLP-1 medication looking at their own body, not for
+   an engineer auditing a mesh. That distinction drove every choice here.
+
+   Such a person wants to know whether they are still making progress when the
+   scale has stopped moving, and where the change is happening. So the screen
+   leads with one sentence — "your waist is 4.2 cm smaller" — over two figures
+   standing side by side: the progress photo people already take, except taken
+   the same way both times.
+
+   What came out, and why: a cross-section tool, a body-volume figure in
+   litres, a displacement scale calibrated in centimetres, an opacity slider,
+   and a per-region breakdown. Each was defensible; none of them answers a
+   patient's question. The colour map survives as an optional tint with a
+   three-word key, because "where did it come off" is a real question — but it
+   is off until asked for.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const $ = (id) => document.getElementById(id);
+
+/* Two ways in: meshes injected into the hidden divs, or posted by the page
+   that embeds this file. The demo site uses the second — two meshes are most
+   of a megabyte, and posting them avoids escaping a whole HTML document
+   inside a JavaScript string. */
+const payload = await new Promise((resolve) => {
+  const inline = $('obj_a').textContent.trim();
+  if (inline) {
+    let m = {};
+    try { m = JSON.parse($('meta_json').textContent || '{}'); } catch (e) {}
+    return resolve({ objA: inline, objB: $('obj_b').textContent.trim(), meta: m });
+  }
+  const onMsg = (e) => {
+    if (e.source !== window.parent) return;
+    const d = e.data;
+    if (!d || d.type !== 'smai-compare') return;
+    window.removeEventListener('message', onMsg);
+    resolve({ objA: d.objA, objB: d.objB, meta: d.meta || {} });
+  };
+  window.addEventListener('message', onMsg);
+  try { parent.postMessage({ type: 'smai-compare-ready' }, '*'); } catch (e) {}
+});
+
+const meta = payload.meta || {};
+const fail = (msg) => {
+  $('fatalMsg').textContent = msg;
+  $('fatal').classList.add('on');
+  $('loading').classList.add('gone');
+};
+
+if (!payload.objA || !payload.objB) {
+  fail('Two scans are needed to show progress, and only one came through.');
+  throw new Error('missing scan');
+}
+
+const pA = parseOBJIndexed(payload.objA);
+const pB = parseOBJIndexed(payload.objB);
+const sameTopology = pA.vertCount === pB.vertCount && pA.faceCount === pB.faceCount;
+
+const off = alignmentOffsets(new MeasureMesh(pA.positions, pA.indices),
+                             new MeasureMesh(pB.positions, pB.indices));
+const A = new MeasureMesh(pA.positions, pA.indices, off.a);
+const B = new MeasureMesh(pB.positions, pB.indices, off.b);
+
+/* The tint is on from the start. The view exists to answer "what changed", and
+   leaving that behind a toggle means the first thing a patient sees is two
+   figures they have to compare by eye — which is the thing they already cannot
+   do reliably in a mirror. With side by side as the layout, the earlier scan
+   stays plain grey and only the latest one is coloured, so it reads as "here is
+   where you are now" rather than as a diagram. */
+const state = { view: 'side', tint: true, unit: meta.unit === 'in' ? 'in' : 'cm', showAll: false };
+
+/* ── Wording ────────────────────────────────────────────────────────────── */
+
+/* The API names measurements the way a measurement engine does. People say
+   "waist", not "waist circumf". */
+const FRIENDLY = {
+  'waist circumf': 'Waist', 'chest circumf': 'Chest', 'hip circumf': 'Hips',
+  'thigh left circumf': 'Thigh', 'thigh right circumf': 'Thigh',
+  'calf left circumf': 'Calf', 'calf right circumf': 'Calf',
+  'bicep right circumf': 'Upper arm', 'bicep left circumf': 'Upper arm',
+  'forearm circumf': 'Forearm', 'neck circumf': 'Neck',
+  'wrist right circumf': 'Wrist', 'ankle left circumf': 'Ankle',
+  'shoulder breadth': 'Shoulders', 'height': 'Height',
+  'neck to pelvis': 'Torso length', 'arm right length': 'Arm length',
+  'inside leg height': 'Inside leg', 'head circumf': 'Head',
+  'back to shoulder': 'Back width', 'right foot length': 'Foot length',
+  'right foot width': 'Foot width',
+};
+// Shown first, and the sheet opens with only these. The rest are one click away.
+const PRIORITY = ['Waist', 'Chest', 'Hips', 'Thigh', 'Upper arm', 'Neck'];
+
+function friendly(name) {
+  const key = String(name).trim().toLowerCase();
+  if (FRIENDLY[key]) return FRIENDLY[key];
+  const cleaned = key.replace(/circumf(erence)?/g, '').replace(/\s+/g, ' ').trim();
+  return cleaned ? cleaned[0].toUpperCase() + cleaned.slice(1) : name;
+}
+
+const conv = (v) => (state.unit === 'cm' ? v : v / 2.54);
+const unitName = () => (state.unit === 'cm' ? 'cm' : 'in');
+const sizeWord = (d) => (d < 0 ? 'smaller' : 'larger');
+
+/* ── Data ───────────────────────────────────────────────────────────────── */
+const deltas = measurementDeltas(meta.measurementsA, meta.measurementsB)
+  .filter((r) => r.delta !== null);
+
+// Height is typed in, not measured, so a change in it is a change in what was
+// typed. It stays out of the "what changed" story.
+const bodyDeltas = deltas.filter((r) => friendly(r.name) !== 'Height');
+
+const daysBetween = (meta.dateA && meta.dateB)
+  ? Math.round((new Date(meta.dateB) - new Date(meta.dateA)) / 86400000) : null;
+
+function headlinePick() {
+  // Waist leads when it is there: the measurement people track, the one that
+  // moves first, and the one a clinician asks about.
+  const waist = bodyDeltas.find((r) => friendly(r.name) === 'Waist');
+  if (waist && Math.abs(waist.delta) >= 0.15) return waist;
+  const biggest = bodyDeltas[0];
+  return biggest && Math.abs(biggest.delta) >= 0.15 ? biggest : null;
+}
+
+function buildHeadline() {
+  const pick = headlinePick();
+  const main = $('hl-main'), sub = $('hl-sub'), note = $('hl-note');
+
+  if (!pick) {
+    main.textContent = bodyDeltas.length ? 'Almost no change yet' : 'Your body, then and now';
+    sub.textContent = daysBetween
+      ? 'Between your two scans, ' + daysBetween + (daysBetween === 1 ? ' day' : ' days') + ' apart.'
+      : 'Both scans, side by side.';
+    note.textContent = 'Measured the same way both times, so small changes are real ones.';
+    return;
+  }
+
+  const cls = pick.delta < 0 ? 'num' : 'num up';
+  main.innerHTML = 'Your ' + friendly(pick.name).toLowerCase() + ' is ' +
+    '<span class="' + cls + '">' + Math.abs(conv(pick.delta)).toFixed(1) + ' ' + unitName() + '</span> ' +
+    sizeWord(pick.delta);
+
+  const others = bodyDeltas
+    .filter((r) => r !== pick && Math.abs(r.delta) >= 0.3)
+    .slice(0, 2)
+    .map((r) => friendly(r.name).toLowerCase() + ' ' + Math.abs(conv(r.delta)).toFixed(1) + ' ' +
+                unitName() + ' ' + sizeWord(r.delta));
+
+  sub.textContent = daysBetween
+    ? 'over ' + daysBetween + (daysBetween === 1 ? ' day' : ' days') +
+      (others.length ? ' \u2014 also ' + others.join(', ') : '')
+    : (others.length ? 'Also ' + others.join(', ') : '');
+
+  // The line that matters to someone whose weight has stalled.
+  note.textContent = 'Your scale cannot see this. Both scans were measured the same way.';
+}
+
+/* ── Scene ──────────────────────────────────────────────────────────────── */
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0B1116);
+
+const camera = new THREE.PerspectiveCamera(36, innerWidth / innerHeight, 0.05, 100);
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.06;
+$('stage').appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.enablePan = false;
+controls.minDistance = 0.8;
+controls.maxDistance = 7;
+
+scene.add(new THREE.HemisphereLight(0xC6DCEC, 0x0B1116, 0.9));
+const keyLight = new THREE.DirectionalLight(0xffffff, 1.55);
+keyLight.position.set(2.2, 3.6, 2.8);
+scene.add(keyLight);
+const rimLight = new THREE.DirectionalLight(0x86DCFF, 0.6);
+rimLight.position.set(-2.8, 1.4, -2.4);
+scene.add(rimLight);
+
+const grid = new THREE.GridHelper(7, 28, 0x1A2730, 0x131D25);
+grid.material.transparent = true;
+grid.material.opacity = 0.45;
+scene.add(grid);
+
+function geomFrom(mesh) {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(Float32Array.from(mesh.pos), 3));
+  g.setIndex(new THREE.BufferAttribute(Uint32Array.from(mesh.indices), 1));
+  g.computeVertexNormals();
+  return g;
+}
+const geoA = geomFrom(A), geoB = geomFrom(B);
+
+// The earlier scan reads as the past: cooler, flatter, quieter.
+const matA = new THREE.MeshStandardMaterial({ color: 0x7D8D9C, roughness: 0.85, metalness: 0.0 });
+const matAGhost = new THREE.MeshStandardMaterial({
+  color: 0x8FA3B5, roughness: 0.8, transparent: true, opacity: 0.3,
+  depthWrite: false, side: THREE.DoubleSide,
+});
+const matB = new THREE.MeshStandardMaterial({ color: 0x3ACBB4, roughness: 0.5, metalness: 0.05 });
+const matTint = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.58 });
+
+const meshA = new THREE.Mesh(geoA, matA);
+const meshB = new THREE.Mesh(geoB, matB);
+meshA.renderOrder = 1;
+scene.add(meshA, meshB);
+// Both stand at the origin. Side by side is drawn as two viewports rather
+// than by pushing the figures apart in the scene — see render().
+
+/* Where the surface moved, coloured. Same maths as before; what changed is
+   that it is optional and its key is three words rather than a scale bar. */
+if (sameTopology) {
+  const disp = vertexDisplacement(A, B, vertexNormals(A));
+  const range = displacementRange(disp);
+  const colors = new Float32Array(B.vertCount * 3);
+  for (let i = 0; i < B.vertCount; i++) {
+    const c = displacementColor(disp[i], range);
+    colors[i * 3] = c[0]; colors[i * 3 + 1] = c[1]; colors[i * 3 + 2] = c[2];
+  }
+  geoB.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+} else {
+  $('tintToggle').style.display = 'none';
+}
+
+const bbA = A.bbox(), bbB = B.bbox();
+const figH = Math.max(bbA.max[1] - bbA.min[1], bbB.max[1] - bbB.min[1]);
+const bodyW = Math.max(bbA.max[0] - bbA.min[0], bbB.max[0] - bbB.min[0]);
+
+controls.target.set(0, figH * 0.52, 0);
+camera.position.set(0, figH * 0.52, figH * 2.2);
+controls.update();
+
+/* A slow turntable. A still figure invites nobody to drag it, and most people
+   here will never think to try. It stops for good the moment they do. */
+let spinning = true;
+controls.addEventListener('start', () => { spinning = false; });
+
+function applyView() {
+  const side = state.view === 'side';
+  meshA.material = side ? matA : matAGhost;
+  meshB.material = (state.tint && sameTopology) ? matTint : matB;
+
+  $('figure-labels').classList.toggle('on', side);
+  $('key').classList.toggle('on', state.tint && sameTopology);
+  document.querySelectorAll('#view button').forEach((b) => b.classList.toggle('active', b.dataset.v === state.view));
+  $('tintToggle').classList.toggle('on', state.tint);
+  layout();
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FRAMING
+
+   Two problems, one answer.
+
+   The first is a phone. Two figures side by side in a portrait viewport, drawn
+   by one camera with the figures pushed apart in the scene, forces the camera
+   so far back that both end up as thumbnails. Instead each figure is drawn
+   into its own half of the screen by its own pass, so each gets the full
+   height and half the width — which for a tall thin subject is plenty.
+
+   The second is that the interface covers the picture. The headline sits over
+   the top, the sheet over the bottom on a phone and the right on a desktop.
+   Framing to the canvas therefore puts the body's middle behind a panel. So
+   the camera is framed to the clear band instead, measured from where the
+   panels actually are rather than from guessed constants — they move when the
+   text wraps or the sheet opens.
+   ═════════════════════════════════════════════════════════════════════════ */
+const layoutState = { views: [], insets: { top: 0, bottom: 0, left: 0, right: 0 } };
+
+function measureInsets() {
+  const w = innerWidth, h = innerHeight;
+  const narrow = w < 900;
+  const r = (el) => el.getBoundingClientRect();
+
+  // The headline fades out over a gradient, so only its text really blocks.
+  const hl = r($('headline'));
+  const top = Math.min(h * 0.34, hl.height * 0.74);
+
+  const dockTop = r($('dock')).top;
+  let bottom = Math.max(0, h - dockTop + 10);
+  let right = 0;
+
+  const sheet = r($('sheet'));
+  if (narrow) bottom = Math.max(bottom, h - sheet.top + 6);
+  else right = Math.max(0, w - sheet.left + 12);
+
+  if (state.tint && sameTopology) {
+    bottom = Math.max(bottom, h - r($('key')).top + 8);
+  }
+  // The figure labels are deliberately not measured here — they are placed
+  // from this result, so reading them back would be circular. layout() adds a
+  // fixed allowance for them instead.
+
+  // Never let the panels eat the whole picture.
+  bottom = Math.min(bottom, h * 0.55);
+  right = Math.min(right, w * 0.42);
+  return { top, bottom, left: 0, right };
+}
+
+const LABEL_BAND = 48;      // room under the figures for their date labels
+
+function layout() {
+  const w = innerWidth, h = innerHeight;
+  const ins = measureInsets();
+
+  // Labels sit just above whatever the panels occupy, wherever that is —
+  // anchoring them to the bottom of the screen put them behind the sheet.
+  if (state.view === 'side') {
+    $('figure-labels').style.bottom = (ins.bottom + 8) + 'px';
+    ins.bottom += LABEL_BAND;
+  }
+
+  const availW = Math.max(80, w - ins.left - ins.right);
+
+  layoutState.insets = ins;
+  layoutState.views = state.view === 'side'
+    ? [{ x: ins.left, w: availW / 2, mesh: meshA },
+       { x: ins.left + availW / 2, w: availW / 2, mesh: meshB }]
+    : [{ x: ins.left, w: availW, mesh: null }];
+
+  // Labels go under the middle of each viewport, wherever those ended up.
+  if (state.view === 'side') {
+    const [a, b] = layoutState.views;
+    $('figure-labels').querySelector('.fl-a').style.left = (a.x + a.w / 2) + 'px';
+    $('figure-labels').querySelector('.fl-b').style.left = (b.x + b.w / 2) + 'px';
+  }
+}
+
+/* Point the camera so the figure fills the clear band rather than the canvas.
+
+   setViewOffset renders a window out of a larger notional image, which is what
+   shifts the body clear of the panels without moving the orbit centre — moving
+   the target instead would make the figure swing when dragged. */
+function frameCamera(view) {
+  const h = innerHeight;
+  const ins = layoutState.insets;
+  const vw = view.w, vh = h;
+  const bandH = Math.max(60, vh - ins.top - ins.bottom);
+
+  // Where the figure should sit vertically, against where it would sit.
+  const dy = ((ins.top + (vh - ins.bottom)) / 2) - vh / 2;
+  const fullH = vh + 2 * Math.abs(dy);
+  const fullW = vw * (fullH / vh);
+
+  camera.aspect = fullW / fullH;
+  camera.setViewOffset(fullW, fullH, (fullW - vw) / 2, (fullH - vh) / 2 - dy, vw, vh);
+
+  // Distance so the body spans the band, with room for the wider of the two.
+  const vfov = (camera.fov * Math.PI) / 180;
+  const needH = figH * 1.12 * (fullH / bandH);
+  let dist = (needH / 2) / Math.tan(vfov / 2);
+  const hfov = 2 * Math.atan(Math.tan(vfov / 2) * camera.aspect);
+  const needW = bodyW * (state.view === 'side' ? 1.7 : 2.4);
+  dist = Math.max(dist, (needW / 2) / Math.tan(hfov / 2));
+
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  camera.position.copy(controls.target).addScaledVector(dir, dist);
+  camera.updateProjectionMatrix();
+}
+
+/* ── Measurement sheet ──────────────────────────────────────────────────── */
+function buildSheet() {
+  const host = $('sheet-body');
+  host.innerHTML = '';
+
+  if (!bodyDeltas.length) {
+    $('sheet-sub').textContent = '';
+    host.innerHTML = '<p style="padding:12px;font-size:12.5px;color:var(--text-3)">No measurements were saved with these scans.</p>';
+    return;
+  }
+
+  const named = bodyDeltas.map((r) => ({ ...r, label: friendly(r.name) }));
+  const primary = PRIORITY.map((p) => named.find((r) => r.label === p)).filter(Boolean);
+  const rest = named.filter((r) => primary.indexOf(r) < 0);
+  const rows = state.showAll ? primary.concat(rest) : primary;
+
+  $('sheet-sub').textContent = daysBetween
+    ? daysBetween + (daysBetween === 1 ? ' day' : ' days') + ' between scans'
+    : 'Between your two scans';
+
+  rows.forEach((r) => {
+    const k = r.delta < -0.05 ? 'down' : r.delta > 0.05 ? 'up' : 'flat';
+    const sign = r.delta < -0.05 ? '\u2212' : r.delta > 0.05 ? '+' : '';
+    const el = document.createElement('div');
+    el.className = 'm';
+    el.innerHTML =
+      '<span class="nm">' + r.label + '</span>' +
+      '<span class="was">' + conv(r.a).toFixed(1) + ' \u2192 ' + conv(r.b).toFixed(1) + '</span>' +
+      '<span class="dl ' + k + '">' + sign + Math.abs(conv(r.delta)).toFixed(1) + '</span>';
+    host.appendChild(el);
+  });
+
+  if (rest.length) {
+    const b = document.createElement('button');
+    b.id = 'more';
+    b.textContent = state.showAll ? 'Show fewer' : 'Show all ' + named.length + ' measurements';
+    b.addEventListener('click', () => { state.showAll = !state.showAll; buildSheet(); });
+    host.appendChild(b);
+  }
+}
+
+/* ── Labels ─────────────────────────────────────────────────────────────── */
+$('figA').textContent = meta.labelA || 'Before';
+$('figB').textContent = meta.labelB || 'Now';
+$('figASub').textContent = 'first scan';
+$('figBSub').textContent = 'latest scan';
+
+/* ── Wiring ─────────────────────────────────────────────────────────────── */
+document.querySelectorAll('#view button').forEach((b) => {
+  b.addEventListener('click', () => { state.view = b.dataset.v; applyView(); });
+});
+$('tint').addEventListener('change', (e) => { state.tint = e.target.checked; applyView(); });
+document.querySelectorAll('#units button').forEach((b) => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#units button').forEach((x) => x.classList.toggle('active', x === b));
+    state.unit = b.dataset.v;
+    buildHeadline(); buildSheet();
+  });
+});
+
+addEventListener('resize', () => {
+  renderer.setSize(innerWidth, innerHeight);
+  layout();
+});
+
+/* Controls belong at the bottom of the screen on a phone — but so does the
+   sheet, and only one of them can own that edge. So on a narrow screen they
+   move inside it, where they lay out in flow and cannot be covered. */
+const narrowQuery = matchMedia('(max-width: 900px)');
+function placeControls() {
+  const slot = $('sheet-controls');
+  const dock = $('dock'), keyEl = $('key');
+  if (narrowQuery.matches) {
+    if (dock.parentElement !== slot) { slot.appendChild(dock); slot.appendChild(keyEl); }
+  } else if (dock.parentElement === slot) {
+    document.body.appendChild(dock);
+    document.body.appendChild(keyEl);
+  }
+}
+narrowQuery.addEventListener('change', () => { placeControls(); layout(); });
+
+/* The sheet peeks on a phone and opens on tap. Opening it changes how much
+   picture is left, so the framing is recomputed either way. */
+$('sheet-head').addEventListener('click', () => {
+  if (innerWidth >= 900) return;
+  const open = $('sheet').classList.toggle('open');
+  $('sheet-toggle').setAttribute('aria-expanded', String(open));
+  $('sheet-toggle-label').textContent = open ? 'Less' : 'More';
+  setTimeout(layout, 280);
+});
+
+buildHeadline();
+buildSheet();
+applyView();
+if (!sameTopology) {
+  $('hl-note').textContent = 'These scans differ in structure, so only the measurements are compared.';
+}
+
+renderer.autoClear = false;
+
+function render() {
+  const h = innerHeight;
+  renderer.setScissorTest(false);
+  renderer.clear();
+
+  const views = layoutState.views;
+  if (views.length === 1) {
+    meshA.visible = true; meshB.visible = true;
+    renderer.setViewport(views[0].x, 0, views[0].w, h);
+    renderer.setScissor(views[0].x, 0, views[0].w, h);
+    renderer.setScissorTest(true);
+    frameCamera(views[0]);
+    renderer.render(scene, camera);
+  } else {
+    // One pass per figure, each masked to its own half. The other figure is
+    // hidden for the pass so it cannot intrude at the edge.
+    renderer.setScissorTest(true);
+    for (const v of views) {
+      meshA.visible = v.mesh === meshA;
+      meshB.visible = v.mesh === meshB;
+      renderer.setViewport(v.x, 0, v.w, h);
+      renderer.setScissor(v.x, 0, v.w, h);
+      frameCamera(v);
+      renderer.render(scene, camera);
+    }
+    meshA.visible = true; meshB.visible = true;
+  }
+  renderer.setScissorTest(false);
+}
+
+let started = false, last = 0;
+function animate(t) {
+  requestAnimationFrame(animate);
+  if (spinning) {
+    const dt = last ? (t - last) / 1000 : 0;
+    const ang = Math.atan2(camera.position.x, camera.position.z) + dt * 0.22;
+    const r = Math.hypot(camera.position.x, camera.position.z);
+    camera.position.x = Math.sin(ang) * r;
+    camera.position.z = Math.cos(ang) * r;
+    camera.lookAt(controls.target);
+  }
+  last = t;
+  controls.update();
+  render();
+  if (!started) { started = true; $('loading').classList.add('gone'); }
+}
+
+placeControls();
+layout();
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
