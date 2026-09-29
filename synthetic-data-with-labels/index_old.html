@@ -12,29 +12,30 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
 
-  <title>Synthetic Human Training Data, Auto-Labeled | SnapMeasureAI</title>
-  <meta name="description" content="Photorealistic synthetic people with exact ground truth: the 3D body under the clothing, pose, keypoints, depth and body measurements. No manual labels.">
+  <title>Synthetic Training Data, Auto-Labeled | SnapMeasureAI</title>
+  <meta name="description" content="Generate unlimited photorealistic training images with accurate ground truth labels — instantly, with no manual annotation or human subjects required.">
   <meta name="keywords" content="synthetic human training data, SMPL synthetic dataset, pose estimation training data, body model synthetic images, auto-labeled computer vision data, synthetic data GDPR compliant, human pose segmentation dataset, diffusion synthetic data generation, annotation-free training data, body shape training data">
   <meta name="author" content="SnapMeasureAI">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://snapmeasureai.com/synthetic-data-with-labels/">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
 
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="video.other">
   <meta property="og:url" content="https://snapmeasureai.com/synthetic-data-with-labels/">
-  <meta property="og:title" content="Synthetic Human Training Data, Auto-Labeled | SnapMeasureAI">
-  <meta property="og:description" content="Photorealistic synthetic people with exact ground truth: the 3D body under the clothing, pose, keypoints, depth and body measurements. No manual labels.">
-  <meta property="og:image" content="https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="A photorealistic synthetic person with a lens revealing the exact 3D body under their clothing">
+  <meta property="og:title" content="Synthetic Training Data, Auto-Labeled | SnapMeasureAI">
+  <meta property="og:description" content="Generate unlimited photorealistic training images with accurate ground truth labels — instantly, with no manual annotation or human subjects required.">
+  <meta property="og:image" content="https://snapmeasureai.com/img/ai-labeled-image-generation.jpg">
+  <meta property="og:video" content="https://snapmeasureai.com/img/ai-labeled-image-generation.mp4">
+  <meta property="og:video:secure_url" content="https://snapmeasureai.com/img/ai-labeled-image-generation.mp4">
+  <meta property="og:video:type" content="video/mp4">
+  <meta property="og:video:width" content="1080">
+  <meta property="og:video:height" content="1080">
   <meta property="og:site_name" content="SnapMeasureAI">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Synthetic Human Training Data, Auto-Labeled | SnapMeasureAI">
-  <meta name="twitter:description" content="Photorealistic synthetic people with exact ground truth: the 3D body under the clothing, pose, keypoints, depth and body measurements. No manual labels.">
-  <meta name="twitter:image" content="https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg">
-  <meta name="twitter:image:alt" content="A photorealistic synthetic person with a lens revealing the exact 3D body under their clothing">
+  <meta name="twitter:title" content="Synthetic Training Data, Auto-Labeled | SnapMeasureAI">
+  <meta name="twitter:description" content="Generate unlimited photorealistic training images with accurate ground truth labels — instantly, with no manual annotation or human subjects required.">
+  <meta name="twitter:image" content="https://snapmeasureai.com/img/ai-labeled-image-generation.jpg">
 
   <script type="application/ld+json">
   {
@@ -68,22 +69,6 @@
       "name": "SnapMeasureAI",
       "url": "https://snapmeasureai.com"
     }
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    "name": "SnapMeasureAI synthetic humans with 3D body ground truth",
-    "description": "A 100,000-image production batch of photorealistic synthetic people, each generated from a parametric 3D body by diffusion conditioned on surface normals and pose. Every image is labeled with the exact body under the clothing: shape parameters, 3D pose, Halpe-26 2D keypoints, body-part segmentation, metric depth, camera intrinsics and 42 body measurements. Sixteen samples and 240 random images are browsable on this page; full datasets are licensed.",
-    "url": "https://snapmeasureai.com/synthetic-data-with-labels/#dataset",
-    "image": "https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg",
-    "isAccessibleForFree": false,
-    "keywords": ["synthetic human data", "body shape under clothing", "body measurement dataset", "human pose estimation", "3D human body", "synthetic training data", "diffusion synthetic data"],
-    "variableMeasured": ["body shape parameters", "3D body pose", "2D keypoints (Halpe-26)", "body-part segmentation", "metric depth", "camera intrinsics", "body measurements"],
-    "measurementTechnique": "Diffusion rendering conditioned on surface normals and pose from parametric 3D body models",
-    "creator": { "@type": "Organization", "name": "SnapMeasureAI", "url": "https://snapmeasureai.com" }
   }
   </script>
 
@@ -341,6 +326,16 @@
     .step__title { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
     .step__body { font-size: 15px; color: var(--text-2); line-height: 1.7; }
 
+    /* ---- VIDEO — square container for 560x560 video, centred ---- */
+    .video-demo {
+      margin-top: 48px;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+      aspect-ratio: 1 / 1;
+      max-width: 560px;
+    }
+    .video-demo video { width: 100%; height: 100%; display: block; object-fit: cover; }
 
     /* ---- THREE-IMAGE COMPARISON SLIDER ---- */
     .comparison-wrap {
@@ -560,162 +555,6 @@
     @media (hover: hover) {
       .btn--primary:hover { opacity: .88; color: #fff; }
     }
-
-    /* ---- INSIDE THE DATASET ---- */
-    .section--data { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .dx { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; align-items: start; }
-    .dx-viewer { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-    .dx-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; border-bottom: 1px solid var(--border); }
-    .dx-chip {
-      font: inherit; font-size: 13px; font-weight: 600; line-height: 1; padding: 8px 13px; border-radius: 100px;
-      cursor: pointer; background: transparent; color: var(--text-2); border: 1px solid var(--border-hi);
-      transition: background .15s, color .15s, border-color .15s;
-    }
-    .dx-chip:hover { color: var(--text); }
-    .dx-chip[aria-pressed="true"] { background: var(--teal-dim); color: var(--teal); border-color: rgba(10,191,163,.55); }
-    .dx-chip:focus-visible, .dx-nav:focus-visible, .dx-thumb:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
-
-    .dx-stage {
-      position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: var(--bg2);
-      cursor: crosshair; touch-action: pan-y; user-select: none; -webkit-user-select: none; outline: none;
-    }
-    .dx-stage:focus-visible { box-shadow: inset 0 0 0 2px var(--teal); }
-    .dx-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-    .dx-layer {
-      clip-path: circle(var(--r, 90px) at var(--x, 50%) var(--y, 45%));
-      transition: clip-path .4s cubic-bezier(.2,.7,.2,1);
-    }
-    .dx-stage.is-live .dx-layer { transition: none; }
-    .dx-stage.is-full .dx-layer { clip-path: circle(150% at var(--x, 50%) var(--y, 45%)); transition: clip-path .5s cubic-bezier(.2,.7,.2,1); }
-    .dx-ring {
-      position: absolute; left: var(--x, 50%); top: var(--y, 45%);
-      width: calc(var(--r, 90px) * 2); height: calc(var(--r, 90px) * 2);
-      transform: translate(-50%, -50%); border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,.92);
-      box-shadow: 0 0 0 1px rgba(0,0,0,.35), 0 0 40px rgba(10,191,163,.35), inset 0 0 26px rgba(10,191,163,.16);
-      touch-action: none; cursor: grab;
-      transition: left .4s cubic-bezier(.2,.7,.2,1), top .4s cubic-bezier(.2,.7,.2,1), opacity .3s;
-    }
-    .dx-ring:active { cursor: grabbing; }
-    .dx-stage.is-hover, .dx-stage.is-hover .dx-ring { cursor: none; }   /* the lens is the cursor */
-    .dx-stage.is-live .dx-ring { transition: opacity .3s; }
-    .dx-stage.is-full .dx-ring { opacity: 0; pointer-events: none; }
-    .dx-tag {
-      position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%);
-      white-space: nowrap; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-      color: var(--text); background: rgba(8,12,16,.8); border: 1px solid var(--border-hi);
-      border-radius: 100px; padding: 5px 11px; backdrop-filter: blur(4px); pointer-events: none;
-    }
-    .dx-tag em { font-style: normal; color: var(--teal); }
-
-    .dx-bar { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-3); }
-    .dx-nav {
-      width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; border: 1px solid var(--border-hi);
-      background: transparent; color: var(--text-2); cursor: pointer; font-size: 18px; line-height: 1;
-      display: inline-flex; align-items: center; justify-content: center;
-    }
-    .dx-nav:hover { color: var(--teal); border-color: rgba(10,191,163,.55); }
-    .dx-count { font-variant-numeric: tabular-nums; color: var(--text-2); min-width: 54px; text-align: center; }
-    .dx-hint { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .dx-reveal { margin-left: auto; flex-shrink: 0; }
-    .dx-thumbs { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; padding: 0 12px 12px; }
-    .dx-thumb {
-      aspect-ratio: 1; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); padding: 0;
-      cursor: pointer; background: var(--bg2); opacity: .5; transition: opacity .15s, border-color .15s;
-    }
-    .dx-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .dx-thumb:hover { opacity: .85; }
-    .dx-thumb[aria-current="true"] { opacity: 1; border-color: var(--teal); }
-
-    .dx-panel { display: flex; flex-direction: column; gap: 12px; }
-    .dx-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
-    .dx-k {
-      display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
-      font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
-    }
-    .dx-k span { color: var(--text-3); letter-spacing: .02em; font-weight: 600; text-transform: none; font-size: 12px; }
-    .dx-subject { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .dx-subject b { display: block; font-size: 21px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -.01em; line-height: 1.2; }
-    .dx-subject small { font-size: 12px; color: var(--text-3); }
-    .dx-meas { width: 100%; border-collapse: collapse; font-size: 14px; }
-    .dx-meas td { padding: 5px 0; border-bottom: 1px solid var(--border); color: var(--text-2); }
-    .dx-meas td:last-child { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
-    .dx-meas tr:last-child td { border-bottom: none; }
-    .dx-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; color: var(--text-2); line-height: 1.65; white-space: pre; overflow-x: auto; }
-    .dx-note { font-size: 13px; color: var(--text-3); margin-top: 12px; line-height: 1.6; }
-    .dx-json summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-2); list-style: none; }
-    .dx-json summary::-webkit-details-marker { display: none; }
-    .dx-json summary::before { content: '{ }'; color: var(--teal); margin-right: 10px; font-family: ui-monospace, Menlo, Consolas, monospace; }
-    .dx-json summary:hover { color: var(--text); }
-    .dx-json pre { margin-top: 14px; max-height: 300px; overflow: auto; }
-
-    /* ---- SAMPLE WALL ---- */
-    .dx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin: 72px 0 16px; flex-wrap: wrap; }
-    .dx-head h3 { font-size: 22px; font-weight: 700; letter-spacing: -.015em; line-height: 1.3; }
-    .dx-head p { font-size: 14px; color: var(--text-3); }
-    .wall {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 3px;
-      border-radius: var(--radius-lg); overflow: hidden; max-height: 480px;
-      -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent);
-              mask-image: linear-gradient(to bottom, #000 72%, transparent);
-    }
-    .wall.is-open { max-height: none; -webkit-mask-image: none; mask-image: none; }
-    .wall-tile { position: relative; aspect-ratio: 1; background: var(--bg3); overflow: hidden; cursor: pointer; }
-    .wall-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s, filter .3s; }
-    .wall-tile svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .2s; pointer-events: none; }
-    .wall-tile.is-sk img { filter: brightness(.4) saturate(.5); transform: scale(1.04); }
-    .wall-tile.is-sk svg { opacity: 1; }
-    @media (hover: hover) {
-      .wall-tile:hover img { filter: brightness(.4) saturate(.5); transform: scale(1.04); }
-      .wall-tile:hover svg { opacity: 1; }
-    }
-    .wall-more { display: flex; margin: 16px auto 0; font-size: 14px; padding: 11px 22px; }
-
-    /* ---- COVERAGE ---- */
-    .cov { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .cov-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 20px 12px; position: relative; }
-    .cov-card h4 { font-size: 15px; font-weight: 600; line-height: 1.3; }
-    .cov-card > p { font-size: 13px; color: var(--text-3); margin: 2px 0 14px; }
-    .cov-card svg { width: 100%; height: auto; display: block; overflow: visible; }
-    .cov-bar { fill: var(--teal); opacity: .78; transition: opacity .12s; }
-    .cov-bar.is-hot { opacity: 1; }
-    .cov-hit { fill: transparent; cursor: default; }
-    .cov-axis { fill: var(--text-3); font-size: 11px; font-family: inherit; }
-    .cov-base { stroke: var(--border-hi); stroke-width: 1; }
-    .cov-sw { stroke: rgba(255,255,255,.16); stroke-width: 1; }   /* keeps the deepest tones visible on the dark card */
-    .cov-tip {
-      position: absolute; pointer-events: none; background: var(--bg); border: 1px solid var(--border-hi);
-      border-radius: 8px; padding: 6px 10px; font-size: 12.5px; color: var(--text-2); white-space: nowrap;
-      transform: translate(-50%, calc(-100% - 8px)); opacity: 0; transition: opacity .12s; z-index: 5;
-    }
-    .cov-tip b { color: var(--text); font-variant-numeric: tabular-nums; }
-    .cov-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-    .cov-tile { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
-    .cov-tile .v { font-size: 26px; font-weight: 700; color: var(--teal); letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.25; }
-    .cov-tile .l { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
-    .cov-tile .d { font-size: 13px; color: var(--text-2); margin-top: 4px; }
-    .cov-foot { font-size: 13px; color: var(--text-3); margin-top: 16px; max-width: 760px; }
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-
-    @media (max-width: 900px) {
-      .dx { grid-template-columns: 1fr; }
-      .cov { grid-template-columns: 1fr; }
-      .cov-tiles { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .dx-subject { grid-template-columns: repeat(2, 1fr); row-gap: 12px; }
-      .dx-thumbs { gap: 3px; padding: 0 8px 8px; }
-      .dx-chips { padding: 10px 8px; }
-      .dx-chip { font-size: 12px; padding: 7px 10px; }
-      .dx-hint { display: none; }
-      .wall { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); max-height: 400px; }
-      .dx-head { margin-top: 56px; }
-      /* SVG text scales with the chart; at phone width 11px shrank to ~7px. */
-      .cov-axis { font-size: 18px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .dx-layer, .dx-ring, .dx-stage.is-full .dx-layer, .wall-tile img { transition: none; }
-    }
   </style>
 </head>
 <body>
@@ -730,7 +569,6 @@
     </a>
     <ul class="nav__links">
       <li><a href="#how-it-works">How it works</a></li>
-      <li><a href="#dataset">Dataset</a></li>
       <li><a href="#use-cases">Use cases</a></li>
       <li class="nav__dropdown">
         <button class="nav__dropdown-toggle">
@@ -758,7 +596,6 @@
 
 <div class="nav__mobile-menu" id="mobile-menu">
   <a href="#how-it-works" onclick="toggleMenu()">How it works</a>
-  <a href="#dataset" onclick="toggleMenu()">Dataset</a>
   <a href="#use-cases" onclick="toggleMenu()">Use cases</a>
   <a href="#faqs" onclick="toggleMenu()">FAQs</a>
   <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
@@ -871,76 +708,72 @@
       </div>
     </div>
 
+    <!-- Video — matches the single video on the live synthetic data page -->
+    <div class="video-demo">
+      <video webkit-playsinline playsinline controls preload="metadata"
+        poster="/img/ai-labeled-image-generation.jpg"
+        style="width:100%;max-height:560px;object-fit:contain;display:block;">
+        <source src="/img/ai-labeled-image-generation.mp4" type="video/mp4">
+      </video>
+    </div>
 
+    <!-- THREE-IMAGE COMPARISON SLIDER -->
+    <div class="comparison-wrap">
 
-  </div>
-</section>
-
-<!-- ==================== INSIDE THE DATASET ==================== -->
-<section class="section section--alt section--data" id="dataset">
-  <div class="container">
-    <p class="section__eyebrow">Inside the dataset</p>
-    <h2 class="section__title">See the body under the clothes.</h2>
-    <p class="section__sub">
-      Sixteen samples from a 100,000-image production batch. Move the lens across a photo to
-      reveal the exact 3D body inside the clothing &mdash; the shape, pose and measurements every
-      label is computed from. The clothes, hair and light belong to the photograph. The body
-      underneath is ground truth.
-    </p>
-
-    <div class="dx">
-      <div class="dx-viewer">
-        <div class="dx-chips" id="dxChips" role="toolbar" aria-label="Label layer shown in the lens"></div>
-        <div class="dx-stage" id="dxStage" tabindex="0" role="img" aria-label="Photograph with a lens revealing the 3D body under the clothing">
-          <img id="dxPhoto" alt="" width="512" height="512" decoding="async">
-          <img id="dxLayer" class="dx-layer" alt="" width="512" height="512" decoding="async">
-          <div class="dx-ring" id="dxRing" aria-hidden="true"><span class="dx-tag" id="dxTag">Body under clothing</span></div>
+      <div class="tri-panel-labels">
+        <div class="tri-panel-label">
+          <div class="tri-panel-label__key">Left</div>
+          <div class="tri-panel-label__val">3D body model — the source</div>
         </div>
-        <div class="dx-bar">
-          <button class="dx-nav" id="dxPrev" aria-label="Previous sample">&#8249;</button>
-          <span class="dx-count" id="dxCount" aria-live="polite">01 / 16</span>
-          <button class="dx-nav" id="dxNext" aria-label="Next sample">&#8250;</button>
-          <span class="dx-hint" id="dxHint">Move the lens to see through the clothing</span>
-          <button class="dx-chip dx-reveal" id="dxReveal" aria-pressed="false">Reveal all</button>
+        <div class="tri-panel-label">
+          <div class="tri-panel-label__key">Centre</div>
+          <div class="tri-panel-label__val">Photorealistic render via diffusion</div>
         </div>
-        <div class="dx-thumbs" id="dxThumbs" aria-label="Samples"></div>
+        <div class="tri-panel-label">
+          <div class="tri-panel-label__key">Right</div>
+          <div class="tri-panel-label__val">Geometry-derived labels — keypoints, mask, depth</div>
+        </div>
       </div>
 
-      <aside class="dx-panel" aria-label="Labels for this sample">
-        <div class="dx-card">
-          <div class="dx-k">Subject <span id="dxId"></span></div>
-          <div class="dx-subject" id="dxSubject"></div>
-        </div>
-        <div class="dx-card">
-          <div class="dx-k">Body measurements <span id="dxMeasN"></span></div>
-          <table class="dx-meas" id="dxMeas"></table>
-          <p class="dx-note">Measured on the 3D body itself &mdash; the exact target a measurement model learns to recover through clothing.</p>
-        </div>
-        <div class="dx-card">
-          <div class="dx-k">Camera <span>intrinsics, pixels</span></div>
-          <div class="dx-mono" id="dxCam"></div>
-        </div>
-        <details class="dx-card dx-json">
-          <summary>Raw label file for this image</summary>
-          <pre class="dx-mono" id="dxJson"></pre>
-        </details>
-      </aside>
-    </div>
+      <div class="tri-slider" id="triSlider"
+        role="img"
+        aria-label="Drag handles to compare: 3D body model source, photorealistic render, and geometry-derived labels">
 
-    <div class="dx-head">
-      <h3>240 random samples. Same batch, same labels.</h3>
-      <p>Hover or tap any image to see its skeleton.</p>
-    </div>
-    <div class="wall" id="wall"></div>
-    <button class="btn btn--ghost wall-more" id="wallMore">Show all 240</button>
+        <!-- Base: photorealistic render — always fully visible, never clipped -->
+        <div class="tri-layer layer-render" id="layerRender">
+          <img src="/img/synthetic_image_male.webp" alt="Photorealistic rendered image" draggable="false">
+        </div>
+        <!-- Left overlay: 3D model — transparent PNG, shown left of handle A -->
+        <div class="tri-layer layer-model" id="layerModel">
+          <img src="/img/synthetic_image_control_male.png" alt="3D body model" draggable="false">
+        </div>
+        <!-- Right overlay: labels — transparent PNG, shown right of handle B -->
+        <div class="tri-layer layer-labels" id="layerLabels">
+          <img src="/img/synthetic_image_keypoints_male.png" alt="Aligned keypoint and segmentation labels" draggable="false">
+        </div>
 
-    <div class="dx-head">
-      <h3>Coverage you can inspect.</h3>
-      <p id="covN">Distributions across the full batch.</p>
-    </div>
-    <div class="cov" id="cov"></div>
-    <div class="cov-tiles" id="covTiles"></div>
-    <p class="cov-foot" id="covFoot"></p>
+        <!-- Left handle (A): separates model | render -->
+        <div class="tri-handle" id="handleA" role="slider" aria-label="Left boundary" tabindex="0" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100">
+          <div class="tri-arrow" aria-hidden="true">
+            <span class="tri-arrow-l"></span>
+            <span class="tri-arrow-r"></span>
+          </div>
+        </div>
+        <!-- Right handle (B): separates render | labels -->
+        <div class="tri-handle" id="handleB" role="slider" aria-label="Right boundary" tabindex="0" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+          <div class="tri-arrow" aria-hidden="true">
+            <span class="tri-arrow-l"></span>
+            <span class="tri-arrow-r"></span>
+          </div>
+        </div>
+
+        <div class="tri-hint" id="triHint" aria-hidden="true">
+          <span>← drag handles to compare →</span>
+        </div>
+      </div>
+
+    </div><!-- /.comparison-wrap -->
+
   </div>
 </section>
 
@@ -1010,9 +843,9 @@
         <div class="spec-item__note">SMPL body model parameters, COCO-format keypoints, and custom schemas for your pipeline</div>
       </div>
       <div class="spec-item">
-        <div class="spec-item__label">Ground truth</div>
-        <div class="spec-item__value">The body, not the clothes</div>
-        <div class="spec-item__note">Shape, pose, keypoints and measurements are exact to the 3D body inside every image — including the parts clothing hides</div>
+        <div class="spec-item__label">Label alignment</div>
+        <div class="spec-item__value">Geometry-derived</div>
+        <div class="spec-item__note">Labels computed from the 3D source — keypoints, masks, and depth share the same ground truth as the render</div>
       </div>
       <div class="spec-item">
         <div class="spec-item__label">Privacy</div>
@@ -1155,461 +988,118 @@
   });
 
   /* ================================================================
-     INSIDE THE DATASET
-     Lens explorer, sample wall and coverage charts. Everything is read
-     from /synthetic-data-with-labels/dataset/; images load lazily. If the
-     data cannot be fetched the section hides itself rather than showing
-     empty frames.
+     THREE-IMAGE COMPARISON SLIDER
+     
+     Layers:
+       layer-render z:1 — always fully visible, never clipped.
+                          This is the photorealistic scene background.
+       layer-model  z:2 — transparent PNG overlay, clipped to show
+                          only LEFT of handle A (posA).
+       layer-labels z:3 — transparent PNG overlay, clipped to show
+                          only RIGHT of handle B (posB).
+     
+     Transparent areas of model and labels naturally reveal the
+     render behind them — no background hacks needed.
+     
+     Handles: handle.style.left = posX + '%', CSS transform:translateX(-50%)
+     centres the 44px hit zone on posX%. No margin-left.
+     
+     Bumping: dragging A past B pushes B. Dragging B past A pushes A.
   ================================================================ */
   (function () {
-    var section = document.getElementById('dataset');
-    if (!section) return;
-    /* Root-absolute: works whether the page is reached with or without the
-       trailing slash. */
-    var BASE = '/synthetic-data-with-labels/dataset/';
-    /* Every layer describes the BODY under the clothing, never the clothing:
-       the photograph's fabric, hair and fingers are its own, and a lens that
-       compared them against geometry would be inviting the wrong question. */
-    var LAYERS = [
-      ['body', 'Body under clothing'], ['parts', 'Body parts'],
-      ['depth', 'Depth'], ['skeleton', 'Skeleton']
-    ];
-    var LAYER_NAME = {};
-    LAYERS.forEach(function (l) { LAYER_NAME[l[0]] = l[1]; });
-    /* Halpe-26: body and feet, no hands and no face mesh. Indices as in the
-       label file: 0 nose, 1-4 eyes/ears, 5-16 limbs, 17 head, 18 neck,
-       19 pelvis, 20-25 toes and heels. */
-    var LIMBS = [[17,18],[18,19],[18,5],[18,6],[5,7],[7,9],[6,8],[8,10],
-                 [19,11],[19,12],[11,13],[13,15],[12,14],[14,16],
-                 [15,20],[15,22],[15,24],[16,21],[16,23],[16,25],
-                 [0,1],[0,2],[1,3],[2,4]];
-    var TONES = ['#f6ede4','#f3e7db','#f7ead0','#eadaba','#d7bd96',
-                 '#a07e56','#825c43','#604134','#3a312a','#292420'];
-    var TONE_NAMES = ['very light','light','light beige','medium beige','olive',
-                      'tan brown','medium brown','deep brown','rich dark brown','very deep'];
-    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var SVGNS = 'http://www.w3.org/2000/svg';
+    var slider      = document.getElementById('triSlider');
+    var layerModel  = document.getElementById('layerModel');
+    var layerLabels = document.getElementById('layerLabels');
+    var handleA     = document.getElementById('handleA');
+    var handleB     = document.getElementById('handleB');
+    var hint        = document.getElementById('triHint');
 
-    function $(id) { return document.getElementById(id); }
-    function el(tag, attrs, text) {
-      var n = document.createElement(tag);
-      for (var k in (attrs || {})) n.setAttribute(k, attrs[k]);
-      if (text != null) n.textContent = text;
-      return n;
-    }
-    function sv(tag, attrs) {
-      var n = document.createElementNS(SVGNS, tag);
-      for (var k in (attrs || {})) n.setAttribute(k, attrs[k]);
-      return n;
-    }
-    function num(v, d) {
-      return Number(v).toLocaleString('en-US', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
-    }
+    var posA = 46.5;   /* left handle — right edge of model overlay */
+    var posB = 57.5;   /* right handle — left edge of labels overlay */
+    var active      = null;
+    var hasDragged  = false;
+
+    /* render layer is never clipped — it is always the full background scene */
+
     function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
-    function joint(name) {
-      var side = name[0] === 'L' && name !== 'Neck' ? 'Left ' : name[0] === 'R' ? 'Right ' : '';
-      var rest = side ? name.slice(1) : name;
-      return (side + rest).replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, function (c) { return c.toUpperCase(); });
+
+    function render() {
+      var a = posA.toFixed(3);
+      var b = posB.toFixed(3);
+
+      /*
+        model: transparent PNG overlay — show only LEFT of posA.
+          clip away everything to the right of posA.
+      */
+      layerModel.style.clipPath = 'inset(0 ' + (100 - posA).toFixed(3) + '% 0 0%)';
+
+      /*
+        labels: transparent PNG overlay — show only RIGHT of posB.
+          clip away everything to the left of posB.
+      */
+      layerLabels.style.clipPath = 'inset(0 0% 0 ' + b + '%)';
+
+      /* render layer: never clipped — always full background */
+
+      /* Position handles */
+      handleA.style.left = a + '%';
+      handleB.style.left = b + '%';
+
+      handleA.setAttribute('aria-valuenow', Math.round(posA));
+      handleB.setAttribute('aria-valuenow', Math.round(posB));
     }
 
-    Promise.all(['samples.json', 'wall.json', 'stats.json'].map(function (f) {
-      return fetch(BASE + f).then(function (r) { if (!r.ok) throw new Error(f); return r.json(); });
-    })).then(function (d) {
-      explorer(d[0]);
-      wall(d[1]);
-      coverage(d[2]);
-    }).catch(function () { section.style.display = 'none'; });
+    /* Run immediately so layers are correct before any interaction */
+    render();
 
-    /* ------------------------------------------------------------ lens */
-    function explorer(samples) {
-      var stage = $('dxStage'), photo = $('dxPhoto'), layer = $('dxLayer');
-      var ring = $('dxRing'), tag = $('dxTag'), reveal = $('dxReveal');
-      var cur = 0, key = 'body', full = false;
-      var lx = 0.5, ly = 0.42;              /* lens centre, as a fraction of the stage */
-      var hovering = false, dragging = false, lastUser = -1e9;
-      var centre = [0.5, 0.45], span = [0.12, 0.25];
-
-      function src(s, k) { return BASE + 'featured/' + parseInt(s.id, 10) + '_' + k + '.webp'; }
-
-      var chips = $('dxChips');
-      LAYERS.forEach(function (l) {
-        var b = el('button', { 'class': 'dx-chip', 'type': 'button', 'aria-pressed': String(l[0] === key) }, l[1]);
-        b.addEventListener('click', function () {
-          key = l[0];
-          chips.querySelectorAll('.dx-chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
-          layer.src = src(samples[cur], key);
-          place();
-        });
-        chips.appendChild(b);
-      });
-
-      var thumbs = $('dxThumbs');
-      samples.forEach(function (s, i) {
-        var b = el('button', { 'class': 'dx-thumb', 'type': 'button', 'aria-label': 'Sample ' + (i + 1) });
-        b.appendChild(el('img', { src: src(s, 'photo'), alt: '', loading: 'lazy', width: 64, height: 64 }));
-        b.addEventListener('click', function () { show(i); });
-        thumbs.appendChild(b);
-      });
-
-      function radius() { return Math.max(62, stage.clientWidth * 0.2); }
-
-      function place() {
-        var w = stage.clientWidth, h = stage.clientHeight, r = radius();
-        stage.style.setProperty('--r', r.toFixed(1) + 'px');
-        stage.style.setProperty('--x', (lx * w).toFixed(1) + 'px');
-        stage.style.setProperty('--y', (ly * h).toFixed(1) + 'px');
-        var label = LAYER_NAME[key];
-        if (key === 'skeleton') {
-          /* Name the joint under the lens: the skeleton is labelled, not drawn. */
-          var s = samples[cur], k = w / 512, best = null, bd = Infinity;
-          s.keypoints_2d.forEach(function (p, j) {
-            var dx = p.xy[0] * k - lx * w, dy = p.xy[1] * k - ly * h, dd = dx * dx + dy * dy;
-            if (dd < bd) { bd = dd; best = p; }
-          });
-          if (best && bd < (r * 0.55) * (r * 0.55)) {
-            tag.innerHTML = '';
-            tag.appendChild(document.createTextNode(label + ' · '));
-            tag.appendChild(el('em', null, joint(best.name)));
-            return;
-          }
-        }
-        tag.textContent = label;
-      }
-
-      function jump(x, y) {
-        /* Discrete moves animate; continuous tracking does not. */
-        stage.classList.remove('is-live');
-        lx = x; ly = y; place();
-        clearTimeout(jump.t);
-        jump.t = setTimeout(function () { if (hovering || dragging) stage.classList.add('is-live'); }, 420);
-      }
-
-      function fromEvent(e) {
-        var rect = stage.getBoundingClientRect();
-        return [clamp((e.clientX - rect.left) / rect.width, 0, 1),
-                clamp((e.clientY - rect.top) / rect.height, 0, 1)];
-      }
-
-      stage.addEventListener('pointerenter', function (e) {
-        if (e.pointerType !== 'mouse') return;
-        hovering = true; stage.classList.add('is-live', 'is-hover');
-      });
-      stage.addEventListener('pointerleave', function (e) {
-        if (e.pointerType !== 'mouse') return;
-        hovering = false; lastUser = performance.now();
-        stage.classList.remove('is-hover');
-        if (!dragging) stage.classList.remove('is-live');
-      });
-      stage.addEventListener('pointermove', function (e) {
-        if (!(dragging || (hovering && e.pointerType === 'mouse'))) return;
-        var p = fromEvent(e); lx = p[0]; ly = p[1]; lastUser = performance.now(); place();
-      });
-      ring.addEventListener('pointerdown', function (e) {
-        dragging = true; lastUser = performance.now();
-        stage.classList.add('is-live');
-        ring.setPointerCapture(e.pointerId);
-        e.preventDefault();
-      });
-      stage.addEventListener('pointerdown', function (e) {
-        if (e.pointerType === 'mouse' || ring.contains(e.target)) return;
-        var p = fromEvent(e); lastUser = performance.now(); jump(p[0], p[1]);   /* tap to place */
-      });
-      function endDrag() {
-        if (!dragging) return;
-        dragging = false; lastUser = performance.now();
-        if (!hovering) stage.classList.remove('is-live');
-      }
-      window.addEventListener('pointerup', endDrag);
-      window.addEventListener('pointercancel', endDrag);
-
-      stage.addEventListener('keydown', function (e) {
-        var d = e.shiftKey ? 0.08 : 0.03, used = true;
-        if (e.key === 'ArrowLeft') lx = clamp(lx - d, 0, 1);
-        else if (e.key === 'ArrowRight') lx = clamp(lx + d, 0, 1);
-        else if (e.key === 'ArrowUp') ly = clamp(ly - d, 0, 1);
-        else if (e.key === 'ArrowDown') ly = clamp(ly + d, 0, 1);
-        else if (e.key === 'PageDown' || e.key === ']') show(cur + 1);
-        else if (e.key === 'PageUp' || e.key === '[') show(cur - 1);
-        else used = false;
-        if (used) { e.preventDefault(); lastUser = performance.now(); place(); }
-      });
-
-      reveal.addEventListener('click', function () {
-        full = !full;
-        stage.classList.toggle('is-full', full);
-        reveal.setAttribute('aria-pressed', String(full));
-        reveal.textContent = full ? 'Use the lens' : 'Reveal all';
-      });
-      $('dxPrev').addEventListener('click', function () { show(cur - 1); });
-      $('dxNext').addEventListener('click', function () { show(cur + 1); });
-      window.addEventListener('resize', place);
-
-      function show(i) {
-        cur = (i + samples.length) % samples.length;
-        var s = samples[cur];
-        photo.src = src(s, 'photo');
-        photo.alt = 'Synthetic photograph ' + s.id + ': ' + (s.subject.sex === 'female' ? 'woman' : 'man') +
-          ', ' + Math.round(s.subject.stature_m * 100) + ' cm, BMI ' + s.subject.bmi;
-        layer.src = src(s, key);
-        LAYERS.forEach(function (l) { (new Image()).src = src(s, l[0]); });
-        (new Image()).src = src(samples[(cur + 1) % samples.length], 'photo');
-
-        $('dxCount').textContent = String(cur + 1).padStart(2, '0') + ' / ' + samples.length;
-        thumbs.querySelectorAll('.dx-thumb').forEach(function (t, j) {
-          t.setAttribute('aria-current', String(j === cur));
-        });
-
-        /* Where the body is, for the idle drift: the skeleton's extent. */
-        var xs = [], ys = [];
-        s.keypoints_2d.forEach(function (p) {
-          if (p.xy[0] >= 0 && p.xy[0] <= 512 && p.xy[1] >= 0 && p.xy[1] <= 512) { xs.push(p.xy[0]); ys.push(p.xy[1]); }
-        });
-        if (xs.length) {
-          var x0 = Math.min.apply(0, xs), x1 = Math.max.apply(0, xs);
-          var y0 = Math.min.apply(0, ys), y1 = Math.max.apply(0, ys);
-          centre = [(x0 + x1) / 1024, (y0 + y1) / 1024];
-          span = [Math.max(0.05, (x1 - x0) / 1024 * 0.55), Math.max(0.12, (y1 - y0) / 1024 * 0.42)];
-        }
-        if (!(hovering || dragging)) jump(centre[0], centre[1] - span[1] * 0.4);
-
-        var sub = s.subject;
-        stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + sub.sex + ', ' +
-          num(sub.stature_m * 100) + ' cm, BMI ' + num(sub.bmi, 1) + '. Lens shows ' + LAYER_NAME[key] + '.');
-        $('dxId').textContent = '#' + s.id;
-        var subj = $('dxSubject'); subj.innerHTML = '';
-        [[sub.sex.charAt(0).toUpperCase() + sub.sex.slice(1), 'sex'],
-         [num(sub.stature_m * 100, 1), 'height, cm'],
-         [num(sub.mass_kg, 1), 'mass, kg'],
-         [num(sub.bmi, 1), 'BMI']].forEach(function (p) {
-          var d = el('div'); d.appendChild(el('b', null, p[0])); d.appendChild(el('small', null, p[1])); subj.appendChild(d);
-        });
-
-        var meas = $('dxMeas'); meas.innerHTML = '';
-        var shown = 0;
-        Object.keys(s.measurements_cm).forEach(function (name) {
-          if (name === 'Height') return;               /* already in the subject row */
-          var tr = el('tr');
-          tr.appendChild(el('td', null, name));
-          tr.appendChild(el('td', null, num(s.measurements_cm[name], 1)));
-          meas.appendChild(tr); shown++;
-        });
-        $('dxMeasN').textContent = shown + ' of ' + s.measurement_count + ' shown · cm';
-
-        var K = s.camera.K;
-        /* No thousands separators in a matrix: 1,090.2 breaks the columns. */
-        function col(v) { return Number(v).toFixed(1).padStart(9, ' '); }
-        $('dxCam').textContent =
-          'distance  ' + num(s.camera.distance_m, 2) + ' m\n' +
-          'K = [' + col(K[0][0]) + col(K[0][1]) + col(K[0][2]) + ' ]\n' +
-          '    [' + col(K[1][0]) + col(K[1][1]) + col(K[1][2]) + ' ]\n' +
-          '    [' + col(K[2][0]) + col(K[2][1]) + col(K[2][2]) + ' ]';
-
-        var file = {
-          id: s.id, subject: s.subject, shape_betas: s.shape_betas,
-          measurements_cm: s.measurements_cm, camera: s.camera,
-          people_in_frame: s.people_in_frame,
-          keypoint_format: s.keypoint_format,
-          keypoints_2d: s.keypoints_2d.filter(function (p) {
-            return /^(Head|Neck|LShoulder|RShoulder)$/.test(p.name);
-          }),
-          keypoints_2d_total: s.keypoints_2d.length
-        };
-        $('dxJson').textContent = JSON.stringify(file, null, 2)
-          .replace(/\n\s+(-?\d)/g, ' $1').replace(/\n\s+\]/g, ' ]');
-      }
-
-      /* Idle drift, so the section is alive before anyone touches it. Only
-         while visible and untouched for a few seconds; never under reduced
-         motion. */
-      /* The loop runs only while there is something to animate: section on
-         screen, tab visible, nobody holding the lens. An always-on
-         requestAnimationFrame never lets the page go idle, which costs a
-         laptop battery for an effect nobody is looking at. data-still on
-         the section freezes it (for screenshots). */
-      var visible = false, t0 = performance.now(), raf = 0;
-      function driftable() {
-        return visible && !reduced && !full && !hovering && !dragging &&
-               !document.hidden && !section.hasAttribute('data-still');
-      }
-      function tick(now) {
-        raf = 0;
-        if (!driftable()) {
-          if (!hovering && !dragging) stage.classList.remove('is-live');
-          return;
-        }
-        if (now - lastUser > 2600) {
-          var t = (now - t0) / 1000;
-          stage.classList.add('is-live');
-          /* Ease towards the path rather than snapping onto it, so the lens
-             never jumps from wherever the visitor left it. */
-          lx += (centre[0] + span[0] * Math.sin(t * 0.55) - lx) * 0.06;
-          ly += (centre[1] + span[1] * Math.sin(t * 0.33 + 1.1) - ly) * 0.06;
-          place();
-        }
-        raf = requestAnimationFrame(tick);
-      }
-      function wake() { if (!raf && driftable()) raf = requestAnimationFrame(tick); }
-      if ('IntersectionObserver' in window) {
-        new IntersectionObserver(function (es) { visible = es[0].isIntersecting; wake(); },
-                                 { threshold: 0.2 }).observe(stage);
-      }
-      document.addEventListener('visibilitychange', wake);
-      stage.addEventListener('pointerleave', function () { setTimeout(wake, 0); });
-      window.addEventListener('pointerup', function () { setTimeout(wake, 0); });
-      reveal.addEventListener('click', function () { setTimeout(wake, 0); });
-      show(0);
+    function toPct(e) {
+      var rect    = slider.getBoundingClientRect();
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      return clamp(((clientX - rect.left) / rect.width) * 100, 0, 100);
     }
 
-    /* ------------------------------------------------------------ wall */
-    function skeleton(pts, size) {
-      var svg = sv('svg', { viewBox: '0 0 ' + size + ' ' + size, 'aria-hidden': 'true' });
-      /* Every joint, hidden or not; the svg clips anything past the frame. */
-      LIMBS.forEach(function (l) {
-        var a = pts[l[0]], b = pts[l[1]];
-        svg.appendChild(sv('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1],
-          stroke: '#0ABFA3', 'stroke-width': 2.2, 'stroke-linecap': 'round' }));
-      });
-      pts.forEach(function (p) {
-        svg.appendChild(sv('circle', { cx: p[0], cy: p[1], r: 2.4, fill: '#F0F4F8' }));
-      });
-      return svg;
+    function startDrag(which, e) {
+      active = which;
+      e.preventDefault();
+      if (!hasDragged) { hasDragged = true; hint.classList.add('hidden'); }
     }
 
-    function wall(items) {
-      var w = $('wall');
-      items.forEach(function (it) {
-        var t = el('div', { 'class': 'wall-tile' });
-        t.appendChild(el('img', { src: BASE + 'wall/' + it.id + '.webp', alt: '', loading: 'lazy', width: 176, height: 176 }));
-        function ensure() { if (!t.firstChild.nextSibling) t.appendChild(skeleton(it.k, 176)); }
-        t.addEventListener('mouseenter', ensure);
-        t.addEventListener('click', function () { ensure(); t.classList.toggle('is-sk'); });
-        w.appendChild(t);
-      });
-      var more = $('wallMore');
-      more.addEventListener('click', function () { w.classList.add('is-open'); more.style.display = 'none'; });
-    }
-
-    /* ------------------------------------------------------------ charts */
-    function barPath(x, y, w, h, r) {
-      r = Math.min(r, w / 2, h);
-      if (h <= 0) return '';
-      return 'M' + x + ',' + (y + h) + 'V' + (y + r) + 'Q' + x + ',' + y + ' ' + (x + r) + ',' + y +
-             'H' + (x + w - r) + 'Q' + (x + w) + ',' + y + ' ' + (x + w) + ',' + (y + r) + 'V' + (y + h) + 'Z';
-    }
-
-    function chart(host, title, sub, counts, labelOf, ticks, total, swatches) {
-      var card = el('div', { 'class': 'cov-card' });
-      card.appendChild(el('h4', null, title));
-      card.appendChild(el('p', null, sub));
-      var W = 480, H = swatches ? 196 : 176, L = 4, R = 4, T = 8, B = swatches ? 44 : 26;
-      var svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': title + ' distribution' });
-      var n = counts.length, bw = (W - L - R) / n, gap = n > 20 ? 2 : 4;
-      var max = Math.max.apply(0, counts), plotH = H - T - B;
-      var tip = el('div', { 'class': 'cov-tip' });
-      var bars = [];
-      counts.forEach(function (c, i) {
-        var h = max ? c / max * plotH : 0, x = L + i * bw + gap / 2, y = T + plotH - h;
-        var p = sv('path', { d: barPath(x, y, Math.max(1, bw - gap), h, 4), 'class': 'cov-bar' });
-        svg.appendChild(p); bars.push(p);
-        if (swatches) {
-          svg.appendChild(sv('rect', { x: x, y: T + plotH + 8, width: Math.max(1, bw - gap), height: 14, rx: 3,
-            fill: swatches[i], 'class': 'cov-sw' }));
-        }
-      });
-      svg.appendChild(sv('line', { x1: L, x2: W - R, y1: T + plotH + 0.5, y2: T + plotH + 0.5, 'class': 'cov-base' }));
-      ticks.forEach(function (tk) {
-        var t = sv('text', { x: L + tk[0] * bw, y: H - 6, 'class': 'cov-axis',
-          'text-anchor': tk[0] <= 0 ? 'start' : tk[0] >= n ? 'end' : 'middle' });
-        t.textContent = tk[1]; svg.appendChild(t);
-      });
-      /* Hit targets: the whole column, not just the bar. */
-      counts.forEach(function (c, i) {
-        var hit = sv('rect', { x: L + i * bw, y: T, width: bw, height: plotH, 'class': 'cov-hit' });
-        hit.addEventListener('pointerenter', function () {
-          bars.forEach(function (b, j) { b.classList.toggle('is-hot', j === i); });
-          tip.innerHTML = '';
-          tip.appendChild(document.createTextNode(labelOf(i) + '  '));
-          tip.appendChild(el('b', null, num(c)));
-          tip.appendChild(document.createTextNode('  ·  ' + num(100 * c / total, 1) + '%'));
-          var sr = svg.getBoundingClientRect(), cr = card.getBoundingClientRect();
-          var bx = (L + (i + 0.5) * bw) / W * sr.width + sr.left - cr.left;
-          var by = (T + plotH - (max ? c / max * plotH : 0)) / H * sr.height + sr.top - cr.top;
-          tip.style.left = clamp(bx, 70, cr.width - 70) + 'px';
-          tip.style.top = by + 'px';
-          tip.style.opacity = 1;
-        });
-        svg.appendChild(hit);
-      });
-      svg.addEventListener('pointerleave', function () {
-        tip.style.opacity = 0;
-        bars.forEach(function (b) { b.classList.remove('is-hot'); });
-      });
-      card.appendChild(svg);
-      card.appendChild(tip);
-
-      /* The same numbers as a table, for screen readers. */
-      var tbl = el('table', { 'class': 'sr-only' });
-      counts.forEach(function (c, i) {
-        var tr = el('tr'); tr.appendChild(el('td', null, labelOf(i))); tr.appendChild(el('td', null, String(c))); tbl.appendChild(tr);
-      });
-      card.appendChild(tbl);
-      host.appendChild(card);
-    }
-
-    function hist(host, title, sub, h, fmt, unit, tickValue, total) {
-      /* Trim empty bins at either end so the axis spans the data, not the
-         bin table; the last bin keeps its "+" only if it is the clipped one. */
-      var a = 0, b = h.counts.length;
-      while (a < b && !h.counts[a]) a++;
-      while (b > a && !h.counts[b - 1]) b--;
-      var counts = h.counts.slice(a, b), lo = h.lo + a * h.step, clipped = b === h.counts.length;
-      var ticks = [];
-      for (var i = 0; i <= counts.length; i++) {
-        var v = lo + i * h.step, q = v / tickValue;
-        if (Math.abs(q - Math.round(q)) < 1e-6) ticks.push([i, fmt(v)]);
+    function onMove(e) {
+      if (!active) return;
+      e.preventDefault();
+      var p = toPct(e);
+      if (active === 'A') {
+        posA = clamp(p, 0, 100);
+        if (posA > posB) posB = posA;   /* bump B right */
+      } else {
+        posB = clamp(p, 0, 100);
+        if (posB < posA) posA = posB;   /* bump A left  */
       }
-      chart(host, title, sub, counts, function (i) {
-        var x = lo + i * h.step, y = x + h.step;
-        var last = clipped && i === counts.length - 1 ? '+' : '';
-        return fmt(x) + '–' + fmt(y) + last + ' ' + unit;
-      }, ticks, total);
+      render();
     }
 
-    function coverage(st) {
-      var host = $('cov'), n = st.n;
-      $('covN').textContent = 'Distributions across all ' + num(n) + ' accepted samples.';
-      hist(host, 'Body mass index', 'Underweight through obese, sampled deliberately rather than as found.',
-           st.bmi, function (v) { return num(v); }, 'BMI', 5, n);
-      hist(host, 'Height', 'Women and men across the full adult range, in centimetres.',
-           st.stature_cm, function (v) { return num(v); }, 'cm', 10, n);
-      hist(host, 'Camera distance', 'Close phone shots out to long-lens portraits, in metres.',
-           st.distance_m, function (v) { return num(v, 0); }, 'm', 1, n);
-      chart(host, 'Skin tone', 'Ten perceptual tones, light to deep, in equal measure.',
-            st.skin_tone, function (i) { return 'Tone ' + (i + 1) + ' · ' + TONE_NAMES[i]; },
-            [[0.5, 'lightest'], [st.skin_tone.length - 0.5, 'deepest']], n, TONES);
+    function onEnd() { active = null; }
 
-      var tiles = $('covTiles');
-      function tile(label, value, detail) {
-        var d = el('div', { 'class': 'cov-tile' });
-        d.appendChild(el('div', { 'class': 'l' }, label));
-        d.appendChild(el('div', { 'class': 'v' }, value));
-        d.appendChild(el('div', { 'class': 'd' }, detail));
-        tiles.appendChild(d);
-      }
-      var f = st.sex.female || 0, m = st.sex.male || 0;
-      tile('Sex', num(100 * f / (f + m), 1) + ' / ' + num(100 * m / (f + m), 1), 'percent female / male');
-      var ages = Object.keys(st.age).map(function (k) { return st.age[k]; });
-      var at = ages.reduce(function (a, b) { return a + b; }, 0);
-      tile('Age', ages.length + ' bands',
-           num(100 * Math.min.apply(0, ages) / at, 1) + '–' + num(100 * Math.max.apply(0, ages) / at, 1) +
-           '% each, young adult to elderly');
-      var solo = st.people['1'] || 0;
-      tile('People in frame', num(100 * (n - solo) / n) + '%', 'include bystanders; the subject is always the one labelled');
+    handleA.addEventListener('mousedown',  function(e){ startDrag('A', e); });
+    handleB.addEventListener('mousedown',  function(e){ startDrag('B', e); });
+    window.addEventListener('mousemove',   onMove);
+    window.addEventListener('mouseup',     onEnd);
 
-      $('covFoot').textContent = 'Automated validation removed ' + num(100000 - n) + ' of 100,000 samples before ' +
-        'these counts. Every remaining sample decodes, carries a complete label file, and has its skeleton ' +
-        'landing on its own silhouette.';
-    }
+    handleA.addEventListener('touchstart', function(e){ startDrag('A', e); }, { passive: false });
+    handleB.addEventListener('touchstart', function(e){ startDrag('B', e); }, { passive: false });
+    window.addEventListener('touchmove',   onMove, { passive: false });
+    window.addEventListener('touchend',    onEnd);
+
+    handleA.addEventListener('keydown', function(e) {
+      var s = e.shiftKey ? 10 : 2;
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); posA = clamp(posA - s, 0, 100); if (posA > posB) posB = posA; render(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); posA = clamp(posA + s, 0, 100); if (posA > posB) posB = posA; render(); }
+    });
+    handleB.addEventListener('keydown', function(e) {
+      var s = e.shiftKey ? 10 : 2;
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); posB = clamp(posB - s, 0, 100); if (posB < posA) posA = posB; render(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); posB = clamp(posB + s, 0, 100); if (posB < posA) posA = posB; render(); }
+    });
   }());
 </script>
 
