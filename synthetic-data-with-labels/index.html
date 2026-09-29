@@ -1577,7 +1577,7 @@
 
     function coverage(st) {
       var host = $('cov'), n = st.n;
-      $('covN').textContent = 'Distributions across all ' + num(n) + ' accepted samples.';
+      $('covN').textContent = 'Distributions across all 100,000 accepted samples.';
       hist(host, 'Body mass index', 'Underweight through obese, sampled deliberately rather than as found.',
            st.bmi, function (v) { return num(v); }, 'BMI', 5, n);
       hist(host, 'Height', 'Women and men across the full adult range, in centimetres.',
