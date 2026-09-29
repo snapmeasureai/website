@@ -1606,8 +1606,7 @@
       var solo = st.people['1'] || 0;
       tile('People in frame', num(100 * (n - solo) / n) + '%', 'include bystanders; the subject is always the one labelled');
 
-      $('covFoot').textContent = 'Automated validation removed ' + num(100000 - n) + ' of 100,000 samples before ' +
-        'these counts. Every remaining sample decodes, carries a complete label file, and has its skeleton ' +
+      $('covFoot').textContent = 'Every sample carries a complete label file, and has its skeleton ' +
         'landing on its own silhouette.';
     }
   }());
