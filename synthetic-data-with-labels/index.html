@@ -684,7 +684,7 @@
       font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
     }
     .dx-k span { color: var(--text-3); letter-spacing: .02em; font-weight: 600; text-transform: none; font-size: 12px; }
-    .dx-subject { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .dx-subject { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .dx-subject b { display: block; font-size: 21px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -.01em; line-height: 1.2; }
     .dx-subject small { font-size: 12px; color: var(--text-3); }
     .dx-meas { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -753,7 +753,7 @@
       .cov-tiles { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .dx-subject { grid-template-columns: repeat(2, 1fr); row-gap: 12px; }
+      .dx-subject { grid-template-columns: repeat(3, 1fr); row-gap: 12px; }
       .dx-thumbs { gap: 3px; padding: 0 8px 8px; }
       .dx-chips { padding: 10px 8px; }
       .dx-chip { font-size: 12px; padding: 7px 10px; }
@@ -1441,7 +1441,7 @@
         var s = samples[cur];
         photo.src = src(s, 'photo');
         photo.alt = 'Synthetic photograph ' + s.id + ': ' + (s.subject.sex === 'female' ? 'woman' : 'man') +
-          ', BMI ' + s.subject.bmi;
+          ', ' + Math.round(s.subject.stature_m * 100) + ' cm, BMI ' + s.subject.bmi;
         layer.src = src(s, key);
         LAYERS.forEach(function (l) { (new Image()).src = src(s, l[0]); });
         (new Image()).src = src(samples[(cur + 1) % samples.length], 'photo');
@@ -1465,19 +1465,19 @@
         if (!(hovering || dragging)) jump(centre[0], centre[1] - span[1] * 0.4);
 
         var sub = s.subject;
-        stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + sub.sex + ', BMI ' +
-          num(sub.bmi, 1) + '. Lens shows ' + LAYER_NAME[key] + '.');
+        stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + sub.sex + ', ' +
+          num(sub.stature_m * 100) + ' cm, BMI ' + num(sub.bmi, 1) + '. Lens shows ' + LAYER_NAME[key] + '.');
         $('dxId').textContent = '#' + s.id;
         var subj = $('dxSubject'); subj.innerHTML = '';
-        /* Sex and BMI only. Height and mass are exact for the 3D body but hard to judge
-           against a tightly framed photo, so they live in the raw label file below. */
+        /* Mass stays in the raw label file below. */
         [[sub.sex.charAt(0).toUpperCase() + sub.sex.slice(1), 'sex'],
+         [num(sub.stature_m * 100, 1), 'height, cm'],
          [num(sub.bmi, 1), 'BMI']].forEach(function (p) {
           var d = el('div'); d.appendChild(el('b', null, p[0])); d.appendChild(el('small', null, p[1])); subj.appendChild(d);
         });
 
         var meas = $('dxMeas'); meas.innerHTML = '';
-        /* Girths first (samples.json lists them first). Height stays in the raw label file. */
+        /* Girths first (samples.json lists them first). Height is already in the subject row. */
         Object.keys(s.measurements_cm).forEach(function (name) {
           if (name === 'Height') return;
           var tr = el('tr');
