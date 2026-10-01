@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "Dataset",
     "name": "SnapMeasureAI synthetic humans with 3D body ground truth",
-    "description": "A 100,000-image production batch of photorealistic synthetic people, each generated from a parametric 3D body by diffusion conditioned on surface normals and pose. Every image is labeled with the exact body under the clothing: shape parameters, 3D pose, Halpe-26 2D keypoints, body-part segmentation, metric depth, camera intrinsics and 42 body measurements. Sixteen samples and 240 random images are browsable on this page; full datasets are licensed.",
+    "description": "A 100,000-image production batch of photorealistic synthetic people, each generated from a parametric 3D body by diffusion conditioned on surface normals and pose. Every image is labeled with the exact body under the clothing: shape parameters, 3D pose, Halpe-26 2D keypoints, body-part segmentation, metric depth, camera intrinsics and 42 body measurements. Sixteen samples and 152 curated images are browsable on this page; full datasets are licensed.",
     "url": "https://snapmeasureai.com/synthetic-data-with-labels/#dataset",
     "image": "https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg",
     "isAccessibleForFree": false,
@@ -684,7 +684,7 @@
       font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
     }
     .dx-k span { color: var(--text-3); letter-spacing: .02em; font-weight: 600; text-transform: none; font-size: 12px; }
-    .dx-subject { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .dx-subject { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .dx-subject b { display: block; font-size: 21px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -.01em; line-height: 1.2; }
     .dx-subject small { font-size: 12px; color: var(--text-3); }
     .dx-meas { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -984,11 +984,11 @@
     </div>
 
     <div class="dx-head">
-      <h3>240 random samples. Same batch, same labels.</h3>
+      <h3>152 curated samples. Same batch, same labels.</h3>
       <p>Hover or tap any image to see its skeleton.</p>
     </div>
     <div class="wall" id="wall"></div>
-    <button class="btn btn--ghost wall-more" id="wallMore">Show all 240</button>
+    <button class="btn btn--ghost wall-more" id="wallMore">Show all 152</button>
 
     <div class="dx-head">
       <h3>Coverage you can inspect.</h3>
@@ -1302,8 +1302,10 @@
       return (side + rest).replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().replace(/^./, function (c) { return c.toUpperCase(); });
     }
 
+    /* DATA_VERSION busts browser/CDN caches when the JSON changes: bump it on every data update. */
+    var DATA_VERSION = '2';
     Promise.all(['samples.json', 'wall.json', 'stats.json'].map(function (f) {
-      return fetch(BASE + f).then(function (r) { if (!r.ok) throw new Error(f); return r.json(); });
+      return fetch(BASE + f + '?v=' + DATA_VERSION).then(function (r) { if (!r.ok) throw new Error(f); return r.json(); });
     })).then(function (d) {
       explorer(d[0]);
       wall(d[1]);
@@ -1439,7 +1441,7 @@
         var s = samples[cur];
         photo.src = src(s, 'photo');
         photo.alt = 'Synthetic photograph ' + s.id + ': ' + (s.subject.sex === 'female' ? 'woman' : 'man') +
-          ', ' + Math.round(s.subject.stature_m * 100) + ' cm, BMI ' + s.subject.bmi;
+          ', BMI ' + s.subject.bmi;
         layer.src = src(s, key);
         LAYERS.forEach(function (l) { (new Image()).src = src(s, l[0]); });
         (new Image()).src = src(samples[(cur + 1) % samples.length], 'photo');
@@ -1463,27 +1465,27 @@
         if (!(hovering || dragging)) jump(centre[0], centre[1] - span[1] * 0.4);
 
         var sub = s.subject;
-        stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + sub.sex + ', ' +
-          num(sub.stature_m * 100) + ' cm, BMI ' + num(sub.bmi, 1) + '. Lens shows ' + LAYER_NAME[key] + '.');
+        stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + sub.sex + ', BMI ' +
+          num(sub.bmi, 1) + '. Lens shows ' + LAYER_NAME[key] + '.');
         $('dxId').textContent = '#' + s.id;
         var subj = $('dxSubject'); subj.innerHTML = '';
+        /* Sex and BMI only. Height and mass are exact for the 3D body but hard to judge
+           against a tightly framed photo, so they live in the raw label file below. */
         [[sub.sex.charAt(0).toUpperCase() + sub.sex.slice(1), 'sex'],
-         [num(sub.stature_m * 100, 1), 'height, cm'],
-         [num(sub.mass_kg, 1), 'mass, kg'],
          [num(sub.bmi, 1), 'BMI']].forEach(function (p) {
           var d = el('div'); d.appendChild(el('b', null, p[0])); d.appendChild(el('small', null, p[1])); subj.appendChild(d);
         });
 
         var meas = $('dxMeas'); meas.innerHTML = '';
-        var shown = 0;
+        /* Girths first (samples.json lists them first). Height stays in the raw label file. */
         Object.keys(s.measurements_cm).forEach(function (name) {
-          if (name === 'Height') return;               /* already in the subject row */
+          if (name === 'Height') return;
           var tr = el('tr');
           tr.appendChild(el('td', null, name));
           tr.appendChild(el('td', null, num(s.measurements_cm[name], 1)));
-          meas.appendChild(tr); shown++;
+          meas.appendChild(tr);
         });
-        $('dxMeasN').textContent = shown + ' of ' + s.measurement_count + ' shown · cm';
+        $('dxMeasN').textContent = 'cm · on the 3D body';
 
         var K = s.camera.K;
         /* No thousands separators in a matrix: 1,090.2 breaks the columns. */
