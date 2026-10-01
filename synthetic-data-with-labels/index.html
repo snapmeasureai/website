@@ -321,6 +321,56 @@
     .hero__stat-value { font-size: 32px; font-weight: 700; color: var(--teal); letter-spacing: -0.02em; }
     .hero__stat-label { font-size: 14px; color: var(--text-3); margin-top: 2px; }
 
+    /* ---- HERO — text + live dataset preview side by side ---- */
+    .hero__grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 56px; align-items: center; }
+    .hero__grid .hero__title { font-size: clamp(38px, 5.2vw, 62px); }
+    .hero__grid .hero__actions { margin-bottom: 0; }
+    .hero__grid .hero__also { flex-wrap: wrap; margin-bottom: 32px; }
+    .hero__grid + .hero__stats { margin-top: 48px; }
+    .hero-peek { display: block; background: var(--bg3); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.45); transition: border-color .2s, transform .2s; }
+    .hero-peek:hover { border-color: rgba(10,191,163,0.55); transform: translateY(-2px); }
+    .hero-peek__stage { position: relative; aspect-ratio: 4 / 5; background: #0E1419; overflow: hidden; }
+    .hero-peek__stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .hero-peek__body { clip-path: inset(0 100% 0 0); animation: peek-wipe 6s ease-in-out infinite; }
+    .hero-peek__line { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background: var(--teal); box-shadow: 0 0 14px var(--teal-glow); animation: peek-line 6s ease-in-out infinite; }
+    @keyframes peek-wipe {
+      0%, 10%   { clip-path: inset(0 100% 0 0); }
+      45%, 65%  { clip-path: inset(0 0 0 0); }
+      95%, 100% { clip-path: inset(0 100% 0 0); }
+    }
+    @keyframes peek-line {
+      0%, 10%   { left: 0; opacity: 0; }
+      14%       { opacity: 1; }
+      45%       { left: 100%; opacity: 1; }
+      46%, 65%  { left: 100%; opacity: 0; }
+      66%       { left: 100%; opacity: 1; }
+      95%       { left: 0; opacity: 1; }
+      100%      { left: 0; opacity: 0; }
+    }
+    .hero-peek__tag { position: absolute; bottom: 12px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; background: rgba(8,12,16,0.78); border: 1px solid var(--border-hi); }
+    .hero-peek__tag--photo { right: 12px; color: var(--text-2); }
+    .hero-peek__tag--body { left: 12px; color: var(--teal); border-color: rgba(10,191,163,0.4); }
+    .hero-peek__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-top: 1px solid var(--border); }
+    .hero-peek__cap { font-size: 13px; line-height: 1.45; color: var(--text-2); }
+    .hero-peek__cap strong { color: var(--text); font-weight: 600; }
+    .hero-peek__go { flex-shrink: 0; font-size: 13px; font-weight: 600; color: var(--teal); white-space: nowrap; }
+    @media (max-width: 900px) {
+      /* Stacked: put the preview right under the headline so it is on the first screen. */
+      .hero__grid { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+      .hero__copy { display: contents; }
+      .hero__eyebrow { order: 0; align-self: flex-start; }
+      .hero__title { order: 1; }
+      .hero__ticker-wrap { order: 2; }
+      .hero-peek { order: 3; width: 100%; max-width: 420px; margin: 4px 0 32px; }
+      .hero__sub { order: 4; }
+      .hero__also { order: 5; }
+      .hero__actions { order: 6; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-peek__body { animation: none; clip-path: inset(0 50% 0 0); }
+      .hero-peek__line { animation: none; left: 50%; }
+    }
+
     /* ---- PROOF STRIP ---- */
     .proof-strip { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; }
     .proof-strip__inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 15px; color: var(--text-3); }
@@ -729,8 +779,8 @@
       <img src="/assets/images/logo.png" alt="SnapMeasureAI">
     </a>
     <ul class="nav__links">
-      <li><a href="#how-it-works">How it works</a></li>
       <li><a href="#dataset">Dataset</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
       <li><a href="#use-cases">Use cases</a></li>
       <li class="nav__dropdown">
         <button class="nav__dropdown-toggle">
@@ -750,15 +800,15 @@
     </ul>
     <div class="nav__cta">
       <a href="https://snapmeasureai.com/contact" class="btn btn--primary">Contact us →</a>
-      <a href="#how-it-works" class="btn btn--outline">How it works</a>
+      <a href="#dataset" class="btn btn--outline">See the dataset</a>
       <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
     </div>
   </div>
 </nav>
 
 <div class="nav__mobile-menu" id="mobile-menu">
-  <a href="#how-it-works" onclick="toggleMenu()">How it works</a>
   <a href="#dataset" onclick="toggleMenu()">Dataset</a>
+  <a href="#how-it-works" onclick="toggleMenu()">How it works</a>
   <a href="#use-cases" onclick="toggleMenu()">Use cases</a>
   <a href="#faqs" onclick="toggleMenu()">FAQs</a>
   <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
@@ -766,13 +816,15 @@
   <a href="https://snapmeasureai.com/motion-capture-from-video" style="padding-left:12px;" onclick="toggleMenu()">AI motion capture</a>
   <a href="https://snapmeasureai.com/synthetic-data-with-labels/" style="padding-left:12px;color:var(--teal);" onclick="toggleMenu()">Synthetic data (this page)</a>
   <a href="https://snapmeasureai.com/contact" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;" onclick="toggleMenu()">Contact us →</a>
-  <a href="#how-it-works" class="btn btn--outline" style="text-align:center;" onclick="toggleMenu()">How it works</a>
+  <a href="#dataset" class="btn btn--outline" style="text-align:center;" onclick="toggleMenu()">See the dataset</a>
 </div>
 
 <!-- ==================== HERO ==================== -->
 <section class="hero" id="home">
   <div class="hero__bg"></div>
   <div class="container">
+   <div class="hero__grid">
+    <div class="hero__copy">
     <div class="hero__eyebrow">
       <span class="hero__eyebrow-dot"></span>
       Synthetic training data — auto-labeled
@@ -805,8 +857,25 @@
 
     <div class="hero__actions">
       <a href="https://snapmeasureai.com/contact" class="btn btn--scan">Get in touch →</a>
-      <a href="#how-it-works" class="btn btn--api">See how it works</a>
+      <a href="#dataset" class="btn btn--api">Explore the dataset ↓</a>
     </div>
+    </div>
+
+    <!-- Live preview of the dataset: the photo, then the exact 3D body under the clothes -->
+    <a class="hero-peek" href="#dataset" aria-label="Explore the dataset: photorealistic photos with the exact 3D body under the clothing">
+      <div class="hero-peek__stage">
+        <img class="hero-peek__photo" id="peekPhoto" src="/synthetic-data-with-labels/dataset/featured/93790_photo.webp" alt="Photorealistic synthetic photo of a person in everyday clothing" width="512" height="512" fetchpriority="high">
+        <img class="hero-peek__body" id="peekBody" src="/synthetic-data-with-labels/dataset/featured/93790_body.webp" alt="The exact 3D body under the clothing for the same photo" width="512" height="512">
+        <span class="hero-peek__line" aria-hidden="true"></span>
+        <span class="hero-peek__tag hero-peek__tag--body" aria-hidden="true">3D body · ground truth</span>
+        <span class="hero-peek__tag hero-peek__tag--photo" aria-hidden="true">Photo</span>
+      </div>
+      <div class="hero-peek__foot">
+        <span class="hero-peek__cap"><strong>Every image ships with the body under the clothes.</strong><br>Shape, pose and measurements, exact.</span>
+        <span class="hero-peek__go">See the dataset ↓</span>
+      </div>
+    </a>
+   </div>
 
     <div class="hero__stats">
       <div>
@@ -829,6 +898,27 @@
   </div>
 </section>
 
+<script>
+  /* Hero preview: swap to the next sample each time the wipe returns to the photo.
+     Picked for clothing that hides the body - sweaters, dresses, cardigans, long sleeves. */
+  (function () {
+    var ids = ['93790', '87974', '91124', '81108', '81524', '85412'];
+    var base = '/synthetic-data-with-labels/dataset/featured/';
+    var photo = document.getElementById('peekPhoto'), body = document.getElementById('peekBody');
+    if (!photo || !body) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var i = 0;
+    function preload(k) { [new Image(), new Image()].forEach(function (im, j) { im.src = base + ids[k] + (j ? '_body' : '_photo') + '.webp'; }); }
+    preload(1);
+    body.addEventListener('animationiteration', function () {
+      i = (i + 1) % ids.length;
+      photo.src = base + ids[i] + '_photo.webp';
+      body.src = base + ids[i] + '_body.webp';
+      preload((i + 1) % ids.length);
+    });
+  })();
+</script>
+
 <!-- ==================== PROOF STRIP ==================== -->
 <div class="proof-strip">
   <div class="container">
@@ -841,40 +931,6 @@
     </div>
   </div>
 </div>
-
-<!-- ==================== HOW IT WORKS ==================== -->
-<section class="section" id="how-it-works">
-  <div class="container">
-    <p class="section__eyebrow">How it works</p>
-    <h2 class="section__title">3D model → photorealistic image → geometry-derived labels.</h2>
-    <p class="section__sub">
-      Each image starts as a 3D body model. Diffusion rendering — guided by depth, surface normals,
-      and pose — produces a photorealistic result. Labels are computed from the same 3D geometry
-      that drives the render.
-    </p>
-
-    <div class="steps">
-      <div class="step">
-        <p class="step__num">Step 01 — Model</p>
-        <h3 class="step__title">Start with a 3D body</h3>
-        <p class="step__body">Choose from over one million rigged 3D body models — any body type, proportion, and pose. Specify lighting, background, and camera angle, or let us generate the variation set for you.</p>
-      </div>
-      <div class="step">
-        <p class="step__num">Step 02 — Render</p>
-        <h3 class="step__title">Diffusion creates the image</h3>
-        <p class="step__body">A diffusion model conditioned on depth maps, surface normals, and pose generates a photorealistic image. The result looks like a real photograph while remaining grounded in the 3D structure.</p>
-      </div>
-      <div class="step">
-        <p class="step__num">Step 03 — Label</p>
-        <h3 class="step__title">Labels derived from the model</h3>
-        <p class="step__body">Keypoints, segmentation masks, depth maps, and body measurements are computed directly from the 3D geometry — the same source that drives the render. No manual annotation required.</p>
-      </div>
-    </div>
-
-
-
-  </div>
-</section>
 
 <!-- ==================== INSIDE THE DATASET ==================== -->
 <section class="section section--alt section--data" id="dataset">
@@ -941,6 +997,40 @@
     <div class="cov" id="cov"></div>
     <div class="cov-tiles" id="covTiles"></div>
     <p class="cov-foot" id="covFoot"></p>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="section" id="how-it-works">
+  <div class="container">
+    <p class="section__eyebrow">How it works</p>
+    <h2 class="section__title">3D model → photorealistic image → geometry-derived labels.</h2>
+    <p class="section__sub">
+      Each image starts as a 3D body model. Diffusion rendering — guided by depth, surface normals,
+      and pose — produces a photorealistic result. Labels are computed from the same 3D geometry
+      that drives the render.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <p class="step__num">Step 01 — Model</p>
+        <h3 class="step__title">Start with a 3D body</h3>
+        <p class="step__body">Choose from over one million rigged 3D body models — any body type, proportion, and pose. Specify lighting, background, and camera angle, or let us generate the variation set for you.</p>
+      </div>
+      <div class="step">
+        <p class="step__num">Step 02 — Render</p>
+        <h3 class="step__title">Diffusion creates the image</h3>
+        <p class="step__body">A diffusion model conditioned on depth maps, surface normals, and pose generates a photorealistic image. The result looks like a real photograph while remaining grounded in the 3D structure.</p>
+      </div>
+      <div class="step">
+        <p class="step__num">Step 03 — Label</p>
+        <h3 class="step__title">Labels derived from the model</h3>
+        <p class="step__body">Keypoints, segmentation masks, depth maps, and body measurements are computed directly from the 3D geometry — the same source that drives the render. No manual annotation required.</p>
+      </div>
+    </div>
+
+
+
   </div>
 </section>
 
