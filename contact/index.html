@@ -605,6 +605,19 @@
   const successEl = document.getElementById('form-success');
   const errorEl   = document.getElementById('form-error');
 
+  /* Analytics — push events to GTM so attempts/successes/failures can be measured in GA4 */
+  window.dataLayer = window.dataLayer || [];
+  function track(event, params) {
+    window.dataLayer.push(Object.assign({ event: event }, params || {}));
+  }
+  let started = false;
+  form.addEventListener('focusin', function() {
+    if (!started) { started = true; track('contact_form_start'); }
+  });
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a) {
+    a.addEventListener('click', function() { track('contact_email_click'); });
+  });
+
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -612,7 +625,9 @@
     const required = form.querySelectorAll('[required]');
     let valid = true;
     required.forEach(function(field) {
-      if (!field.value.trim()) {
+      const empty    = !field.value.trim();
+      const badEmail = field.type === 'email' && !empty && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+      if (empty || badEmail) {
         field.style.borderColor = 'rgba(239,68,68,0.6)';
         field.style.boxShadow   = '0 0 0 3px rgba(239,68,68,0.12)';
         valid = false;
@@ -622,11 +637,15 @@
         }, { once: true });
       }
     });
-    if (!valid) return;
+    if (!valid) {
+      track('contact_form_invalid');
+      return;
+    }
 
     submitBtn.disabled   = true;
     submitBtn.textContent = 'Sending…';
     errorEl.classList.remove('visible');
+    track('contact_form_attempt', { form_topic: form.topic.value || 'none' });
 
     try {
       const data = new FormData(form);
@@ -635,14 +654,18 @@
         body:    data,
         headers: { 'Accept': 'application/json' }
       });
+      const json = await res.json().catch(function() { return {}; });
 
-      if (res.ok) {
+      if (res.ok && json.success !== false) {
+        track('contact_form_submit', { form_topic: form.topic.value || 'none' });
         form.style.display    = 'none';
         successEl.style.display = 'block';
       } else {
-        throw new Error('Server error');
+        throw new Error('HTTP ' + res.status + ': ' + (json.message || 'Server error'));
       }
     } catch (err) {
+      /* A TypeError here means the request never reached Web3Forms (network, ad blocker, firewall) */
+      track('contact_form_error', { error_message: String(err.message || err).slice(0, 100) });
       submitBtn.disabled   = false;
       submitBtn.innerHTML  = 'Send message <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M9 4l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       errorEl.classList.add('visible');
