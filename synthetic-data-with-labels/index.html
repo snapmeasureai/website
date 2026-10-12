@@ -13,7 +13,7 @@
   })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
 
   <title>Synthetic Human Training Data, Auto-Labeled | SnapMeasureAI</title>
-  <meta name="description" content="Photorealistic synthetic people with exact ground truth: the 3D body under the clothing, pose, keypoints, depth and body measurements. No manual labels.">
+  <meta name="description" content="Photorealistic synthetic people in everyday clothing, each with exact 3D ground truth: body shape, pose, keypoints, depth and body measurements. No manual labels.">
   <meta name="keywords" content="synthetic human training data, SMPL synthetic dataset, pose estimation training data, body model synthetic images, auto-labeled computer vision data, synthetic data GDPR compliant, human pose segmentation dataset, diffusion synthetic data generation, annotation-free training data, body shape training data">
   <meta name="author" content="SnapMeasureAI">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -23,18 +23,18 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://snapmeasureai.com/synthetic-data-with-labels/">
   <meta property="og:title" content="Synthetic Human Training Data, Auto-Labeled | SnapMeasureAI">
-  <meta property="og:description" content="Photorealistic synthetic people with exact ground truth: the 3D body under the clothing, pose, keypoints, depth and body measurements. No manual labels.">
+  <meta property="og:description" content="Photorealistic synthetic people in everyday clothing, each with exact 3D ground truth: body shape, pose, keypoints, depth and body measurements. No manual labels.">
   <meta property="og:image" content="https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="A photorealistic synthetic person with a lens revealing the exact 3D body under their clothing">
+  <meta property="og:image:alt" content="A photorealistic synthetic person beside the exact 3D body model used as ground truth">
   <meta property="og:site_name" content="SnapMeasureAI">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Synthetic Human Training Data, Auto-Labeled | SnapMeasureAI">
-  <meta name="twitter:description" content="Photorealistic synthetic people with exact ground truth: the 3D body under the clothing, pose, keypoints, depth and body measurements. No manual labels.">
+  <meta name="twitter:description" content="Photorealistic synthetic people in everyday clothing, each with exact 3D ground truth: body shape, pose, keypoints, depth and body measurements. No manual labels.">
   <meta name="twitter:image" content="https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg">
-  <meta name="twitter:image:alt" content="A photorealistic synthetic person with a lens revealing the exact 3D body under their clothing">
+  <meta name="twitter:image:alt" content="A photorealistic synthetic person beside the exact 3D body model used as ground truth">
 
   <script type="application/ld+json">
   {
@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "Dataset",
     "name": "SnapMeasureAI synthetic humans with 3D body ground truth",
-    "description": "A 100,000-image production batch of photorealistic synthetic people, each generated from a parametric 3D body by diffusion conditioned on surface normals and pose. Every image is labeled with the exact body under the clothing: shape parameters, 3D pose, Halpe-26 2D keypoints, body-part segmentation, metric depth, camera intrinsics and 42 body measurements. Sixteen samples and 152 curated images are browsable on this page; full datasets are licensed.",
+    "description": "A 100,000-image production batch of photorealistic synthetic people, each generated from a parametric 3D body by diffusion conditioned on surface normals and pose. Every image is labeled with its exact 3D body ground truth: shape parameters, 3D pose, Halpe-26 2D keypoints, body-part segmentation, metric depth, camera intrinsics and body measurements. Sixteen samples and 152 curated images are browsable on this page; full datasets are licensed.",
     "url": "https://snapmeasureai.com/synthetic-data-with-labels/#dataset",
     "image": "https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg",
     "isAccessibleForFree": false,
@@ -137,7 +137,7 @@
         "name": "What body diversity is covered?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The 3D model library covers the full range of human body morphology — heights, the full BMI range, all sexes, and a complete range of skin tones and ethnicities. Pose diversity includes standing, sitting, crouching, sport-specific, and custom positions. Specify the demographic distribution you need and we generate to that specification."
+          "text": "The 3D model library covers the full range of human body morphology — heights, the full BMI range, all sexes, and a complete range of skin tones and ethnicities. Limb and torso proportions vary independently, matched to anthropometric survey data, so a large thigh does not imply a matching calf. Pose diversity includes standing, sitting, crouching, sport-specific, and custom positions. Specify the demographic distribution you need and we generate to that specification."
         }
       },
       {
@@ -691,13 +691,10 @@
     .dx-meas td { padding: 5px 0; border-bottom: 1px solid var(--border); color: var(--text-2); }
     .dx-meas td:last-child { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
     .dx-meas tr:last-child td { border-bottom: none; }
-    .dx-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; color: var(--text-2); line-height: 1.65; white-space: pre; overflow-x: auto; }
+    .dx-labels { color: var(--text-2); }
+    .dx-more { color: var(--teal); font-weight: 600; }
+    .dx-more:hover { text-decoration: underline; }
     .dx-note { font-size: 13px; color: var(--text-3); margin-top: 12px; line-height: 1.6; }
-    .dx-json summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-2); list-style: none; }
-    .dx-json summary::-webkit-details-marker { display: none; }
-    .dx-json summary::before { content: '{ }'; color: var(--teal); margin-right: 10px; font-family: ui-monospace, Menlo, Consolas, monospace; }
-    .dx-json summary:hover { color: var(--text); }
-    .dx-json pre { margin-top: 14px; max-height: 300px; overflow: auto; }
 
     /* ---- SAMPLE WALL ---- */
     .dx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin: 72px 0 16px; flex-wrap: wrap; }
@@ -862,16 +859,16 @@
     </div>
 
     <!-- Live preview of the dataset: the photo, then the exact 3D body under the clothes -->
-    <a class="hero-peek" href="#dataset" aria-label="Explore the dataset: photorealistic photos with the exact 3D body under the clothing">
+    <a class="hero-peek" href="#dataset" aria-label="Explore the dataset: photorealistic photos with their exact 3D body ground truth">
       <div class="hero-peek__stage">
         <img class="hero-peek__photo" id="peekPhoto" src="/synthetic-data-with-labels/dataset/featured/93790_photo.webp" alt="Photorealistic synthetic photo of a person in everyday clothing" width="512" height="512" fetchpriority="high">
-        <img class="hero-peek__body" id="peekBody" src="/synthetic-data-with-labels/dataset/featured/93790_body.webp" alt="The exact 3D body under the clothing for the same photo" width="512" height="512">
+        <img class="hero-peek__body" id="peekBody" src="/synthetic-data-with-labels/dataset/featured/93790_body.webp" alt="The exact 3D body model behind the same photo" width="512" height="512">
         <span class="hero-peek__line" aria-hidden="true"></span>
         <span class="hero-peek__tag hero-peek__tag--body" aria-hidden="true">3D body · ground truth</span>
         <span class="hero-peek__tag hero-peek__tag--photo" aria-hidden="true">Photo</span>
       </div>
       <div class="hero-peek__foot">
-        <span class="hero-peek__cap"><strong>Every image ships with the body under the clothes.</strong><br>Shape, pose and measurements, exact.</span>
+        <span class="hero-peek__cap"><strong>Every image ships with its exact 3D body.</strong><br>Shape, pose and measurements, exact.</span>
         <span class="hero-peek__go">See the dataset ↓</span>
       </div>
     </a>
@@ -928,6 +925,7 @@
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Pose, segmentation, depth, measurements</div>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Any body type, skin tone, background</div>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Edge cases and rare poses on demand</div>
+      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Trains our own clothed-body measurement model &mdash; <a href="https://demo.snapmeasureai.com/" style="color: var(--teal);">try the demo</a></div>
     </div>
   </div>
 </div>
@@ -936,27 +934,27 @@
 <section class="section section--alt section--data" id="dataset">
   <div class="container">
     <p class="section__eyebrow">Inside the dataset</p>
-    <h2 class="section__title">See the body under the clothes.</h2>
+    <h2 class="section__title">The 3D ground truth behind every photo.</h2>
     <p class="section__sub">
       Sixteen samples from a 100,000-image production batch. Move the lens across a photo to
-      reveal the exact 3D body inside the clothing &mdash; the shape, pose and measurements every
-      label is computed from. The clothes, hair and light belong to the photograph. The body
-      underneath is ground truth.
+      reveal the exact 3D body model it was generated from &mdash; the shape, pose and measurements
+      every label is computed from. The clothes, hair and light belong to the photograph. The body
+      model is ground truth.
     </p>
 
     <div class="dx">
       <div class="dx-viewer">
         <div class="dx-chips" id="dxChips" role="toolbar" aria-label="Label layer shown in the lens"></div>
-        <div class="dx-stage" id="dxStage" tabindex="0" role="img" aria-label="Photograph with a lens revealing the 3D body under the clothing">
+        <div class="dx-stage" id="dxStage" tabindex="0" role="img" aria-label="Photograph with a lens revealing its 3D ground truth">
           <img id="dxPhoto" alt="" width="512" height="512" decoding="async">
           <img id="dxLayer" class="dx-layer" alt="" width="512" height="512" decoding="async">
-          <div class="dx-ring" id="dxRing" aria-hidden="true"><span class="dx-tag" id="dxTag">Body under clothing</span></div>
+          <div class="dx-ring" id="dxRing" aria-hidden="true"><span class="dx-tag" id="dxTag">3D body</span></div>
         </div>
         <div class="dx-bar">
           <button class="dx-nav" id="dxPrev" aria-label="Previous sample">&#8249;</button>
           <span class="dx-count" id="dxCount" aria-live="polite">01 / 16</span>
           <button class="dx-nav" id="dxNext" aria-label="Next sample">&#8250;</button>
-          <span class="dx-hint" id="dxHint">Move the lens to see through the clothing</span>
+          <span class="dx-hint" id="dxHint">Move the lens to reveal the 3D ground truth</span>
           <button class="dx-chip dx-reveal" id="dxReveal" aria-pressed="false">Reveal all</button>
         </div>
         <div class="dx-thumbs" id="dxThumbs" aria-label="Samples"></div>
@@ -970,16 +968,13 @@
         <div class="dx-card">
           <div class="dx-k">Body measurements <span id="dxMeasN"></span></div>
           <table class="dx-meas" id="dxMeas"></table>
-          <p class="dx-note">Measured on the 3D body itself &mdash; the exact target a measurement model learns to recover through clothing.</p>
+          <p class="dx-note">Measured on the 3D body itself &mdash; the exact target a measurement model learns to recover from a clothed photo.</p>
         </div>
         <div class="dx-card">
-          <div class="dx-k">Camera <span>intrinsics, pixels</span></div>
-          <div class="dx-mono" id="dxCam"></div>
+          <div class="dx-k">In every label file</div>
+          <p class="dx-note dx-labels">Body shape and 3D pose &middot; 2D/3D keypoints &middot; body-part segmentation &middot; metric depth &middot; camera &middot; body measurements</p>
+          <p class="dx-note"><a class="dx-more" href="https://snapmeasureai.com/contact">Full sample label files on request &rarr;</a></p>
         </div>
-        <details class="dx-card dx-json">
-          <summary>Raw label file for this image</summary>
-          <pre class="dx-mono" id="dxJson"></pre>
-        </details>
       </aside>
     </div>
 
@@ -1061,6 +1056,7 @@
         <p class="audience-card__body">Training a body measurement or pose detection model requires representation across body types, proportions, and demographics. Photographing and labeling that diversity is expensive and slow. Synthetic generation covers the full range instantly, with no consent overhead.</p>
         <ul class="audience-card__list">
           <li>1M+ body model library — any height, weight, and proportion</li>
+          <li>Limb and torso proportions vary independently, matched to anthropometric survey data</li>
           <li>Full range of skin tones, ages, and body shapes</li>
           <li>Body measurements derived from 3D geometry per image</li>
           <li>No real human subjects — no GDPR or HIPAA exposure</li>
@@ -1261,7 +1257,7 @@
        the photograph's fabric, hair and fingers are its own, and a lens that
        compared them against geometry would be inviting the wrong question. */
     var LAYERS = [
-      ['body', 'Body under clothing'], ['parts', 'Body parts'],
+      ['body', '3D body'], ['parts', 'Body parts'],
       ['depth', 'Depth'], ['skeleton', 'Skeleton']
     ];
     var LAYER_NAME = {};
@@ -1469,7 +1465,6 @@
           num(sub.stature_m * 100) + ' cm, BMI ' + num(sub.bmi, 1) + '. Lens shows ' + LAYER_NAME[key] + '.');
         $('dxId').textContent = '#' + s.id;
         var subj = $('dxSubject'); subj.innerHTML = '';
-        /* Mass stays in the raw label file below. */
         [[sub.sex.charAt(0).toUpperCase() + sub.sex.slice(1), 'sex'],
          [num(sub.stature_m * 100, 1), 'height, cm'],
          [num(sub.bmi, 1), 'BMI']].forEach(function (p) {
@@ -1477,7 +1472,7 @@
         });
 
         var meas = $('dxMeas'); meas.innerHTML = '';
-        /* Girths first (samples.json lists them first). Height is already in the subject row. */
+        /* Six girths; height is already in the subject row. */
         Object.keys(s.measurements_cm).forEach(function (name) {
           if (name === 'Height') return;
           var tr = el('tr');
@@ -1487,27 +1482,6 @@
         });
         $('dxMeasN').textContent = 'cm · on the 3D body';
 
-        var K = s.camera.K;
-        /* No thousands separators in a matrix: 1,090.2 breaks the columns. */
-        function col(v) { return Number(v).toFixed(1).padStart(9, ' '); }
-        $('dxCam').textContent =
-          'distance  ' + num(s.camera.distance_m, 2) + ' m\n' +
-          'K = [' + col(K[0][0]) + col(K[0][1]) + col(K[0][2]) + ' ]\n' +
-          '    [' + col(K[1][0]) + col(K[1][1]) + col(K[1][2]) + ' ]\n' +
-          '    [' + col(K[2][0]) + col(K[2][1]) + col(K[2][2]) + ' ]';
-
-        var file = {
-          id: s.id, subject: s.subject, shape_betas: s.shape_betas,
-          measurements_cm: s.measurements_cm, camera: s.camera,
-          people_in_frame: s.people_in_frame,
-          keypoint_format: s.keypoint_format,
-          keypoints_2d: s.keypoints_2d.filter(function (p) {
-            return /^(Head|Neck|LShoulder|RShoulder)$/.test(p.name);
-          }),
-          keypoints_2d_total: s.keypoints_2d.length
-        };
-        $('dxJson').textContent = JSON.stringify(file, null, 2)
-          .replace(/\n\s+(-?\d)/g, ' $1').replace(/\n\s+\]/g, ' ]');
       }
 
       /* Idle drift, so the section is alive before anyone touches it. Only
