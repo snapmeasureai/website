@@ -684,9 +684,6 @@
       font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
     }
     .dx-k span { color: var(--text-3); letter-spacing: .02em; font-weight: 600; text-transform: none; font-size: 12px; }
-    .dx-subject { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .dx-subject b { display: block; font-size: 21px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -.01em; line-height: 1.2; }
-    .dx-subject small { font-size: 12px; color: var(--text-3); }
     .dx-legend { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 12px; }
     .dx-legend button {
       font: inherit; font-size: 14px; color: var(--text-2); background: none; border: 0; padding: 4px 0; cursor: pointer;
@@ -755,7 +752,6 @@
       .cov-tiles { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .dx-subject { grid-template-columns: repeat(3, 1fr); row-gap: 12px; }
       .dx-thumbs { gap: 3px; padding: 0 8px 8px; }
       .dx-chips { padding: 10px 8px; }
       .dx-chip { font-size: 12px; padding: 7px 10px; }
@@ -967,10 +963,6 @@
       </div>
 
       <aside class="dx-panel" aria-label="Labels for this sample">
-        <div class="dx-card">
-          <div class="dx-k">Subject <span id="dxId"></span></div>
-          <div class="dx-subject" id="dxSubject"></div>
-        </div>
         <div class="dx-card">
           <div class="dx-k">Body measurements <span>on the 3D body</span></div>
           <ul class="dx-legend" id="dxLegend" aria-label="Show measurements in the lens"></ul>
@@ -1500,8 +1492,7 @@
         cur = (i + samples.length) % samples.length;
         var s = samples[cur];
         photo.src = src(s, 'photo');
-        photo.alt = 'Synthetic photograph ' + s.id + ': ' + (s.subject.sex === 'female' ? 'woman' : 'man') +
-          ', ' + Math.round(s.subject.stature_m * 100) + ' cm';
+        photo.alt = 'Synthetic photograph ' + s.id + ': ' + (s.subject.sex === 'female' ? 'woman' : 'man');
         layer.src = src(s, key);
         drawOverlay(s);
         LAYERS.forEach(function (l) { (new Image()).src = src(s, l[0]); });
@@ -1525,15 +1516,8 @@
         }
         if (!(hovering || dragging)) jump(centre[0], centre[1] - span[1] * 0.4);
 
-        var sub = s.subject;
-        stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + sub.sex + ', ' +
-          num(sub.stature_m * 100) + ' cm. Lens shows ' + LAYER_NAME[key] + '.');
-        $('dxId').textContent = '#' + s.id;
-        var subj = $('dxSubject'); subj.innerHTML = '';
-        [[sub.sex.charAt(0).toUpperCase() + sub.sex.slice(1), 'sex'],
-         [num(sub.stature_m * 100, 1), 'height, cm']].forEach(function (p) {
-          var d = el('div'); d.appendChild(el('b', null, p[0])); d.appendChild(el('small', null, p[1])); subj.appendChild(d);
-        });
+        stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + s.subject.sex +
+          '. Lens shows ' + LAYER_NAME[key] + '.');
       }
 
       /* Idle drift, so the section is alive before anyone touches it. Only
