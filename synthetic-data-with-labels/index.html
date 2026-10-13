@@ -684,13 +684,18 @@
       font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
     }
     .dx-k span { color: var(--text-3); letter-spacing: .02em; font-weight: 600; text-transform: none; font-size: 12px; }
-    .dx-subject { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .dx-subject { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .dx-subject b { display: block; font-size: 21px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -.01em; line-height: 1.2; }
     .dx-subject small { font-size: 12px; color: var(--text-3); }
-    .dx-meas { width: 100%; border-collapse: collapse; font-size: 14px; }
-    .dx-meas td { padding: 5px 0; border-bottom: 1px solid var(--border); color: var(--text-2); }
-    .dx-meas td:last-child { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
-    .dx-meas tr:last-child td { border-bottom: none; }
+    .dx-legend { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 12px; }
+    .dx-legend button {
+      font: inherit; font-size: 14px; color: var(--text-2); background: none; border: 0; padding: 4px 0; cursor: pointer;
+      display: flex; align-items: center; gap: 9px; width: 100%; text-align: left;
+    }
+    .dx-legend button:hover { color: var(--text); }
+    .dx-legend i { width: 14px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+    .dx-legend i.is-ring { height: 8px; border: 2px solid; border-radius: 50%; }
+    .dx-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
     .dx-labels { color: var(--text-2); }
     .dx-more { color: var(--teal); font-weight: 600; }
     .dx-more:hover { text-decoration: underline; }
@@ -948,6 +953,7 @@
         <div class="dx-stage" id="dxStage" tabindex="0" role="img" aria-label="Photograph with a lens revealing its 3D ground truth">
           <img id="dxPhoto" alt="" width="512" height="512" decoding="async">
           <img id="dxLayer" class="dx-layer" alt="" width="512" height="512" decoding="async">
+          <svg id="dxOverlay" class="dx-layer dx-overlay" viewBox="0 0 512 512" aria-hidden="true" style="display:none"></svg>
           <div class="dx-ring" id="dxRing" aria-hidden="true"><span class="dx-tag" id="dxTag">3D body</span></div>
         </div>
         <div class="dx-bar">
@@ -966,9 +972,9 @@
           <div class="dx-subject" id="dxSubject"></div>
         </div>
         <div class="dx-card">
-          <div class="dx-k">Body measurements <span id="dxMeasN"></span></div>
-          <table class="dx-meas" id="dxMeas"></table>
-          <p class="dx-note">Measured on the 3D body itself &mdash; the exact target a measurement model learns to recover from a clothed photo.</p>
+          <div class="dx-k">Body measurements <span>on the 3D body</span></div>
+          <ul class="dx-legend" id="dxLegend" aria-label="Show measurements in the lens"></ul>
+          <p class="dx-note">Measured on the 3D body itself, not the clothing &mdash; the exact target a measurement model learns to recover from a clothed photo. Every label file carries 100+ girths and lengths.</p>
         </div>
         <div class="dx-card">
           <div class="dx-k">In every label file</div>
@@ -1257,9 +1263,24 @@
        the photograph's fabric, hair and fingers are its own, and a lens that
        compared them against geometry would be inviting the wrong question. */
     var LAYERS = [
-      ['body', '3D body'], ['parts', 'Body parts'],
+      ['body', '3D body'], ['measure', 'Measurements'], ['parts', 'Body parts'],
       ['depth', 'Depth'], ['skeleton', 'Skeleton']
     ];
+    /* The measurement layer draws where girths and lengths are taken on the
+       3D body, without values: the per-person numbers are in the label files.
+       The geometry in samples.json (overlay) is the production measurement
+       definitions run on each sample's own SUPR body (A-pose cut planes,
+       body-part filter, convex hull; limb lengths as the viewer's surface path
+       between their landmarks, shoulder breadth point to point), carried onto
+       the posed body and projected with the sample's camera. */
+    var MEASURES = [
+      ['chest', 'Chest', '#0ABFA3', 1], ['hip', 'Hip', '#6C63FF', 1],
+      ['upper_arm', 'Bicep', '#FFB020', 1], ['thigh', 'Thigh', '#38BDF8', 1],
+      ['calf', 'Calf', '#FF6B9A', 1], ['shoulder', 'Shoulder breadth', '#A3E635', 0],
+      ['arm', 'Arm length', '#FB923C', 0], ['inseam', 'Leg length', '#E879F9', 0]
+    ];
+    var MEASURE_COLOR = {};
+    MEASURES.forEach(function (m) { MEASURE_COLOR[m[0]] = m[2]; });
     var LAYER_NAME = {};
     LAYERS.forEach(function (l) { LAYER_NAME[l[0]] = l[1]; });
     /* Halpe-26: body and feet, no hands and no face mesh. Indices as in the
@@ -1299,7 +1320,7 @@
     }
 
     /* DATA_VERSION busts browser/CDN caches when the JSON changes: bump it on every data update. */
-    var DATA_VERSION = '2';
+    var DATA_VERSION = '5';
     Promise.all(['samples.json', 'wall.json', 'stats.json'].map(function (f) {
       return fetch(BASE + f + '?v=' + DATA_VERSION).then(function (r) { if (!r.ok) throw new Error(f); return r.json(); });
     })).then(function (d) {
@@ -1317,18 +1338,61 @@
       var hovering = false, dragging = false, lastUser = -1e9;
       var centre = [0.5, 0.45], span = [0.12, 0.25];
 
-      function src(s, k) { return BASE + 'featured/' + parseInt(s.id, 10) + '_' + k + '.webp'; }
+      /* The measurement layer is the 3D body render with the overlay on top. */
+      function src(s, k) { return BASE + 'featured/' + parseInt(s.id, 10) + '_' + (k === 'measure' ? 'body' : k) + '.webp'; }
+
+      var overlay = $('dxOverlay');
+      function drawOverlay(s) {
+        overlay.innerHTML = '';
+        var o = s.overlay || { rings: [], lengths: [] };
+        function f(v) { return v.toFixed(1); }
+        function path(d, color, width, opacity) {
+          overlay.appendChild(sv('path', { d: d, fill: 'none', stroke: color, 'stroke-width': width,
+            'stroke-opacity': opacity, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }));
+        }
+        /* Drawn over the body at full strength whatever the pose, as in the 3D
+           viewer (depth test off): a ring shows its whole loop, a length its
+           whole path, even where the body would hide them. A dark under-stroke
+           and a soft halo keep each colour legible on the light body render. */
+        function draw(item, closed) {
+          var c = MEASURE_COLOR[item.k];
+          var d = item.p.map(function (p, i) { return (i ? 'L' : 'M') + f(p[0]) + ' ' + f(p[1]); }).join('') + (closed ? 'Z' : '');
+          path(d, '#080C10', 4.2, 0.55);
+          path(d, c, 7, 0.25);
+          path(d, c, 2.4, 1);
+        }
+        o.rings.forEach(function (r) { draw(r, true); });
+        o.lengths.forEach(function (l) {
+          draw(l, false);
+          [l.p[0], l.p[l.p.length - 1]].forEach(function (p) {
+            overlay.appendChild(sv('circle', { cx: f(p[0]), cy: f(p[1]), r: 3.6, fill: MEASURE_COLOR[l.k],
+              stroke: '#080C10', 'stroke-width': 1.2, 'stroke-opacity': 0.55 }));
+          });
+        });
+      }
 
       var chips = $('dxChips');
+      function setLayer(k) {
+        key = k;
+        chips.querySelectorAll('.dx-chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c.getAttribute('data-k') === k)); });
+        layer.src = src(samples[cur], key);
+        overlay.style.display = key === 'measure' ? '' : 'none';
+        place();
+      }
       LAYERS.forEach(function (l) {
-        var b = el('button', { 'class': 'dx-chip', 'type': 'button', 'aria-pressed': String(l[0] === key) }, l[1]);
-        b.addEventListener('click', function () {
-          key = l[0];
-          chips.querySelectorAll('.dx-chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
-          layer.src = src(samples[cur], key);
-          place();
-        });
+        var b = el('button', { 'class': 'dx-chip', 'type': 'button', 'data-k': l[0], 'aria-pressed': String(l[0] === key) }, l[1]);
+        b.addEventListener('click', function () { setLayer(l[0]); });
         chips.appendChild(b);
+      });
+
+      /* The legend doubles as a shortcut to the measurement layer. */
+      var legend = $('dxLegend');
+      MEASURES.forEach(function (m) {
+        var b = el('button', { 'type': 'button' });
+        b.appendChild(el('i', m[3] ? { 'class': 'is-ring', style: 'border-color:' + m[2] } : { style: 'background:' + m[2] }));
+        b.appendChild(document.createTextNode(m[1]));
+        b.addEventListener('click', function () { setLayer('measure'); });
+        var li = el('li'); li.appendChild(b); legend.appendChild(li);
       });
 
       var thumbs = $('dxThumbs');
@@ -1437,8 +1501,9 @@
         var s = samples[cur];
         photo.src = src(s, 'photo');
         photo.alt = 'Synthetic photograph ' + s.id + ': ' + (s.subject.sex === 'female' ? 'woman' : 'man') +
-          ', ' + Math.round(s.subject.stature_m * 100) + ' cm, BMI ' + s.subject.bmi;
+          ', ' + Math.round(s.subject.stature_m * 100) + ' cm';
         layer.src = src(s, key);
+        drawOverlay(s);
         LAYERS.forEach(function (l) { (new Image()).src = src(s, l[0]); });
         (new Image()).src = src(samples[(cur + 1) % samples.length], 'photo');
 
@@ -1462,26 +1527,13 @@
 
         var sub = s.subject;
         stage.setAttribute('aria-label', 'Sample ' + s.id + ': ' + sub.sex + ', ' +
-          num(sub.stature_m * 100) + ' cm, BMI ' + num(sub.bmi, 1) + '. Lens shows ' + LAYER_NAME[key] + '.');
+          num(sub.stature_m * 100) + ' cm. Lens shows ' + LAYER_NAME[key] + '.');
         $('dxId').textContent = '#' + s.id;
         var subj = $('dxSubject'); subj.innerHTML = '';
         [[sub.sex.charAt(0).toUpperCase() + sub.sex.slice(1), 'sex'],
-         [num(sub.stature_m * 100, 1), 'height, cm'],
-         [num(sub.bmi, 1), 'BMI']].forEach(function (p) {
+         [num(sub.stature_m * 100, 1), 'height, cm']].forEach(function (p) {
           var d = el('div'); d.appendChild(el('b', null, p[0])); d.appendChild(el('small', null, p[1])); subj.appendChild(d);
         });
-
-        var meas = $('dxMeas'); meas.innerHTML = '';
-        /* Six girths; height is already in the subject row. */
-        Object.keys(s.measurements_cm).forEach(function (name) {
-          if (name === 'Height') return;
-          var tr = el('tr');
-          tr.appendChild(el('td', null, name));
-          tr.appendChild(el('td', null, num(s.measurements_cm[name], 1)));
-          meas.appendChild(tr);
-        });
-        $('dxMeasN').textContent = 'cm · on the 3D body';
-
       }
 
       /* Idle drift, so the section is alive before anyone touches it. Only
