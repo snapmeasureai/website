@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "Dataset",
     "name": "SnapMeasureAI synthetic humans with 3D body ground truth",
-    "description": "A 100,000-image production batch of photorealistic synthetic people, each generated from a parametric 3D body by diffusion conditioned on surface normals and pose. Every image is labeled with its exact 3D body ground truth: shape parameters, 3D pose, Halpe-26 2D keypoints, body-part segmentation, metric depth, camera intrinsics and body measurements. Sixteen samples and 152 curated images are browsable on this page; full datasets are licensed.",
+    "description": "A 100,000-image production batch of photorealistic synthetic people, each generated from a parametric 3D body by diffusion conditioned on surface normals and pose. Every image is labeled with its exact 3D body ground truth: shape parameters, 3D pose, Halpe-26 2D keypoints, body-part segmentation, metric depth, camera intrinsics and body measurements. Sixteen samples are browsable on this page; datasets are available on request.",
     "url": "https://snapmeasureai.com/synthetic-data-with-labels/#dataset",
     "image": "https://snapmeasureai.com/synthetic-data-with-labels/dataset/og-image.jpg",
     "isAccessibleForFree": false,
@@ -698,71 +698,44 @@
     .dx-more:hover { text-decoration: underline; }
     .dx-note { font-size: 13px; color: var(--text-3); margin-top: 12px; line-height: 1.6; }
 
-    /* ---- SAMPLE WALL ---- */
-    .dx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin: 72px 0 16px; flex-wrap: wrap; }
-    .dx-head h3 { font-size: 22px; font-weight: 700; letter-spacing: -.015em; line-height: 1.3; }
+    /* ---- VIDEO ---- */
+    .vx { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 56px; align-items: center; }
+    .vx .section__sub { margin-bottom: 28px; }
+    .vx-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+    .vx-more { font-size: 14px; font-weight: 600; color: var(--text-2); }
+    .vx-more:hover { color: var(--teal); }
+    .vx-media {
+      position: relative; height: min(640px, 78vh); aspect-ratio: 9 / 16; margin: 0;
+      border-radius: var(--radius-lg); overflow: hidden; background: var(--bg2);
+      border: 1px solid var(--border-hi); box-shadow: 0 24px 64px rgba(0,0,0,.45);
+    }
+    .vx-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .vx-toggle {
+      position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-hi); background: rgba(8,12,16,.72); color: var(--text);
+      display: inline-flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(4px);
+    }
+    .vx-toggle:hover { border-color: rgba(10,191,163,.6); color: var(--teal); }
+    .vx-toggle:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    .dx-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin: 96px 0 20px; flex-wrap: wrap; }
+    .dx-head h3 { font-size: 24px; font-weight: 700; letter-spacing: -.015em; line-height: 1.3; }
     .dx-head p { font-size: 14px; color: var(--text-3); }
-    .wall {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 3px;
-      border-radius: var(--radius-lg); overflow: hidden; max-height: 480px;
-      -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent);
-              mask-image: linear-gradient(to bottom, #000 72%, transparent);
-    }
-    .wall.is-open { max-height: none; -webkit-mask-image: none; mask-image: none; }
-    .wall-tile { position: relative; aspect-ratio: 1; background: var(--bg3); overflow: hidden; cursor: pointer; }
-    .wall-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s, filter .3s; }
-    .wall-tile svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .2s; pointer-events: none; }
-    .wall-tile.is-sk img { filter: brightness(.4) saturate(.5); transform: scale(1.04); }
-    .wall-tile.is-sk svg { opacity: 1; }
-    @media (hover: hover) {
-      .wall-tile:hover img { filter: brightness(.4) saturate(.5); transform: scale(1.04); }
-      .wall-tile:hover svg { opacity: 1; }
-    }
-    .wall-more { display: flex; margin: 16px auto 0; font-size: 14px; padding: 11px 22px; }
-
-    /* ---- COVERAGE ---- */
-    .cov { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .cov-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 20px 12px; position: relative; }
-    .cov-card h4 { font-size: 15px; font-weight: 600; line-height: 1.3; }
-    .cov-card > p { font-size: 13px; color: var(--text-3); margin: 2px 0 14px; }
-    .cov-card svg { width: 100%; height: auto; display: block; overflow: visible; }
-    .cov-bar { fill: var(--teal); opacity: .78; transition: opacity .12s; }
-    .cov-bar.is-hot { opacity: 1; }
-    .cov-hit { fill: transparent; cursor: default; }
-    .cov-axis { fill: var(--text-3); font-size: 11px; font-family: inherit; }
-    .cov-base { stroke: var(--border-hi); stroke-width: 1; }
-    .cov-sw { stroke: rgba(255,255,255,.16); stroke-width: 1; }   /* keeps the deepest tones visible on the dark card */
-    .cov-tip {
-      position: absolute; pointer-events: none; background: var(--bg); border: 1px solid var(--border-hi);
-      border-radius: 8px; padding: 6px 10px; font-size: 12.5px; color: var(--text-2); white-space: nowrap;
-      transform: translate(-50%, calc(-100% - 8px)); opacity: 0; transition: opacity .12s; z-index: 5;
-    }
-    .cov-tip b { color: var(--text); font-variant-numeric: tabular-nums; }
-    .cov-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
-    .cov-tile { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
-    .cov-tile .v { font-size: 26px; font-weight: 700; color: var(--teal); letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.25; }
-    .cov-tile .l { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
-    .cov-tile .d { font-size: 13px; color: var(--text-2); margin-top: 4px; }
-    .cov-foot { font-size: 13px; color: var(--text-3); margin-top: 16px; max-width: 760px; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 
     @media (max-width: 900px) {
       .dx { grid-template-columns: 1fr; }
-      .cov { grid-template-columns: 1fr; }
-      .cov-tiles { grid-template-columns: 1fr; }
+      .vx { grid-template-columns: 1fr; gap: 32px; }
+      .vx-media { height: auto; width: min(100%, 360px); justify-self: center; }
     }
     @media (max-width: 600px) {
       .dx-thumbs { gap: 3px; padding: 0 8px 8px; }
       .dx-chips { padding: 10px 8px; }
       .dx-chip { font-size: 12px; padding: 7px 10px; }
       .dx-hint { display: none; }
-      .wall { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); max-height: 400px; }
-      .dx-head { margin-top: 56px; }
-      /* SVG text scales with the chart; at phone width 11px shrank to ~7px. */
-      .cov-axis { font-size: 18px; }
+      .dx-head { margin-top: 64px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .dx-layer, .dx-ring, .dx-stage.is-full .dx-layer, .wall-tile img { transition: none; }
+      .dx-layer, .dx-ring, .dx-stage.is-full .dx-layer { transition: none; }
     }
   </style>
 </head>
@@ -934,14 +907,36 @@
 <!-- ==================== INSIDE THE DATASET ==================== -->
 <section class="section section--alt section--data" id="dataset">
   <div class="container">
-    <p class="section__eyebrow">Inside the dataset</p>
-    <h2 class="section__title">The 3D ground truth behind every photo.</h2>
-    <p class="section__sub">
-      Sixteen samples from a 100,000-image production batch. Move the lens across a photo to
-      reveal the exact 3D body model it was generated from &mdash; the shape, pose and measurements
-      every label is computed from. The clothes, hair and light belong to the photograph. The body
-      model is ground truth.
-    </p>
+    <div class="vx">
+      <div>
+        <p class="section__eyebrow">Inside the dataset</p>
+        <h2 class="section__title">Every photo comes with the exact body underneath.</h2>
+        <p class="section__sub">
+          A 100,000-image production batch of photorealistic people in the clothes people actually
+          wear &mdash; sweaters, dresses, layers &mdash; each generated from a 3D body we know exactly.
+          It is what our measurement model learns from: two photos, everyday clothes, real sizes.
+        </p>
+        <div class="vx-actions">
+          <a href="https://demo.snapmeasureai.com/" class="btn btn--scan">Try it on your own photos &rarr;</a>
+          <a href="https://snapmeasureai.com/contact" class="vx-more">Interested in the dataset? Get in touch &rarr;</a>
+        </div>
+      </div>
+      <figure class="vx-media">
+        <video id="vxVideo" muted loop playsinline preload="metadata"
+               poster="/img/synthetic-body-dataset-poster.webp" width="540" height="960"
+               aria-label="Video: synthetic photos of people in everyday clothes, each wiping to the exact 3D body underneath, then the dataset's range of body types">
+          <source src="/img/synthetic-body-dataset.mp4" type="video/mp4">
+        </video>
+        <button class="vx-toggle" id="vxToggle" type="button" aria-label="Pause video">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path id="vxIcon" d="M3 2h3v10H3zM8 2h3v10H8z" fill="currentColor"/></svg>
+        </button>
+      </figure>
+    </div>
+
+    <div class="dx-head">
+      <h3>Inspect it yourself.</h3>
+      <p>Sixteen samples. Move the lens to reveal the 3D body, or switch to any label layer.</p>
+    </div>
 
     <div class="dx">
       <div class="dx-viewer">
@@ -976,20 +971,6 @@
       </aside>
     </div>
 
-    <div class="dx-head">
-      <h3>152 curated samples. Same batch, same labels.</h3>
-      <p>Hover or tap any image to see its skeleton.</p>
-    </div>
-    <div class="wall" id="wall"></div>
-    <button class="btn btn--ghost wall-more" id="wallMore">Show all 152</button>
-
-    <div class="dx-head">
-      <h3>Coverage you can inspect.</h3>
-      <p id="covN">Distributions across the full batch.</p>
-    </div>
-    <div class="cov" id="cov"></div>
-    <div class="cov-tiles" id="covTiles"></div>
-    <p class="cov-foot" id="covFoot"></p>
   </div>
 </section>
 
@@ -1240,10 +1221,10 @@
 
   /* ================================================================
      INSIDE THE DATASET
-     Lens explorer, sample wall and coverage charts. Everything is read
-     from /synthetic-data-with-labels/dataset/; images load lazily. If the
-     data cannot be fetched the section hides itself rather than showing
-     empty frames.
+     Autoplaying video, then the lens explorer. Explorer data is read from
+     /synthetic-data-with-labels/dataset/; images load lazily. If the data
+     cannot be fetched the explorer hides itself rather than showing empty
+     frames; the video does not depend on it.
   ================================================================ */
   (function () {
     var section = document.getElementById('dataset');
@@ -1275,17 +1256,6 @@
     MEASURES.forEach(function (m) { MEASURE_COLOR[m[0]] = m[2]; });
     var LAYER_NAME = {};
     LAYERS.forEach(function (l) { LAYER_NAME[l[0]] = l[1]; });
-    /* Halpe-26: body and feet, no hands and no face mesh. Indices as in the
-       label file: 0 nose, 1-4 eyes/ears, 5-16 limbs, 17 head, 18 neck,
-       19 pelvis, 20-25 toes and heels. */
-    var LIMBS = [[17,18],[18,19],[18,5],[18,6],[5,7],[7,9],[6,8],[8,10],
-                 [19,11],[19,12],[11,13],[13,15],[12,14],[14,16],
-                 [15,20],[15,22],[15,24],[16,21],[16,23],[16,25],
-                 [0,1],[0,2],[1,3],[2,4]];
-    var TONES = ['#f6ede4','#f3e7db','#f7ead0','#eadaba','#d7bd96',
-                 '#a07e56','#825c43','#604134','#3a312a','#292420'];
-    var TONE_NAMES = ['very light','light','light beige','medium beige','olive',
-                      'tan brown','medium brown','deep brown','rich dark brown','very deep'];
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var SVGNS = 'http://www.w3.org/2000/svg';
 
@@ -1301,9 +1271,6 @@
       for (var k in (attrs || {})) n.setAttribute(k, attrs[k]);
       return n;
     }
-    function num(v, d) {
-      return Number(v).toLocaleString('en-US', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
-    }
     function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
     function joint(name) {
       var side = name[0] === 'L' && name !== 'Neck' ? 'Left ' : name[0] === 'R' ? 'Right ' : '';
@@ -1313,13 +1280,34 @@
 
     /* DATA_VERSION busts browser/CDN caches when the JSON changes: bump it on every data update. */
     var DATA_VERSION = '5';
-    Promise.all(['samples.json', 'wall.json', 'stats.json'].map(function (f) {
-      return fetch(BASE + f + '?v=' + DATA_VERSION).then(function (r) { if (!r.ok) throw new Error(f); return r.json(); });
-    })).then(function (d) {
-      explorer(d[0]);
-      wall(d[1]);
-      coverage(d[2]);
-    }).catch(function () { section.style.display = 'none'; });
+    fetch(BASE + 'samples.json?v=' + DATA_VERSION)
+      .then(function (r) { if (!r.ok) throw new Error('samples.json'); return r.json(); })
+      .then(explorer)
+      .catch(function () {
+        section.querySelector('.dx').style.display = 'none';
+        section.querySelector('.dx-head').style.display = 'none';
+      });
+
+    /* ------------------------------------------------------------ video */
+    /* Plays muted on loop while on screen, never under reduced motion, and
+       always has a pause button (anything moving for more than 5 s needs one). */
+    (function () {
+      var v = $('vxVideo'), btn = $('vxToggle'), icon = $('vxIcon');
+      if (!v) return;
+      var paused = reduced, onScreen = false;
+      function sync() {
+        icon.setAttribute('d', paused ? 'M4 2l8 5-8 5z' : 'M3 2h3v10H3zM8 2h3v10H8z');
+        btn.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
+        if (!paused && onScreen) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      }
+      btn.addEventListener('click', function () { paused = !paused; sync(); });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; sync(); },
+                                 { threshold: 0.25 }).observe(v);
+      } else { onScreen = true; sync(); }
+      sync();
+    }());
 
     /* ------------------------------------------------------------ lens */
     function explorer(samples) {
@@ -1560,156 +1548,6 @@
       window.addEventListener('pointerup', function () { setTimeout(wake, 0); });
       reveal.addEventListener('click', function () { setTimeout(wake, 0); });
       show(0);
-    }
-
-    /* ------------------------------------------------------------ wall */
-    function skeleton(pts, size) {
-      var svg = sv('svg', { viewBox: '0 0 ' + size + ' ' + size, 'aria-hidden': 'true' });
-      /* Every joint, hidden or not; the svg clips anything past the frame. */
-      LIMBS.forEach(function (l) {
-        var a = pts[l[0]], b = pts[l[1]];
-        svg.appendChild(sv('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1],
-          stroke: '#0ABFA3', 'stroke-width': 2.2, 'stroke-linecap': 'round' }));
-      });
-      pts.forEach(function (p) {
-        svg.appendChild(sv('circle', { cx: p[0], cy: p[1], r: 2.4, fill: '#F0F4F8' }));
-      });
-      return svg;
-    }
-
-    function wall(items) {
-      var w = $('wall');
-      items.forEach(function (it) {
-        var t = el('div', { 'class': 'wall-tile' });
-        t.appendChild(el('img', { src: BASE + 'wall/' + it.id + '.webp', alt: '', loading: 'lazy', width: 176, height: 176 }));
-        function ensure() { if (!t.firstChild.nextSibling) t.appendChild(skeleton(it.k, 176)); }
-        t.addEventListener('mouseenter', ensure);
-        t.addEventListener('click', function () { ensure(); t.classList.toggle('is-sk'); });
-        w.appendChild(t);
-      });
-      var more = $('wallMore');
-      more.addEventListener('click', function () { w.classList.add('is-open'); more.style.display = 'none'; });
-    }
-
-    /* ------------------------------------------------------------ charts */
-    function barPath(x, y, w, h, r) {
-      r = Math.min(r, w / 2, h);
-      if (h <= 0) return '';
-      return 'M' + x + ',' + (y + h) + 'V' + (y + r) + 'Q' + x + ',' + y + ' ' + (x + r) + ',' + y +
-             'H' + (x + w - r) + 'Q' + (x + w) + ',' + y + ' ' + (x + w) + ',' + (y + r) + 'V' + (y + h) + 'Z';
-    }
-
-    function chart(host, title, sub, counts, labelOf, ticks, total, swatches) {
-      var card = el('div', { 'class': 'cov-card' });
-      card.appendChild(el('h4', null, title));
-      card.appendChild(el('p', null, sub));
-      var W = 480, H = swatches ? 196 : 176, L = 4, R = 4, T = 8, B = swatches ? 44 : 26;
-      var svg = sv('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': title + ' distribution' });
-      var n = counts.length, bw = (W - L - R) / n, gap = n > 20 ? 2 : 4;
-      var max = Math.max.apply(0, counts), plotH = H - T - B;
-      var tip = el('div', { 'class': 'cov-tip' });
-      var bars = [];
-      counts.forEach(function (c, i) {
-        var h = max ? c / max * plotH : 0, x = L + i * bw + gap / 2, y = T + plotH - h;
-        var p = sv('path', { d: barPath(x, y, Math.max(1, bw - gap), h, 4), 'class': 'cov-bar' });
-        svg.appendChild(p); bars.push(p);
-        if (swatches) {
-          svg.appendChild(sv('rect', { x: x, y: T + plotH + 8, width: Math.max(1, bw - gap), height: 14, rx: 3,
-            fill: swatches[i], 'class': 'cov-sw' }));
-        }
-      });
-      svg.appendChild(sv('line', { x1: L, x2: W - R, y1: T + plotH + 0.5, y2: T + plotH + 0.5, 'class': 'cov-base' }));
-      ticks.forEach(function (tk) {
-        var t = sv('text', { x: L + tk[0] * bw, y: H - 6, 'class': 'cov-axis',
-          'text-anchor': tk[0] <= 0 ? 'start' : tk[0] >= n ? 'end' : 'middle' });
-        t.textContent = tk[1]; svg.appendChild(t);
-      });
-      /* Hit targets: the whole column, not just the bar. */
-      counts.forEach(function (c, i) {
-        var hit = sv('rect', { x: L + i * bw, y: T, width: bw, height: plotH, 'class': 'cov-hit' });
-        hit.addEventListener('pointerenter', function () {
-          bars.forEach(function (b, j) { b.classList.toggle('is-hot', j === i); });
-          tip.innerHTML = '';
-          tip.appendChild(document.createTextNode(labelOf(i) + '  '));
-          tip.appendChild(el('b', null, num(c)));
-          tip.appendChild(document.createTextNode('  ·  ' + num(100 * c / total, 1) + '%'));
-          var sr = svg.getBoundingClientRect(), cr = card.getBoundingClientRect();
-          var bx = (L + (i + 0.5) * bw) / W * sr.width + sr.left - cr.left;
-          var by = (T + plotH - (max ? c / max * plotH : 0)) / H * sr.height + sr.top - cr.top;
-          tip.style.left = clamp(bx, 70, cr.width - 70) + 'px';
-          tip.style.top = by + 'px';
-          tip.style.opacity = 1;
-        });
-        svg.appendChild(hit);
-      });
-      svg.addEventListener('pointerleave', function () {
-        tip.style.opacity = 0;
-        bars.forEach(function (b) { b.classList.remove('is-hot'); });
-      });
-      card.appendChild(svg);
-      card.appendChild(tip);
-
-      /* The same numbers as a table, for screen readers. */
-      var tbl = el('table', { 'class': 'sr-only' });
-      counts.forEach(function (c, i) {
-        var tr = el('tr'); tr.appendChild(el('td', null, labelOf(i))); tr.appendChild(el('td', null, String(c))); tbl.appendChild(tr);
-      });
-      card.appendChild(tbl);
-      host.appendChild(card);
-    }
-
-    function hist(host, title, sub, h, fmt, unit, tickValue, total) {
-      /* Trim empty bins at either end so the axis spans the data, not the
-         bin table; the last bin keeps its "+" only if it is the clipped one. */
-      var a = 0, b = h.counts.length;
-      while (a < b && !h.counts[a]) a++;
-      while (b > a && !h.counts[b - 1]) b--;
-      var counts = h.counts.slice(a, b), lo = h.lo + a * h.step, clipped = b === h.counts.length;
-      var ticks = [];
-      for (var i = 0; i <= counts.length; i++) {
-        var v = lo + i * h.step, q = v / tickValue;
-        if (Math.abs(q - Math.round(q)) < 1e-6) ticks.push([i, fmt(v)]);
-      }
-      chart(host, title, sub, counts, function (i) {
-        var x = lo + i * h.step, y = x + h.step;
-        var last = clipped && i === counts.length - 1 ? '+' : '';
-        return fmt(x) + '–' + fmt(y) + last + ' ' + unit;
-      }, ticks, total);
-    }
-
-    function coverage(st) {
-      var host = $('cov'), n = st.n;
-      $('covN').textContent = 'Distributions across all 100,000 accepted samples.';
-      hist(host, 'Body mass index', 'Underweight through obese, sampled deliberately rather than as found.',
-           st.bmi, function (v) { return num(v); }, 'BMI', 5, n);
-      hist(host, 'Height', 'Women and men across the full adult range, in centimetres.',
-           st.stature_cm, function (v) { return num(v); }, 'cm', 10, n);
-      hist(host, 'Camera distance', 'Close phone shots out to long-lens portraits, in metres.',
-           st.distance_m, function (v) { return num(v, 0); }, 'm', 1, n);
-      chart(host, 'Skin tone', 'Ten perceptual tones, light to deep, in equal measure.',
-            st.skin_tone, function (i) { return 'Tone ' + (i + 1) + ' · ' + TONE_NAMES[i]; },
-            [[0.5, 'lightest'], [st.skin_tone.length - 0.5, 'deepest']], n, TONES);
-
-      var tiles = $('covTiles');
-      function tile(label, value, detail) {
-        var d = el('div', { 'class': 'cov-tile' });
-        d.appendChild(el('div', { 'class': 'l' }, label));
-        d.appendChild(el('div', { 'class': 'v' }, value));
-        d.appendChild(el('div', { 'class': 'd' }, detail));
-        tiles.appendChild(d);
-      }
-      var f = st.sex.female || 0, m = st.sex.male || 0;
-      tile('Sex', num(100 * f / (f + m), 1) + ' / ' + num(100 * m / (f + m), 1), 'percent female / male');
-      var ages = Object.keys(st.age).map(function (k) { return st.age[k]; });
-      var at = ages.reduce(function (a, b) { return a + b; }, 0);
-      tile('Age', ages.length + ' bands',
-           num(100 * Math.min.apply(0, ages) / at, 1) + '–' + num(100 * Math.max.apply(0, ages) / at, 1) +
-           '% each, young adult to elderly');
-      var solo = st.people['1'] || 0;
-      tile('People in frame', num(100 * (n - solo) / n) + '%', 'include bystanders; the subject is always the one labelled');
-
-      $('covFoot').textContent = 'Every sample carries a complete label file, and has its skeleton ' +
-        'landing on its own silhouette.';
     }
   }());
 </script>
