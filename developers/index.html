@@ -453,7 +453,7 @@
 {
   <span class="p">"height"</span>:  <span class="s">"174cm"</span>,
   <span class="p">"company"</span>: <span class="s">"your-partner-code"</span>,
-  <span class="p">"images"</span>: [    <span class="c">// base64-encoded JPEGs, not file uploads</span>
+  <span class="p">"images"</span>: [    <span class="c">// each photo as a base64 string</span>
     { <span class="p">"fileName"</span>: <span class="s">"front.jpg"</span>, <span class="p">"data"</span>: <span class="s">"/9j/4AAQ…"</span> },
     { <span class="p">"fileName"</span>: <span class="s">"side.jpg"</span>,  <span class="p">"data"</span>: <span class="s">"/9j/4AAQ…"</span> }
   ]
@@ -543,8 +543,8 @@
           <p>Onboarding gives you an endpoint, a partner code, and test access. The partner code carries your output configuration and your measurement set.</p>
         </li>
         <li>
-          <h3>Downscale and base64-encode the photos</h3>
-          <p>Front first, then side. Resize so the longest side is 800&nbsp;px, save as JPEG, and base64-encode the bytes — photos travel as strings inside the JSON, not as file uploads. 800&nbsp;px is the resolution the engine works at, so larger files only slow the upload.</p>
+          <h3>Turn each photo into a base64 string</h3>
+          <p>Use whatever capture or upload flow your product already has — your own camera screen, a file picker, or images already in your storage. Base64-encode the bytes of the front and side photos; that text goes in the JSON. Optionally resize to 800&nbsp;px on the longest side first: it's the resolution the engine works at, so larger photos only slow the request.</p>
         </li>
         <li>
           <h3>Send the request</h3>
@@ -566,7 +566,10 @@
           </div>
           <button class="copy" type="button" data-copy>Copy</button>
         </div>
-<pre id="code-js" role="tabpanel" aria-labelledby="tab-js"><span class="c">// Browser: downscale a photo to 800 px and return raw base64 (no data: prefix)</span>
+<pre id="code-js" role="tabpanel" aria-labelledby="tab-js"><span class="k">const</span> SNAPMEASURE_ENDPOINT = <span class="s">"https://…"</span>;   <span class="c">// issued at onboarding</span>
+<span class="k">const</span> PARTNER_CODE = <span class="s">"your-partner-code"</span>;
+
+<span class="c">// Shrink a photo (File or Blob) to 800 px and return it as base64 text</span>
 <span class="k">async function</span> toBase64(file, maxSide = <span class="n">800</span>) {
   <span class="k">const</span> img = <span class="k">await</span> createImageBitmap(file);
   <span class="k">const</span> scale = Math.min(<span class="n">1</span>, maxSide / Math.max(img.width, img.height));
@@ -577,6 +580,8 @@
   <span class="k">return</span> canvas.toDataURL(<span class="s">"image/jpeg"</span>, <span class="n">0.94</span>).split(<span class="s">","</span>)[<span class="n">1</span>];
 }
 
+<span class="c">// frontFile, sideFile: File or Blob objects from your own capture or upload UI,</span>
+<span class="c">// e.g. document.querySelector("#front-photo").files[0]</span>
 <span class="k">const</span> res = <span class="k">await</span> fetch(SNAPMEASURE_ENDPOINT, {
   method: <span class="s">"POST"</span>,
   headers: { <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span> },
@@ -590,26 +595,42 @@
   }),
 });
 <span class="k">if</span> (!res.ok) <span class="k">throw new</span> Error(<span class="k">await</span> res.text());
-<span class="k">const</span> result = <span class="k">await</span> res.json();</pre>
+<span class="k">const</span> result = <span class="k">await</span> res.json();
+console.log(result.measurements[<span class="s">"waist circumference"</span>]);   <span class="c">// 88.6 (cm)</span></pre>
 <pre id="code-py" role="tabpanel" aria-labelledby="tab-py" hidden><span class="k">import</span> base64, requests
 
-<span class="k">def</span> b64(path):
-    <span class="k">with</span> open(path, <span class="s">"rb"</span>) <span class="k">as</span> f:
-        <span class="k">return</span> base64.b64encode(f.read()).decode()
+SNAPMEASURE_ENDPOINT = <span class="s">"https://…"</span>   <span class="c"># issued at onboarding</span>
+PARTNER_CODE = <span class="s">"your-partner-code"</span>
+
+<span class="k">def</span> to_base64(image_bytes):
+    <span class="c"># The raw bytes of a JPEG or PNG, as base64 text</span>
+    <span class="k">return</span> base64.b64encode(image_bytes).decode(<span class="s">"ascii"</span>)
+
+<span class="c"># Photo bytes can come from anywhere: your upload handler, S3, a database, or disk</span>
+<span class="k">with</span> open(<span class="s">"front.jpg"</span>, <span class="s">"rb"</span>) <span class="k">as</span> f:
+    front = f.read()
+<span class="k">with</span> open(<span class="s">"side.jpg"</span>, <span class="s">"rb"</span>) <span class="k">as</span> f:
+    side = f.read()
 
 payload = {
     <span class="s">"height"</span>: <span class="s">"174cm"</span>,                  <span class="c"># or "68in"</span>
     <span class="s">"company"</span>: PARTNER_CODE,
     <span class="s">"images"</span>: [
-        {<span class="s">"fileName"</span>: <span class="s">"front.jpg"</span>, <span class="s">"data"</span>: b64(<span class="s">"front.jpg"</span>)},
-        {<span class="s">"fileName"</span>: <span class="s">"side.jpg"</span>,  <span class="s">"data"</span>: b64(<span class="s">"side.jpg"</span>)},
+        {<span class="s">"fileName"</span>: <span class="s">"front.jpg"</span>, <span class="s">"data"</span>: to_base64(front)},
+        {<span class="s">"fileName"</span>: <span class="s">"side.jpg"</span>,  <span class="s">"data"</span>: to_base64(side)},
     ],
 }
 
 res = requests.post(SNAPMEASURE_ENDPOINT, json=payload, timeout=<span class="n">60</span>)
 res.raise_for_status()
-result = res.json()</pre>
-<pre id="code-curl" role="tabpanel" aria-labelledby="tab-curl" hidden><span class="c"># scan.json holds {"height": "174cm", "company": "…", "images": [ … ]}</span>
+result = res.json()
+print(result[<span class="s">"measurements"</span>][<span class="s">"waist circumference"</span>])   <span class="c"># 88.6 (cm)</span></pre>
+<pre id="code-curl" role="tabpanel" aria-labelledby="tab-curl" hidden><span class="c"># Base64-encode each photo onto one line, then build the JSON body</span>
+FRONT=$(base64 &lt; front.jpg | tr -d <span class="s">'\n'</span>)
+SIDE=$(base64 &lt; side.jpg | tr -d <span class="s">'\n'</span>)
+printf <span class="s">'{"height":"174cm","company":"%s","images":[{"fileName":"front.jpg","data":"%s"},{"fileName":"side.jpg","data":"%s"}]}'</span> \
+  <span class="s">"$PARTNER_CODE"</span> <span class="s">"$FRONT"</span> <span class="s">"$SIDE"</span> &gt; scan.json
+
 curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
   --max-time <span class="n">60</span> \
@@ -629,8 +650,8 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
     <div class="callout">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.7"/><path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
       <div>
-        <b>Photos are base64 strings, not file uploads</b>
-        <p>There is no multipart form. Read each JPEG or PNG, base64-encode the bytes, and put the string in <code>images[].data</code> — the quickstart code above does exactly this.</p>
+        <b>Photos go inside the JSON, as base64 text</b>
+        <p>Capture or upload photos however your product already does. When you call the API, send each photo's JPEG or PNG bytes as a base64 string in <code>images[].data</code>, not as a <code>multipart/form-data</code> file field. The quickstart code above does exactly this.</p>
       </div>
     </div>
 
