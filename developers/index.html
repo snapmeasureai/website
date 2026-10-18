@@ -382,7 +382,21 @@
     </a>
     <ul class="nav__links">
       <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
-      <li><a href="https://snapmeasureai.com/#use-cases">Use cases</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">Solutions</span>
+          <a href="https://snapmeasureai.com/patient-engagement-platform/">GLP-1 &amp; weight loss</a>
+          <a href="https://snapmeasureai.com/uniform-sizing/">Uniforms &amp; workwear</a>
+          <a href="https://snapmeasureai.com/apparel-sizing/">Apparel &amp; made-to-measure</a>
+          <a href="https://snapmeasureai.com/#use-cases">All use cases</a>
+        </div>
+      </li>
       <li class="nav__dropdown">
         <button class="nav__dropdown-toggle">
           Technologies
@@ -410,7 +424,10 @@
 
 <div class="nav__mobile-menu" id="mobile-menu">
   <a href="https://snapmeasureai.com/#how-it-works" onclick="toggleMenu()">How it works</a>
-  <a href="https://snapmeasureai.com/#use-cases" onclick="toggleMenu()">Use cases</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Solutions</div>
+  <a href="https://snapmeasureai.com/patient-engagement-platform/" style="padding-left:12px;">GLP-1 &amp; weight loss</a>
+  <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
+  <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
   <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()" style="color:var(--teal);">Developers</a>
   <a href="https://snapmeasureai.com/#faqs" onclick="toggleMenu()">FAQs</a>
   <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
@@ -704,6 +721,14 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
         <h3>3D body model <span class="badge badge--core">Core</span></h3>
         <p>The complete 10,000-point body mesh in a standard pose, scaled to the person's real height. Delivered as OBJ for CAD, pattern-making, virtual fitting, avatars, and digital twins.</p>
       </article>
+      <article class="out out--wide out--feature">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s-6.5-3.9-6.5-8.6A3.6 3.6 0 0110 6.3a3.6 3.6 0 016.5 2.1C16.5 13.1 10 17 10 17z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 10h2.2l1.2-2 1.6 4 1.2-2h2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h3>Body composition &amp; health indicators <span class="badge badge--core">Health programs</span></h3>
+          <p>Waist-to-height and waist-to-hip ratios come straight from the scan. Body-fat percentage, fat and lean mass, and estimated weight can be derived from the same scan — from girths, using established circumference-based equations, and from the 3D model's body volume — configured and validated with each program. A way to show change between visits, alongside clinical body-composition assessment rather than instead of it.</p>
+        </div>
+        <a href="https://snapmeasureai.com/patient-engagement-platform/" class="btn btn--ghost">GLP-1 programs →</a>
+      </article>
       <article class="out out--indigo">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 15c3 0 4-9 8-9s5 9 8 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 15V9M13.5 15V9M10 15V5" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.6 1.6"/></svg></div>
         <h3>Confidence ranges <span class="badge badge--opt">Available</span></h3>
@@ -718,14 +743,6 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 17h14M7 17V4M13 17V8M7 7h3M13 11h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
         <h3>Ground-referenced measurements <span class="badge badge--opt">Available</span></h3>
         <p>Leg circumferences at fixed heights from the floor, and the height above the floor of every circumference — the format compression-garment and medical-fit makers specify garments in.</p>
-      </article>
-      <article class="out out--wide out--feature">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s-6.5-3.9-6.5-8.6A3.6 3.6 0 0110 6.3a3.6 3.6 0 016.5 2.1C16.5 13.1 10 17 10 17z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 10h2.2l1.2-2 1.6 4 1.2-2h2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <h3>Body composition &amp; health indicators <span class="badge badge--core">Health programs</span></h3>
-          <p>Waist-to-height and waist-to-hip ratios come straight from the scan. Body-fat percentage, fat and lean mass, and estimated weight can be derived from the same scan — from girths, using established circumference-based equations, and from the 3D model's body volume — configured and validated with each program. A way to show change between visits, alongside clinical body-composition assessment rather than instead of it.</p>
-        </div>
-        <a href="https://snapmeasureai.com/patient-engagement-platform/" class="btn btn--ghost">GLP-1 programs →</a>
       </article>
       <article class="out out--wide">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="5" cy="10" r="1.6" fill="currentColor"/><circle cx="10" cy="10" r="1.6" fill="currentColor"/><circle cx="15" cy="10" r="1.6" fill="currentColor"/></svg></div>
@@ -946,6 +963,9 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
       </a>
       <ul class="footer__links">
         <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/patient-engagement-platform/">Patient engagement</a></li>
+        <li><a href="https://snapmeasureai.com/uniform-sizing/">Uniform sizing</a></li>
+        <li><a href="https://snapmeasureai.com/apparel-sizing/">Apparel sizing</a></li>
         <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
         <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
         <li><a href="https://snapmeasureai.com/developers/" style="color:var(--teal)">Developers</a></li>

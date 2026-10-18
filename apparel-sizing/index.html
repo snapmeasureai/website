@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
+
+<title>Apparel Sizing &amp; Made-to-Measure API | SnapMeasureAI</title>
+<meta name="description" content="Body measurements and a 3D body model from two smartphone photos, for size recommendations, made-to-measure and fit development. API or white-label.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://snapmeasureai.com/apparel-sizing/">
+<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SnapMeasureAI">
+<meta property="og:url" content="https://snapmeasureai.com/apparel-sizing/">
+<meta property="og:title" content="Apparel Sizing &amp; Made-to-Measure API | SnapMeasureAI">
+<meta property="og:description" content="Body measurements and a 3D body model from two smartphone photos, for size recommendations, made-to-measure and fit development. API or white-label.">
+<meta property="og:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
+<meta property="og:image:alt" content="Body measurements for apparel sizing from two smartphone photos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Apparel Sizing &amp; Made-to-Measure API | SnapMeasureAI">
+<meta name="twitter:description" content="Body measurements and a 3D body model from two smartphone photos, for size recommendations, made-to-measure and fit development. API or white-label.">
+<meta name="twitter:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://snapmeasureai.com/#organization",
+      "name": "SnapMeasureAI",
+      "url": "https://snapmeasureai.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://snapmeasureai.com/assets/images/logo.png"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://snapmeasureai.com/#website",
+      "url": "https://snapmeasureai.com/",
+      "name": "SnapMeasureAI",
+      "publisher": {
+        "@id": "https://snapmeasureai.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://snapmeasureai.com/apparel-sizing/#webpage",
+      "url": "https://snapmeasureai.com/apparel-sizing/",
+      "name": "Apparel Sizing & Made-to-Measure API | SnapMeasureAI",
+      "description": "Body measurements and a 3D body model from two smartphone photos, for size recommendations, made-to-measure and fit development. API or white-label.",
+      "isPartOf": {
+        "@id": "https://snapmeasureai.com/#website"
+      },
+      "about": {
+        "@id": "https://snapmeasureai.com/apparel-sizing/#service"
+      },
+      "breadcrumb": {
+        "@id": "https://snapmeasureai.com/apparel-sizing/#breadcrumb"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://snapmeasureai.com/assets/images/ai-body-measurement.jpg"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://snapmeasureai.com/apparel-sizing/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://snapmeasureai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Apparel sizing & made-to-measure",
+          "item": "https://snapmeasureai.com/apparel-sizing/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://snapmeasureai.com/apparel-sizing/#service",
+      "name": "Body Measurements for Apparel Sizing and Made-to-Measure",
+      "serviceType": [
+        "Size recommendation data",
+        "Made-to-measure body measurements",
+        "Body measurement API",
+        "Virtual fitting",
+        "3D body model for apparel"
+      ],
+      "description": "Body measurements and a 3D body model from two smartphone photos, delivered by API or white-label into an apparel brand's site or app, to drive size recommendations, made-to-measure orders and fit development.",
+      "provider": {
+        "@id": "https://snapmeasureai.com/#organization"
+      },
+      "url": "https://snapmeasureai.com/apparel-sizing/",
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": [
+          "Apparel brands and retailers",
+          "E-commerce platforms and marketplaces",
+          "Made-to-measure and custom tailoring brands",
+          "Size and fit technology providers",
+          "Compression and medical garment makers"
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://snapmeasureai.com/apparel-sizing/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do body measurements help reduce size-related returns?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Many size-related returns start with a shopper guessing their size from a chart. A two-photo scan replaces the guess with the shopper's own measurements, which your size logic compares with each garment's chart. Shoppers who sit between two sizes can be told so — instead of ordering both and sending one back."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Average accuracy is 97% in everyday clothing, across 18 standard measurements, tested on people photographed in varied clothing and compared with 3D body scans. For context, reliability studies of trained measurers using a tape report waist measurement errors of 1.3–6.5 cm, and the body itself changes through the day. Results are best in fitted clothing, with arms slightly away from the body. The best test is your own: try the free live demo, or run a pilot that compares scans with your size charts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do shoppers need to undress or download an app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Fitted clothing gives the best results, but everyday clothes such as jeans and T-shirts work too; only coats and bulky layers come off. The scan runs inside your own site or app on any smartphone, with nothing to install."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can made-to-measure brands use the scan for patterns?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Define the measurements your patterns use — any circumference or length between points on the body — and every scan returns that set, plus an OBJ 3D body model for pattern and CAD software. Customers can be measured at home instead of booking a fitting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this replace our size recommendation engine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It can feed one. The scan returns body measurements, not a size: your own size logic, or the recommendation provider you already use, turns them into a size for each garment. Optional confidence ranges show when a shopper is close to a size boundary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do you store about our customers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nothing that identifies them. Photos are processed in memory and deleted once the result is returned, and a scan needs no name or email. The measurements go to your system, where you can save them to the customer's profile and reuse them across your catalogue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the experience carry our brand?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The capture flow and the optional 3D viewer are white-label, or your team can build its own interface and call the API directly — see the developer docs."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg:        #080C10;
+    --bg2:       #0E1419;
+    --bg3:       #141C24;
+    --surface:   #1A2330;
+    --border:    rgba(255,255,255,0.08);
+    --border-hi: rgba(255,255,255,0.15);
+    --teal:      #0ABFA3;
+    --teal-dim:  rgba(10,191,163,0.12);
+    --indigo:    #6C63FF;
+    --indigo-dim:rgba(108,99,255,0.12);
+    --amber:     #EF9F27;
+    --text:      #F0F4F8;
+    --text-2:    #AABDCF;
+    --text-3:    #7A96AA;
+    --radius:    10px;
+    --radius-lg: 18px;
+    --max:       1120px;
+    --mono:      ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+  /* ---- NAV (matches site) ---- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(8,12,16,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); height: 64px; display: flex; align-items: center;
+  }
+  .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  .nav__logo img { height: 32px; }
+  .nav__links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 14px; color: var(--text-2); }
+  .nav__links a:hover { color: var(--text); }
+  .nav__dropdown { position: relative; }
+  .nav__dropdown-toggle {
+    display: flex; align-items: center; gap: 5px; cursor: pointer;
+    color: var(--text-2); font-size: 14px; background: none; border: none; padding: 0; font-family: inherit;
+  }
+  .nav__dropdown-toggle:hover { color: var(--text); }
+  .nav__dropdown-toggle svg { transition: transform .2s; }
+  .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
+  .nav__dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
+    border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .nav__dropdown-menu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+  .nav__dropdown:hover .nav__dropdown-menu, .nav__dropdown:focus-within .nav__dropdown-menu { display: block; }
+  .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
+  .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
+  .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
+  .nav__cta { display: flex; gap: 10px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: opacity .15s, transform .1s; border: none; font-family: inherit;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn--outline { background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF; }
+  .btn--outline:hover { background: rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.8); color: #fff; }
+  .btn--primary { background: var(--teal); color: #050E0C; font-weight: 600; }
+  .btn--primary:hover { opacity: .88; }
+  .btn--lg { font-size: 16px; padding: 14px 28px; }
+  .btn--primary.btn--lg { font-weight: 700; }
+  .nav__hamburger { display: none; }
+  .nav__mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+    background: var(--bg); padding: 32px 24px; flex-direction: column; gap: 22px; z-index: 99; overflow-y: auto;
+  }
+  .nav__mobile-menu.open { display: flex; }
+  .nav__mobile-menu a { font-size: 18px; color: var(--text-2); }
+  .nav__mobile-menu a:hover { color: var(--teal); }
+  .nav__mobile-menu .menu-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
+  .nav__mobile-menu .sub { padding-left: 12px; }
+
+  /* ---- SECTIONS ---- */
+  .section { padding: 72px 0; }
+  .section--alt { background: var(--bg2); }
+  .section__eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; font-family: var(--mono); }
+  .section__title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 16px; max-width: 860px; }
+  .section__sub { font-size: 17px; color: var(--text-2); max-width: 660px; line-height: 1.7; }
+  .section__sub a, .text-link { color: var(--teal); }
+  .section__sub a:hover, .text-link:hover { opacity: .8; }
+
+  /* ---- HERO ---- */
+  .hero { padding: 120px 0 56px; position: relative; overflow: hidden; }
+  .hero__bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 72% 30%, rgba(10,191,163,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 15% 75%, rgba(108,99,255,0.07) 0%, transparent 70%);
+  }
+  .hero .container { position: relative; }
+  .hero__eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal-dim); border: 1px solid rgba(10,191,163,0.25);
+    border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600;
+    color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .hero__eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  .hero__title { font-size: clamp(36px, 5.6vw, 64px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.07; margin-bottom: 20px; max-width: 900px; }
+  .hero__title span { color: var(--teal); }
+  .hero__sub { font-size: 18px; color: var(--text-2); max-width: 660px; margin-bottom: 32px; }
+  .hero__actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 48px; }
+  .hero__stats { display: flex; gap: 44px; flex-wrap: wrap; padding-top: 36px; border-top: 1px solid var(--border); }
+  .hero__stat-value { font-size: 32px; font-weight: 700; color: var(--teal); letter-spacing: -0.02em; line-height: 1.2; }
+  .hero__stat-label { font-size: 14px; color: var(--text-3); margin-top: 2px; }
+
+  .proof-strip { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .proof-strip__inner { display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap; justify-content: center; font-size: 15px; color: var(--text-3); }
+  .proof-strip__item { display: flex; align-items: center; gap: 8px; }
+  .proof-strip__item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+
+  /* ---- CARDS ---- */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+  .cards--2 { grid-template-columns: repeat(2, 1fr); }
+  .card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px 26px; }
+  .card__tag { display: inline-block; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 11px; border-radius: 100px; margin-bottom: 18px; background: var(--teal-dim); color: var(--teal); }
+  .card__tag.i { background: var(--indigo-dim); color: #A9A4FF; }
+  .card__tag.a { background: rgba(239,159,39,.14); color: var(--amber); }
+  .card h3 { font-size: 19px; font-weight: 650; margin-bottom: 10px; letter-spacing: -0.015em; line-height: 1.35; }
+  .card p { font-size: 15px; color: var(--text-2); line-height: 1.7; }
+  .card sup, .stat sup { color: var(--teal); font-size: 11px; }
+  .stat__value { font-size: clamp(34px, 4vw, 44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--text); margin-bottom: 10px; }
+  .stat__value em { font-style: normal; color: var(--amber); }
+  .footnotes { margin-top: 26px; font-size: 13px; color: var(--text-3); line-height: 1.8; }
+  .footnotes sup { color: var(--teal); }
+  .footnotes a { color: var(--text-2); text-decoration: underline; text-decoration-color: var(--border-hi); text-underline-offset: 3px; }
+  .footnotes a:hover { color: var(--teal); }
+
+  /* ---- STEPS + MOCKUP ---- */
+  .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: start; margin-top: 44px; }
+  .steps-list { display: flex; flex-direction: column; gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .step { background: var(--bg); padding: 22px 26px; display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: start; }
+  .section--alt .step { background: var(--bg2); }
+  .step__num { font-family: var(--mono); font-size: 12.5px; font-weight: 700; letter-spacing: .1em; color: var(--teal); padding-top: 3px; }
+  .step__title { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .step__body { font-size: 15px; color: var(--text-2); line-height: 1.65; }
+
+  .mock { border: 1px solid var(--border-hi); border-radius: var(--radius-lg); background: linear-gradient(180deg, #0D131A 0%, #0A1015 100%); overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+  .mock__chrome { display: flex; align-items: center; gap: 14px; padding: 12px 18px; background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border); }
+  .mock__dots { display: flex; gap: 6px; flex-shrink: 0; }
+  .mock__dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.13); display: block; }
+  .mock__url { flex: 1; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--text-3); background: rgba(0,0,0,.35); border: 1px solid var(--border); border-radius: 100px; padding: 4px 14px; max-width: 320px; margin: 0 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mock__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px 24px 16px; }
+  .mock__head h3 { font-size: 18px; font-weight: 650; letter-spacing: -0.01em; }
+  .mock__head p { font-size: 13.5px; color: var(--text-3); margin-top: 2px; }
+  .mock__progress { font-family: var(--mono); font-size: 11.5px; color: var(--teal); border: 1px solid rgba(10,191,163,.35); background: var(--teal-dim); border-radius: 100px; padding: 5px 12px; white-space: nowrap; }
+  .mock__table-wrap { overflow-x: auto; padding: 0 24px 6px; }
+  .mock table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 460px; }
+  .mock th { text-align: left; font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--text-3); font-weight: 600; padding: 10px 10px 10px 0; border-bottom: 1px solid var(--border-hi); }
+  .mock td { padding: 11px 10px 11px 0; border-bottom: 1px solid var(--border); color: var(--text-2); white-space: nowrap; }
+  .mock td.id { font-family: var(--mono); font-size: 12.5px; color: var(--text); }
+  .mock tr.is-hi td { background: rgba(10,191,163,.07); }
+  .mock tr.is-hi td:first-child { box-shadow: inset 2px 0 0 var(--teal); padding-left: 10px; }
+  .pill { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; border: 1px solid var(--border-hi); color: var(--text-3); }
+  .pill--ok { color: var(--teal); border-color: rgba(10,191,163,.4); background: var(--teal-dim); }
+  .pill--mtm { color: #B9B4FF; border-color: rgba(108,99,255,.5); background: var(--indigo-dim); }
+  .pill--wait { border-style: dashed; }
+  .mock__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 24px; border-top: 1px solid var(--border); background: rgba(255,255,255,.02); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
+  .mock__foot em { font-style: normal; color: var(--teal); }
+  .mock__rec { margin: 8px 24px 22px; border: 1px solid rgba(10,191,163,.4); background: var(--teal-dim); border-radius: var(--radius); padding: 14px 16px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .mock__rec b { font-size: 24px; color: var(--teal); font-weight: 700; letter-spacing: -0.02em; }
+  .mock__rec span { font-size: 14px; color: var(--text-2); line-height: 1.5; flex: 1; min-width: 200px; }
+  .mock__caption { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); text-align: center; margin-top: 12px; }
+
+  /* ---- SPECS ---- */
+  .specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; }
+  .spec-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
+  .spec-item__label { font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+  .spec-item__value { font-size: 18px; font-weight: 650; color: var(--text); letter-spacing: -0.01em; line-height: 1.35; }
+  .spec-item__note { font-size: 14px; color: var(--text-2); margin-top: 6px; line-height: 1.6; }
+  .after-grid { margin-top: 24px; font-size: 15px; color: var(--text-2); }
+
+  /* ---- FAQ ---- */
+  .faq { max-width: 800px; margin-top: 32px; }
+  .faq details { border-bottom: 1px solid var(--border); padding: 20px 0; }
+  .faq summary { font-size: 17px; font-weight: 550; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border-hi); display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--text-2); transition: transform .2s; margin-top: 2px; }
+  .faq details[open] summary::after { transform: rotate(45deg); color: var(--teal); border-color: var(--teal); }
+  .faq summary:hover { color: var(--teal); }
+  .faq details p { font-size: 16px; color: var(--text-2); line-height: 1.75; margin-top: 12px; }
+  .faq details p a { color: var(--teal); }
+
+  /* ---- RELATED ---- */
+  .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  .related a { display: block; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px 24px; transition: border-color .2s, background .2s; }
+  .related a:hover { border-color: rgba(10,191,163,.4); background: var(--surface); }
+  .related b { display: block; font-size: 17px; font-weight: 650; margin-bottom: 4px; }
+  .related span { font-size: 14.5px; color: var(--text-2); line-height: 1.6; display: block; }
+  .related em { font-style: normal; color: var(--teal); font-size: 14px; font-weight: 600; display: block; margin-top: 10px; }
+
+  /* ---- CTA / FOOTER ---- */
+  .cta-section { padding: 80px 0; text-align: center; }
+  .cta-section__title { font-size: clamp(28px, 4.2vw, 46px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.12; margin: 0 auto 16px; max-width: 760px; }
+  .cta-section__sub { font-size: 17px; color: var(--text-2); max-width: 540px; margin: 0 auto 34px; }
+  .cta-section__actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .cta-section__email { font-size: 15px; color: var(--text-3); }
+  .cta-section__email a { color: var(--teal); }
+  .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0; }
+  .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer__logo img { height: 26px; opacity: .7; }
+  .footer__links { display: flex; gap: 12px 24px; list-style: none; flex-wrap: wrap; }
+  .footer__links a { font-size: 13px; color: var(--text-3); }
+  .footer__links a:hover, .footer__links a[aria-current="page"] { color: var(--teal); }
+  .footer__copy { font-size: 12px; color: var(--text-3); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 1000px) {
+    .cards, .related { grid-template-columns: 1fr; }
+    .cards--2 { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .specs-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    .nav__links { display: none; }
+    .nav__cta .btn--outline { display: none; }
+    .nav__hamburger { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; cursor: pointer; color: var(--text-2); font-size: 22px; background: none; border: none; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .container { padding: 0 16px; }
+    .section { padding: 52px 0; }
+    .hero { padding: 100px 0 44px; }
+    .hero__stats { gap: 24px 32px; }
+    .hero__actions, .cta-section__actions { flex-direction: column; align-items: stretch; }
+    .hero__actions .btn, .cta-section__actions .btn { justify-content: center; }
+    .specs-grid { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 1fr; gap: 6px; padding: 20px; }
+    .mock__head, .mock__foot { padding-left: 16px; padding-right: 16px; }
+    .mock__table-wrap { padding: 0 16px 6px; }
+    .mock__rec { margin: 8px 16px 18px; }
+    .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
+    .nav__logo img { height: 26px; }
+    .nav__mobile-menu .btn { align-self: flex-start; }
+    .footer__inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3T6T8SX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="https://snapmeasureai.com/" class="nav__logo">
+      <img src="/assets/images/logo.png" alt="SnapMeasureAI">
+    </a>
+    <ul class="nav__links">
+      <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">Solutions</span>
+          <a href="https://snapmeasureai.com/patient-engagement-platform/">GLP-1 &amp; weight loss</a>
+          <a href="https://snapmeasureai.com/uniform-sizing/">Uniforms &amp; workwear</a>
+          <a href="https://snapmeasureai.com/apparel-sizing/" style="color:var(--teal);" aria-current="page">Apparel &amp; made-to-measure</a>
+          <a href="https://snapmeasureai.com/#use-cases">All use cases</a>
+        </div>
+      </li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Technologies
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">AI technologies</span>
+          <a href="https://snapmeasureai.com/">3D body scan</a>
+          <a href="https://snapmeasureai.com/motion-capture-from-video/">AI motion capture</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a>
+        </div>
+      </li>
+      <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--primary">Live demo →</a>
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--outline">Contact us</a>
+      <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile-menu" id="mobile-menu">
+  <a href="https://snapmeasureai.com/#how-it-works">How it works</a>
+  <div class="menu-label">Solutions</div>
+  <a href="https://snapmeasureai.com/patient-engagement-platform/" class="sub">GLP-1 &amp; weight loss</a>
+  <a href="https://snapmeasureai.com/uniform-sizing/" class="sub">Uniforms &amp; workwear</a>
+  <a href="https://snapmeasureai.com/apparel-sizing/" class="sub" style="color:var(--teal);" aria-current="page">Apparel &amp; made-to-measure</a>
+  <div class="menu-label">Technologies</div>
+  <a href="https://snapmeasureai.com/" class="sub">3D body scan</a>
+  <a href="https://snapmeasureai.com/motion-capture-from-video/" class="sub">AI motion capture</a>
+  <a href="https://snapmeasureai.com/synthetic-data-with-labels/" class="sub">Synthetic data</a>
+  <a href="https://snapmeasureai.com/developers/">Developers</a>
+  <a href="#faqs" onclick="toggleMenu()">FAQs</a>
+  <a href="https://demo.snapmeasureai.com/" class="btn btn--primary" style="justify-content:center;margin-top:8px;color:#050E0C;">Live demo →</a>
+  <a href="https://snapmeasureai.com/contact/" class="btn btn--outline" style="justify-content:center;">Contact us</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="hero__bg"></div>
+  <div class="container">
+    <div class="hero__eyebrow"><i></i> Apparel sizing &amp; made-to-measure</div>
+    <h1 class="hero__title">Size from the body,<br><span>not from a guess.</span></h1>
+    <p class="hero__sub">
+      Size and fit are the reason apparel brands most often give for online returns. Give your size logic,
+      made-to-measure workflow or product team real body measurements from two smartphone photos —
+      inside your own site or app.
+    </p>
+    <div class="hero__actions">
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--primary btn--lg">Try the live demo →</a>
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--outline btn--lg">Talk to us about integration</a>
+    </div>
+    <div class="hero__stats">
+      <div><div class="hero__stat-value">2 photos</div><div class="hero__stat-label">Any smartphone, everyday clothes</div></div>
+      <div><div class="hero__stat-value">&lt;10s</div><div class="hero__stat-label">From photos to measurements</div></div>
+      <div><div class="hero__stat-value">100+</div><div class="hero__stat-label">Measurements available</div></div>
+      <div><div class="hero__stat-value">OBJ</div><div class="hero__stat-label">3D body model export</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="proof-strip">
+  <div class="container proof-strip__inner">
+    <span class="proof-strip__item">White-label or API</span>
+    <span class="proof-strip__item">Measure once, reuse across the catalogue</span>
+    <span class="proof-strip__item">No photos stored</span>
+    <span class="proof-strip__item">2 issued patents + 1 pending</span>
+  </div>
+</div>
+
+<!-- ==================== PROBLEM ==================== -->
+<section class="section" id="problem">
+  <div class="container">
+    <p class="section__eyebrow">The cost of a wrong size</p>
+    <h2 class="section__title">Returns start with a guess at the size chart.</h2>
+    <p class="section__sub">
+      Shoppers can't try clothes on online, so many guess — or buy two sizes and send one back.
+    </p>
+    <div class="cards">
+      <article class="card stat">
+        <div class="stat__value"><em>24.4%</em></div>
+        <h3>of online apparel is returned</h3>
+        <p>Coresight Research's estimate for US online apparel, with size and fit the most-cited reason among
+          the brands and retailers it surveyed (53%).<sup>1</sup></p>
+      </article>
+      <article class="card stat">
+        <div class="stat__value"><em>$25.1B</em></div>
+        <h3>to process those returns</h3>
+        <p>The same report's estimate of what handling US online apparel returns cost in 2023 — before counting
+          merchandise that can't be resold.<sup>1</sup></p>
+      </article>
+      <article class="card stat">
+        <div class="stat__value"><em>51%</em></div>
+        <h3>of Gen Z shoppers bracket</h3>
+        <p>Buying several versions of an item, such as two sizes, intending to return some, in NRF and
+          Happy Returns' 2024 survey. Across US retail, 19.3% of online sales were expected to come back in 2025.<sup>2,3</sup></p>
+      </article>
+    </div>
+    <p class="footnotes">
+      <sup>1</sup> Coresight Research, <a href="https://coresight.com/research/the-true-cost-of-apparel-returns-alarming-return-rates-require-loss-minimization-solutions" rel="noopener" target="_blank">“The True Cost of Apparel Returns”</a> (April 2023); survey of 100 US apparel brand and retailer decision-makers.<br>
+      <sup>2</sup> NRF and Happy Returns, <a href="https://nrf.com/research/2024-consumer-returns-retail-industry" rel="noopener" target="_blank">2024 Consumer Returns in the Retail Industry</a>.<br>
+      <sup>3</sup> NRF and Happy Returns, <a href="https://nrf.com/research/2025-retail-returns-landscape" rel="noopener" target="_blank">2025 Retail Returns Landscape</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== USES ==================== -->
+<section class="section section--alt" id="uses">
+  <div class="container">
+    <p class="section__eyebrow">One scan, four uses</p>
+    <h2 class="section__title">Measurements for every team that touches fit.</h2>
+    <p class="section__sub">The same scan feeds the storefront, the cutting room and the product team.</p>
+    <div class="cards cards--2">
+      <article class="card">
+        <span class="card__tag">Size recommendations</span>
+        <h3>Real measurements behind every size</h3>
+        <p>Feed the shopper's measurements into your size charts or recommendation engine. With confidence ranges,
+          a shopper who sits between two sizes can be told so — instead of buying both.</p>
+      </article>
+      <article class="card">
+        <span class="card__tag i">Made-to-measure</span>
+        <h3>Pattern measurements from home</h3>
+        <p>The measurement set your patterns use, plus an OBJ 3D body model for pattern and CAD software —
+          captured at home instead of at a fitting appointment.</p>
+      </article>
+      <article class="card">
+        <span class="card__tag a">Fit &amp; product development</span>
+        <h3>How your customers are actually shaped</h3>
+        <p>Anonymised measurements from your own customers show how real bodies compare with your size chart and
+          fit models — evidence for grading, fit-model choice and range decisions.</p>
+      </article>
+      <article class="card">
+        <span class="card__tag">3D body &amp; try-on</span>
+        <h3>The full body, not just a list</h3>
+        <p>The 3D body model, joint positions and a body-part map for avatars, visualisation and virtual try-on
+          pipelines — with or without a measurement list.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== JOURNEY ==================== -->
+<section class="section" id="how-it-works">
+  <div class="container">
+    <p class="section__eyebrow">In the customer journey</p>
+    <h2 class="section__title">Measure once. Size the whole catalogue.</h2>
+    <p class="section__sub">Your site keeps the customer's measurements, so one scan answers the size question on every product after it.</p>
+    <div class="split">
+      <div class="steps-list">
+        <div class="step">
+          <div class="step__num">01<br>PROMPT</div>
+          <div><div class="step__title">“Find my size”</div>
+            <div class="step__body">On the product page, in a fit quiz, at checkout, or in the customer's account.</div></div>
+        </div>
+        <div class="step">
+          <div class="step__num">02<br>SCAN</div>
+          <div><div class="step__title">Two photos, front and side</div>
+            <div class="step__body">A front and a side photo with the phone propped up or held by a friend. Results return in seconds.</div></div>
+        </div>
+        <div class="step">
+          <div class="step__num">03<br>SAVE</div>
+          <div><div class="step__title">Measurements on the profile</div>
+            <div class="step__body">Store them against the customer in your system and reuse them across products — no new scan for every item.</div></div>
+        </div>
+        <div class="step">
+          <div class="step__num">04<br>SIZE</div>
+          <div><div class="step__title">A size for each garment</div>
+            <div class="step__body">Your size logic compares the measurements with each product's chart. Made-to-measure orders go to production with them attached.</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mock" role="img" aria-label="Illustration of a product page size finder comparing a shopper's measurements with a size chart">
+          <div class="mock__chrome">
+            <span class="mock__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="mock__url">your-store.com/oxford-shirt</span>
+          </div>
+          <div class="mock__head">
+            <div><h3>Oxford shirt · Slim fit</h3><p>Size chart, body measurements in cm</p></div>
+            <span class="mock__progress">Your scan · today</span>
+          </div>
+          <div class="mock__table-wrap">
+            <table>
+              <thead><tr><th>Size</th><th>Chest</th><th>Waist</th><th>Sleeve</th></tr></thead>
+              <tbody>
+                <tr><td class="id">S</td><td>88–94</td><td>76–82</td><td>61–63</td></tr>
+                <tr><td class="id">M</td><td>94–100</td><td>82–88</td><td>63–65</td></tr>
+                <tr class="is-hi"><td class="id">L</td><td>100–106</td><td>88–94</td><td>65–67</td></tr>
+                <tr><td class="id">XL</td><td>106–112</td><td>94–100</td><td>67–69</td></tr>
+                <tr><td class="id" style="color:var(--teal);">You</td><td style="color:var(--text);">100.5</td><td style="color:var(--text);">88.6</td><td style="color:var(--text);">64.2</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mock__rec"><b>L</b><span>Chest and waist sit just inside L. Sleeve is closer to M, so the L may feel slightly long in the arm.</span></div>
+        </div>
+        <p class="mock__caption">Illustrative — the size logic is yours</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHO ==================== -->
+<section class="section section--alt" id="who">
+  <div class="container">
+    <p class="section__eyebrow">Who it's for</p>
+    <h2 class="section__title">Built for teams that sell fit.</h2>
+    <div class="specs-grid">
+      <div class="spec-item"><div class="spec-item__label">Apparel brands &amp; retailers</div><div class="spec-item__value">Size guidance on your own site</div><div class="spec-item__note">Measurements in your storefront and app, under your brand.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Platforms &amp; marketplaces</div><div class="spec-item__value">One scan, many sellers</div><div class="spec-item__note">A measurement profile shoppers can reuse across brands and size charts.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Made-to-measure</div><div class="spec-item__value">Custom clothing without the appointment</div><div class="spec-item__note">Suits, shirts, bridal and tailoring: your measurement set plus a 3D body model.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Fit technology providers</div><div class="spec-item__value">Body data for your engine</div><div class="spec-item__note">Add photo-based body measurements to an existing size or fit product by API.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Compression &amp; medical garments</div><div class="spec-item__value">Girths at set heights</div><div class="spec-item__note">Limb girths measured at fixed heights from the floor, the way these garments are specified.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Teamwear &amp; uniforms</div><div class="spec-item__value">Whole teams, remotely</div><div class="spec-item__note">Size a squad or a workforce at once — see <a class="text-link" href="https://snapmeasureai.com/uniform-sizing/">uniform sizing</a>.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INTEGRATION ==================== -->
+<section class="section" id="integration">
+  <div class="container">
+    <p class="section__eyebrow">Integration</p>
+    <h2 class="section__title">White-label in your storefront, or one API call.</h2>
+    <p class="section__sub">Two photos and a height in; your measurement set and an optional 3D body model out. The <a href="https://snapmeasureai.com/developers/">developer docs</a> cover the request, outputs and data handling.</p>
+    <div class="specs-grid">
+      <div class="spec-item"><div class="spec-item__label">Delivery</div><div class="spec-item__value">White-label flow or REST API</div><div class="spec-item__note">Embed the capture flow and 3D viewer, or build your own interface on the endpoint.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Measurements</div><div class="spec-item__value">Your definitions</div><div class="spec-item__note">Any circumference or length between points on the body, matched to your charts and patterns.</div></div>
+      <div class="spec-item"><div class="spec-item__label">3D output</div><div class="spec-item__value">OBJ body model</div><div class="spec-item__note">A 10,000-point mesh scaled to the shopper's height, for CAD, avatars and try-on.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Confidence</div><div class="spec-item__value">Ranges per measurement</div><div class="spec-item__note">Optional ranges that show when a shopper sits close to a size boundary.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Data handling</div><div class="spec-item__value">No photos kept, no PII needed</div><div class="spec-item__note">Photos are deleted after processing. The measurement profile lives in your system.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Deployment</div><div class="spec-item__value">Shared, dedicated, or on-premise</div><div class="spec-item__note">Dedicated cloud and on-premise deployment for enterprise agreements.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section section--alt" id="faqs">
+  <div class="container">
+    <p class="section__eyebrow">FAQs</p>
+    <h2 class="section__title">Apparel sizing questions</h2>
+    <div class="faq">
+      <details>
+        <summary>How do body measurements help reduce size-related returns?</summary>
+        <p>Many size-related returns start with a shopper guessing their size from a chart. A two-photo scan replaces the guess with the shopper's own measurements, which your size logic compares with each garment's chart. Shoppers who sit between two sizes can be told so — instead of ordering both and sending one back.</p>
+      </details>
+      <details>
+        <summary>How accurate is it?</summary>
+        <p>Average accuracy is 97% in everyday clothing, across 18 standard measurements, tested on people photographed in varied clothing and compared with 3D body scans. For context, reliability studies of trained measurers using a tape report waist measurement errors of 1.3–6.5 cm, and the body itself changes through the day. Results are best in fitted clothing, with arms slightly away from the body. The best test is your own: try the free <a href="https://demo.snapmeasureai.com/">live demo</a>, or run a pilot that compares scans with your size charts.</p>
+      </details>
+      <details>
+        <summary>Do shoppers need to undress or download an app?</summary>
+        <p>No. Fitted clothing gives the best results, but everyday clothes such as jeans and T-shirts work too; only coats and bulky layers come off. The scan runs inside your own site or app on any smartphone, with nothing to install.</p>
+      </details>
+      <details>
+        <summary>Can made-to-measure brands use the scan for patterns?</summary>
+        <p>Yes. Define the measurements your patterns use — any circumference or length between points on the body — and every scan returns that set, plus an OBJ 3D body model for pattern and CAD software. Customers can be measured at home instead of booking a fitting.</p>
+      </details>
+      <details>
+        <summary>Does this replace our size recommendation engine?</summary>
+        <p>It can feed one. The scan returns body measurements, not a size: your own size logic, or the recommendation provider you already use, turns them into a size for each garment. Optional confidence ranges show when a shopper is close to a size boundary.</p>
+      </details>
+      <details>
+        <summary>What do you store about our customers?</summary>
+        <p>Nothing that identifies them. Photos are processed in memory and deleted once the result is returned, and a scan needs no name or email. The measurements go to your system, where you can save them to the customer's profile and reuse them across your catalogue.</p>
+      </details>
+      <details>
+        <summary>Can the experience carry our brand?</summary>
+        <p>Yes. The capture flow and the optional 3D viewer are white-label, or your team can build its own interface and call the API directly — see the <a href="https://snapmeasureai.com/developers/">developer docs</a>.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RELATED ==================== -->
+<section class="section" id="related">
+  <div class="container">
+    <p class="section__eyebrow">Related</p>
+    <h2 class="section__title">One scan, other programs.</h2>
+    <div class="related">
+      <a href="https://snapmeasureai.com/uniform-sizing/"><b>Uniforms &amp; workwear</b><span>Size every wearer on a contract remotely, with no fitting days.</span><em>Uniform sizing →</em></a>
+      <a href="https://snapmeasureai.com/patient-engagement-platform/"><b>GLP-1 &amp; weight-loss programs</b><span>Show patients how their body shape changes from month to month.</span><em>Patient engagement →</em></a>
+      <a href="https://snapmeasureai.com/developers/"><b>Developer docs</b><span>One request: two photos and a height in, measurements and a 3D body model out.</span><em>API docs →</em></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta-section section--alt">
+  <div class="container">
+    <h2 class="cta-section__title">Put real measurements behind every size.</h2>
+    <p class="cta-section__sub">Send us your size chart or pattern measurements, and we'll set up a measurement set to test against it.</p>
+    <div class="cta-section__actions">
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--primary btn--lg">Talk to us about integration</a>
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--outline btn--lg">Try the live demo →</a>
+    </div>
+    <p class="cta-section__email">Or write to us directly: <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a></p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="https://snapmeasureai.com/" class="footer__logo"><img src="/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI"></a>
+    <ul class="footer__links">
+        <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/patient-engagement-platform/">Patient engagement</a></li>
+        <li><a href="https://snapmeasureai.com/uniform-sizing/">Uniform sizing</a></li>
+        <li><a href="https://snapmeasureai.com/apparel-sizing/" aria-current="page">Apparel sizing</a></li>
+        <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
+        <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
+        <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+        <li><a href="https://demo.snapmeasureai.com/">Live demo</a></li>
+        <li><a href="https://snapmeasureai.com/contact/">Contact</a></li>
+    </ul>
+    <span class="footer__copy">© <span data-year>2026</span> SnapMeasureAI</span><script>document.querySelectorAll("[data-year]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu(btn) {
+    var m = document.getElementById('mobile-menu');
+    var open = m.classList.toggle('open');
+    var b = btn || document.querySelector('.nav__hamburger');
+    if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+</script>
+</body>
+</html>

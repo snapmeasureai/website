@@ -30,8 +30,11 @@ Core capabilities:
 ### GLP-1 & Weight-Loss Programs
 GLP-1 medications change waist, hips, and proportions in ways a scale never shows. Telehealth platforms and weight-loss programs integrate the scan so patients see a precise, visual record of how their body is changing, month over month, at home. Photos are deleted after processing, and the measurement history stays in the program's own system. [Explore the patient engagement platform →](https://snapmeasureai.com/patient-engagement-platform/)
 
-### Apparel & Uniform Sizing
-Uniform suppliers, rental programs, and employers measure staff remotely — no fitting days, no travelling fitters, fewer remakes and exchanges. Apparel brands and e-commerce platforms use the same scan for size recommendations and made-to-measure, cutting size-related returns. 3D OBJ export supports pattern-making and CAD workflows.
+### Uniforms & Workwear
+Uniform suppliers, rental programs, and employers measure staff remotely — no fitting days and no travelling fitters. Wearers take two photos in their everyday work clothes, and the supplier's ordering system maps the measurements to its size charts. [Explore uniform sizing →](https://snapmeasureai.com/uniform-sizing/)
+
+### Apparel & Made-to-Measure
+Apparel brands and e-commerce platforms put the scan in their own site or app to drive size recommendations, made-to-measure orders, and fit development. 3D OBJ export supports pattern-making and CAD workflows. [Explore apparel sizing →](https://snapmeasureai.com/apparel-sizing/)
 
 ### Fitness Platforms
 Phone-based body scans in place of hardware scanners: circumference tracking by body part and 3D before-and-after comparisons, inside a fitness platform or coaching app.
@@ -50,7 +53,7 @@ Phone-based body scans in place of hardware scanners: circumference tracking by 
 ## Why It Works
 
 - **Fast** — two photos, under 10 seconds, any smartphone camera
-- **Precise** — often within half an inch of a tape measure on major measurements, with fitted clothing and A-pose photos
+- **Accurate in everyday clothing** — 97% average accuracy across 18 standard measurements, in varied clothing; best in fitted clothing
 - **Flexible** — any body type, skin tone, or background; no controlled environment needed
 - **Privacy-first** — photos are processed and deleted immediately; no PII retained
 
@@ -76,6 +79,9 @@ Complementary technologies from the same team:
 
 - [3D body scan and body measurement technology](https://snapmeasureai.com/)
 - [Body scans for GLP-1 and weight-loss programs](https://snapmeasureai.com/patient-engagement-platform/)
+- [Remote uniform and workwear sizing](https://snapmeasureai.com/uniform-sizing/)
+- [Apparel sizing and made-to-measure](https://snapmeasureai.com/apparel-sizing/)
+- [Developer docs](https://snapmeasureai.com/developers/)
 - [AI motion capture from video](https://snapmeasureai.com/motion-capture-from-video/)
 - [Synthetic data for AI model training](https://snapmeasureai.com/synthetic-data-with-labels/)
 

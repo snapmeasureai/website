@@ -189,7 +189,7 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   }
   .nav__dropdown-menu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
-  .nav__dropdown:hover .nav__dropdown-menu { display: block; }
+  .nav__dropdown:hover .nav__dropdown-menu, .nav__dropdown:focus-within .nav__dropdown-menu { display: block; }
   .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
   .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
   .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
@@ -589,8 +589,21 @@
     </a>
     <ul class="nav__links">
       <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
-      <li><a href="https://snapmeasureai.com/#use-cases">Use cases</a></li>
-      <li><a href="/patient-engagement-platform/" class="is-active" aria-current="page">Patient engagement<span class="nav__new" aria-hidden="true"></span></a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">Solutions</span>
+          <a href="https://snapmeasureai.com/patient-engagement-platform/" style="color:var(--teal);" aria-current="page">GLP-1 &amp; weight loss</a>
+          <a href="https://snapmeasureai.com/uniform-sizing/">Uniforms &amp; workwear</a>
+          <a href="https://snapmeasureai.com/apparel-sizing/">Apparel &amp; made-to-measure</a>
+          <a href="https://snapmeasureai.com/#use-cases">All use cases</a>
+        </div>
+      </li>
       <li class="nav__dropdown">
         <button class="nav__dropdown-toggle">
           Technologies
@@ -618,8 +631,10 @@
 
 <div class="nav__mobile-menu" id="mobile-menu">
   <a href="https://snapmeasureai.com/#how-it-works">How it works</a>
-  <a href="https://snapmeasureai.com/#use-cases">Use cases</a>
-  <a href="/patient-engagement-platform/" style="color:var(--teal);">Patient engagement platform</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Solutions</div>
+  <a href="https://snapmeasureai.com/patient-engagement-platform/" style="padding-left:12px;color:var(--teal);">GLP-1 &amp; weight loss</a>
+  <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
+  <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
   <a href="https://snapmeasureai.com/developers/">Developers</a>
   <a href="https://snapmeasureai.com/#faqs">FAQs</a>
   <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
@@ -666,8 +681,8 @@
         <div class="hero__stat-label">Photo to full result</div>
       </div>
       <div>
-        <div class="hero__stat-value">½ in</div>
-        <div class="hero__stat-label">Often within, on major measurements</div>
+        <div class="hero__stat-value">Any phone</div>
+        <div class="hero__stat-label">No kiosk, scale or wearable</div>
       </div>
     </div>
   </div>
@@ -1226,7 +1241,9 @@
     <a href="https://snapmeasureai.com/" class="footer__logo">SnapMeasure<i>AI</i></a>
     <ul class="footer__links">
       <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
-      <li><a href="/patient-engagement-platform/">Patient engagement</a></li>
+      <li><a href="/patient-engagement-platform/" style="color:var(--teal);">Patient engagement</a></li>
+      <li><a href="https://snapmeasureai.com/uniform-sizing/">Uniform sizing</a></li>
+      <li><a href="https://snapmeasureai.com/apparel-sizing/">Apparel sizing</a></li>
       <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
       <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
       <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>

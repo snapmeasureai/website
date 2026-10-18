@@ -13,7 +13,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://snapmeasureai.com/</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -45,6 +45,18 @@
   <!-- Developers (API docs) -->
   <url>
     <loc>https://snapmeasureai.com/developers/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapmeasureai.com/uniform-sizing/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapmeasureai.com/apparel-sizing/</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

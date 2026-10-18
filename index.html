@@ -127,7 +127,7 @@
       "name": "How accurate is the body scan compared to tape measurements?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "On major measurements, results are often within half an inch of a tape measure, especially with fitted clothing and A-pose photos. The technology was built on Cambridge research and trained on over one million images spanning body types, poses, skin tones, clothing, and environments. That consistency makes it reliable for apparel and uniform sizing and for longitudinal health monitoring alike."
+        "text": "Average accuracy is 97% in everyday clothing, across 18 standard measurements, tested on people photographed in varied clothing and compared with 3D body scans. For context, reliability studies of trained measurers using a tape report waist measurement errors of 1.3–6.5 cm, and the body itself changes through the day. Results are best in fitted clothing, with arms slightly away from the body, and every scan is measured the same way, so results don't depend on who holds the tape. The best test is your own: try the free live demo, or run a pilot that compares scans with your current measurements."
       }
     },
     {
@@ -363,7 +363,7 @@
     .step__body { font-size: 15px; color: var(--text-2); line-height: 1.7; }
 
     /* ---- AUDIENCE CARDS ---- */
-    .audiences { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .audiences { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .audience-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 28px; transition: border-color .2s, background .2s; }
     .audience-card:hover { border-color: var(--teal); background: var(--surface); }
     .audience-card.featured { border-color: rgba(10,191,163,0.35); background: var(--surface); }
@@ -491,7 +491,21 @@
     </a>
     <ul class="nav__links">
       <li><a href="#how-it-works">How it works</a></li>
-      <li><a href="#use-cases">Use cases</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">Solutions</span>
+          <a href="https://snapmeasureai.com/patient-engagement-platform/">GLP-1 &amp; weight loss</a>
+          <a href="https://snapmeasureai.com/uniform-sizing/">Uniforms &amp; workwear</a>
+          <a href="https://snapmeasureai.com/apparel-sizing/">Apparel &amp; made-to-measure</a>
+          <a href="#use-cases">All use cases</a>
+        </div>
+      </li>
       <li class="nav__dropdown">
         <button class="nav__dropdown-toggle">
           Technologies
@@ -519,7 +533,10 @@
 
 <div class="nav__mobile-menu" id="mobile-menu">
   <a href="#how-it-works" onclick="toggleMenu()">How it works</a>
-  <a href="#use-cases" onclick="toggleMenu()">Use cases</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Solutions</div>
+  <a href="https://snapmeasureai.com/patient-engagement-platform/" style="padding-left:12px;">GLP-1 &amp; weight loss</a>
+  <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
+  <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
   <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()">Developers</a>
   <a href="#faqs" onclick="toggleMenu()">FAQs</a>
   <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
@@ -541,7 +558,7 @@
 
     <h1 class="hero__title">
       Two photos, a precise<br>
-      <span class="hero__title-accent">3D scan of your body.</span>
+      <span class="hero__title-accent">3D body scan.</span>
     </h1>
 
     <!-- Rotating use-case ticker — pure CSS -->
@@ -575,8 +592,8 @@
 
     <div class="hero__stats">
       <div>
-        <div class="hero__stat-value">Often within ½ inch</div>
-        <div class="hero__stat-label">On major measurements</div>
+        <div class="hero__stat-value">97%</div>
+        <div class="hero__stat-label">Average accuracy, in everyday clothing</div>
       </div>
       <div>
         <div class="hero__stat-value">100+</div>
@@ -669,17 +686,27 @@
       </div>
 
       <div class="audience-card">
-        <span class="audience-card__tag tag--retail">Apparel &amp; Uniforms</span>
-        <h3 class="audience-card__title">Accurate sizing without a fitting room</h3>
-        <p class="audience-card__body">Remote body measurements replace fitting days and cut costly remakes — for uniform suppliers and rental programs that need precise fit at scale, and for apparel brands cutting size-related returns.</p>
+        <span class="audience-card__tag tag--retail">Uniforms &amp; Workwear</span>
+        <h3 class="audience-card__title">Size every wearer without a fitting day</h3>
+        <p class="audience-card__body">Uniform suppliers, rental programs and employers send each wearer a scan link. Two photos in everyday work clothes return the measurements their size chart uses — for one new starter or an entire workforce.</p>
         <ul class="audience-card__list">
-          <li>Remote garment measurements — chest, waist, inseam, sleeve, and more</li>
-          <li>Size recommendations and made-to-measure from the same scan</li>
-          <li>Export 3D body model for pattern-making and CAD integration</li>
-          <li>Reduce sizing errors and remake costs in uniform programs</li>
-          <li>Staff measured in their everyday work clothes — no changing rooms</li>
+          <li>Remote measurements — chest, waist, inseam, sleeve, neck, and more</li>
+          <li>Staff measured in their work clothes — no changing rooms or travelling fitters</li>
+          <li>Kit ordered before day one, with the measurements behind every size on record</li>
         </ul>
-        <a href="https://snapmeasureai.com/contact/" class="audience-card__cta">Talk to us about integration →</a>
+        <a href="https://snapmeasureai.com/uniform-sizing/" class="audience-card__cta">Explore uniform sizing →</a>
+      </div>
+
+      <div class="audience-card">
+        <span class="audience-card__tag tag--retail">Apparel &amp; Made-to-Measure</span>
+        <h3 class="audience-card__title">Real measurements behind every size</h3>
+        <p class="audience-card__body">Size and fit are the reason apparel brands most often give for online returns. Brands and platforms put the scan in their own site or app to drive size recommendations and made-to-measure orders.</p>
+        <ul class="audience-card__list">
+          <li>Size recommendations from the shopper's own measurements</li>
+          <li>Made-to-measure measurements plus a 3D body model for pattern and CAD software</li>
+          <li>Fit data on real customers for grading and range decisions</li>
+        </ul>
+        <a href="https://snapmeasureai.com/apparel-sizing/" class="audience-card__cta">Explore apparel sizing →</a>
       </div>
 
       <div class="audience-card">
@@ -707,9 +734,9 @@
 
     <div class="specs-grid">
       <div class="spec-item">
-        <div class="spec-item__label">Precision</div>
-        <div class="spec-item__value">Often within ½ inch</div>
-        <div class="spec-item__note">On major measurements, with fitted clothing and A-pose photos</div>
+        <div class="spec-item__label">Accuracy</div>
+        <div class="spec-item__value">97% in everyday clothing</div>
+        <div class="spec-item__note">Average across 18 standard measurements, in varied clothing. Best in fitted clothing.</div>
       </div>
       <div class="spec-item">
         <div class="spec-item__label">Processing time</div>
@@ -791,7 +818,7 @@
 
       <div class="faq-item">
         <div class="faq-item__q" onclick="toggleFaq(this)">How accurate is the body scan compared to tape measurements?<span class="faq-item__icon">+</span></div>
-        <p class="faq-item__a">On major measurements, results are often within half an inch of a tape measure, especially with fitted clothing and A-pose photos. The technology was built on Cambridge research and trained on over one million images spanning body types, poses, skin tones, clothing, and environments. That consistency makes it reliable for apparel and uniform sizing and for longitudinal health monitoring alike.</p>
+        <p class="faq-item__a">Average accuracy is 97% in everyday clothing, across 18 standard measurements, tested on people photographed in varied clothing and compared with 3D body scans. For context, reliability studies of trained measurers using a tape report waist measurement errors of 1.3–6.5 cm, and the body itself changes through the day. Results are best in fitted clothing, with arms slightly away from the body, and every scan is measured the same way, so results don't depend on who holds the tape. The best test is your own: try the free live demo, or run a pilot that compares scans with your current measurements.</p>
       </div>
 
       <div class="faq-item">
@@ -850,6 +877,9 @@
       </a>
       <ul class="footer__links">
         <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/patient-engagement-platform/">Patient engagement</a></li>
+        <li><a href="https://snapmeasureai.com/uniform-sizing/">Uniform sizing</a></li>
+        <li><a href="https://snapmeasureai.com/apparel-sizing/">Apparel sizing</a></li>
         <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
         <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
         <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
