@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
+
+  <title>Body Measurement API &amp; 3D Body Scan Docs | SnapMeasureAI</title>
+  <meta name="description" content="Body measurement API docs: send two smartphone photos and a height, get body measurements, a full 3D body model, or both. Request format, outputs, and data handling.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://snapmeasureai.com/developers/">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://snapmeasureai.com/developers/">
+  <meta property="og:title" content="Body Measurement API &amp; 3D Body Scan Docs | SnapMeasureAI">
+  <meta property="og:description" content="Two photos and a height in. Body measurements, a full 3D body model, or both out — shaped to what your product needs.">
+  <meta property="og:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "SnapMeasureAI body measurement API documentation",
+    "description": "How to integrate SnapMeasureAI 3D body scanning: request format, available outputs (body measurements, 3D body model, and more), photo guidance, errors, and data handling.",
+    "url": "https://snapmeasureai.com/developers/",
+    "inLanguage": "en-US",
+    "about": ["Body measurement API", "3D body scanning", "Body measurements from photos"],
+    "publisher": { "@type": "Organization", "name": "SnapMeasureAI", "url": "https://snapmeasureai.com" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Which languages and platforms are supported?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build the capture screen, the white-label scan flow and 3D viewer can be embedded instead." } },
+      { "@type": "Question", "name": "Can we get only the measurements, or only the 3D body model?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The response is configured per integration: measurements only, the 3D body model only, both, or any combination of the other outputs. Many partners take the measurements for sizing and keep the compact shape code so they can regenerate the body model later." } },
+      { "@type": "Question", "name": "How do we define our own measurements?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In the live demo's 3D viewer, use Custom Measure to define circumferences or lengths between any points on the body, save them as a measurement profile (a JSON file), and send it to us. It is attached to your partner code, so every scan through your integration returns your set." } },
+      { "@type": "Question", "name": "What units are measurements returned in?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The unit of the height you send. Send \"174cm\" and every measurement comes back in centimetres; send \"68in\" and they come back in inches." } },
+      { "@type": "Question", "name": "Are photos or results stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Photos are decoded and processed in memory, never written to disk, and discarded when the response is returned. No account, name, or email is needed to run a scan, and results go back to your system rather than being kept by SnapMeasureAI." } },
+      { "@type": "Question", "name": "How do we get access?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Contact us with your use case. Onboarding provides your endpoint, partner code, and test access, and we configure your outputs and measurement profile with you. You can run the live demo at any time to see the scan your users would get." } }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg:        #080C10;
+      --bg2:       #0E1419;
+      --bg3:       #141C24;
+      --surface:   #1A2330;
+      --code:      #0B1117;
+      --border:    rgba(255,255,255,0.08);
+      --border-hi: rgba(255,255,255,0.15);
+      --teal:      #0ABFA3;
+      --teal-dim:  rgba(10,191,163,0.12);
+      --teal-glow: rgba(10,191,163,0.25);
+      --indigo:    #6C63FF;
+      --indigo-dim:rgba(108,99,255,0.12);
+      --amber:     #FFB020;
+      --text:      #F0F4F8;
+      --text-2:    #AABDCF;
+      --text-3:    #7A96AA;
+      --radius:    10px;
+      --radius-lg: 18px;
+      --max:       1120px;
+      --mono:      ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    code { font-family: var(--mono); font-size: .88em; background: var(--surface); border: 1px solid var(--border); padding: 1px 6px; border-radius: 5px; color: #D6E4F0; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    [id] { scroll-margin-top: 128px; }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,12,16,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); height: 64px;
+      display: flex; align-items: center;
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav__logo img { height: 32px; }
+    .nav__links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 14px; color: var(--text-2); }
+    .nav__links a:hover { color: var(--text); }
+    .nav__links a[aria-current="page"] { color: var(--teal); }
+    .nav__dropdown { position: relative; }
+    .nav__dropdown-toggle {
+      display: flex; align-items: center; gap: 5px; cursor: pointer;
+      color: var(--text-2); font-size: 14px; background: none; border: none; padding: 0; font-family: inherit;
+    }
+    .nav__dropdown-toggle:hover { color: var(--text); }
+    .nav__dropdown-toggle svg { transition: transform .2s; }
+    .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
+    .nav__dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
+      border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .nav__dropdown-menu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .nav__dropdown:hover .nav__dropdown-menu { display: block; }
+    .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
+    .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
+    .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
+    .nav__cta { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: opacity .15s, transform .1s; border: none; font-family: inherit;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn--outline { background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF; }
+    .btn--outline:hover { background: rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.8); color: #fff; }
+    .btn--primary { background: var(--teal); color: #050E0C; font-weight: 600; }
+    .btn--primary:hover { opacity: .88; }
+    .btn--lg { padding: 14px 26px; font-size: 15px; }
+    .btn--ghost { background: transparent; border: 1px solid var(--border-hi); color: var(--text); }
+    .btn--ghost:hover { border-color: rgba(10,191,163,.6); color: var(--teal); }
+    .nav__hamburger { display: none; }
+    .nav__mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); padding: 32px 24px; flex-direction: column; gap: 24px; z-index: 99;
+    }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a { font-size: 18px; color: var(--text-2); }
+    .nav__mobile-menu a:hover { color: var(--teal); }
+
+    /* ---- HERO ---- */
+    .hero { padding: 132px 0 72px; position: relative; overflow: hidden; }
+    .hero__bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 60% at 85% 25%, rgba(10,191,163,0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 10% 80%, rgba(108,99,255,0.07) 0%, transparent 70%);
+    }
+    .hero__grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 56px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-dim); border: 1px solid rgba(10,191,163,0.25);
+      border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600;
+      color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 22px;
+    }
+    .eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+    .hero h1 { font-size: clamp(34px, 4.6vw, 54px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 18px; }
+    .hero h1 em { font-style: normal; color: var(--teal); }
+    .hero__sub { font-size: 17px; color: var(--text-2); max-width: 520px; margin-bottom: 28px; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+    .hero__facts { display: flex; flex-wrap: wrap; gap: 8px 22px; list-style: none; font-size: 13px; color: var(--text-3); }
+    .hero__facts li { display: flex; align-items: center; gap: 8px; }
+    .hero__facts li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+
+    /* ---- CODE ---- */
+    .code-card { background: var(--code); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,.45); }
+    .code-card__bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px 10px 16px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.02); }
+    .code-card__dots { display: flex; gap: 6px; margin-right: 6px; }
+    .code-card__dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.14); }
+    .code-card__title { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+    .tabs { display: flex; gap: 4px; margin-left: auto; }
+    .tab {
+      font: 600 12px/1 inherit; font-family: inherit; color: var(--text-3); background: transparent;
+      border: 1px solid transparent; border-radius: 7px; padding: 7px 11px; cursor: pointer;
+    }
+    .tab:hover { color: var(--text); }
+    .tab[aria-selected="true"] { color: var(--teal); background: var(--teal-dim); border-color: rgba(10,191,163,.4); }
+    .tab:focus-visible, .copy:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    .copy {
+      font: 600 12px/1 inherit; font-family: inherit; color: var(--text-2); background: var(--surface);
+      border: 1px solid var(--border-hi); border-radius: 7px; padding: 7px 10px; cursor: pointer; margin-left: 6px;
+    }
+    .copy:hover { color: var(--teal); border-color: rgba(10,191,163,.5); }
+    pre { margin: 0; padding: 18px 20px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.7; color: #CFDCE8; tab-size: 2; }
+    pre[hidden] { display: none; }
+    .k { color: #8EA9FF; }     /* keyword */
+    .s { color: #7FE0C6; }     /* string */
+    .n { color: #FFC777; }     /* number */
+    .c { color: #5F7A8E; }     /* comment */
+    .p { color: #F0F4F8; }     /* property */
+
+    /* ---- SECTIONS ---- */
+    .section { padding: 88px 0; }
+    .section--alt { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .section__eyebrow { font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+    .section__title { font-size: clamp(26px, 3.6vw, 40px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.12; margin-bottom: 14px; }
+    .section__sub { font-size: 17px; color: var(--text-2); max-width: 660px; margin-bottom: 44px; }
+
+    /* in-page contents */
+    .toc { position: sticky; top: 64px; z-index: 50; background: rgba(8,12,16,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    .toc ul { display: flex; gap: 6px; list-style: none; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    .toc ul::-webkit-scrollbar { display: none; }
+    .toc a { display: block; white-space: nowrap; font-size: 13px; font-weight: 600; color: var(--text-3); padding: 7px 12px; border-radius: 100px; border: 1px solid transparent; }
+    .toc a:hover { color: var(--text); }
+    .toc a.is-on { color: var(--teal); background: var(--teal-dim); border-color: rgba(10,191,163,.35); }
+
+    /* flow */
+    .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 14px; align-items: stretch; }
+    .flow__box { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+    .flow__box--mid { border-color: rgba(10,191,163,.4); background: linear-gradient(180deg, rgba(10,191,163,.08), var(--bg3)); }
+    .flow__tag { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+    .flow__box--mid .flow__tag { color: var(--teal); }
+    .flow__box h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .flow__box p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+    .flow__box ul { list-style: none; margin-top: 12px; display: grid; gap: 6px; }
+    .flow__box li { font-size: 13px; color: var(--text-2); display: flex; gap: 8px; }
+    .flow__box li::before { content: '✓'; color: var(--teal); font-weight: 700; }
+    .flow__arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--text-3); font-family: var(--mono); font-size: 11px; }
+    .flow__arrow svg { color: var(--teal); }
+    .flow__time { text-align: center; margin-top: 18px; font-size: 13px; color: var(--text-3); }
+
+    /* steps (quickstart) */
+    .qs { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 40px; align-items: start; }
+    .steps { list-style: none; counter-reset: s; display: grid; gap: 22px; }
+    .steps li { counter-increment: s; position: relative; padding-left: 52px; }
+    .steps li::before {
+      content: counter(s); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 14px; font-weight: 700; color: var(--teal);
+      background: var(--teal-dim); border: 1px solid rgba(10,191,163,.4);
+    }
+    .steps h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .steps p { font-size: 14.5px; color: var(--text-2); line-height: 1.65; }
+
+    /* tables */
+    .table-wrap { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow-x: auto; background: var(--bg3); }
+    table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 640px; }
+    th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 14px 18px; border-bottom: 1px solid var(--border-hi); background: rgba(255,255,255,.02); }
+    td { padding: 16px 18px; border-bottom: 1px solid var(--border); color: var(--text-2); vertical-align: top; line-height: 1.6; }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { white-space: nowrap; }
+    td .field { font-family: var(--mono); font-size: 13.5px; color: var(--text); font-weight: 600; }
+    .type { font-family: var(--mono); font-size: 12px; color: var(--indigo); }
+    .req { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 7px; border-radius: 100px; margin-left: 8px; vertical-align: 1px; }
+    .req--yes { color: var(--teal); background: var(--teal-dim); }
+    .req--opt { color: var(--text-3); background: rgba(255,255,255,.05); }
+    .note { margin-top: 16px; font-size: 14px; color: var(--text-3); }
+    .callout { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; background: rgba(255,176,32,.07); border: 1px solid rgba(255,176,32,.35); border-radius: var(--radius-lg); padding: 18px 20px; margin-bottom: 20px; }
+    .callout svg { color: var(--amber); margin-top: 2px; }
+    .callout b { display: block; font-size: 15.5px; color: var(--text); margin-bottom: 3px; }
+    .callout p { font-size: 14.5px; color: var(--text-2); line-height: 1.6; }
+
+    /* outputs */
+    .outputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .out { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; transition: border-color .15s; }
+    .out:hover { border-color: rgba(10,191,163,.35); }
+    .out__icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--teal-dim); color: var(--teal); margin-bottom: 16px; }
+    .out--indigo .out__icon { background: var(--indigo-dim); color: #A9A4FF; }
+    .out h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .out p { font-size: 14px; color: var(--text-2); line-height: 1.65; }
+    .out p + p { margin-top: 8px; }
+    .badge { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; }
+    .badge--core { color: var(--teal); background: var(--teal-dim); border: 1px solid rgba(10,191,163,.35); }
+    .badge--opt { color: #C4C0FF; background: var(--indigo-dim); border: 1px solid rgba(108,99,255,.35); }
+    .out--wide { grid-column: span 3; display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+    .out--feature { border-color: rgba(10,191,163,.4); background: linear-gradient(135deg, rgba(10,191,163,.09), var(--bg3) 60%); }
+    .out--wide .out__icon { margin: 0; }
+
+    .resp { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 40px; align-items: start; margin-top: 56px; }
+    .resp h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+    .resp p { font-size: 15px; color: var(--text-2); margin-bottom: 12px; }
+    .resp ul { list-style: none; display: grid; gap: 8px; margin-top: 4px; }
+    .resp li { font-size: 14.5px; color: var(--text-2); display: flex; gap: 10px; }
+    .resp li::before { content: '→'; color: var(--teal); }
+
+    /* photo guide */
+    .guide { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .tip { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; }
+    .tip b { display: block; font-size: 15px; margin-bottom: 6px; }
+    .tip span { font-size: 14px; color: var(--text-2); line-height: 1.6; display: block; }
+    .tip svg { color: var(--teal); margin-bottom: 12px; }
+
+    /* trust */
+    .trust { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .trust__item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px; display: grid; grid-template-columns: auto 1fr; gap: 16px; }
+    .trust__item svg { color: var(--teal); margin-top: 3px; }
+    .trust__item h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+    .trust__item p { font-size: 14.5px; color: var(--text-2); line-height: 1.65; }
+    .boundary { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px dashed rgba(10,191,163,.35); border-radius: var(--radius-lg); overflow: hidden; }
+    .boundary div { padding: 18px 20px; font-size: 13.5px; color: var(--text-2); }
+    .boundary div + div { border-left: 1px dashed rgba(10,191,163,.25); }
+    .boundary b { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
+
+    /* options */
+    .options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .opt { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 22px; }
+    .opt__k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 8px; }
+    .opt h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+    .opt p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+
+    /* faq */
+    .faq { max-width: 820px; }
+    .faq details { border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .faq summary { list-style: none; cursor: pointer; font-size: 16.5px; font-weight: 500; display: flex; justify-content: space-between; gap: 16px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border-hi); display: grid; place-items: center; font-size: 14px; color: var(--text-2); transition: transform .2s; }
+    .faq details[open] summary::after { transform: rotate(45deg); color: var(--teal); border-color: var(--teal); }
+    .faq summary:hover { color: var(--teal); }
+    .faq details p { font-size: 15.5px; color: var(--text-2); margin-top: 12px; line-height: 1.75; }
+
+    /* cta */
+    .cta { padding: 96px 0; text-align: center; position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 50% 100%, rgba(10,191,163,.10), transparent 70%); pointer-events: none; }
+    .cta h2 { position: relative; font-size: clamp(28px, 4vw, 46px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 14px; }
+    .cta p { position: relative; font-size: 17px; color: var(--text-2); max-width: 560px; margin: 0 auto 32px; }
+    .cta .hero__actions { justify-content: center; position: relative; }
+    .cta__mail { position: relative; font-size: 14px; color: var(--text-3); }
+    .cta__mail a { color: var(--teal); }
+
+    /* ---- FOOTER ---- */
+    .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer__logo img { height: 24px; opacity: .6; }
+    .footer__links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
+    .footer__links a { font-size: 13px; color: var(--text-3); }
+    .footer__links a:hover { color: var(--teal); }
+    .footer__copy { font-size: 12px; color: var(--text-3); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 980px) {
+      .hero__grid, .qs, .resp { grid-template-columns: 1fr; gap: 36px; }
+      .outputs { grid-template-columns: repeat(2, 1fr); }
+      .out--wide { grid-column: span 2; }
+      .guide, .options { grid-template-columns: repeat(2, 1fr); }
+      .flow { grid-template-columns: 1fr; }
+      .flow__arrow { flex-direction: row; padding: 2px 0; }
+      .flow__arrow svg { transform: rotate(90deg); }
+    }
+    @media (max-width: 900px) {
+      .nav__links { display: none; }
+      .nav__cta .btn--outline { display: none; }
+      .nav__hamburger {
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; cursor: pointer; color: var(--text-2); font-size: 22px;
+        background: none; border: none;
+      }
+    }
+    @media (max-width: 640px) {
+      .section { padding: 64px 0; }
+      .outputs, .guide, .options, .trust { grid-template-columns: 1fr; }
+      .out--wide { grid-column: auto; grid-template-columns: 1fr; }
+      .boundary { grid-template-columns: 1fr; }
+      .boundary div + div { border-left: none; border-top: 1px dashed rgba(10,191,163,.25); }
+      .code-card__bar { flex-wrap: wrap; }
+      .tabs { margin-left: 0; order: 3; width: 100%; }
+      pre { font-size: 12px; padding: 16px; }
+      .footer__inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer__links { display: grid; grid-template-columns: repeat(3, auto); gap: 10px 20px; }
+      .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3T6T8SX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="https://snapmeasureai.com/" class="nav__logo">
+      <img src="/assets/images/logo.png" alt="SnapMeasureAI">
+    </a>
+    <ul class="nav__links">
+      <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
+      <li><a href="https://snapmeasureai.com/#use-cases">Use cases</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Technologies
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">AI technologies</span>
+          <a href="https://snapmeasureai.com/">3D body scan</a>
+          <a href="https://snapmeasureai.com/motion-capture-from-video/">AI motion capture</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a>
+        </div>
+      </li>
+      <li><a href="https://snapmeasureai.com/developers/" aria-current="page">Developers</a></li>
+      <li><a href="https://snapmeasureai.com/#faqs">FAQs</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--primary">Live demo →</a>
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--outline">Contact us</a>
+      <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile-menu" id="mobile-menu">
+  <a href="https://snapmeasureai.com/#how-it-works" onclick="toggleMenu()">How it works</a>
+  <a href="https://snapmeasureai.com/#use-cases" onclick="toggleMenu()">Use cases</a>
+  <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()" style="color:var(--teal);">Developers</a>
+  <a href="https://snapmeasureai.com/#faqs" onclick="toggleMenu()">FAQs</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
+  <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
+  <a href="https://snapmeasureai.com/motion-capture-from-video/" style="padding-left:12px;" onclick="toggleMenu()">AI motion capture</a>
+  <a href="https://snapmeasureai.com/synthetic-data-with-labels/" style="padding-left:12px;" onclick="toggleMenu()">Synthetic data</a>
+  <a href="https://demo.snapmeasureai.com/" class="btn btn--primary" style="justify-content:center;margin-top:8px;color:#050E0C !important;">Live demo →</a>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<header class="hero">
+  <div class="hero__bg"></div>
+  <div class="container hero__grid">
+    <div>
+      <span class="eyebrow">Developers · Body measurement API</span>
+      <h1>Add 3D body scanning to your product with <em>one API call.</em></h1>
+      <p class="hero__sub">
+        Send two smartphone photos — base64-encoded inside a JSON body — and a height. Get back
+        body measurements, a full 3D body model, or both, shaped to exactly what your product needs,
+        in under 10 seconds.
+      </p>
+      <div class="hero__actions">
+        <a href="https://snapmeasureai.com/contact/" class="btn btn--primary btn--lg">Request API access →</a>
+        <a href="https://demo.snapmeasureai.com/" class="btn btn--ghost btn--lg">Try the live demo</a>
+      </div>
+      <ul class="hero__facts">
+        <li>One HTTPS endpoint, JSON in and out</li>
+        <li>Photos as base64 strings</li>
+        <li>Any language, no SDK</li>
+        <li>Photos never stored</li>
+      </ul>
+    </div>
+
+    <div class="code-card" aria-label="Example request and response">
+      <div class="code-card__bar">
+        <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="code-card__title">POST · scan</span>
+      </div>
+<pre><span class="c">// request — two photos and a height</span>
+{
+  <span class="p">"height"</span>:  <span class="s">"174cm"</span>,
+  <span class="p">"company"</span>: <span class="s">"your-partner-code"</span>,
+  <span class="p">"images"</span>: [    <span class="c">// base64-encoded JPEGs, not file uploads</span>
+    { <span class="p">"fileName"</span>: <span class="s">"front.jpg"</span>, <span class="p">"data"</span>: <span class="s">"/9j/4AAQ…"</span> },
+    { <span class="p">"fileName"</span>: <span class="s">"side.jpg"</span>,  <span class="p">"data"</span>: <span class="s">"/9j/4AAQ…"</span> }
+  ]
+}
+
+<span class="c">// response — the outputs your integration is set up for</span>
+{
+  <span class="p">"measurements"</span>: {
+    <span class="p">"chest circumference"</span>: <span class="n">100.5</span>,
+    <span class="p">"waist circumference"</span>: <span class="n">88.6</span>,
+    <span class="p">"hip circumference"</span>:   <span class="n">100.2</span>,
+    <span class="p">"inside leg height"</span>:   <span class="n">76.5</span>  <span class="c">// …your set, in cm</span>
+  },
+  <span class="p">"body_model"</span>: { <span class="p">"format"</span>: <span class="s">"obj"</span>, <span class="p">"points"</span>: <span class="s">"10,000"</span> }
+}</pre>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== IN-PAGE CONTENTS ==================== -->
+<nav class="toc" aria-label="On this page">
+  <div class="container">
+    <ul>
+      <li><a href="#flow">How it works</a></li>
+      <li><a href="#quickstart">Quickstart</a></li>
+      <li><a href="#request">Request</a></li>
+      <li><a href="#outputs">Outputs</a></li>
+      <li><a href="#photos">Photo capture</a></li>
+      <li><a href="#errors">Errors</a></li>
+      <li><a href="#data">Data handling</a></li>
+      <li><a href="#options">Integration options</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== FLOW ==================== -->
+<section class="section" id="flow">
+  <div class="container">
+    <p class="section__eyebrow">How it works</p>
+    <h2 class="section__title">Your app captures. We measure. Your system keeps the result.</h2>
+    <p class="section__sub">The scan engine is stateless: it reconstructs the body, computes what you asked for, returns it, and forgets it. Everything that persists lives on your side.</p>
+
+    <div class="flow">
+      <div class="flow__box">
+        <p class="flow__tag">Your app or website</p>
+        <h3>Capture</h3>
+        <p>Your user takes a front and a side photo and enters their height — in your own capture screen, or our white-label one.</p>
+        <ul><li>Any smartphone camera</li><li>Everyday clothes work</li></ul>
+      </div>
+      <div class="flow__arrow" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M1 7h24M19 1l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>HTTPS · JSON</span>
+      </div>
+      <div class="flow__box flow__box--mid">
+        <p class="flow__tag">SnapMeasureAI · stateless</p>
+        <h3>Reconstruct &amp; measure</h3>
+        <p>Pose is detected in every photo, the views are fused into one 3D body model scaled to the height, and your measurements are computed on it.</p>
+        <ul><li>Processed in memory</li><li>Photos never written to disk</li></ul>
+      </div>
+      <div class="flow__arrow" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M1 7h24M19 1l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>JSON</span>
+      </div>
+      <div class="flow__box">
+        <p class="flow__tag">Your system</p>
+        <h3>Store &amp; use</h3>
+        <p>Measurements and the body model land in your system, joined to your own user or patient record, under your retention policy.</p>
+        <ul><li>You hold the history</li><li>Size charts, CAD, progress views</li></ul>
+      </div>
+    </div>
+    <p class="flow__time">Typically under 10 seconds from photos to result.</p>
+  </div>
+</section>
+
+<!-- ==================== QUICKSTART ==================== -->
+<section class="section section--alt" id="quickstart">
+  <div class="container">
+    <p class="section__eyebrow">Quickstart</p>
+    <h2 class="section__title">From two photos to measurements.</h2>
+    <p class="section__sub">One request. Photos go as base64 strings inside a JSON body, so it works the same from a browser, a phone, or a server.</p>
+
+    <div class="qs">
+      <ol class="steps">
+        <li>
+          <h3>Get your endpoint and partner code</h3>
+          <p>Onboarding gives you an endpoint, a partner code, and test access. The partner code carries your output configuration and your measurement set.</p>
+        </li>
+        <li>
+          <h3>Downscale and base64-encode the photos</h3>
+          <p>Front first, then side. Resize so the longest side is 800&nbsp;px, save as JPEG, and base64-encode the bytes — photos travel as strings inside the JSON, not as file uploads. 800&nbsp;px is the resolution the engine works at, so larger files only slow the upload.</p>
+        </li>
+        <li>
+          <h3>Send the request</h3>
+          <p>POST the height, your partner code, and the base64 images. Allow up to 60&nbsp;seconds of client timeout; typical scans return in under 10.</p>
+        </li>
+        <li>
+          <h3>Use the result</h3>
+          <p>Map measurements to your size chart, store them against your record, or hand the 3D body model to your CAD, pattern, or visualization pipeline.</p>
+        </li>
+      </ol>
+
+      <div class="code-card">
+        <div class="code-card__bar">
+          <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <div class="tabs" role="tablist" aria-label="Code language">
+            <button class="tab" role="tab" aria-selected="true" aria-controls="code-js" id="tab-js">JavaScript</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="code-py" id="tab-py">Python</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="code-curl" id="tab-curl">cURL</button>
+          </div>
+          <button class="copy" type="button" data-copy>Copy</button>
+        </div>
+<pre id="code-js" role="tabpanel" aria-labelledby="tab-js"><span class="c">// Browser: downscale a photo to 800 px and return raw base64 (no data: prefix)</span>
+<span class="k">async function</span> toBase64(file, maxSide = <span class="n">800</span>) {
+  <span class="k">const</span> img = <span class="k">await</span> createImageBitmap(file);
+  <span class="k">const</span> scale = Math.min(<span class="n">1</span>, maxSide / Math.max(img.width, img.height));
+  <span class="k">const</span> canvas = Object.assign(document.createElement(<span class="s">"canvas"</span>), {
+    width: Math.round(img.width * scale), height: Math.round(img.height * scale),
+  });
+  canvas.getContext(<span class="s">"2d"</span>).drawImage(img, <span class="n">0</span>, <span class="n">0</span>, canvas.width, canvas.height);
+  <span class="k">return</span> canvas.toDataURL(<span class="s">"image/jpeg"</span>, <span class="n">0.94</span>).split(<span class="s">","</span>)[<span class="n">1</span>];
+}
+
+<span class="k">const</span> res = <span class="k">await</span> fetch(SNAPMEASURE_ENDPOINT, {
+  method: <span class="s">"POST"</span>,
+  headers: { <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span> },
+  body: JSON.stringify({
+    height: <span class="s">"174cm"</span>,                       <span class="c">// or "68in"</span>
+    company: PARTNER_CODE,
+    images: [
+      { fileName: <span class="s">"front.jpg"</span>, data: <span class="k">await</span> toBase64(frontFile) },
+      { fileName: <span class="s">"side.jpg"</span>,  data: <span class="k">await</span> toBase64(sideFile) },
+    ],
+  }),
+});
+<span class="k">if</span> (!res.ok) <span class="k">throw new</span> Error(<span class="k">await</span> res.text());
+<span class="k">const</span> result = <span class="k">await</span> res.json();</pre>
+<pre id="code-py" role="tabpanel" aria-labelledby="tab-py" hidden><span class="k">import</span> base64, requests
+
+<span class="k">def</span> b64(path):
+    <span class="k">with</span> open(path, <span class="s">"rb"</span>) <span class="k">as</span> f:
+        <span class="k">return</span> base64.b64encode(f.read()).decode()
+
+payload = {
+    <span class="s">"height"</span>: <span class="s">"174cm"</span>,                  <span class="c"># or "68in"</span>
+    <span class="s">"company"</span>: PARTNER_CODE,
+    <span class="s">"images"</span>: [
+        {<span class="s">"fileName"</span>: <span class="s">"front.jpg"</span>, <span class="s">"data"</span>: b64(<span class="s">"front.jpg"</span>)},
+        {<span class="s">"fileName"</span>: <span class="s">"side.jpg"</span>,  <span class="s">"data"</span>: b64(<span class="s">"side.jpg"</span>)},
+    ],
+}
+
+res = requests.post(SNAPMEASURE_ENDPOINT, json=payload, timeout=<span class="n">60</span>)
+res.raise_for_status()
+result = res.json()</pre>
+<pre id="code-curl" role="tabpanel" aria-labelledby="tab-curl" hidden><span class="c"># scan.json holds {"height": "174cm", "company": "…", "images": [ … ]}</span>
+curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  --max-time <span class="n">60</span> \
+  -d @scan.json</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REQUEST ==================== -->
+<section class="section" id="request">
+  <div class="container">
+    <p class="section__eyebrow">Request</p>
+    <h2 class="section__title">Three fields. That's the whole input.</h2>
+    <p class="section__sub">A JSON body sent with <code>Content-Type: application/json</code>.</p>
+
+    <div class="callout">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.7"/><path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <div>
+        <b>Photos are base64 strings, not file uploads</b>
+        <p>There is no multipart form. Read each JPEG or PNG, base64-encode the bytes, and put the string in <code>images[].data</code> — the quickstart code above does exactly this.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="field">height</span><span class="req req--yes">Required</span></td>
+            <td><span class="type">string</span></td>
+            <td>The person's height with its unit: <code>"174cm"</code> or <code>"68in"</code>. The body model is scaled to it, so every measurement comes out at real size — and in the same unit.</td>
+          </tr>
+          <tr>
+            <td><span class="field">images</span><span class="req req--yes">Required</span></td>
+            <td><span class="type">array</span></td>
+            <td>Two to four photos of one person, <b>front first, then side</b>. A back view or the other side is optional and refines depth. Each item is <code>{ "fileName", "data" }</code>, where <code>data</code> is the photo as a <b>base64-encoded string</b> of the JPEG or PNG bytes (a <code>data:image/jpeg;base64,</code> prefix is also accepted). Up to 30&nbsp;MB per photo; 800&nbsp;px on the longest side is all the engine uses.</td>
+          </tr>
+          <tr>
+            <td><span class="field">company</span><span class="req req--opt">Partner code</span></td>
+            <td><span class="type">string</span></td>
+            <td>Your partner code, issued at onboarding. It selects your measurement set and the outputs your integration returns. Leave it blank to get the live demo's default output: the standard measurement set plus the embeddable 3D viewer.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">No names, emails, or account IDs are needed. To join a result to your own record, keep your reference on your side and attach the response to it when it comes back.</p>
+  </div>
+</section>
+
+<!-- ==================== OUTPUTS ==================== -->
+<section class="section section--alt" id="outputs">
+  <div class="container">
+    <p class="section__eyebrow">Outputs</p>
+    <h2 class="section__title">Measurements, the full 3D body, or both.</h2>
+    <p class="section__sub">Every scan reconstructs a complete 3D body and computes a lot along the way — and anything computed during a scan can be returned. Each integration takes the combination its product needs, and that can grow as the product does.</p>
+
+    <div class="outputs">
+      <article class="out">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><ellipse cx="10" cy="10" rx="8" ry="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M2 10v0M18 10" stroke="currentColor" stroke-width="1.7"/></svg></div>
+        <h3>Body measurements <span class="badge badge--core">Core</span></h3>
+        <p>Circumferences and lengths across the full body — chest, waist, hips, neck, bicep, forearm, wrist, thigh, calf, ankle, shoulder breadth, arm length, inside leg, torso lengths, foot length and width — in centimetres or inches, matching the height you send.</p>
+      </article>
+      <article class="out">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16l12-12M4 4h4M4 4v4M16 16h-4M16 16v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+        <h3>Custom measurement sets <span class="badge badge--core">Core</span></h3>
+        <p>Any circumference or length between any points on the body, defined once in the live demo's 3D viewer and saved as a JSON measurement profile. Your partner code applies it to every scan — 100+ measurements are available.</p>
+      </article>
+      <article class="out">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2l7 4v8l-7 4-7-4V6l7-4z M3 6l7 4 7-4 M10 10v8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+        <h3>3D body model <span class="badge badge--core">Core</span></h3>
+        <p>The complete 10,000-point body mesh in a standard pose, scaled to the person's real height. Delivered as OBJ for CAD, pattern-making, virtual fitting, avatars, and digital twins.</p>
+      </article>
+      <article class="out out--indigo">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 15c3 0 4-9 8-9s5 9 8 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 15V9M13.5 15V9M10 15V5" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.6 1.6"/></svg></div>
+        <h3>Confidence ranges <span class="badge badge--opt">Available</span></h3>
+        <p>The model predicts a distribution for each measurement, not just a number, so every value can come with a calibrated range. Flag uncertain scans, or show a size range instead of a single size.</p>
+      </article>
+      <article class="out out--indigo">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10.2l2 2 4-4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Photo quality feedback <span class="badge badge--opt">Available</span></h3>
+        <p>Per-photo checks — person found, framing, estimated camera distance, and how much each photo contributed — so your app can ask for a better retake before a measurement is used.</p>
+      </article>
+      <article class="out out--indigo">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 17h14M7 17V4M13 17V8M7 7h3M13 11h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Ground-referenced measurements <span class="badge badge--opt">Available</span></h3>
+        <p>Leg circumferences at fixed heights from the floor, and the height above the floor of every circumference — the format compression-garment and medical-fit makers specify garments in.</p>
+      </article>
+      <article class="out out--wide out--feature">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s-6.5-3.9-6.5-8.6A3.6 3.6 0 0110 6.3a3.6 3.6 0 016.5 2.1C16.5 13.1 10 17 10 17z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 10h2.2l1.2-2 1.6 4 1.2-2h2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h3>Body composition &amp; health indicators <span class="badge badge--core">Health programs</span></h3>
+          <p>Waist-to-height and waist-to-hip ratios come straight from the scan. Body-fat percentage, fat and lean mass, and estimated weight can be derived from the same scan — from girths, using established circumference-based equations, and from the 3D model's body volume — configured and validated with each program. A way to show change between visits, alongside clinical body-composition assessment rather than instead of it.</p>
+        </div>
+        <a href="https://snapmeasureai.com/patient-engagement-platform/" class="btn btn--ghost">GLP-1 programs →</a>
+      </article>
+      <article class="out out--wide">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="5" cy="10" r="1.6" fill="currentColor"/><circle cx="10" cy="10" r="1.6" fill="currentColor"/><circle cx="15" cy="10" r="1.6" fill="currentColor"/></svg></div>
+        <div>
+          <h3>Also available from every scan</h3>
+          <p>A compact body shape code (a few hundred bytes — store it, then regenerate the 3D model or apply new measurement definitions later without new photos), 3D joint positions and per-photo keypoints, a body-part map of the 3D model, the exact ring or path each measurement was taken along, and named landmark points on the body surface. If it's computed during a scan, it can be in your response.</p>
+        </div>
+        <a href="https://snapmeasureai.com/contact/" class="btn btn--ghost">Ask about an output →</a>
+      </article>
+      <article class="out out--wide out--indigo">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 17.5h6M10 14.5v3M8 7l3 2-3 2V7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div>
+          <h3>Embeddable 3D viewer <span class="badge badge--opt">Optional</span></h3>
+          <p>The interactive viewer from the live demo — rotating body model, measurement rings and lengths, a custom-measurement editor — returned as a self-contained page you can drop into an iframe, under your brand. Skip it if you render results yourself.</p>
+        </div>
+        <a href="https://demo.snapmeasureai.com/" class="btn btn--ghost">See it in the demo →</a>
+      </article>
+    </div>
+
+    <div class="resp">
+      <div>
+        <h3>Shaped per integration</h3>
+        <p>Your outputs are configured on your partner code, so a sizing integration and a health integration can call the same endpoint and get very different responses.</p>
+        <ul>
+          <li>Uniform supplier: your garment measurement set, mapped to your size chart</li>
+          <li>Made-to-measure: measurements plus the OBJ body model for pattern software</li>
+          <li>E-commerce sizing: measurements with confidence ranges, so borderline customers see two sizes</li>
+          <li>Compression garments: leg girths at the exact heights from the floor your patterns use</li>
+          <li>GLP-1 program: tracking girths, waist-to-height ratio, and body-composition estimates for the patient record</li>
+        </ul>
+      </div>
+      <div class="code-card">
+        <div class="code-card__bar">
+          <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="code-card__title">Example response · measurements + 3D body model</span>
+          <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
+        </div>
+<pre>{
+  <span class="p">"measurements"</span>: {
+    <span class="p">"height"</span>:                    <span class="n">174.0</span>,
+    <span class="p">"chest circumference"</span>:       <span class="n">100.5</span>,
+    <span class="p">"waist circumference"</span>:       <span class="n">88.6</span>,
+    <span class="p">"hip circumference"</span>:         <span class="n">100.2</span>,
+    <span class="p">"neck circumference"</span>:        <span class="n">39.8</span>,
+    <span class="p">"shoulder breadth"</span>:          <span class="n">36.4</span>,
+    <span class="p">"arm right length"</span>:          <span class="n">54.2</span>,
+    <span class="p">"inside leg height"</span>:         <span class="n">76.5</span>,
+    <span class="p">"thigh left circumference"</span>:  <span class="n">57.5</span>
+    <span class="c">// …the rest of your measurement set, in cm (the height's unit)</span>
+  },
+  <span class="p">"body_model"</span>: {
+    <span class="p">"format"</span>: <span class="s">"obj"</span>,
+    <span class="p">"data"</span>:   <span class="s">"v 0.0213 1.5482 0.0871\nv …"</span>
+  }
+}</pre>
+      </div>
+    </div>
+    <p class="note">Illustrative. Field names and the exact contents of each response are agreed during onboarding.</p>
+  </div>
+</section>
+
+<!-- ==================== PHOTOS ==================== -->
+<section class="section" id="photos">
+  <div class="container">
+    <p class="section__eyebrow">Photo capture</p>
+    <h2 class="section__title">Good photos in, precise measurements out.</h2>
+    <p class="section__sub">Build these into your capture screen — or use the white-label flow, which has a guided camera with a countdown timer built in.</p>
+
+    <div class="guide">
+      <div class="tip">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="4.5" r="2.2" stroke="currentColor" stroke-width="1.6"/><path d="M11 7v7M11 9l-5 3.5M11 9l5 3.5M11 14l-3 6M11 14l3 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <b>Stand in an A-pose</b>
+        <span>Arms slightly away from the body in both photos. Raised arms lift the shirt and make the chest read larger.</span>
+      </div>
+      <div class="tip">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="5" y="2" width="12" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 6h6M11 9v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <b>Whole body in frame</b>
+        <span>Head to toe, phone upright at about hip height. A shelf or a second person works well.</span>
+      </div>
+      <div class="tip">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M7 3l-4 3 2 3 2-1v11h8V8l2 1 2-3-4-3c-1 1.5-2.5 2-4 2S8 4.5 7 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <b>Everyday clothes work</b>
+        <span>Fitted clothing gives the best results; jeans, shorts, and T-shirts are fine. Take off coats and bulky layers.</span>
+      </div>
+      <div class="tip">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M11 2v2M11 18v2M2 11h2M18 11h2M4.6 4.6l1.4 1.4M16 16l1.4 1.4M4.6 17.4L6 16M16 6l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <b>One person, decent light</b>
+        <span>No special background needed. Very dark photos or other people in frame can stop a scan.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ERRORS ==================== -->
+<section class="section section--alt" id="errors">
+  <div class="container">
+    <p class="section__eyebrow">Errors</p>
+    <h2 class="section__title">What can go wrong, and what to do.</h2>
+    <p class="section__sub">Input problems are rejected immediately with a readable message. Photos the engine can't measure come back as a successful response with no measurements, so your app can ask for a retake.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Status</th><th>When</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td><span class="field">200</span></td><td>Scan complete — your configured outputs are in the body.</td><td>Store and use the result.</td></tr>
+          <tr><td><span class="field">200</span> · no measurements</td><td>A person couldn't be found in enough photos, or fewer than two usable photos were sent.</td><td>Ask the user to retake: full body in frame, A-pose, decent light, one person.</td></tr>
+          <tr><td><span class="field">400</span></td><td>Height missing, no photos or more than four, or a photo over the size limit.</td><td>Fix the request; the message says which check failed.</td></tr>
+          <tr><td><span class="field">500</span></td><td>The scan couldn't be completed on our side.</td><td>Retry once; if it repeats, send us the time of the request.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DATA HANDLING ==================== -->
+<section class="section" id="data">
+  <div class="container">
+    <p class="section__eyebrow">Data handling</p>
+    <h2 class="section__title">Built so there's nothing to leak.</h2>
+    <p class="section__sub">The simplest way to protect body photos is never to keep them. Here is exactly what happens to the data in a scan, end to end.</p>
+
+    <div class="trust">
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="3" y="5" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 5l16 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div><h3>Photos are never stored</h3><p>Images are decoded and processed in memory, never written to disk, and discarded as soon as the response is returned. In the demo and the white-label flow they are also downscaled on the device first, so full-resolution originals never leave the phone.</p></div>
+      </div>
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 19c1.2-3.5 4-5 7-5s5.8 1.5 7 5M3 3l16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div><h3>No personal information required</h3><p>A scan needs photos, a height, and your partner code — no name, email, account, or date of birth. Your own user or patient ID never has to reach us.</p></div>
+      </div>
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 6h14v12H4zM8 6V4h6v2M8 11h6M8 14h4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <div><h3>Your system holds the history</h3><p>Results are returned to you, not kept by us as a record. Longitudinal tracking, deltas, and retention live in your environment, under your policies.</p></div>
+      </div>
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="5" y="10" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <div><h3>Encrypted in transit, deployable where you need</h3><p>Requests travel over HTTPS. For enterprise agreements, the engine can run in a dedicated cloud tenancy or on your own infrastructure, with custom data-handling terms.</p></div>
+      </div>
+    </div>
+
+    <div class="boundary" aria-label="Where data lives">
+      <div><b>Your app</b>Photos and height, captured with the user's consent</div>
+      <div><b>SnapMeasureAI</b>Processed in memory · returned · forgotten</div>
+      <div><b>Your system</b>Results stored against your record, under your retention</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== OPTIONS ==================== -->
+<section class="section section--alt" id="options">
+  <div class="container">
+    <p class="section__eyebrow">Integration options</p>
+    <h2 class="section__title">Fit it into the product you already have.</h2>
+    <p class="section__sub">Start with whichever is fastest for your team; they share one engine and one partner code.</p>
+
+    <div class="options">
+      <div class="opt"><p class="opt__k">Fastest</p><h3>White-label scan</h3><p>Our capture flow, with the guided camera, under your brand — linked from an email, SMS, QR code, or your portal.</p></div>
+      <div class="opt"><p class="opt__k">Most control</p><h3>REST API</h3><p>Your own capture screen calls the endpoint directly from your app or backend.</p></div>
+      <div class="opt"><p class="opt__k">Visual</p><h3>Embedded 3D viewer</h3><p>Show the rotating body model and measurements inside your product, without building a 3D renderer.</p></div>
+      <div class="opt"><p class="opt__k">Enterprise</p><h3>Dedicated or on-premise</h3><p>A dedicated cloud tenancy or your own infrastructure, with custom data-handling terms.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section" id="faq">
+  <div class="container">
+    <p class="section__eyebrow">FAQ</p>
+    <h2 class="section__title">Developer questions</h2>
+    <div class="faq" style="margin-top:28px;">
+      <details>
+        <summary>Which languages and platforms are supported?</summary>
+        <p>Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build the capture screen, the white-label scan flow and 3D viewer can be embedded instead.</p>
+      </details>
+      <details>
+        <summary>Can we get only the measurements, or only the 3D body model?</summary>
+        <p>Yes. The response is configured per integration: measurements only, the 3D body model only, both, or any combination of the other outputs. Many partners take the measurements for sizing and keep the compact shape code so they can regenerate the body model later.</p>
+      </details>
+      <details>
+        <summary>How do we define our own measurements?</summary>
+        <p>In the live demo's 3D viewer, use Custom Measure to define circumferences or lengths between any points on the body, save them as a measurement profile (a JSON file), and send it to us. It is attached to your partner code, so every scan through your integration returns your set.</p>
+      </details>
+      <details>
+        <summary>What units are measurements returned in?</summary>
+        <p>The unit of the height you send. Send "174cm" and every measurement comes back in centimetres; send "68in" and they come back in inches.</p>
+      </details>
+      <details>
+        <summary>Are photos or results stored?</summary>
+        <p>No. Photos are decoded and processed in memory, never written to disk, and discarded when the response is returned. No account, name, or email is needed to run a scan, and results go back to your system rather than being kept by SnapMeasureAI.</p>
+      </details>
+      <details>
+        <summary>How do we get access?</summary>
+        <p>Contact us with your use case. Onboarding provides your endpoint, partner code, and test access, and we configure your outputs and measurement profile with you. You can run the live demo at any time to see the scan your users would get.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta section--alt">
+  <div class="container">
+    <h2>Ready to build it in?</h2>
+    <p>Tell us what you're building. We'll set up your endpoint, partner code, and measurement set, and walk your team through the first integration.</p>
+    <div class="hero__actions">
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--primary btn--lg">Request API access →</a>
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--ghost btn--lg">Try the live demo</a>
+    </div>
+    <p class="cta__mail">Or write to us directly: <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a></p>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <a href="https://snapmeasureai.com/" class="footer__logo">
+        <img src="/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI">
+      </a>
+      <ul class="footer__links">
+        <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
+        <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
+        <li><a href="https://snapmeasureai.com/developers/" style="color:var(--teal)">Developers</a></li>
+        <li><a href="https://demo.snapmeasureai.com/">Live demo</a></li>
+        <li><a href="https://snapmeasureai.com/contact/">Contact</a></li>
+      </ul>
+      <span class="footer__copy">© <span data-year>2026</span> SnapMeasureAI</span><script>document.querySelectorAll("[data-year]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Nav */
+  function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+  document.addEventListener('click', function (e) {
+    var menu = document.getElementById('mobile-menu'), nav = document.getElementById('nav');
+    if (menu.classList.contains('open') && !nav.contains(e.target) && !menu.contains(e.target)) menu.classList.remove('open');
+  });
+
+  /* Code tabs */
+  document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+    var tabs = list.querySelectorAll('[role="tab"]');
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.tabIndex = i === 0 ? 0 : -1;
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        var next = tabs[(i + d + tabs.length) % tabs.length];
+        select(next); next.focus(); e.preventDefault();
+      });
+    });
+  });
+
+  /* Copy buttons copy the visible code block in their card */
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.code-card');
+      var pre = Array.prototype.find.call(card.querySelectorAll('pre'), function (p) { return !p.hidden; });
+      if (!pre || !navigator.clipboard) return;
+      navigator.clipboard.writeText(pre.innerText).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      });
+    });
+  });
+
+  /* Highlight the section in view in the contents bar */
+  (function () {
+    var links = document.querySelectorAll('.toc a');
+    if (!('IntersectionObserver' in window) || !links.length) return;
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.classList.remove('is-on'); });
+        var a = map[en.target.id];
+        if (a) { a.classList.add('is-on'); a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  }());
+</script>
+</body>
+</html>
