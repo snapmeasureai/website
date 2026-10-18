@@ -1,9 +1,9 @@
 <div align="center">
   <img width="1400" height="260" alt="SnapMeasureAI" src="https://github.com/user-attachments/assets/135fcf06-772d-4049-8c5f-5fcbe75ef4b2" />
 
-  <strong>Patented 3D body scanning for your platform — 100+ body measurements from two smartphone photos in under 10 seconds.</strong>
+  <strong>3D body scanning from two photos, in everyday clothing.</strong>
 
-  Delivered by API or white-label to GLP-1 and weight-loss programs, apparel brands, and uniform suppliers.
+  100+ measurements and a 3D body model in under 10 seconds, inside your product.
 
 [![Live demo](https://img.shields.io/badge/Live_demo-→-1D9E75?style=for-the-badge)](https://demo.snapmeasureai.com)
 [![Contact us](https://img.shields.io/badge/Contact_us-info%40snapmeasureai.com-0F6E56?style=for-the-badge)](https://snapmeasureai.com/contact/)
@@ -11,79 +11,41 @@
 
 ---
 
-## What SnapMeasureAI Does
+## What It Does
 
-SnapMeasureAI is 3D body scanning and body measurement technology for businesses. Your platform integrates the scan; your patients, customers, or staff take two smartphone photos inside your product, and your system receives a 10,000-point 3D body model and 100+ precise body measurements — circumferences, lengths, and ratios across the full body — in under 10 seconds.
+Your users take a front and a side photo inside your product. Your system gets back:
 
-Built on Cambridge research. Trained on over one million images spanning body types, poses, skin tones, clothing, and environments. Two issued patents, one pending.
+- **100+ body measurements**, or your own custom set
+- **A 3D body model**, a 10,000-point mesh exportable as OBJ
+- **In under 10 seconds**, from any smartphone, with no hardware
 
-Core capabilities:
-- **100+ body measurements** — circumferences, lengths, ratios, and custom points between any locations on the body
-- **3D body model** — 10,000-point mesh exportable as OBJ for CAD, pattern-making, visualization, or digital twin applications
-- **Body change tracking** — scan-to-scan comparison for GLP-1 programs and health monitoring
-- **No hardware required** — any smartphone camera, any body type, skin tone, or background; everyday clothing works
+97% average accuracy in everyday clothing. Built on Cambridge research, with two issued patents and one pending.
 
 ---
 
 ## Use Cases
 
-### GLP-1 & Weight-Loss Programs
-GLP-1 medications change waist, hips, and proportions in ways a scale never shows. Telehealth platforms and weight-loss programs integrate the scan so patients see a precise, visual record of how their body is changing, month over month, at home. Photos are deleted after processing, and the measurement history stays in the program's own system. [Explore the patient engagement platform →](https://snapmeasureai.com/patient-engagement-platform/)
-
-### Uniforms & Workwear
-Uniform suppliers, rental programs, and employers measure staff remotely — no fitting days and no travelling fitters. Wearers take two photos in their everyday work clothes, and the supplier's ordering system maps the measurements to its size charts. [Explore uniform sizing →](https://snapmeasureai.com/uniform-sizing/)
-
-### Apparel & Made-to-Measure
-Apparel brands and e-commerce platforms put the scan in their own site or app to drive size recommendations, made-to-measure orders, and fit development. 3D OBJ export supports pattern-making and CAD workflows. [Explore apparel sizing →](https://snapmeasureai.com/apparel-sizing/)
-
-### Fitness Platforms
-Phone-based body scans in place of hardware scanners: circumference tracking by body part and 3D before-and-after comparisons, inside a fitness platform or coaching app.
+- **[GLP-1 & weight loss](https://snapmeasureai.com/patient-engagement-platform/)**: show patients how their body changes, scan to scan
+- **[Uniforms & workwear](https://snapmeasureai.com/uniform-sizing/)**: size every wearer remotely, with no fitting days
+- **[Apparel & made-to-measure](https://snapmeasureai.com/apparel-sizing/)**: size recommendations, made-to-measure, and fit data
+- **Fitness platforms**: track body change without a hardware scanner
 
 ---
 
 ## Integration
 
-- **REST API** — send two photos and a height; receive the 3D body model and the measurement set you specify, as structured data
-- **White-label scan and 3D viewer** — embed the capture flow and interactive viewer in your own app or website, under your brand
-- **Custom measurement sets** — define the measurements your product needs; build a profile in the live demo and export it as JSON
-- **Deployment** — shared cloud, dedicated cloud, or on-premise for enterprise agreements
+- **REST API**: two photos and a height in; measurements and a 3D model out. [Developer docs →](https://snapmeasureai.com/developers/)
+- **White-label**: embed the capture flow and 3D viewer under your brand
+- **Custom measurements**: define your own in the live demo and export them as JSON
+- **Deployment**: shared cloud, dedicated cloud, or on-premise
+- **Privacy**: photos are deleted after processing; no personal data needed
 
 ---
 
-## Why It Works
+## More From the Team
 
-- **Fast** — two photos, under 10 seconds, any smartphone camera
-- **Accurate in everyday clothing** — 97% average accuracy across 18 standard measurements, in varied clothing; best in fitted clothing
-- **Flexible** — any body type, skin tone, or background; no controlled environment needed
-- **Privacy-first** — photos are processed and deleted immediately; no PII retained
-
----
-
-## Additional Technologies
-
-Complementary technologies from the same team:
-
-- [**AI motion capture**](https://snapmeasureai.com/motion-capture-from-video/) — markerless 3D motion capture from any video
-- [**Synthetic labeled data**](https://snapmeasureai.com/synthetic-data-with-labels/) — photorealistic synthetic people with exact 3D body ground truth, used to train our measurement model
-
----
-
-## Try It
-
-- **Live demo:** [demo.snapmeasureai.com](https://demo.snapmeasureai.com) — the same scan your users would get, free, no account
-- **API access, licensing, or a pilot:** [snapmeasureai.com/contact](https://snapmeasureai.com/contact/) or info@snapmeasureai.com
-
----
-
-## Learn More
-
-- [3D body scan and body measurement technology](https://snapmeasureai.com/)
-- [Body scans for GLP-1 and weight-loss programs](https://snapmeasureai.com/patient-engagement-platform/)
-- [Remote uniform and workwear sizing](https://snapmeasureai.com/uniform-sizing/)
-- [Apparel sizing and made-to-measure](https://snapmeasureai.com/apparel-sizing/)
-- [Developer docs](https://snapmeasureai.com/developers/)
-- [AI motion capture from video](https://snapmeasureai.com/motion-capture-from-video/)
-- [Synthetic data for AI model training](https://snapmeasureai.com/synthetic-data-with-labels/)
+- [**AI motion capture**](https://snapmeasureai.com/motion-capture-from-video/): 3D motion data from any video
+- [**Synthetic data**](https://snapmeasureai.com/synthetic-data-with-labels/): photorealistic people with exact 3D labels
 
 ---
 
@@ -93,6 +55,7 @@ Complementary technologies from the same team:
 
 ---
 
-## Contact
+## Try It
 
-Email: [info@snapmeasureai.com](mailto:info@snapmeasureai.com) · [Contact form](https://snapmeasureai.com/contact/)
+- **Live demo:** [demo.snapmeasureai.com](https://demo.snapmeasureai.com), free with no account
+- **API access or a pilot:** [contact us](https://snapmeasureai.com/contact/) or email info@snapmeasureai.com
