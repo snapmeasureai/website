@@ -19,7 +19,7 @@ Your users take a front and a side photo inside your product. Your system gets b
 - **A 3D body model**, a 10,000-point mesh exportable as OBJ
 - **In under 10 seconds**, from any smartphone, with no hardware
 
-97% average accuracy in everyday clothing. Built on Cambridge research, with two issued patents and one pending.
+Within 1.6 cm on average in everyday clothing, across 18 standard measurements. Built on Cambridge research, with two issued patents and one pending.
 
 ---
 
