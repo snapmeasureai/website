@@ -35,9 +35,9 @@ Within 1.6 cm on average in everyday clothing, across 18 standard measurements. 
 ## Integration
 
 - **REST API**: two photos and a height in; measurements and a 3D model out. [Developer docs →](https://snapmeasureai.com/developers/)
-- **White-label**: embed the capture flow and 3D viewer under your brand
+- **White-label**: embed the 3D viewer under your brand; a hosted capture page on request
 - **Custom measurements**: define your own in the live demo and export them as JSON
-- **Deployment**: shared cloud, dedicated cloud, or on-premise
+- **Deployment**: shared cloud, or dedicated servers in the region you choose
 - **Privacy**: photos are deleted after processing; no personal data needed
 
 ---

@@ -43,7 +43,7 @@
     "@type": "FAQPage",
     "mainEntity": [
       { "@type": "Question", "name": "Which languages and platforms are supported?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build the capture screen, the white-label scan flow and 3D viewer can be embedded instead." } },
+        "acceptedAnswer": { "@type": "Answer", "text": "Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build a capture screen, a hosted, white-label capture page can be set up on request, and the 3D viewer can be embedded either way." } },
       { "@type": "Question", "name": "Can we get only the measurements, or only the 3D body model?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes. The response is configured per integration: measurements only, the 3D body model only, both, or any combination of the other outputs. Many partners take the measurements for sizing and keep the compact shape code so they can regenerate the body model later." } },
       { "@type": "Question", "name": "How do we define our own measurements?",
@@ -724,25 +724,25 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
       <article class="out out--wide out--feature">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s-6.5-3.9-6.5-8.6A3.6 3.6 0 0110 6.3a3.6 3.6 0 016.5 2.1C16.5 13.1 10 17 10 17z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 10h2.2l1.2-2 1.6 4 1.2-2h2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div>
-          <h3>Body composition &amp; health indicators <span class="badge badge--core">Health programs</span></h3>
-          <p>Waist-to-height and waist-to-hip ratios come straight from the scan. Body-fat percentage, fat and lean mass, and estimated weight can be derived from the same scan — from girths, using established circumference-based equations, and from the 3D model's body volume — configured and validated with each program. A way to show change between visits, alongside clinical body-composition assessment rather than instead of it.</p>
+          <h3>Health indicators <span class="badge badge--core">Health programs</span></h3>
+          <p>Waist, hip and limb girths tracked scan to scan, plus ratios such as waist-to-height and waist-to-hip from the same measurements. A way to show change between visits, alongside clinical assessment rather than instead of it.</p>
         </div>
         <a href="https://snapmeasureai.com/patient-engagement-platform/" class="btn btn--ghost">GLP-1 programs →</a>
       </article>
       <article class="out out--indigo">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 15c3 0 4-9 8-9s5 9 8 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 15V9M13.5 15V9M10 15V5" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.6 1.6"/></svg></div>
-        <h3>Confidence ranges <span class="badge badge--opt">Available</span></h3>
-        <p>The model predicts a distribution for each measurement, not just a number, so every value can come with a calibrated range. Flag uncertain scans, or show a size range instead of a single size.</p>
-      </article>
-      <article class="out out--indigo">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10.2l2 2 4-4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Photo quality feedback <span class="badge badge--opt">Available</span></h3>
-        <p>Per-photo checks — person found, framing, estimated camera distance, and how much each photo contributed — so your app can ask for a better retake before a measurement is used.</p>
+        <h3>Person check <span class="badge badge--core">Built in</span></h3>
+        <p>Every photo is checked for a person before it is measured. Photos without one are dropped, and if fewer than two usable photos remain the response has no measurements, so your app can ask for a retake.</p>
       </article>
       <article class="out out--indigo">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 17h14M7 17V4M13 17V8M7 7h3M13 11h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
         <h3>Ground-referenced measurements <span class="badge badge--opt">Available</span></h3>
         <p>Leg circumferences at fixed heights from the floor, and the height above the floor of every circumference — the format compression-garment and medical-fit makers specify garments in.</p>
+      </article>
+      <article class="out out--indigo">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 15c3 0 4-9 8-9s5 9 8 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 15V9M13.5 15V9M10 15V5" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.6 1.6"/></svg></div>
+        <h3>Measurement uncertainty <span class="badge badge--opt">On request</span></h3>
+        <p>The model predicts an uncertainty for each core measurement, not just a value, and uses it to combine the photos into one result. It can be added to your response, for example to flag a scan for review.</p>
       </article>
       <article class="out out--wide">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="5" cy="10" r="1.6" fill="currentColor"/><circle cx="10" cy="10" r="1.6" fill="currentColor"/><circle cx="15" cy="10" r="1.6" fill="currentColor"/></svg></div>
@@ -769,9 +769,9 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
         <ul>
           <li>Uniform supplier: your garment measurement set, mapped to your size chart</li>
           <li>Made-to-measure: measurements plus the OBJ body model for pattern software</li>
-          <li>E-commerce sizing: measurements with confidence ranges, so borderline customers see two sizes</li>
+          <li>E-commerce sizing: the shopper's measurements, compared with each garment's size chart</li>
           <li>Compression garments: leg girths at the exact heights from the floor your patterns use</li>
-          <li>GLP-1 program: tracking girths, waist-to-height ratio, and body-composition estimates for the patient record</li>
+          <li>GLP-1 program: tracking girths and waist-to-height ratio for the patient record</li>
         </ul>
       </div>
       <div class="code-card">
@@ -809,7 +809,7 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
   <div class="container">
     <p class="section__eyebrow">Photo capture</p>
     <h2 class="section__title">Good photos in, precise measurements out.</h2>
-    <p class="section__sub">Build these into your capture screen — or use our capture flow, which has a guided camera with a countdown timer built in.</p>
+    <p class="section__sub">Build these into your capture screen. The live demo's guided camera, with a countdown timer, shows one way to do it.</p>
 
     <div class="guide">
       <div class="tip">
@@ -867,7 +867,7 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
     <div class="trust">
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="3" y="5" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 5l16 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <div><h3>Photos are never stored</h3><p>Images are decoded and processed in memory, never written to disk, and discarded as soon as the response is returned. In the demo and our capture flow they are also downscaled on the device first, so full-resolution originals never leave the phone.</p></div>
+        <div><h3>Photos are never stored</h3><p>Images are decoded and processed in memory, never written to disk, and discarded as soon as the response is returned. In the live demo they are also downscaled on the device first, so full-resolution originals never leave the phone.</p></div>
       </div>
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 19c1.2-3.5 4-5 7-5s5.8 1.5 7 5M3 3l16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -879,7 +879,7 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
       </div>
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="5" y="10" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <div><h3>Encrypted in transit, deployable where you need</h3><p>Requests travel over HTTPS. For enterprise agreements, the engine can run in a dedicated cloud tenancy or on your own infrastructure, with custom data-handling terms.</p></div>
+        <div><h3>Encrypted in transit, hosted where you need</h3><p>Requests travel over HTTPS with TLS 1.3. For enterprise agreements, a dedicated server can run in the cloud region you choose, with custom data-handling terms.</p></div>
       </div>
     </div>
 
@@ -899,10 +899,10 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
     <p class="section__sub">Start with whichever is fastest for your team; they share one engine and one partner code.</p>
 
     <div class="options">
-      <div class="opt"><p class="opt__k">Fastest</p><h3>White-label scan</h3><p>Our capture flow, with the guided camera, under your brand — linked from an email, SMS, QR code, or your portal.</p></div>
-      <div class="opt"><p class="opt__k">Most control</p><h3>REST API</h3><p>Your own capture screen calls the endpoint directly from your app or backend.</p></div>
+      <div class="opt"><p class="opt__k">Core</p><h3>REST API</h3><p>Your own capture screen calls the endpoint directly from your app or backend.</p></div>
       <div class="opt"><p class="opt__k">Visual</p><h3>Embedded 3D viewer</h3><p>Show the rotating body model and measurements inside your product, without building a 3D renderer.</p></div>
-      <div class="opt"><p class="opt__k">Enterprise</p><h3>Dedicated or on-premise</h3><p>A dedicated cloud tenancy or your own infrastructure, with custom data-handling terms.</p></div>
+      <div class="opt"><p class="opt__k">On request</p><h3>Hosted capture page</h3><p>A guided capture page under your brand, linked from an email, SMS, QR code or your portal.</p></div>
+      <div class="opt"><p class="opt__k">Enterprise</p><h3>Dedicated servers</h3><p>A dedicated server in the cloud region you choose, with custom data-handling terms.</p></div>
     </div>
   </div>
 </section>
@@ -915,7 +915,7 @@ curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
     <div class="faq" style="margin-top:28px;">
       <details>
         <summary>Which languages and platforms are supported?</summary>
-        <p>Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build the capture screen, the white-label scan flow and 3D viewer can be embedded instead.</p>
+        <p>Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build a capture screen, a hosted, white-label capture page can be set up on request, and the 3D viewer can be embedded either way.</p>
       </details>
       <details>
         <summary>Can we get only the measurements, or only the 3D body model?</summary>

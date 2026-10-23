@@ -159,7 +159,7 @@
           "name": "Does this replace our size recommendation engine?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It can feed one. The scan returns body measurements, not a size: your own size logic, or the recommendation provider you already use, turns them into a size for each garment. Optional confidence ranges show when a shopper is close to a size boundary."
+            "text": "It can feed one. The scan returns body measurements, not a size: your own size logic, or the recommendation provider you already use, turns them into a size for each garment."
           }
         },
         {
@@ -175,7 +175,7 @@
           "name": "Can the experience carry our brand?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The capture flow and the optional 3D viewer are white-label, or your team can build its own interface and call the API directly — see the developer docs."
+            "text": "Yes. Your team builds the capture screen into your own site or app and calls the API, and the optional 3D viewer is white-label — see the developer docs."
           }
         }
       ]
@@ -581,8 +581,8 @@
       <article class="card">
         <span class="card__tag">Size recommendations</span>
         <h3>Real measurements behind every size</h3>
-        <p>Feed the shopper's measurements into your size charts or recommendation engine. With confidence ranges,
-          a shopper who sits between two sizes can be told so — instead of buying both.</p>
+        <p>Feed the shopper's measurements into your size charts or recommendation engine, so a shopper who sits
+          between two sizes can be told so — instead of buying both.</p>
       </article>
       <article class="card">
         <span class="card__tag i">Made-to-measure</span>
@@ -689,12 +689,12 @@
     <h2 class="section__title">In your storefront, or one API call.</h2>
     <p class="section__sub">Two photos and a height in; your measurement set and an optional 3D body model out. The <a href="https://snapmeasureai.com/developers/">developer docs</a> cover the request, outputs and data handling.</p>
     <div class="specs-grid">
-      <div class="spec-item"><div class="spec-item__label">Delivery</div><div class="spec-item__value">White-label flow or REST API</div><div class="spec-item__note">Embed the capture flow and 3D viewer, or build your own interface on the endpoint.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Delivery</div><div class="spec-item__value">REST API + 3D viewer</div><div class="spec-item__note">Build your capture screen on the endpoint, and embed the 3D viewer under your brand.</div></div>
       <div class="spec-item"><div class="spec-item__label">Measurements</div><div class="spec-item__value">Your definitions</div><div class="spec-item__note">Any circumference or length between points on the body, matched to your charts and patterns.</div></div>
       <div class="spec-item"><div class="spec-item__label">3D output</div><div class="spec-item__value">OBJ body model</div><div class="spec-item__note">A 10,000-point mesh scaled to the shopper's height, for CAD, avatars and try-on.</div></div>
-      <div class="spec-item"><div class="spec-item__label">Confidence</div><div class="spec-item__value">Ranges per measurement</div><div class="spec-item__note">Optional ranges that show when a shopper sits close to a size boundary.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Photo check</div><div class="spec-item__value">A person in every photo</div><div class="spec-item__note">Photos without a person are rejected, so your site can ask for a retake.</div></div>
       <div class="spec-item"><div class="spec-item__label">Data handling</div><div class="spec-item__value">No photos kept, no PII needed</div><div class="spec-item__note">Photos are deleted after processing. The measurement profile lives in your system.</div></div>
-      <div class="spec-item"><div class="spec-item__label">Deployment</div><div class="spec-item__value">Shared, dedicated, or on-premise</div><div class="spec-item__note">Dedicated cloud and on-premise deployment for enterprise agreements.</div></div>
+      <div class="spec-item"><div class="spec-item__label">Deployment</div><div class="spec-item__value">Shared or dedicated servers</div><div class="spec-item__note">Dedicated servers in the cloud region you choose, for enterprise agreements.</div></div>
     </div>
   </div>
 </section>
@@ -723,7 +723,7 @@
       </details>
       <details>
         <summary>Does this replace our size recommendation engine?</summary>
-        <p>It can feed one. The scan returns body measurements, not a size: your own size logic, or the recommendation provider you already use, turns them into a size for each garment. Optional confidence ranges show when a shopper is close to a size boundary.</p>
+        <p>It can feed one. The scan returns body measurements, not a size: your own size logic, or the recommendation provider you already use, turns them into a size for each garment.</p>
       </details>
       <details>
         <summary>What do you store about our customers?</summary>
@@ -731,7 +731,7 @@
       </details>
       <details>
         <summary>Can the experience carry our brand?</summary>
-        <p>Yes. The capture flow and the optional 3D viewer are white-label, or your team can build its own interface and call the API directly — see the <a href="https://snapmeasureai.com/developers/">developer docs</a>.</p>
+        <p>Yes. Your team builds the capture screen into your own site or app and calls the API, and the optional 3D viewer is white-label — see the <a href="https://snapmeasureai.com/developers/">developer docs</a>.</p>
       </details>
     </div>
   </div>
