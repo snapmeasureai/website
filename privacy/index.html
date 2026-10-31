@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
+
+  <title>Privacy Policy | SnapMeasureAI</title>
+  <meta name="description" content="How SnapMeasureAI handles your photos and data: photos are processed and deleted, scans stay on your device, and nothing is sold.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://snapmeasureai.com/privacy/">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  <style>
+    :root {
+      --bg:        #080C10;
+      --bg2:       #0E1419;
+      --bg3:       #141C24;
+      --surface:   #1A2330;
+      --border:    rgba(255,255,255,0.08);
+      --border-hi: rgba(255,255,255,0.15);
+      --teal:      #0ABFA3;
+      --teal-dim:  rgba(10,191,163,0.12);
+      --teal-glow: rgba(10,191,163,0.25);
+      --indigo:    #6C63FF;
+      --indigo-dim:rgba(108,99,255,0.12);
+      --text:      #F0F4F8;
+      --text-2:    #AABDCF;
+      --text-3:    #7A96AA;
+      --radius:    10px;
+      --radius-lg: 18px;
+      --max:       1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,12,16,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); height: 64px;
+      display: flex; align-items: center;
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav__logo img { height: 32px; }
+    .nav__links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 14px; color: var(--text-2); }
+    .nav__links a:hover { color: var(--text); }
+    .nav__dropdown { position: relative; }
+    .nav__dropdown-toggle {
+      display: flex; align-items: center; gap: 5px; cursor: pointer;
+      color: var(--text-2); font-size: 14px; background: none; border: none; padding: 0; font-family: inherit;
+    }
+    .nav__dropdown-toggle:hover { color: var(--text); }
+    .nav__dropdown-toggle svg { transition: transform .2s; }
+    .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
+    .nav__dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
+      border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .nav__dropdown-menu::before {
+      content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px;
+    }
+    .nav__dropdown:hover .nav__dropdown-menu { display: block; }
+    .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
+    .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
+    .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
+    .nav__cta { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: opacity .15s, transform .1s; border: none;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn--outline { background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF; }
+    .btn--outline:hover { background: rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.8); color: #fff; }
+    .btn--primary { background: var(--teal); color: #050E0C; font-weight: 600; }
+    .btn--primary:hover { opacity: .88; }
+    .nav__hamburger { display: none; }
+    .nav__mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); padding: 32px 24px; flex-direction: column; gap: 24px; z-index: 99;
+    }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a { font-size: 18px; color: var(--text-2); }
+    .nav__mobile-menu a:hover { color: var(--teal); }
+
+    /* ---- PAGE HERO ---- */
+    .page-hero {
+      padding: 120px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 60% at 80% 30%, rgba(10,191,163,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 15% 70%, rgba(108,99,255,0.06) 0%, transparent 70%);
+    }
+    .page-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-dim); border: 1px solid rgba(10,191,163,0.25);
+      border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600;
+      color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .page-hero__eyebrow-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform: scale(1); }
+      50% { opacity:.5; transform: scale(0.8); }
+    }
+    .page-hero__title {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.07; margin-bottom: 16px;
+    }
+    .page-hero__title-accent { color: var(--teal); }
+    .page-hero__sub {
+      font-size: 17px; color: var(--text-2); max-width: 520px; line-height: 1.7;
+    }
+
+    /* ---- LEGAL DOCUMENT ---- */
+    .page-hero { padding-bottom: 40px; }
+    .legal-meta { font-size: 14px; color: var(--text-3); margin-top: 12px; }
+    .legal { padding: 0 0 96px; }
+    .legal__grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; align-items: start; }
+    .legal__toc { position: sticky; top: 96px; font-size: 13.5px; line-height: 1.5; }
+    .legal__toc p { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+    .legal__toc ol { list-style: none; display: grid; gap: 9px; border-left: 1px solid var(--border); padding-left: 16px; }
+    .legal__toc a { color: var(--text-3); }
+    .legal__toc a:hover { color: var(--teal); }
+    .legal__body { max-width: 720px; color: var(--text-2); font-size: 16px; }
+    .legal__body h2 { color: var(--text); font-size: 21px; font-weight: 700; letter-spacing: -0.01em; margin: 48px 0 12px; scroll-margin-top: 88px; }
+    .legal__body p { margin-bottom: 14px; }
+    .legal__body ul { margin: 0 0 16px 20px; display: grid; gap: 7px; }
+    .legal__body li::marker { color: var(--teal); }
+    .legal__body strong { color: var(--text); font-weight: 600; }
+    .legal__body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(10,191,163,.4); }
+    .legal-summary { background: var(--bg3); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); padding: 24px 28px; }
+    .legal-summary__title { color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px !important; }
+    .legal-summary ul { margin-bottom: 0; }
+    .legal-summary li { color: var(--text); }
+
+    /* ---- FOOTER ---- */
+    .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer__logo img { height: 24px; opacity: .6; }
+    .footer__links { display: flex; gap: 24px; list-style: none; }
+    .footer__links a { font-size: 13px; color: var(--text-3); }
+    .footer__links a:hover { color: var(--teal); }
+    .footer__copy { font-size: 12px; color: var(--text-3); }
+
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .legal__grid { grid-template-columns: 1fr; gap: 0; }
+      .legal__toc { display: none; }
+      .nav__links { display: none; }
+      .nav__cta .btn--outline { display: none; }
+      .nav__hamburger {
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; cursor: pointer; color: var(--text-2); font-size: 22px;
+        background: none; border: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .legal-summary { padding: 20px; }
+      .footer__inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer__links { display: grid; grid-template-columns: repeat(3, auto); gap: 10px 20px; }
+      .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3T6T8SX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="https://snapmeasureai.com/" class="nav__logo">
+      <img src="/assets/images/logo.png" alt="SnapMeasureAI">
+    </a>
+    <ul class="nav__links">
+      <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">Solutions</span>
+          <a href="https://snapmeasureai.com/patient-engagement-platform/">GLP-1 &amp; weight loss</a>
+          <a href="https://snapmeasureai.com/uniform-sizing/">Uniforms &amp; workwear</a>
+          <a href="https://snapmeasureai.com/apparel-sizing/">Apparel &amp; made-to-measure</a>
+          <a href="https://snapmeasureai.com/#use-cases">All use cases</a>
+        </div>
+      </li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Technologies
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">AI technologies</span>
+          <a href="https://snapmeasureai.com/">3D body scan</a>
+          <a href="https://snapmeasureai.com/motion-capture-from-video/">AI motion capture</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a>
+        </div>
+      </li>
+      <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+      <li><a href="https://snapmeasureai.com/#faqs">FAQs</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--primary">Live demo →</a>
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--outline">Contact us</a>
+      <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile-menu" id="mobile-menu">
+  <a href="https://snapmeasureai.com/#how-it-works" onclick="toggleMenu()">How it works</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Solutions</div>
+  <a href="https://snapmeasureai.com/patient-engagement-platform/" style="padding-left:12px;">GLP-1 &amp; weight loss</a>
+  <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
+  <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
+  <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()">Developers</a>
+  <a href="https://snapmeasureai.com/#faqs" onclick="toggleMenu()">FAQs</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
+  <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
+  <a href="https://snapmeasureai.com/motion-capture-from-video/" style="padding-left:12px;" onclick="toggleMenu()">AI motion capture</a>
+  <a href="https://snapmeasureai.com/synthetic-data-with-labels/" style="padding-left:12px;" onclick="toggleMenu()">Synthetic data</a>
+  <a href="https://demo.snapmeasureai.com/" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;">Live demo →</a>
+</div>
+
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="page-hero">
+  <div class="page-hero__bg"></div>
+  <div class="container">
+    <div class="page-hero__eyebrow">
+      <span class="page-hero__eyebrow-dot"></span>
+      Privacy
+    </div>
+    <h1 class="page-hero__title">Privacy <span class="page-hero__title-accent">Policy</span></h1>
+    <p class="page-hero__sub">Your photos are processed, then deleted. Your scans stay with you.</p>
+    <p class="legal-meta">Last updated October 30, 2026</p>
+  </div>
+</section>
+
+<!-- ==================== DOCUMENT ==================== -->
+<section class="legal">
+  <div class="container legal__grid">
+    <nav class="legal__toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#who">1. Who we are and what this covers</a></li><li><a href="#photos">2. Photos and scans</a></li><li><a href="#device">3. Information kept on your device</a></li><li><a href="#purchases">4. Subscriptions and purchases</a></li><li><a href="#website">5. The Website, analytics and cookies</a></li><li><a href="#contact-info">6. When you contact us</a></li><li><a href="#business">7. Business customers and the API</a></li><li><a href="#dont">8. What we don’t do</a></li><li><a href="#sharing">9. Who we share information with</a></li><li><a href="#retention">10. How long we keep information</a></li><li><a href="#security">11. Security</a></li><li><a href="#rights">12. Your choices and rights</a></li><li><a href="#health">13. Consumer health data</a></li><li><a href="#eea">14. Visitors from the EEA, UK and Switzerland</a></li><li><a href="#children">15. Children</a></li><li><a href="#changes">16. Changes to this policy</a></li><li><a href="#contact">17. Contact us</a></li></ol>
+    </nav>
+    <article class="legal__body">
+
+    <div class="legal-summary">
+      <p class="legal-summary__title">The short version</p>
+      <ul>
+        <li>Your photos are processed in memory to make your scan, then deleted. We don’t keep them and don’t train on them.</li>
+        <li>We don’t keep your measurements or 3D model either. In the app they’re stored on your phone, and in the web demo in your browser.</li>
+        <li>The app has no account. Subscriptions run through Apple or Google.</li>
+        <li>We don’t sell your information, don’t use it for advertising, and don’t use photos to recognize or identify anyone.</li>
+      </ul>
+    </div>
+
+    <h2 id="who">1. Who we are and what this covers</h2>
+    <p>SnapMeasureAI, LLC (“SnapMeasureAI”, “we”, “us”) is an Illinois limited liability company at 119 South Western Avenue, Unit 1 #488, Chicago, IL 60612, USA. We make software that estimates body measurements and a 3D body model from photos.</p>
+    <p>This policy covers:</p>
+    <ul>
+      <li>the SnapMeasureAI mobile app for iOS and Android (the “App”);</li>
+      <li>the live demo at demo.snapmeasureai.com (the “Demo”);</li>
+      <li>this website, snapmeasureai.com (the “Website”); and</li>
+      <li>emails and other messages you send us.</li>
+    </ul>
+    <p>Businesses that use our scanning API in their own products have a separate agreement with us. For scans made through a business’s product, that business decides how the data is used, and its privacy notice applies. See <a href="#business">section 7</a>.</p>
+
+    <h2 id="photos">2. Photos and scans</h2>
+    <p>When you scan in the App or the Demo, your device sends us:</p>
+    <ul>
+      <li>a front photo and a side photo (the App and the Demo shrink them to about 800 pixels before sending); and</li>
+      <li>your height.</li>
+    </ul>
+    <p>The photos and height are encrypted in transit (TLS) to our servers, which Amazon Web Services runs for us in the United States. Our servers process them in memory and send back your measurements and a 3D body model. Then:</p>
+    <ul>
+      <li><strong>Photos are deleted.</strong> They are not written to disk, kept in logs, or reviewed by people.</li>
+      <li><strong>Measurements and the 3D model are not kept by us.</strong> They go back to your device, and our copy is discarded.</li>
+      <li><strong>Your photos are never used to train or improve our models.</strong> We train on synthetic (computer-generated) data.</li>
+      <li><strong>No one is identified.</strong> The software locates body landmarks to estimate shape and size. It does not recognize people. It does not create or keep face templates, faceprints or any other biometric identifier.</li>
+    </ul>
+    <p>Request logging is turned off on our scanning servers. If a scan fails, the server writes a technical error record so we can fix the bug. That record holds only the location of the fault in our code and the type of error. It holds no photos, heights, measurements or other information about you.</p>
+    <p>Only send photos of yourself, or of an adult who has agreed to be scanned.</p>
+
+    <h2 id="device">3. Information kept on your device</h2>
+    <p><strong>App.</strong> The App has no account and no cloud copy. It keeps these on your phone:</p>
+    <ul>
+      <li>your scans: measurements, 3D model and date;</li>
+      <li>any weight you enter; and</li>
+      <li>your profile: height, sex (used to pick the body-fat formula) and units.</li>
+    </ul>
+    <p>We can’t see, recover or restore this information. You can delete one scan, or everything at once in Settings → Delete all data. Uninstalling the App also removes it.</p>
+    <p>Your phone’s own backups (iCloud on iPhone, Google backup on Android) may include App data if you have backups turned on. Those backups are controlled by you and Apple or Google, not by us.</p>
+    <p>The App can make a PDF report or a CSV file of your scans. It does this on your phone. The file goes only where you choose to send it.</p>
+    <p><strong>Demo.</strong> The Demo keeps your recent scans in your browser’s local storage, on your device, so you can compare them later. Clearing your browser’s site data removes them.</p>
+
+    <h2 id="purchases">4. Subscriptions and purchases</h2>
+    <p>App subscriptions are bought and billed through the Apple App Store or Google Play. Apple or Google handles your payment details, and we never receive them.</p>
+    <p>We use RevenueCat, Inc. to confirm which subscription is active on your device. RevenueCat receives:</p>
+    <ul>
+      <li>a random app user ID that is not linked to your name or email;</li>
+      <li>your purchase and subscription history from the store, with transaction IDs;</li>
+      <li>the store country and price; and</li>
+      <li>basic device information, such as the operating system and app version.</li>
+    </ul>
+    <p>See <a href="https://www.revenuecat.com/privacy" rel="noopener">RevenueCat’s privacy policy</a>. To cancel, manage or ask for a refund on a subscription, go through Apple or Google.</p>
+
+    <h2 id="website">5. The Website, analytics and cookies</h2>
+    <p>The Website and Demo use Google Analytics 4, loaded through Google Tag Manager. They set cookies to show us how pages are used: pages viewed, device and browser type, approximate location (country or city), referring site, and events such as starting a scan or opening the contact form. We use this only to improve the site. We don’t use advertising features or build advertising profiles.</p>
+    <p>To opt out, block cookies in your browser or use <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google’s opt-out add-on</a>. See also <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from sites that use its services</a>. The App contains no analytics or advertising code.</p>
+    <p>Our hosting providers may keep standard technical logs, such as IP address and request time, for security and to keep the service running.</p>
+
+    <h2 id="contact-info">6. When you contact us</h2>
+    <p>If you use the contact form or email us, we receive what you send, such as your name, email address, company and message. The contact form is delivered to our inbox by Web3Forms. We use this only to reply to you and to run any business relationship that follows. We keep the correspondence for as long as that relationship lasts, plus a reasonable period for our records.</p>
+
+    <h2 id="business">7. Business customers and the API</h2>
+    <p>When a business, such as a clinic, retailer or uniform supplier, uses our API in its own product, it decides why and how the scans are processed. For those scans we process data only on that business’s instructions, under our agreement with them, and in the cloud region agreed with them. Photos are handled as described in section 2. Questions about those scans should go to the business whose product you used. We will help them answer you.</p>
+
+    <h2 id="dont">8. What we don’t do</h2>
+    <ul>
+      <li>We don’t sell personal information, and we don’t share it for targeted or cross-context advertising.</li>
+      <li>We don’t keep your photos, measurements or 3D models.</li>
+      <li>We don’t use your photos to train our models.</li>
+      <li>We don’t identify people from photos or create biometric identifiers.</li>
+    </ul>
+
+    <h2 id="sharing">9. Who we share information with</h2>
+    <p>We share only what each provider needs to do its job for us:</p>
+    <ul>
+      <li><strong>Amazon Web Services</strong>: runs the servers that process scans.</li>
+      <li><strong>Apple and Google</strong>: distribute the App and handle subscription payments.</li>
+      <li><strong>RevenueCat</strong>: checks subscription status (see section 4).</li>
+      <li><strong>Google Analytics</strong>: measures Website and Demo use (see section 5).</li>
+      <li><strong>Web3Forms</strong>: delivers contact-form messages.</li>
+      <li><strong>GitHub</strong>: hosts the Website.</li>
+    </ul>
+    <p>We may also disclose information if the law requires it, to protect people’s safety or our rights, or to a buyer or successor if our business is sold or reorganized. In a sale or reorganization, this policy would continue to apply.</p>
+
+    <h2 id="retention">10. How long we keep information</h2>
+    <ul>
+      <li><strong>Photos, height, measurements and 3D models sent for a scan:</strong> only while the scan is being processed, usually a few seconds.</li>
+      <li><strong>App and Demo data on your device:</strong> until you delete it.</li>
+      <li><strong>Subscription records:</strong> kept by Apple, Google and RevenueCat as long as needed to provide the subscription and meet tax and accounting rules.</li>
+      <li><strong>Analytics data:</strong> kept in Google Analytics for 14 months at most.</li>
+      <li><strong>Correspondence:</strong> as described in section 6.</li>
+    </ul>
+
+    <h2 id="security">11. Security</h2>
+    <p>Scans travel over TLS 1.3. Photos are processed in memory and never written to disk. Server request logging and crash dumps are turned off. Access to the servers is restricted to the people who run them. No system is perfectly secure, but keeping as little as possible is our main protection: we can’t lose what we don’t keep.</p>
+
+    <h2 id="rights">12. Your choices and rights</h2>
+    <p>Most of your information is already in your hands. You can delete App data in the App and Demo data in your browser at any time, and turn off analytics as described in section 5.</p>
+    <p>Depending on where you live, you may have the right to:</p>
+    <ul>
+      <li>ask whether we hold personal information about you;</li>
+      <li>get a copy of it;</li>
+      <li>have it corrected or deleted;</li>
+      <li>object to or restrict how we use it;</li>
+      <li>withdraw consent; and</li>
+      <li>not be treated differently for using these rights.</li>
+    </ul>
+    <p>Email <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a> with your request. We may need to verify that the request comes from you. We answer within 30 days, or within the time your local law sets, which can be up to 45 days.</p>
+    <p>Because we keep no photos or scans, often we will have no scan data to return or delete. If we decline a request, you can appeal by replying to our answer. You can also complain to your local data protection or consumer protection authority.</p>
+
+    <h2 id="health">13. Consumer health data</h2>
+    <p>Some US state laws, including Washington’s My Health My Data Act, treat body measurements and body-composition estimates as consumer health data. We use this data only to give you your scan results, and only when you ask for a scan. We don’t keep it on our servers, sell it, or share it with anyone except the service providers in section 9 that process it for us. You can ask about this data, or ask us to delete it, as described in section 12.</p>
+
+    <h2 id="eea">14. Visitors from the EEA, UK and Switzerland</h2>
+    <p>SnapMeasureAI, LLC is the controller for the App, the Demo and the Website. We rely on these legal bases:</p>
+    <ul>
+      <li>performing our contract with you, to make the scans you ask for and provide your subscription;</li>
+      <li>your explicit consent, given when you start a scan, because body measurements can count as health data;</li>
+      <li>our legitimate interests, to run, secure and improve the Website and to answer messages; and</li>
+      <li>your consent for analytics cookies, where the law requires it.</li>
+    </ul>
+    <p>Processing happens in the United States. Where we transfer personal data there, we rely on the European Commission’s Standard Contractual Clauses or another lawful transfer mechanism.</p>
+
+    <h2 id="children">15. Children</h2>
+    <p>The App, the Demo and the Website are not intended for children. The App is for adults aged 18 and over. Don’t scan anyone under 18. If you believe a child has sent us information, contact us and we’ll delete anything we hold.</p>
+
+    <h2 id="changes">16. Changes to this policy</h2>
+    <p>If we change this policy, we’ll post the new version here and update the date at the top. If a change materially affects how we handle your information, we’ll also tell you in the App or on the Website before it takes effect.</p>
+
+    <h2 id="contact">17. Contact us</h2>
+    <p>SnapMeasureAI, LLC<br>119 South Western Avenue, Unit 1 #488<br>Chicago, IL 60612, USA<br><a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a></p>
+
+    </article>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <a href="https://snapmeasureai.com/" class="footer__logo">
+        <img src="/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI">
+      </a>
+      <ul class="footer__links">
+        <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/patient-engagement-platform/">Patient engagement</a></li>
+        <li><a href="https://snapmeasureai.com/uniform-sizing/">Uniform sizing</a></li>
+        <li><a href="https://snapmeasureai.com/apparel-sizing/">Apparel sizing</a></li>
+        <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
+        <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
+        <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+        <li><a href="https://demo.snapmeasureai.com/">Live demo</a></li>
+        <li><a href="https://snapmeasureai.com/contact/">Contact</a></li>
+        <li><a href="https://snapmeasureai.com/privacy/" style="color:var(--teal)">Privacy</a></li>
+        <li><a href="https://snapmeasureai.com/terms/">Terms</a></li>
+      </ul>
+      <span class="footer__copy">© <span data-year>2026</span> SnapMeasureAI</span><script>document.querySelectorAll("[data-year]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Nav */
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobile-menu');
+    const nav  = document.getElementById('nav');
+    if (menu.classList.contains('open') && !nav.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>

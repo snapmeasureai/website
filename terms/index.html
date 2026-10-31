@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
+
+  <title>Terms of Use | SnapMeasureAI</title>
+  <meta name="description" content="Terms for the SnapMeasureAI app, demo and website, including subscriptions.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://snapmeasureai.com/terms/">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  <style>
+    :root {
+      --bg:        #080C10;
+      --bg2:       #0E1419;
+      --bg3:       #141C24;
+      --surface:   #1A2330;
+      --border:    rgba(255,255,255,0.08);
+      --border-hi: rgba(255,255,255,0.15);
+      --teal:      #0ABFA3;
+      --teal-dim:  rgba(10,191,163,0.12);
+      --teal-glow: rgba(10,191,163,0.25);
+      --indigo:    #6C63FF;
+      --indigo-dim:rgba(108,99,255,0.12);
+      --text:      #F0F4F8;
+      --text-2:    #AABDCF;
+      --text-3:    #7A96AA;
+      --radius:    10px;
+      --radius-lg: 18px;
+      --max:       1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,12,16,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); height: 64px;
+      display: flex; align-items: center;
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav__logo img { height: 32px; }
+    .nav__links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 14px; color: var(--text-2); }
+    .nav__links a:hover { color: var(--text); }
+    .nav__dropdown { position: relative; }
+    .nav__dropdown-toggle {
+      display: flex; align-items: center; gap: 5px; cursor: pointer;
+      color: var(--text-2); font-size: 14px; background: none; border: none; padding: 0; font-family: inherit;
+    }
+    .nav__dropdown-toggle:hover { color: var(--text); }
+    .nav__dropdown-toggle svg { transition: transform .2s; }
+    .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
+    .nav__dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
+      border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .nav__dropdown-menu::before {
+      content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px;
+    }
+    .nav__dropdown:hover .nav__dropdown-menu { display: block; }
+    .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
+    .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
+    .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
+    .nav__cta { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: opacity .15s, transform .1s; border: none;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn--outline { background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF; }
+    .btn--outline:hover { background: rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.8); color: #fff; }
+    .btn--primary { background: var(--teal); color: #050E0C; font-weight: 600; }
+    .btn--primary:hover { opacity: .88; }
+    .nav__hamburger { display: none; }
+    .nav__mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); padding: 32px 24px; flex-direction: column; gap: 24px; z-index: 99;
+    }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a { font-size: 18px; color: var(--text-2); }
+    .nav__mobile-menu a:hover { color: var(--teal); }
+
+    /* ---- PAGE HERO ---- */
+    .page-hero {
+      padding: 120px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 60% at 80% 30%, rgba(10,191,163,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 15% 70%, rgba(108,99,255,0.06) 0%, transparent 70%);
+    }
+    .page-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-dim); border: 1px solid rgba(10,191,163,0.25);
+      border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600;
+      color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .page-hero__eyebrow-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform: scale(1); }
+      50% { opacity:.5; transform: scale(0.8); }
+    }
+    .page-hero__title {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.07; margin-bottom: 16px;
+    }
+    .page-hero__title-accent { color: var(--teal); }
+    .page-hero__sub {
+      font-size: 17px; color: var(--text-2); max-width: 520px; line-height: 1.7;
+    }
+
+    /* ---- LEGAL DOCUMENT ---- */
+    .page-hero { padding-bottom: 40px; }
+    .legal-meta { font-size: 14px; color: var(--text-3); margin-top: 12px; }
+    .legal { padding: 0 0 96px; }
+    .legal__grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; align-items: start; }
+    .legal__toc { position: sticky; top: 96px; font-size: 13.5px; line-height: 1.5; }
+    .legal__toc p { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+    .legal__toc ol { list-style: none; display: grid; gap: 9px; border-left: 1px solid var(--border); padding-left: 16px; }
+    .legal__toc a { color: var(--text-3); }
+    .legal__toc a:hover { color: var(--teal); }
+    .legal__body { max-width: 720px; color: var(--text-2); font-size: 16px; }
+    .legal__body h2 { color: var(--text); font-size: 21px; font-weight: 700; letter-spacing: -0.01em; margin: 48px 0 12px; scroll-margin-top: 88px; }
+    .legal__body p { margin-bottom: 14px; }
+    .legal__body ul { margin: 0 0 16px 20px; display: grid; gap: 7px; }
+    .legal__body li::marker { color: var(--teal); }
+    .legal__body strong { color: var(--text); font-weight: 600; }
+    .legal__body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(10,191,163,.4); }
+    .legal-summary { background: var(--bg3); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); padding: 24px 28px; }
+    .legal-summary__title { color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px !important; }
+    .legal-summary ul { margin-bottom: 0; }
+    .legal-summary li { color: var(--text); }
+
+    /* ---- FOOTER ---- */
+    .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer__logo img { height: 24px; opacity: .6; }
+    .footer__links { display: flex; gap: 24px; list-style: none; }
+    .footer__links a { font-size: 13px; color: var(--text-3); }
+    .footer__links a:hover { color: var(--teal); }
+    .footer__copy { font-size: 12px; color: var(--text-3); }
+
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .legal__grid { grid-template-columns: 1fr; gap: 0; }
+      .legal__toc { display: none; }
+      .nav__links { display: none; }
+      .nav__cta .btn--outline { display: none; }
+      .nav__hamburger {
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; cursor: pointer; color: var(--text-2); font-size: 22px;
+        background: none; border: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .legal-summary { padding: 20px; }
+      .footer__inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer__links { display: grid; grid-template-columns: repeat(3, auto); gap: 10px 20px; }
+      .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3T6T8SX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="https://snapmeasureai.com/" class="nav__logo">
+      <img src="/assets/images/logo.png" alt="SnapMeasureAI">
+    </a>
+    <ul class="nav__links">
+      <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">Solutions</span>
+          <a href="https://snapmeasureai.com/patient-engagement-platform/">GLP-1 &amp; weight loss</a>
+          <a href="https://snapmeasureai.com/uniform-sizing/">Uniforms &amp; workwear</a>
+          <a href="https://snapmeasureai.com/apparel-sizing/">Apparel &amp; made-to-measure</a>
+          <a href="https://snapmeasureai.com/#use-cases">All use cases</a>
+        </div>
+      </li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Technologies
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">AI technologies</span>
+          <a href="https://snapmeasureai.com/">3D body scan</a>
+          <a href="https://snapmeasureai.com/motion-capture-from-video/">AI motion capture</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a>
+        </div>
+      </li>
+      <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+      <li><a href="https://snapmeasureai.com/#faqs">FAQs</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--primary">Live demo →</a>
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--outline">Contact us</a>
+      <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile-menu" id="mobile-menu">
+  <a href="https://snapmeasureai.com/#how-it-works" onclick="toggleMenu()">How it works</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Solutions</div>
+  <a href="https://snapmeasureai.com/patient-engagement-platform/" style="padding-left:12px;">GLP-1 &amp; weight loss</a>
+  <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
+  <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
+  <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()">Developers</a>
+  <a href="https://snapmeasureai.com/#faqs" onclick="toggleMenu()">FAQs</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
+  <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
+  <a href="https://snapmeasureai.com/motion-capture-from-video/" style="padding-left:12px;" onclick="toggleMenu()">AI motion capture</a>
+  <a href="https://snapmeasureai.com/synthetic-data-with-labels/" style="padding-left:12px;" onclick="toggleMenu()">Synthetic data</a>
+  <a href="https://demo.snapmeasureai.com/" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;">Live demo →</a>
+</div>
+
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="page-hero">
+  <div class="page-hero__bg"></div>
+  <div class="container">
+    <div class="page-hero__eyebrow">
+      <span class="page-hero__eyebrow-dot"></span>
+      Legal
+    </div>
+    <h1 class="page-hero__title">Terms of <span class="page-hero__title-accent">Use</span></h1>
+    <p class="page-hero__sub">The rules for using the SnapMeasureAI app, demo and website.</p>
+    <p class="legal-meta">Last updated October 30, 2026</p>
+  </div>
+</section>
+
+<!-- ==================== DOCUMENT ==================== -->
+<section class="legal">
+  <div class="container legal__grid">
+    <nav class="legal__toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#agreement">1. Agreement</a></li><li><a href="#eligibility">2. Who can use the Services</a></li><li><a href="#estimates">3. Scans are estimates, not medical advice</a></li><li><a href="#photos">4. Your photos and data</a></li><li><a href="#subscriptions">5. Free use and subscriptions</a></li><li><a href="#use">6. Acceptable use</a></li><li><a href="#ip">7. Ownership and licence</a></li><li><a href="#third">8. Third-party services</a></li><li><a href="#changes-service">9. Changes and availability</a></li><li><a href="#disclaimer">10. Disclaimer</a></li><li><a href="#liability">11. Limitation of liability</a></li><li><a href="#ending">12. Ending these Terms</a></li><li><a href="#law">13. Governing law and disputes</a></li><li><a href="#changes">14. Changes to these Terms</a></li><li><a href="#apple">15. App store terms</a></li><li><a href="#general">16. General</a></li><li><a href="#contact">17. Contact us</a></li></ol>
+    </nav>
+    <article class="legal__body">
+
+    <div class="legal-summary">
+      <p class="legal-summary__title">The short version</p>
+      <ul>
+        <li>Scans are estimates from photos. They are not medical advice or a medical device.</li>
+        <li>Only scan yourself, or an adult who has agreed to it.</li>
+        <li>Subscriptions renew automatically through Apple or Google until you cancel there.</li>
+        <li>Your scans live on your phone. If you delete the app or lose the phone, we can’t get them back.</li>
+      </ul>
+    </div>
+
+    <h2 id="agreement">1. Agreement</h2>
+    <p>These Terms of Use (“Terms”) are an agreement between you and SnapMeasureAI, LLC, an Illinois limited liability company (“SnapMeasureAI”, “we”, “us”). They cover:</p>
+    <ul>
+      <li>the SnapMeasureAI mobile app (the “App”);</li>
+      <li>the demo at demo.snapmeasureai.com (the “Demo”); and</li>
+      <li>the website snapmeasureai.com (the “Website”).</li>
+    </ul>
+    <p>Together these are the “Services”. By using the Services you accept these Terms and our <a href="/privacy/">Privacy Policy</a>. If you don’t agree, don’t use the Services.</p>
+    <p>Businesses that use our API do so under their own written agreement with us. If that agreement conflicts with these Terms, that agreement wins.</p>
+
+    <h2 id="eligibility">2. Who can use the Services</h2>
+    <p>You must be at least 18, or the age of majority where you live if that is higher, and able to enter into a binding contract. Don’t scan anyone under 18.</p>
+
+    <h2 id="estimates">3. Scans are estimates, not medical advice</h2>
+    <p>The Services estimate body measurements, a 3D body model and related figures from photos. These are estimates. Their accuracy depends on things like:</p>
+    <ul>
+      <li>lighting, camera angle and distance;</li>
+      <li>your pose;</li>
+      <li>clothing (fitted everyday clothes give the best results); and</li>
+      <li>the height you enter.</li>
+    </ul>
+    <p>Results can differ from scan to scan and from tape-measure results. Figures such as the body-fat estimate and waist-to-height ratio come from standard formulas applied to the estimated measurements. They are not body-composition measurements.</p>
+    <p>The Services are for general wellness and fitness tracking. They are not a medical device and do not diagnose, treat, cure or prevent any disease or condition. Nothing in the Services is medical advice. Talk to a qualified health professional before making decisions about your health, weight or medication. Measurements used for clothing or garments are estimates as well. Check fit-critical sizes before you rely on them.</p>
+
+    <h2 id="photos">4. Your photos and data</h2>
+    <p>You must only submit photos of yourself, or of an adult who has agreed to be scanned and to these Terms. Don’t submit photos that are unlawful, sexual or of a child.</p>
+    <p>You keep all rights in your photos and results. You give us a limited permission to process your photos and height only to produce your results. As our <a href="/privacy/">Privacy Policy</a> explains, we delete photos after processing and don’t keep your results.</p>
+    <p>In the App, your scans and profile are stored only on your device. You are responsible for that device and for any backups of it. If you delete the App, reset or lose your device, or use “Delete all data”, your scans are gone and we cannot restore them.</p>
+
+    <h2 id="subscriptions">5. Free use and subscriptions</h2>
+    <p><strong>Free tier.</strong> The App includes a limited number of free scans each month and some free features. We may change what is free at any time.</p>
+    <p><strong>SnapMeasureAI Pro.</strong> A Pro subscription unlocks the features described in the App when you buy. You buy it through the Apple App Store or Google Play, and that store’s terms also apply. The price, billing period and features are shown before you confirm.</p>
+    <p><strong>Automatic renewal.</strong> Subscriptions renew automatically at the end of each period at the then-current price, unless you cancel at least 24 hours before the period ends. Payment is charged to your store account. To cancel or manage your subscription, use your Apple or Google account settings. Deleting the App does not cancel it.</p>
+    <p><strong>Price changes.</strong> We give notice of price changes as Apple or Google requires. Where their rules require it, we ask for your consent before a higher price applies.</p>
+    <p><strong>Refunds.</strong> Apple or Google handles refunds under its own policies. We cannot issue refunds for store purchases ourselves. Nothing in these Terms limits any right to a refund or withdrawal that your local law gives you.</p>
+    <p><strong>Restoring.</strong> Use “Restore purchases” in the App to restore an active subscription on a new device with the same store account.</p>
+
+    <h2 id="use">6. Acceptable use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>scan anyone without their permission, or use the Services to watch, track or harass anyone;</li>
+      <li>reverse engineer, decompile or try to extract the source code, models or data behind the Services, except where the law allows it despite this restriction;</li>
+      <li>send automated or bulk requests, or use the App or Demo as a substitute for our paid API;</li>
+      <li>get around usage limits, paywalls or security measures;</li>
+      <li>copy, resell or redistribute the Services or their results as a commercial service;</li>
+      <li>use the Services to build a competing product or to benchmark them for publication; or</li>
+      <li>use the Services in any unlawful way.</li>
+    </ul>
+
+    <h2 id="ip">7. Ownership and licence</h2>
+    <p>The Services, including the software, models, designs and content, belong to SnapMeasureAI or its licensors and are protected by law. We give you a personal, non-exclusive, non-transferable, revocable licence to use the App on devices you own or control, and to use the Demo and Website, for your own non-commercial purposes under these Terms. We keep all rights we don’t expressly grant. For the App, this licence is also subject to the store’s usage rules (see <a href="#apple">section 15</a>).</p>
+    <p>If you send us feedback, we may use it without any obligation to you.</p>
+
+    <h2 id="third">8. Third-party services</h2>
+    <p>The Services depend on third parties, including Apple, Google, RevenueCat, Amazon Web Services and Google Analytics. Their terms and privacy policies govern their services, and we aren’t responsible for them.</p>
+
+    <h2 id="changes-service">9. Changes and availability</h2>
+    <p>We may change, suspend or stop any part of the Services. If we stop the App while you have a paid subscription, you can ask Apple or Google for a refund under their policies. We don’t promise that the Services will always be available or free of errors.</p>
+
+    <h2 id="disclaimer">10. Disclaimer</h2>
+    <p>To the extent the law allows, the Services are provided “as is” and “as available”, without warranties of any kind, express or implied. This includes warranties of merchantability, fitness for a particular purpose, accuracy and non-infringement. Some places don’t allow these exclusions, so some of them may not apply to you.</p>
+
+    <h2 id="liability">11. Limitation of liability</h2>
+    <p>To the extent the law allows, SnapMeasureAI will not be liable for any indirect, incidental, special, consequential or punitive damages, or for lost profits, data or goodwill, arising out of or related to the Services. Our total liability for all claims relating to the Services is limited to the greater of (a) the amount you paid for the Services in the 12 months before the event giving rise to the claim, and (b) US $50.</p>
+    <p>Nothing in these Terms limits liability for death or personal injury caused by negligence, for fraud, or for anything else that cannot be limited by law.</p>
+
+    <h2 id="ending">12. Ending these Terms</h2>
+    <p>You can stop using the Services at any time. To end a subscription, cancel it through Apple or Google. We may suspend or end your access if you seriously or repeatedly breach these Terms. Sections 3, 4, 7, 10, 11, 13 and 14 survive the end of these Terms.</p>
+
+    <h2 id="law">13. Governing law and disputes</h2>
+    <p>Illinois law governs these Terms, without regard to its conflict-of-law rules. The state and federal courts in Cook County, Illinois have exclusive jurisdiction. If you are a consumer living outside the United States, you also keep the protection of the mandatory laws of your country of residence, and you may bring claims in your local courts. Before filing a claim, please email us so we can try to resolve it informally.</p>
+
+    <h2 id="changes">14. Changes to these Terms</h2>
+    <p>If we change these Terms, we’ll post the new version here and update the date at the top. If a change is material, we’ll tell you in the App or on the Website before it takes effect. If you keep using the Services after it takes effect, you accept the new Terms.</p>
+
+    <h2 id="apple">15. App store terms</h2>
+    <p>If you got the App from the Apple App Store:</p>
+    <ul>
+      <li>These Terms are between you and SnapMeasureAI, not Apple. SnapMeasureAI, not Apple, is solely responsible for the App and its content.</li>
+      <li>Your licence to the App is limited to use on Apple-branded products that you own or control, as permitted by the Usage Rules in the App Store Terms of Service. Family Sharing may also allow use where the App supports it.</li>
+      <li>Apple has no obligation to provide maintenance or support for the App.</li>
+      <li>If the App fails to conform to any applicable warranty, you may notify Apple, and Apple will refund the purchase price for the App, if any. To the maximum extent the law allows, Apple has no other warranty obligation for the App. Any other claims, losses, liabilities, damages, costs or expenses caused by a failure to conform to a warranty are SnapMeasureAI’s responsibility, to the extent these Terms don’t disclaim them.</li>
+      <li>SnapMeasureAI, not Apple, is responsible for addressing any claims by you or a third party relating to the App or your use of it. These include product liability claims, claims that the App fails to conform to legal or regulatory requirements, and claims under consumer protection, privacy or similar laws.</li>
+      <li>If a third party claims that the App or your use of it infringes their intellectual property, SnapMeasureAI, not Apple, is responsible for investigating, defending, settling and discharging that claim.</li>
+      <li>You confirm that you are not located in a country subject to a US Government embargo or designated by the US Government as a “terrorist supporting” country. You also confirm that you are not on any US Government list of prohibited or restricted parties.</li>
+      <li>You must comply with any third-party terms that apply when you use the App.</li>
+      <li>Apple and its subsidiaries are third-party beneficiaries of these Terms. Once you accept them, Apple has the right to enforce them against you as a third-party beneficiary.</li>
+    </ul>
+    <p>If you got the App from Google Play, the Google Play Terms of Service also apply. If they conflict with these Terms on your relationship with Google, Google’s terms govern that relationship.</p>
+
+    <h2 id="general">16. General</h2>
+    <p>These Terms and the Privacy Policy are the whole agreement between you and us about the Services. If any part is found unenforceable, the rest stays in effect. If we don’t enforce a right, we haven’t waived it. You may not transfer these Terms without our consent. We may transfer them as part of a merger, sale or reorganization.</p>
+
+    <h2 id="contact">17. Contact us</h2>
+    <p>SnapMeasureAI, LLC<br>119 South Western Avenue, Unit 1 #488<br>Chicago, IL 60612, USA<br><a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a></p>
+
+    </article>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <a href="https://snapmeasureai.com/" class="footer__logo">
+        <img src="/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI">
+      </a>
+      <ul class="footer__links">
+        <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/patient-engagement-platform/">Patient engagement</a></li>
+        <li><a href="https://snapmeasureai.com/uniform-sizing/">Uniform sizing</a></li>
+        <li><a href="https://snapmeasureai.com/apparel-sizing/">Apparel sizing</a></li>
+        <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
+        <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
+        <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+        <li><a href="https://demo.snapmeasureai.com/">Live demo</a></li>
+        <li><a href="https://snapmeasureai.com/contact/">Contact</a></li>
+        <li><a href="https://snapmeasureai.com/privacy/">Privacy</a></li>
+        <li><a href="https://snapmeasureai.com/terms/" style="color:var(--teal)">Terms</a></li>
+      </ul>
+      <span class="footer__copy">© <span data-year>2026</span> SnapMeasureAI</span><script>document.querySelectorAll("[data-year]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Nav */
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobile-menu');
+    const nav  = document.getElementById('nav');
+    if (menu.classList.contains('open') && !nav.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
