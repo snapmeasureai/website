@@ -248,7 +248,7 @@
     /* ---- HERO ---- */
     .hero {
       display: flex; flex-direction: column; justify-content: center;
-      padding: 85px 0 50px; position: relative; overflow: hidden;
+      padding: 85px 0 16px; position: relative; overflow: hidden;
     }
     .hero__bg {
       position: absolute; inset: 0; pointer-events: none;
@@ -332,21 +332,17 @@
       font-size: 13px; color: var(--text-2); background: var(--bg3);
       border: 1px solid var(--border-hi); border-radius: 6px; padding: 4px 10px; white-space: nowrap;
     }
-    .hero__actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 60px; }
+    .hero__actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 32px; }
     .btn--scan { background: var(--teal); color: #050E0C; font-size: 16px; font-weight: 700; padding: 14px 28px; border-radius: var(--radius); }
     .btn--scan:hover { opacity: .88; color: #fff; }
     .btn--api { background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF; font-size: 16px; padding: 14px 28px; border-radius: var(--radius); }
     .btn--api:hover { background: rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.8); color: #fff; }
-    .hero__stats { display: flex; gap: 40px; flex-wrap: wrap; padding-top: 48px; border-top: 1px solid var(--border); margin-top: 8px; }
+    .hero__stats { display: flex; gap: 40px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--border); }
     .hero__stat-value { font-size: 32px; font-weight: 700; color: var(--teal); letter-spacing: -0.02em; }
     .hero__stat-label { font-size: 14px; color: var(--text-3); margin-top: 2px; }
 
-    /* ---- PROOF STRIP ---- */
-    .proof-strip { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; }
-    .proof-strip__inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 15px; color: var(--text-3); }
-    .proof-strip__item { display: flex; align-items: center; gap: 8px; }
-    .proof-strip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
-    .proof-divider { color: var(--border-hi); }
+    .hero__note { display: flex; align-items: center; gap: 8px; margin-top: 24px; font-size: 14px; color: var(--text-3); }
+    .hero__note::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
 
     /* ---- SECTIONS ---- */
     .section { padding: 50px 0; }
@@ -452,7 +448,7 @@
 
     /* ---- RESPONSIVE 600px ---- */
     @media (max-width: 600px) {
-      .hero__stats { gap: 24px; }
+      .hero__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
       .specs-grid { grid-template-columns: 1fr; }
       .hero__actions {
         flex-direction: column;
@@ -637,22 +633,9 @@
         <div class="hero__stat-label">Training images</div>
       </div>
     </div>
+    <p class="hero__note">Built on Cambridge research</p>
   </div>
 </section>
-
-<!-- ==================== PROOF STRIP ==================== -->
-<div class="proof-strip">
-  <div class="container">
-    <div class="proof-strip__inner">
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Built on Cambridge research</div>
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Trained on 2M+ images</div>
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Works on any smartphone camera</div>
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Any body type, skin tone, background</div>
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Works in everyday clothing</div>
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Mobile or web — no installation needed</div>
-    </div>
-  </div>
-</div>
 
 <!-- ==================== HOW IT WORKS ==================== -->
 <section class="section" id="how-it-works">
