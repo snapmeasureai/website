@@ -715,7 +715,7 @@
         <div class="phone">
           <div class="phone__screen">
             <div class="phone__notch" aria-hidden="true"></div>
-            <video id="scan-video" muted loop playsinline autoplay preload="metadata"
+            <video id="scan-video" data-player muted loop playsinline preload="metadata"
                    aria-label="How the SnapMeasureAI 3D body scan works"></video>
             <div class="vid-missing" id="vid-missing">
               <strong style="color:var(--text-2);font-size:14px;">The scan video couldn't load</strong>
@@ -1278,12 +1278,11 @@
       if (i >= candidates.length) {
         video.style.display = 'none';
         missing.classList.add('show');
+        video.parentElement.querySelectorAll('.vp-toggle, .vp-play').forEach(function (b) { b.remove(); });
         return;
       }
       video.src = candidates[i++];
       video.load();
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
     }
     video.addEventListener('error', next);
     next();
@@ -1339,4 +1338,87 @@
 
 
 
+<script>
+/* Site-wide video behaviour for any <video data-player>.
+   Plays muted on loop while on screen, and never under reduced motion.
+   Playing: small pause button in the corner. Stopped (paused, reduced motion, or autoplay
+   blocked, e.g. iPhone Low Power Mode): large play button in the centre. */
+(function () {
+  var PAUSE = 'M3 2h3v10H3zM8 2h3v10H8z', PLAY = 'M4 2l8 5-8 5z';
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var css =
+    '.vp-toggle,.vp-play{position:absolute;z-index:3;border-radius:50%;display:flex;align-items:center;justify-content:center;' +
+      'cursor:pointer;padding:0;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}' +
+    '.vp-toggle{right:12px;bottom:12px;width:36px;height:36px;border:1px solid rgba(255,255,255,.15);' +
+      'background:rgba(8,12,16,.72);color:#F0F4F8}' +
+    '.vp-toggle:hover{border-color:rgba(10,191,163,.6);color:#0ABFA3}' +
+    '.vp-play{left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border:1px solid rgba(10,191,163,.6);' +
+      'background:rgba(8,12,16,.6);color:#fff}' +
+    '.vp-play svg{margin-left:4px}' +
+    '.vp-play:hover{background:rgba(10,191,163,.25)}' +
+    '.vp-toggle:focus-visible,.vp-play:focus-visible{outline:2px solid #0ABFA3;outline-offset:2px}' +
+    '.vp-toggle[hidden],.vp-play[hidden]{display:none}' +
+    /* iOS draws its own play glyph on a blocked video; ours replaces it */
+    'video[data-player]::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}';
+  var style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  function button(cls, label, size, d) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = cls;
+    b.setAttribute('aria-label', label);
+    b.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 14 14" aria-hidden="true">' +
+                  '<path d="' + d + '" fill="currentColor"/></svg>';
+    return b;
+  }
+
+  function setup(v) {
+    var box = v.parentElement;
+    if (getComputedStyle(box).position === 'static') box.style.position = 'relative';
+    v.muted = true;
+    v.loop = true;
+    var btn = button('vp-toggle', 'Pause video', 14, PAUSE);
+    var big = button('vp-play', 'Play video', 28, PLAY);
+    box.appendChild(btn);
+    box.appendChild(big);
+
+    var paused = reduced, onScreen = false;
+    function draw() {
+      btn.hidden = paused;
+      big.hidden = !paused;
+    }
+    function sync() {
+      draw();
+      if (!paused && onScreen) {
+        var p = v.play();
+        if (p && p.catch) p.catch(function (err) {
+          if (err && err.name === 'NotAllowedError') { paused = true; draw(); }
+        });
+      } else {
+        v.pause();
+      }
+    }
+    btn.addEventListener('click', function () { paused = true; sync(); big.focus(); });
+    big.addEventListener('click', function () { paused = false; sync(); btn.focus(); });
+    v.addEventListener('click', function () { if (paused) { paused = false; sync(); } });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; sync(); },
+                               { threshold: 0.25 }).observe(v);
+    } else {
+      onScreen = true;
+    }
+    sync();
+  }
+
+  function init() {
+    Array.prototype.forEach.call(document.querySelectorAll('video[data-player]'), setup);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+}());
+</script>
 </body></html>

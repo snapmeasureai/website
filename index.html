@@ -428,13 +428,6 @@
       border: 1px solid var(--border-hi); box-shadow: 0 24px 64px rgba(0,0,0,.45);
     }
     .why__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .why__toggle {
-      position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid var(--border-hi); background: rgba(8,12,16,.72); color: var(--text);
-      display: inline-flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(4px);
-    }
-    .why__toggle:hover { border-color: rgba(10,191,163,.6); color: var(--teal); }
-    .why__toggle:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 
     /* ---- RESPONSIVE 900px ---- */
     @media (max-width: 900px) {
@@ -670,8 +663,9 @@
     </p>
 
     <div style="max-width:1280px;margin-left:auto;margin-right:auto;">
-      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
-        <video id="scanVideo" webkit-playsinline playsinline autoplay loop muted preload="auto" style="width:100%;display:block;">
+      <div style="position:relative;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+        <video id="scanVideo" data-player webkit-playsinline playsinline loop muted preload="auto" style="width:100%;display:block;"
+               aria-label="Video: two phone photos turned into a 3D body model with 100+ measurements">
           <source src="/img/3d-body-scan-how-it-works-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
           <source src="/img/3d-body-scan-how-it-works.mp4" type="video/mp4">
         </video>
@@ -723,14 +717,11 @@
         </div>
       </div>
       <figure class="why__media">
-        <video id="whyVideo" muted loop playsinline webkit-playsinline preload="metadata"
+        <video id="whyVideo" data-player muted loop playsinline webkit-playsinline preload="metadata"
                poster="/img/synthetic-body-dataset-poster.webp" width="540" height="960"
                aria-label="Video: photos of people in everyday clothes, each wiping to the exact 3D body underneath, then the range of body types in the training data">
           <source src="/img/synthetic-body-dataset.mp4" type="video/mp4">
         </video>
-        <button class="why__toggle" id="whyToggle" type="button" aria-label="Pause video">
-          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path id="whyIcon" d="M3 2h3v10H3zM8 2h3v10H8z" fill="currentColor"/></svg>
-        </button>
       </figure>
     </div>
   </div>
@@ -992,26 +983,88 @@ video.poster = window.innerWidth <= 767
   ? "/img/3D_body_scan_mobile.jpg"
   : "/img/3D_body_scan.jpg";
 
-/* Dataset video: plays muted on loop while on screen, never under reduced motion,
-   and always has a pause button. */
+</script>
+<script>
+/* Site-wide video behaviour for any <video data-player>.
+   Plays muted on loop while on screen, and never under reduced motion.
+   Playing: small pause button in the corner. Stopped (paused, reduced motion, or autoplay
+   blocked, e.g. iPhone Low Power Mode): large play button in the centre. */
 (function () {
-  var v = document.getElementById('whyVideo'), btn = document.getElementById('whyToggle'),
-      icon = document.getElementById('whyIcon');
-  if (!v) return;
-  var paused = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var onScreen = false;
-  function sync() {
-    icon.setAttribute('d', paused ? 'M4 2l8 5-8 5z' : 'M3 2h3v10H3zM8 2h3v10H8z');
-    btn.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
-    if (!paused && onScreen) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-    else v.pause();
+  var PAUSE = 'M3 2h3v10H3zM8 2h3v10H8z', PLAY = 'M4 2l8 5-8 5z';
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var css =
+    '.vp-toggle,.vp-play{position:absolute;z-index:3;border-radius:50%;display:flex;align-items:center;justify-content:center;' +
+      'cursor:pointer;padding:0;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}' +
+    '.vp-toggle{right:12px;bottom:12px;width:36px;height:36px;border:1px solid rgba(255,255,255,.15);' +
+      'background:rgba(8,12,16,.72);color:#F0F4F8}' +
+    '.vp-toggle:hover{border-color:rgba(10,191,163,.6);color:#0ABFA3}' +
+    '.vp-play{left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border:1px solid rgba(10,191,163,.6);' +
+      'background:rgba(8,12,16,.6);color:#fff}' +
+    '.vp-play svg{margin-left:4px}' +
+    '.vp-play:hover{background:rgba(10,191,163,.25)}' +
+    '.vp-toggle:focus-visible,.vp-play:focus-visible{outline:2px solid #0ABFA3;outline-offset:2px}' +
+    '.vp-toggle[hidden],.vp-play[hidden]{display:none}' +
+    /* iOS draws its own play glyph on a blocked video; ours replaces it */
+    'video[data-player]::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}';
+  var style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  function button(cls, label, size, d) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = cls;
+    b.setAttribute('aria-label', label);
+    b.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 14 14" aria-hidden="true">' +
+                  '<path d="' + d + '" fill="currentColor"/></svg>';
+    return b;
   }
-  btn.addEventListener('click', function () { paused = !paused; sync(); });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; sync(); },
-                             { threshold: 0.25 }).observe(v);
-  } else { onScreen = true; sync(); }
-  sync();
+
+  function setup(v) {
+    var box = v.parentElement;
+    if (getComputedStyle(box).position === 'static') box.style.position = 'relative';
+    v.muted = true;
+    v.loop = true;
+    var btn = button('vp-toggle', 'Pause video', 14, PAUSE);
+    var big = button('vp-play', 'Play video', 28, PLAY);
+    box.appendChild(btn);
+    box.appendChild(big);
+
+    var paused = reduced, onScreen = false;
+    function draw() {
+      btn.hidden = paused;
+      big.hidden = !paused;
+    }
+    function sync() {
+      draw();
+      if (!paused && onScreen) {
+        var p = v.play();
+        if (p && p.catch) p.catch(function (err) {
+          if (err && err.name === 'NotAllowedError') { paused = true; draw(); }
+        });
+      } else {
+        v.pause();
+      }
+    }
+    btn.addEventListener('click', function () { paused = true; sync(); big.focus(); });
+    big.addEventListener('click', function () { paused = false; sync(); btn.focus(); });
+    v.addEventListener('click', function () { if (paused) { paused = false; sync(); } });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; sync(); },
+                               { threshold: 0.25 }).observe(v);
+    } else {
+      onScreen = true;
+    }
+    sync();
+  }
+
+  function init() {
+    Array.prototype.forEach.call(document.querySelectorAll('video[data-player]'), setup);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 }());
 </script>
 </body>
