@@ -436,8 +436,11 @@
       .step { border-bottom: 1px solid var(--border); }
       .step:last-child { border-bottom: none; }
       .specs-grid { grid-template-columns: 1fr 1fr; }
-      .why { grid-template-columns: 1fr; gap: 36px; }
-      .why__media { height: auto; width: min(100%, 360px); justify-self: center; }
+      /* Single column: heading, then the video, then the copy and buttons */
+      .why { grid-template-columns: 1fr; gap: 0; }
+      .why__text { display: contents; }
+      .why__media { order: 1; height: auto; width: min(100%, 360px); justify-self: center; margin: 12px 0 32px; }
+      .why .section__sub, .why__list, .why__actions { order: 2; }
       .nav__links { display: none; }
       .nav__cta .btn--outline { display: none; }
       .nav__hamburger {
@@ -696,7 +699,7 @@
 <section class="section section--alt" id="why-it-works">
   <div class="container">
     <div class="why">
-      <div>
+      <div class="why__text">
         <p class="section__eyebrow">Why it's different</p>
         <h2 class="section__title">Trained on the body under the clothes.</h2>
         <p class="section__sub">
