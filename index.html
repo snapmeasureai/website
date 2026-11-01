@@ -421,9 +421,7 @@
     .why__list li { font-size: 16px; color: var(--text-2); display: flex; align-items: flex-start; gap: 12px; line-height: 1.55; }
     .why__list li::before { content: '\2713'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
     .why__list strong { color: var(--text); font-weight: 600; }
-    .why__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
-    .why__more { font-size: 15px; font-weight: 600; color: var(--text-2); }
-    .why__more:hover { color: var(--teal); }
+    .why__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
     .why__media {
       position: relative; height: min(640px, 78vh); aspect-ratio: 9 / 16; margin: 0;
       border-radius: var(--radius-lg); overflow: hidden; background: var(--bg3);
@@ -495,9 +493,9 @@
       .why__actions {
         flex-direction: column;
         align-items: stretch;
-        text-align: center;
       }
-      .why__actions .btn--scan {
+      .why__actions .btn--scan,
+      .why__actions .btn--api {
         width: 100%;
         justify-content: center;
       }
@@ -721,7 +719,7 @@
         </ul>
         <div class="why__actions">
           <a href="https://demo.snapmeasureai.com/" class="btn btn--scan">Try the live demo &rarr;</a>
-          <a href="https://snapmeasureai.com/synthetic-data-with-labels/" class="why__more">See inside the dataset &rarr;</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels/" class="btn btn--api">See inside the dataset &rarr;</a>
         </div>
       </div>
       <figure class="why__media">
