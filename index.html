@@ -25,8 +25,8 @@
   <meta property="og:title" content="SnapMeasureAI: 3D Body Scan | 100+ Measurements, 2 Photos">
   <meta property="og:description" content="3D body scanning — 2 phone photos, 10 seconds, 100+ body measurements. Cuts apparel returns, tracks GLP-1 body changes, and powers 3D digital twins.">
   <meta property="og:image" content="https://snapmeasureai.com/assets/images/ai-body-measurement.jpg">
-  <meta property="og:video" content="https://snapmeasureai.com/img/3D_body_scan_mobile.mp4">
-  <meta property="og:video:secure_url" content="https://snapmeasureai.com/img/3D_body_scan_mobile.mp4">
+  <meta property="og:video" content="https://snapmeasureai.com/img/3d-body-scan-how-it-works-mobile.mp4">
+  <meta property="og:video:secure_url" content="https://snapmeasureai.com/img/3d-body-scan-how-it-works-mobile.mp4">
   <meta property="og:video:type" content="video/mp4">
   <meta property="og:video:width" content="720">
   <meta property="og:video:height" content="1280">
@@ -414,6 +414,30 @@
     .footer__copy { font-size: 12px; color: var(--text-3); }
     .ph-badge { display: inline-block; }
 
+    /* ---- WHY (dataset video) ---- */
+    .why { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 64px; align-items: center; }
+    .why .section__sub { margin-bottom: 28px; }
+    .why__list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+    .why__list li { font-size: 16px; color: var(--text-2); display: flex; align-items: flex-start; gap: 12px; line-height: 1.55; }
+    .why__list li::before { content: '\2713'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+    .why__list strong { color: var(--text); font-weight: 600; }
+    .why__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+    .why__more { font-size: 15px; font-weight: 600; color: var(--text-2); }
+    .why__more:hover { color: var(--teal); }
+    .why__media {
+      position: relative; height: min(640px, 78vh); aspect-ratio: 9 / 16; margin: 0;
+      border-radius: var(--radius-lg); overflow: hidden; background: var(--bg3);
+      border: 1px solid var(--border-hi); box-shadow: 0 24px 64px rgba(0,0,0,.45);
+    }
+    .why__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .why__toggle {
+      position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-hi); background: rgba(8,12,16,.72); color: var(--text);
+      display: inline-flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(4px);
+    }
+    .why__toggle:hover { border-color: rgba(10,191,163,.6); color: var(--teal); }
+    .why__toggle:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
     /* ---- RESPONSIVE 900px ---- */
     @media (max-width: 900px) {
       .audiences { grid-template-columns: 1fr; }
@@ -421,6 +445,8 @@
       .step { border-bottom: 1px solid var(--border); }
       .step:last-child { border-bottom: none; }
       .specs-grid { grid-template-columns: 1fr 1fr; }
+      .why { grid-template-columns: 1fr; gap: 36px; }
+      .why__media { height: auto; width: min(100%, 360px); justify-self: center; }
       .nav__links { display: none; }
       .nav__cta .btn--outline { display: none; }
       .nav__hamburger {
@@ -656,17 +682,55 @@
 
     <div style="margin-top:48px;max-width:1280px;margin-left:auto;margin-right:auto;">
       <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
-        <video webkit-playsinline playsinline autoplay loop muted preload="auto" style="width:100%;display:block;">
-          <source src="/img/3D_body_scan_mobile.mp4" type="video/mp4" media="(max-width: 767px)">
-          <source src="/img/3D_body_scan.mp4" type="video/mp4">
+        <video id="scanVideo" webkit-playsinline playsinline autoplay loop muted preload="auto" style="width:100%;display:block;">
+          <source src="/img/3d-body-scan-how-it-works-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
+          <source src="/img/3d-body-scan-how-it-works.mp4" type="video/mp4">
         </video>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ==================== WHY: TRAINED ON THE BODY UNDER THE CLOTHES ==================== -->
+<section class="section section--alt" id="why-it-works">
+  <div class="container">
+    <div class="why">
+      <div>
+        <p class="section__eyebrow">Why it's different</p>
+        <h2 class="section__title">Trained on the body under the clothes.</h2>
+        <p class="section__sub">
+          A photo shows clothing, not the body underneath, which is why body scanning has
+          long meant tight clothing or special hardware. So we built our own training data:
+          2M+ photorealistic people in the clothes people actually wear, each paired with the
+          exact 3D body underneath. Our models learn where the body is, not where the fabric is.
+        </p>
+        <ul class="why__list">
+          <li><span><strong>2M+ training images,</strong> each labelled with the exact 3D body</span></li>
+          <li><span><strong>BMI 15&ndash;45 and 141&ndash;206 cm,</strong> women and men in equal numbers</span></li>
+          <li><span><strong>Every skin tone in equal shares,</strong> young adult to elderly</span></li>
+          <li><span><strong>Real-world clothing,</strong> poses and backgrounds</span></li>
+        </ul>
+        <div class="why__actions">
+          <a href="https://demo.snapmeasureai.com/" class="btn btn--scan">Try the live demo &rarr;</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels/" class="why__more">See inside the dataset &rarr;</a>
+        </div>
+      </div>
+      <figure class="why__media">
+        <video id="whyVideo" muted loop playsinline webkit-playsinline preload="metadata"
+               poster="/img/synthetic-body-dataset-poster.webp" width="540" height="960"
+               aria-label="Video: photos of people in everyday clothes, each wiping to the exact 3D body underneath, then the range of body types in the training data">
+          <source src="/img/synthetic-body-dataset.mp4" type="video/mp4">
+        </video>
+        <button class="why__toggle" id="whyToggle" type="button" aria-label="Pause video">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path id="whyIcon" d="M3 2h3v10H3zM8 2h3v10H8z" fill="currentColor"/></svg>
+        </button>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== USE CASES ==================== -->
-<section class="section section--alt" id="use-cases">
+<section class="section" id="use-cases">
   <div class="container">
     <p class="section__eyebrow">Who it's built for</p>
     <h2 class="section__title">Body scanning technology for health programs, apparel brands, and uniform suppliers.</h2>
@@ -726,7 +790,7 @@
 </section>
 
 <!-- ==================== TECHNOLOGY ==================== -->
-<section class="section" id="technology">
+<section class="section section--alt" id="technology">
   <div class="container">
     <p class="section__eyebrow">Technology</p>
     <h2 class="section__title">Serious computer vision research, practically applied.</h2>
@@ -784,7 +848,7 @@
 </section>
 
 <!-- ==================== FAQs ==================== -->
-<section class="section section--alt" id="faqs">
+<section class="section" id="faqs">
   <div class="container">
     <p class="section__eyebrow" style="max-width:760px;margin-left:auto;margin-right:auto;">FAQs</p>
     <h2 class="section__title" style="max-width:760px;margin-left:auto;margin-right:auto;">Common questions</h2>
@@ -916,10 +980,32 @@
       }
     });
   });
-const video = document.querySelector('video');
+const video = document.getElementById('scanVideo');
 video.poster = window.innerWidth <= 767
   ? "/img/3D_body_scan_mobile.jpg"
   : "/img/3D_body_scan.jpg";
+
+/* Dataset video: plays muted on loop while on screen, never under reduced motion,
+   and always has a pause button. */
+(function () {
+  var v = document.getElementById('whyVideo'), btn = document.getElementById('whyToggle'),
+      icon = document.getElementById('whyIcon');
+  if (!v) return;
+  var paused = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var onScreen = false;
+  function sync() {
+    icon.setAttribute('d', paused ? 'M4 2l8 5-8 5z' : 'M3 2h3v10H3zM8 2h3v10H8z');
+    btn.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
+    if (!paused && onScreen) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    else v.pause();
+  }
+  btn.addEventListener('click', function () { paused = !paused; sync(); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; sync(); },
+                             { threshold: 0.25 }).observe(v);
+  } else { onScreen = true; sync(); }
+  sync();
+}());
 </script>
 </body>
 </html>
