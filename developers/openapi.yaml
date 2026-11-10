@@ -255,7 +255,7 @@ components:
         units: {type: string, example: m}
         up: {type: string, example: "+y"}
         front: {type: string, example: "+z"}
-        vertex_count: {type: integer, example: 10475}
+        vertex_count: {type: integer, description: "The same for every body (standard topology)."}
         face_count: {type: integer, example: 20908}
         vertices: {type: string, format: byte, description: "float32 x, y, z per vertex."}
         faces: {type: string, format: byte, description: "uint16 vertex indices, three per triangle (with include \"faces\")."}

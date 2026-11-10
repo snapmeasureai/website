@@ -16,7 +16,7 @@
 Your users take a front and a side photo inside your product. Your system gets back:
 
 - **100+ body measurements**, or your own custom set
-- **A 3D body model**, a 10,000-point mesh exportable as OBJ
+- **A 3D body model**, a detailed mesh exportable as OBJ
 - **In under 10 seconds**, from any smartphone, with no hardware
 
 Within 1.6 cm on average in everyday clothing, across 18 standard measurements. Built on Cambridge research and trained on over two million images.
