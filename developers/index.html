@@ -30,7 +30,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "SnapMeasureAI body measurement API documentation",
-    "description": "How to integrate SnapMeasureAI 3D body scanning: request format, available outputs (body measurements, 3D body model, and more), photo guidance, errors, and data handling.",
+    "description": "How to integrate SnapMeasureAI 3D body scanning: authentication, the /v1/measurements request, outputs (body measurements, custom measurement sets, OBJ, glTF and raw geometry, an embeddable 3D viewer), 3D pose options, errors, rate limits, regions, security and versioning.",
     "url": "https://snapmeasureai.com/developers/",
     "inLanguage": "en-US",
     "about": ["Body measurement API", "3D body scanning", "Body measurements from photos"],
@@ -43,17 +43,17 @@
     "@type": "FAQPage",
     "mainEntity": [
       { "@type": "Question", "name": "Which languages and platforms are supported?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build a capture screen, a hosted, white-label capture page can be set up on request, and the 3D viewer can be embedded either way." } },
-      { "@type": "Question", "name": "Can we get only the measurements, or only the 3D body model?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The response is configured per integration: measurements only, the 3D body model only, both, or any combination of the other outputs. Many partners take the measurements for sizing and keep the compact shape code so they can regenerate the body model later." } },
+        "acceptedAnswer": { "@type": "Answer", "text": "Anything that can make an HTTPS request with a JSON body: any back-end language, web, iOS or Android. There is no SDK to install; the OpenAPI 3.1 file on this page imports into Postman and generates a typed client for most languages." } },
+      { "@type": "Question", "name": "Can we call the API from our website or mobile app?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Browser keys work only from the website addresses registered for them, and app keys carry per-device limits. Server keys stay on your back end: requests made with a server key from a web page are refused." } },
+      { "@type": "Question", "name": "How can we try it before signing?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The live demo at demo.snapmeasureai.com runs the same scan, free, in any browser. API keys are issued with an agreement and set up for your use case: your measurement set, your outputs and your region." } },
       { "@type": "Question", "name": "How do we define our own measurements?",
-        "acceptedAnswer": { "@type": "Answer", "text": "In the live demo's 3D viewer, use Custom Measure to define circumferences or lengths between any points on the body, save them as a measurement profile (a JSON file), and send it to us. It is attached to your partner code, so every scan through your integration returns your set." } },
-      { "@type": "Question", "name": "What units are measurements returned in?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The unit of the height you send. Send \"174cm\" and every measurement comes back in centimetres; send \"68in\" and they come back in inches." } },
+        "acceptedAnswer": { "@type": "Answer", "text": "Open the measurement studio on a demo result, use Custom Measure to define any girth or length on the body, and save it as a measurement profile. We attach it to your keys, and every scan returns exactly that set, with your field names, units and rounding." } },
       { "@type": "Question", "name": "Are photos or results stored?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Photos are decoded and processed in memory, never written to disk, and discarded when the response is returned. No account, name, or email is needed to run a scan, and results go back to your system rather than being kept by SnapMeasureAI." } },
-      { "@type": "Question", "name": "How do we get access?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Contact us with your use case. Onboarding provides your endpoint, partner code, and test access, and we configure your outputs and measurement profile with you. You can run the live demo at any time to see the scan your users would get." } }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Photos and heights are processed in memory and deleted as soon as the response is sent. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI." } },
+      { "@type": "Question", "name": "Will the API change under us?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. /v1 is stable. New optional fields and outputs can be added at any time, so ignore fields you don't recognise. A change that would break an integration comes with a new version path and advance notice, as set out in your agreement." } }
     ]
   }
   </script>
@@ -368,6 +368,40 @@
       .footer__links { display: grid; grid-template-columns: repeat(3, auto); gap: 10px 20px; }
       .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
     }
+
+    /* ---- v1 reference additions ---- */
+    .hero__links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: -12px 0 26px; font-size: 14px; }
+    .hero__links a { color: var(--teal); }
+    .hero__links a:hover { text-decoration: underline; }
+    .ep { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 14px; background: var(--code); border: 1px solid var(--border-hi); border-radius: 10px; padding: 8px 14px; margin: 0 10px 12px 0; color: var(--text); max-width: 100%; overflow-wrap: anywhere; }
+    .ep b { font-size: 11.5px; letter-spacing: .04em; color: #050E0C; background: var(--teal); border-radius: 6px; padding: 3px 8px; }
+    .ep b.get { background: #8EA9FF; }
+    .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+    .split h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+    .split p { font-size: 15px; color: var(--text-2); margin-bottom: 12px; }
+    .list { list-style: none; display: grid; gap: 10px; margin-top: 6px; }
+    .list li { font-size: 15px; color: var(--text-2); line-height: 1.6; display: grid; grid-template-columns: 18px 1fr; gap: 10px; }
+    .list li::before { content: '→'; color: var(--teal); }
+    .list b { color: var(--text); font-weight: 600; }
+    .sub-h { font-size: 20px; font-weight: 600; margin: 48px 0 16px; letter-spacing: -0.01em; }
+    .extensions { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .regions td:first-child { white-space: normal; }
+    .mini { font-size: 13px; color: var(--text-3); }
+    .ok { color: var(--teal); }
+
+    /* Tables become stacked cards on a phone, so nothing scrolls sideways. */
+    @media (max-width: 640px) {
+      .split, .extensions { grid-template-columns: 1fr; }
+      .table-wrap.stack { overflow: visible; background: transparent; border: none; }
+      .stack table { min-width: 0; }
+      .stack thead { display: none; }
+      .stack table, .stack tbody, .stack tr, .stack td { display: block; width: 100%; }
+      .stack tr { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 12px; }
+      .stack td { border: none; padding: 4px 0; white-space: normal !important; }
+      .stack td[data-l]::before { content: attr(data-l); display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 2px; }
+      .hero__links { margin-top: -8px; }
+      .ep { font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -445,18 +479,23 @@
       <span class="eyebrow">Developers · Body measurement API</span>
       <h1>Add 3D body scanning to your product with <em>one API call.</em></h1>
       <p class="hero__sub">
-        Send two smartphone photos — base64-encoded inside a JSON body — and a height. Get back
-        body measurements, a full 3D body model, or both, shaped to exactly what your product needs,
-        in under 10 seconds.
+        Send a front and a side photo and the person's height. Get their body measurements back,
+        in your own measurement set, and the 3D body as OBJ, glTF or raw geometry if you want it.
+        Typically under 10 seconds.
       </p>
       <div class="hero__actions">
         <a href="https://snapmeasureai.com/contact/" class="btn btn--primary btn--lg">Request API access →</a>
         <a href="https://demo.snapmeasureai.com/" class="btn btn--ghost btn--lg">Try the live demo</a>
       </div>
+      <p class="hero__links">
+        <a href="/developers/openapi.yaml" download>OpenAPI 3.1 specification ↓</a>
+        <a href="#quickstart">Quickstart</a>
+        <a href="#errors">Error codes</a>
+      </p>
       <ul class="hero__facts">
-        <li>One HTTPS endpoint, JSON in and out</li>
-        <li>Photos as base64 strings</li>
-        <li>Any language, no SDK</li>
+        <li>REST, JSON in and out</li>
+        <li>API keys, TLS 1.2+</li>
+        <li>US and EU regions</li>
         <li>Photos never stored</li>
       </ul>
     </div>
@@ -464,27 +503,30 @@
     <div class="code-card" aria-label="Example request and response">
       <div class="code-card__bar">
         <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="code-card__title">POST · scan</span>
+        <span class="code-card__title">POST /v1/measurements</span>
       </div>
-<pre><span class="c">// request — two photos and a height</span>
+<pre><span class="c">// request</span>
+<span class="k">POST</span> https://api.snapmeasureai.com/v1/measurements
+<span class="p">X-API-Key</span>: smk_live_…
+
 {
   <span class="p">"height"</span>:  <span class="s">"174cm"</span>,
-  <span class="p">"company"</span>: <span class="s">"your-partner-code"</span>,
-  <span class="p">"images"</span>: [    <span class="c">// each photo as a base64 string</span>
-    { <span class="p">"fileName"</span>: <span class="s">"front.jpg"</span>, <span class="p">"data"</span>: <span class="s">"/9j/4AAQ…"</span> },
-    { <span class="p">"fileName"</span>: <span class="s">"side.jpg"</span>,  <span class="p">"data"</span>: <span class="s">"/9j/4AAQ…"</span> }
-  ]
+  <span class="p">"images"</span>:  [<span class="s">"/9j/4AAQ…"</span>, <span class="s">"/9j/4AAQ…"</span>],  <span class="c">// front, side (base64)</span>
+  <span class="p">"include"</span>: [<span class="s">"glb"</span>]
 }
 
-<span class="c">// response — the outputs your integration is set up for</span>
+<span class="c">// 200 OK</span>
 {
+  <span class="p">"request_id"</span>:    <span class="s">"3f9a1c0d2b7e4a51"</span>,
+  <span class="p">"model_version"</span>: <span class="s">"2026.10"</span>,
+  <span class="p">"unit"</span>:          <span class="s">"cm"</span>,
+  <span class="p">"photos"</span>:        { <span class="p">"received"</span>: <span class="n">2</span>, <span class="p">"used"</span>: <span class="n">2</span>, <span class="p">"unused"</span>: [] },
   <span class="p">"measurements"</span>: {
-    <span class="p">"chest circumference"</span>: <span class="n">100.5</span>,
-    <span class="p">"waist circumference"</span>: <span class="n">88.6</span>,
-    <span class="p">"hip circumference"</span>:   <span class="n">100.2</span>,
-    <span class="p">"inside leg height"</span>:   <span class="n">76.5</span>  <span class="c">// …your set, in cm</span>
+    <span class="p">"chest circumf"</span>: <span class="n">99.5</span>,
+    <span class="p">"waist circumf"</span>: <span class="n">79.5</span>,
+    <span class="p">"hip circumf"</span>:   <span class="n">94.8</span>   <span class="c">// …your measurement set</span>
   },
-  <span class="p">"body_model"</span>: { <span class="p">"format"</span>: <span class="s">"obj"</span>, <span class="p">"points"</span>: <span class="s">"10,000"</span> }
+  <span class="p">"glb"</span>: <span class="s">"Z2xURgIAAAD…"</span>   <span class="c">// the 3D body, glTF 2.0</span>
 }</pre>
     </div>
   </div>
@@ -494,14 +536,17 @@
 <nav class="toc" aria-label="On this page">
   <div class="container">
     <ul>
-      <li><a href="#flow">How it works</a></li>
+      <li><a href="#flow">Overview</a></li>
       <li><a href="#quickstart">Quickstart</a></li>
+      <li><a href="#auth">Authentication</a></li>
       <li><a href="#request">Request</a></li>
       <li><a href="#outputs">Outputs</a></li>
-      <li><a href="#photos">Photo capture</a></li>
+      <li><a href="#mesh">3D files</a></li>
       <li><a href="#errors">Errors</a></li>
-      <li><a href="#data">Data handling</a></li>
-      <li><a href="#options">Integration options</a></li>
+      <li><a href="#limits">Limits &amp; retries</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#regions">Regions</a></li>
+      <li><a href="#versioning">Versioning</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
   </div>
@@ -510,15 +555,15 @@
 <!-- ==================== FLOW ==================== -->
 <section class="section" id="flow">
   <div class="container">
-    <p class="section__eyebrow">How it works</p>
+    <p class="section__eyebrow">Overview</p>
     <h2 class="section__title">Your app captures. We measure. Your system keeps the result.</h2>
-    <p class="section__sub">The scan engine is stateless: it reconstructs the body, computes what you asked for, returns it, and forgets it. Everything that persists lives on your side.</p>
+    <p class="section__sub">The scan service is stateless: it builds the 3D body, computes what you asked for, returns it, and keeps nothing. Everything that persists lives on your side.</p>
 
     <div class="flow">
       <div class="flow__box">
         <p class="flow__tag">Your app or website</p>
         <h3>Capture</h3>
-        <p>Your user takes a front and a side photo and enters their height — in your own capture screen, or ours under your brand.</p>
+        <p>Your user takes a front and a side photo and enters their height, in your own capture screen.</p>
         <ul><li>Any smartphone camera</li><li>Everyday clothes work</li></ul>
       </div>
       <div class="flow__arrow" aria-hidden="true">
@@ -528,7 +573,7 @@
       <div class="flow__box flow__box--mid">
         <p class="flow__tag">SnapMeasureAI · stateless</p>
         <h3>Reconstruct &amp; measure</h3>
-        <p>Pose is detected in every photo, the views are fused into one 3D body model scaled to the height, and your measurements are computed on it.</p>
+        <p>The person is found in every photo, the views are combined into one 3D body at the real height, and your measurements are taken on it.</p>
         <ul><li>Processed in memory</li><li>Photos never written to disk</li></ul>
       </div>
       <div class="flow__arrow" aria-hidden="true">
@@ -538,11 +583,11 @@
       <div class="flow__box">
         <p class="flow__tag">Your system</p>
         <h3>Store &amp; use</h3>
-        <p>Measurements and the body model land in your system, joined to your own user or patient record, under your retention policy.</p>
+        <p>Measurements and the 3D body land in your system, joined to your own user, order or patient record, under your retention policy.</p>
         <ul><li>You hold the history</li><li>Size charts, CAD, progress views</li></ul>
       </div>
     </div>
-    <p class="flow__time">Typically under 10 seconds from photos to result.</p>
+    <p class="flow__time">Processing takes about five seconds; with the upload, typically under 10 seconds from photos to result.</p>
   </div>
 </section>
 
@@ -551,25 +596,25 @@
   <div class="container">
     <p class="section__eyebrow">Quickstart</p>
     <h2 class="section__title">From two photos to measurements.</h2>
-    <p class="section__sub">One request. Photos go as base64 strings inside a JSON body, so it works the same from a browser, a phone, or a server.</p>
+    <p class="section__sub">One request. Photos go as base64 text inside a JSON body, so it works the same from any language.</p>
 
     <div class="qs">
       <ol class="steps">
         <li>
-          <h3>Get your endpoint and partner code</h3>
-          <p>Onboarding gives you an endpoint, a partner code, and test access. The partner code carries your output configuration and your measurement set.</p>
+          <h3>Get your API key</h3>
+          <p>Keys are issued with your agreement, set up for your measurement set, your outputs and your region. Keep server keys in your back end's secret store, never in an app or web page.</p>
         </li>
         <li>
-          <h3>Turn each photo into a base64 string</h3>
-          <p>Use whatever capture or upload flow your product already has — your own camera screen, a file picker, or images already in your storage. Base64-encode the bytes of the front and side photos; that text goes in the JSON. Optionally resize to 800&nbsp;px on the longest side first: it's the resolution the engine works at, so larger photos only slow the request.</p>
+          <h3>Turn each photo into base64</h3>
+          <p>Use the capture or upload flow your product already has. 1,000–2,000&nbsp;px on the long side is plenty: photos are scaled to 800&nbsp;px before measuring, so larger ones only slow the upload.</p>
         </li>
         <li>
-          <h3>Send the request</h3>
-          <p>POST the height, your partner code, and the base64 images. Allow up to 60&nbsp;seconds of client timeout; typical scans return in under 10.</p>
+          <h3>POST to <code>/v1/measurements</code></h3>
+          <p>Send the height and the photos, front first, with your key in the <code>X-API-Key</code> header. Allow up to 120&nbsp;seconds of client timeout.</p>
         </li>
         <li>
           <h3>Use the result</h3>
-          <p>Map measurements to your size chart, store them against your record, or hand the 3D body model to your CAD, pattern, or visualization pipeline.</p>
+          <p>Store the measurements against your own record, map them to your size charts, or pass the 3D body to your CAD, pattern or visualization pipeline. Keep the <code>model_version</code> with each result.</p>
         </li>
       </ol>
 
@@ -577,375 +622,461 @@
         <div class="code-card__bar">
           <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
           <div class="tabs" role="tablist" aria-label="Code language">
-            <button class="tab" role="tab" aria-selected="true" aria-controls="code-js" id="tab-js">JavaScript</button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="code-py" id="tab-py">Python</button>
+            <button class="tab" role="tab" aria-selected="true" aria-controls="code-py" id="tab-py">Python</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="code-js" id="tab-js">Node.js</button>
             <button class="tab" role="tab" aria-selected="false" aria-controls="code-curl" id="tab-curl">cURL</button>
           </div>
           <button class="copy" type="button" data-copy>Copy</button>
         </div>
-<pre id="code-js" role="tabpanel" aria-labelledby="tab-js"><span class="k">const</span> SNAPMEASURE_ENDPOINT = <span class="s">"https://…"</span>;   <span class="c">// issued at onboarding</span>
-<span class="k">const</span> PARTNER_CODE = <span class="s">"your-partner-code"</span>;
+<pre id="code-py" role="tabpanel" aria-labelledby="tab-py"><span class="k">import</span> base64, os, requests
 
-<span class="c">// Shrink a photo (File or Blob) to 800 px and return it as base64 text</span>
-<span class="k">async function</span> toBase64(file, maxSide = <span class="n">800</span>) {
-  <span class="k">const</span> img = <span class="k">await</span> createImageBitmap(file);
-  <span class="k">const</span> scale = Math.min(<span class="n">1</span>, maxSide / Math.max(img.width, img.height));
-  <span class="k">const</span> canvas = Object.assign(document.createElement(<span class="s">"canvas"</span>), {
-    width: Math.round(img.width * scale), height: Math.round(img.height * scale),
-  });
-  canvas.getContext(<span class="s">"2d"</span>).drawImage(img, <span class="n">0</span>, <span class="n">0</span>, canvas.width, canvas.height);
-  <span class="k">return</span> canvas.toDataURL(<span class="s">"image/jpeg"</span>, <span class="n">0.94</span>).split(<span class="s">","</span>)[<span class="n">1</span>];
-}
+API = <span class="s">"https://api.snapmeasureai.com/v1/measurements"</span>
+KEY = os.environ[<span class="s">"SNAPMEASURE_API_KEY"</span>]   <span class="c"># smk_live_…, kept on your server</span>
 
-<span class="c">// frontFile, sideFile: File or Blob objects from your own capture or upload UI,</span>
-<span class="c">// e.g. document.querySelector("#front-photo").files[0]</span>
-<span class="k">const</span> res = <span class="k">await</span> fetch(SNAPMEASURE_ENDPOINT, {
-  method: <span class="s">"POST"</span>,
-  headers: { <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span> },
-  body: JSON.stringify({
-    height: <span class="s">"174cm"</span>,                       <span class="c">// or "68in"</span>
-    company: PARTNER_CODE,
-    images: [
-      { fileName: <span class="s">"front.jpg"</span>, data: <span class="k">await</span> toBase64(frontFile) },
-      { fileName: <span class="s">"side.jpg"</span>,  data: <span class="k">await</span> toBase64(sideFile) },
-    ],
-  }),
-});
-<span class="k">if</span> (!res.ok) <span class="k">throw new</span> Error(<span class="k">await</span> res.text());
-<span class="k">const</span> result = <span class="k">await</span> res.json();
-console.log(result.measurements[<span class="s">"waist circumference"</span>]);   <span class="c">// 88.6 (cm)</span></pre>
-<pre id="code-py" role="tabpanel" aria-labelledby="tab-py" hidden><span class="k">import</span> base64, requests
+<span class="k">def</span> b64(path):
+    <span class="k">with</span> open(path, <span class="s">"rb"</span>) <span class="k">as</span> f:
+        <span class="k">return</span> base64.b64encode(f.read()).decode(<span class="s">"ascii"</span>)
 
-SNAPMEASURE_ENDPOINT = <span class="s">"https://…"</span>   <span class="c"># issued at onboarding</span>
-PARTNER_CODE = <span class="s">"your-partner-code"</span>
-
-<span class="k">def</span> to_base64(image_bytes):
-    <span class="c"># The raw bytes of a JPEG or PNG, as base64 text</span>
-    <span class="k">return</span> base64.b64encode(image_bytes).decode(<span class="s">"ascii"</span>)
-
-<span class="c"># Photo bytes can come from anywhere: your upload handler, S3, a database, or disk</span>
-<span class="k">with</span> open(<span class="s">"front.jpg"</span>, <span class="s">"rb"</span>) <span class="k">as</span> f:
-    front = f.read()
-<span class="k">with</span> open(<span class="s">"side.jpg"</span>, <span class="s">"rb"</span>) <span class="k">as</span> f:
-    side = f.read()
-
-payload = {
-    <span class="s">"height"</span>: <span class="s">"174cm"</span>,                  <span class="c"># or "68in"</span>
-    <span class="s">"company"</span>: PARTNER_CODE,
-    <span class="s">"images"</span>: [
-        {<span class="s">"fileName"</span>: <span class="s">"front.jpg"</span>, <span class="s">"data"</span>: to_base64(front)},
-        {<span class="s">"fileName"</span>: <span class="s">"side.jpg"</span>,  <span class="s">"data"</span>: to_base64(side)},
-    ],
-}
-
-res = requests.post(SNAPMEASURE_ENDPOINT, json=payload, timeout=<span class="n">60</span>)
-res.raise_for_status()
+res = requests.post(API, headers={<span class="s">"X-API-Key"</span>: KEY}, timeout=<span class="n">120</span>, json={
+    <span class="s">"height"</span>: <span class="s">"174cm"</span>,                       <span class="c"># or "68.5in"</span>
+    <span class="s">"images"</span>: [b64(<span class="s">"front.jpg"</span>), b64(<span class="s">"side.jpg"</span>)],
+    <span class="s">"include"</span>: [<span class="s">"glb"</span>],                      <span class="c"># optional: the 3D body too</span>
+    <span class="s">"reference"</span>: <span class="s">"order-42"</span>,                 <span class="c"># optional: echoed back</span>
+})
 result = res.json()
-print(result[<span class="s">"measurements"</span>][<span class="s">"waist circumference"</span>])   <span class="c"># 88.6 (cm)</span></pre>
+<span class="k">if not</span> res.ok:
+    err = result[<span class="s">"error"</span>]
+    <span class="k">raise</span> RuntimeError(f<span class="s">'{err["code"]}: {err["message"]} (request {result["request_id"]})'</span>)
+
+print(result[<span class="s">"measurements"</span>][<span class="s">"waist circumf"</span>])   <span class="c"># 79.5 (cm)</span></pre>
+<pre id="code-js" role="tabpanel" aria-labelledby="tab-js" hidden><span class="k">import</span> { readFile } <span class="k">from</span> <span class="s">"node:fs/promises"</span>;
+
+<span class="k">const</span> API = <span class="s">"https://api.snapmeasureai.com/v1/measurements"</span>;
+<span class="k">const</span> KEY = process.env.SNAPMEASURE_API_KEY;   <span class="c">// smk_live_…, kept on your server</span>
+<span class="k">const</span> b64 = <span class="k">async</span> (path) =&gt; (<span class="k">await</span> readFile(path)).toString(<span class="s">"base64"</span>);
+
+<span class="k">const</span> res = <span class="k">await</span> fetch(API, {
+  method: <span class="s">"POST"</span>,
+  headers: { <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>, <span class="s">"X-API-Key"</span>: KEY },
+  body: JSON.stringify({
+    height: <span class="s">"174cm"</span>,                             <span class="c">// or "68.5in"</span>
+    images: [<span class="k">await</span> b64(<span class="s">"front.jpg"</span>), <span class="k">await</span> b64(<span class="s">"side.jpg"</span>)],
+    include: [<span class="s">"glb"</span>],                            <span class="c">// optional: the 3D body too</span>
+    reference: <span class="s">"order-42"</span>,                       <span class="c">// optional: echoed back</span>
+  }),
+  signal: AbortSignal.timeout(<span class="n">120_000</span>),
+});
+<span class="k">const</span> result = <span class="k">await</span> res.json();
+<span class="k">if</span> (!res.ok) {
+  <span class="k">const</span> { code, message } = result.error;
+  <span class="k">throw new</span> Error(<span class="s">`${code}: ${message} (request ${result.request_id})`</span>);
+}
+
+console.log(result.measurements[<span class="s">"waist circumf"</span>]);   <span class="c">// 79.5 (cm)</span></pre>
 <pre id="code-curl" role="tabpanel" aria-labelledby="tab-curl" hidden><span class="c"># Base64-encode each photo onto one line, then build the JSON body</span>
 FRONT=$(base64 &lt; front.jpg | tr -d <span class="s">'\n'</span>)
 SIDE=$(base64 &lt; side.jpg | tr -d <span class="s">'\n'</span>)
-printf <span class="s">'{"height":"174cm","company":"%s","images":[{"fileName":"front.jpg","data":"%s"},{"fileName":"side.jpg","data":"%s"}]}'</span> \
-  <span class="s">"$PARTNER_CODE"</span> <span class="s">"$FRONT"</span> <span class="s">"$SIDE"</span> &gt; scan.json
+printf <span class="s">'{"height":"174cm","images":["%s","%s"]}'</span> <span class="s">"$FRONT"</span> <span class="s">"$SIDE"</span> &gt; scan.json
 
-curl -X POST <span class="s">"$SNAPMEASURE_ENDPOINT"</span> \
+curl https://api.snapmeasureai.com/v1/measurements \
+  -H <span class="s">"X-API-Key: $SNAPMEASURE_API_KEY"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
-  --max-time <span class="n">60</span> \
+  --max-time <span class="n">120</span> \
   -d @scan.json</pre>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ==================== AUTHENTICATION ==================== -->
+<section class="section" id="auth">
+  <div class="container">
+    <p class="section__eyebrow">Authentication</p>
+    <h2 class="section__title">One key per place you call from.</h2>
+    <p class="section__sub">Every request carries an API key in the <code>X-API-Key</code> header (<code>Authorization: Bearer</code> works too). Never put a key in a URL.</p>
+
+    <div class="table-wrap stack">
+      <table>
+        <thead><tr><th>Key type</th><th>Prefix</th><th>Use it from</th><th>Protection</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Key type"><span class="field">Server</span></td><td data-l="Prefix"><code>smk_live_</code></td><td data-l="Use it from">Your back end</td><td data-l="Protection">Secret. Refused when sent from a web page. Can be limited to your own IP ranges.</td></tr>
+          <tr><td data-l="Key type"><span class="field">Browser</span></td><td data-l="Prefix"><code>smk_pub_</code></td><td data-l="Use it from">Your website</td><td data-l="Protection">Works only from the website addresses registered for it, with per-visitor limits.</td></tr>
+          <tr><td data-l="Key type"><span class="field">App</span></td><td data-l="Prefix"><code>smk_app_</code></td><td data-l="Use it from">Your mobile app</td><td data-l="Protection">Per-device limits, so one copied key can't run up volume.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="list" style="margin-top:22px;">
+      <li><span><b>Rotation without downtime.</b> Hold several keys at once: switch to a new one, then the old one is disabled. Keys can also carry an expiry date.</span></li>
+      <li><span><b>Limits per key.</b> Each key has its own rate limits and number of scans at once, as set in your agreement.</span></li>
+      <li><span><b>Stored as hashes.</b> We keep only a cryptographic hash of each key, so a key is shown once, when it's issued.</span></li>
+    </ul>
+  </div>
+</section>
+
 <!-- ==================== REQUEST ==================== -->
-<section class="section" id="request">
+<section class="section section--alt" id="request">
   <div class="container">
     <p class="section__eyebrow">Request</p>
-    <h2 class="section__title">Three fields. That's the whole input.</h2>
+    <h2 class="section__title">Two fields required. Everything else is optional.</h2>
     <p class="section__sub">A JSON body sent with <code>Content-Type: application/json</code>.</p>
+
+    <div><span class="ep"><b>POST</b>/v1/measurements</span></div>
 
     <div class="callout">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.7"/><path d="M10 6v5M10 13.5v.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
       <div>
         <b>Photos go inside the JSON, as base64 text</b>
-        <p>Capture or upload photos however your product already does. When you call the API, send each photo's JPEG or PNG bytes as a base64 string in <code>images[].data</code>, not as a <code>multipart/form-data</code> file field. The quickstart code above does exactly this.</p>
+        <p>Send each photo's JPEG, PNG or WebP bytes as a base64 string (a <code>data:image/jpeg;base64,</code> prefix is fine), not as a <code>multipart/form-data</code> file. Up to 30&nbsp;MB and 100 megapixels per photo, 80&nbsp;MB per request. Phone photos are turned the right way up from their EXIF orientation.</p>
       </div>
     </div>
 
-    <div class="table-wrap">
+    <div class="table-wrap stack">
       <table>
         <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
         <tbody>
-          <tr>
-            <td><span class="field">height</span><span class="req req--yes">Required</span></td>
-            <td><span class="type">string</span></td>
-            <td>The person's height with its unit: <code>"174cm"</code> or <code>"68in"</code>. The body model is scaled to it, so every measurement comes out at real size — and in the same unit.</td>
-          </tr>
-          <tr>
-            <td><span class="field">images</span><span class="req req--yes">Required</span></td>
-            <td><span class="type">array</span></td>
-            <td>Two to four photos of one person, <b>front first, then side</b>. A back view or the other side is optional and refines depth. Each item is <code>{ "fileName", "data" }</code>, where <code>data</code> is the photo as a <b>base64-encoded string</b> of the JPEG or PNG bytes (a <code>data:image/jpeg;base64,</code> prefix is also accepted). Up to 30&nbsp;MB per photo; 800&nbsp;px on the longest side is all the engine uses.</td>
-          </tr>
-          <tr>
-            <td><span class="field">company</span><span class="req req--opt">Partner code</span></td>
-            <td><span class="type">string</span></td>
-            <td>Your partner code, issued at onboarding. It selects your measurement set and the outputs your integration returns. Leave it blank to get the live demo's default output: the standard measurement set plus the embeddable 3D viewer.</td>
-          </tr>
+          <tr><td data-l="Field"><span class="field">height</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">string | number</span></td><td data-l="Description"><code>"174cm"</code> or <code>"68.5in"</code>, or a number with <code>"height_unit": "cm"</code> or <code>"in"</code>. The body is scaled to it, so every measurement is at real size.</td></tr>
+          <tr><td data-l="Field"><span class="field">images</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">2–4 photos of one person, <b>front first, then side</b>; a back or second side view helps. Each is a base64 string or <code>{"data": "…"}</code>. Whole body in frame, head to feet.</td></tr>
+          <tr><td data-l="Field"><span class="field">include</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">Extra outputs: <code>obj</code>, <code>glb</code>, <code>geometry</code>, <code>faces</code>, <code>viewer</code>, <code>heights_above_floor</code>, <code>sizes</code> (see <a href="#outputs" class="ok">Outputs</a>). Without it you get your account's default outputs.</td></tr>
+          <tr><td data-l="Field"><span class="field">profile</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">Your measurement profile: your own measurement set. Keys with a default profile use it automatically.</td></tr>
+          <tr><td data-l="Field"><span class="field">unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>cm</code>, <code>mm</code> or <code>in</code>. Default: your account's setting, or the height's unit.</td></tr>
+          <tr><td data-l="Field"><span class="field">pose</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string | object</span></td><td data-l="Description">Pose of the 3D files: <code>a_pose</code> (default), <code>t_pose</code>, or your own angles such as <code>{"arms": 45, "legs": 6}</code>. See <a href="#mesh" class="ok">3D files</a>.</td></tr>
+          <tr><td data-l="Field"><span class="field">watertight</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Description"><code>true</code>: the OBJ and glTF are one closed surface, for cloth simulation, physics and 3D printing.</td></tr>
+          <tr><td data-l="Field"><span class="field">mesh_units</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">OBJ units: <code>m</code> (default), <code>cm</code> or <code>mm</code>. glTF and geometry are always metres.</td></tr>
+          <tr><td data-l="Field"><span class="field">viewer_style</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>studio</code> (every measurement, custom measurements) or <code>showcase</code> (the body large, with the key measurements on it).</td></tr>
+          <tr><td data-l="Field"><span class="field">reference</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">Your own identifier, up to 128 characters, returned as sent. We don't store or log it.</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">No names, emails, or account IDs are needed. To join a result to your own record, keep your reference on your side and attach the response to it when it comes back.</p>
+    <p class="note">No names, emails or account ids are needed. To join a result to your own record, keep your id on your side, or pass it as <code>reference</code>.</p>
   </div>
 </section>
 
 <!-- ==================== OUTPUTS ==================== -->
-<section class="section section--alt" id="outputs">
+<section class="section" id="outputs">
   <div class="container">
     <p class="section__eyebrow">Outputs</p>
     <h2 class="section__title">Measurements, the full 3D body, or both.</h2>
-    <p class="section__sub">Every scan reconstructs a complete 3D body and computes a lot along the way — and anything computed during a scan can be returned. Each integration takes the combination its product needs, and that can grow as the product does.</p>
+    <p class="section__sub">Every scan builds a complete 3D body. Take the measurements only, or add any of these, per request or as your account's default.</p>
 
     <div class="outputs">
       <article class="out">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><ellipse cx="10" cy="10" rx="8" ry="3.4" stroke="currentColor" stroke-width="1.7"/><path d="M2 10v0M18 10" stroke="currentColor" stroke-width="1.7"/></svg></div>
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><ellipse cx="10" cy="10" rx="8" ry="3.4" stroke="currentColor" stroke-width="1.7"/></svg></div>
         <h3>Body measurements <span class="badge badge--core">Core</span></h3>
-        <p>Circumferences and lengths across the full body — chest, waist, hips, neck, bicep, forearm, wrist, thigh, calf, ankle, shoulder breadth, arm length, inside leg, torso lengths, foot length and width — in centimetres or inches, matching the height you send.</p>
+        <p>About 20 standard girths and lengths: chest, waist, hips, neck, upper arm, forearm, wrist, thigh, calf, ankle, head, shoulder width, arm length, inseam, torso length, foot length and width. In centimetres, millimetres or inches.</p>
       </article>
       <article class="out">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16l12-12M4 4h4M4 4v4M16 16h-4M16 16v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
-        <h3>Custom measurement sets <span class="badge badge--core">Core</span></h3>
-        <p>Any circumference or length between any points on the body, defined once in the live demo's 3D viewer and saved as a JSON measurement profile. Your partner code applies it to every scan — 100+ measurements are available.</p>
+        <h3>Your measurement set <span class="badge badge--core">Core</span></h3>
+        <p>Define any girth or length on the body in the demo's measurement studio (Custom Measure) and save it as a profile. Every scan then returns exactly that set, in your field names, units and rounding.</p>
       </article>
       <article class="out">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2l7 4v8l-7 4-7-4V6l7-4z M3 6l7 4 7-4 M10 10v8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <h3>3D body model <span class="badge badge--core">Core</span></h3>
-        <p>The complete 10,000-point body mesh in a standard pose, scaled to the person's real height. Delivered as OBJ for CAD, pattern-making, virtual fitting, avatars, and digital twins.</p>
-      </article>
-      <article class="out out--wide out--feature">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s-6.5-3.9-6.5-8.6A3.6 3.6 0 0110 6.3a3.6 3.6 0 016.5 2.1C16.5 13.1 10 17 10 17z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5.5 10h2.2l1.2-2 1.6 4 1.2-2h2.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <h3>Health indicators <span class="badge badge--core">Health programs</span></h3>
-          <p>Waist, hip and limb girths tracked scan to scan, plus ratios such as waist-to-height and waist-to-hip from the same measurements. A way to show change between visits, alongside clinical assessment rather than instead of it.</p>
-        </div>
-        <a href="https://snapmeasureai.com/patient-engagement-platform/" class="btn btn--ghost">GLP-1 programs →</a>
+        <h3>3D body <span class="badge badge--core">Core</span></h3>
+        <p>The body at real size, in the same 10,475-point topology for every scan: OBJ, glTF&nbsp;2.0 (each measurement as a named line), or raw geometry with named landmarks and joint centres.</p>
       </article>
       <article class="out out--indigo">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10.2l2 2 4-4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Person check <span class="badge badge--core">Built in</span></h3>
-        <p>Every photo is checked for a person before it is measured. Photos without one are dropped, and if fewer than two usable photos remain the response has no measurements, so your app can ask for a retake.</p>
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 17.5h6M10 14.5v3M8 7l3 2-3 2V7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Embeddable 3D viewer <span class="badge badge--opt">Optional</span></h3>
+        <p>A self-contained interactive viewer page for an iframe or web view, in your colours and with your logo or none. It loads nothing from third parties.</p>
       </article>
       <article class="out out--indigo">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 17h14M7 17V4M13 17V8M7 7h3M13 11h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-        <h3>Ground-referenced measurements <span class="badge badge--opt">Available</span></h3>
-        <p>Leg circumferences at fixed heights from the floor, and the height above the floor of every circumference — the format compression-garment and medical-fit makers specify garments in.</p>
+        <h3>Heights above the floor <span class="badge badge--opt">Optional</span></h3>
+        <p>For each girth, its height above the floor at heel level: the format compression-garment and medical-fit makers specify garments in.</p>
       </article>
       <article class="out out--indigo">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 15c3 0 4-9 8-9s5 9 8 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6.5 15V9M13.5 15V9M10 15V5" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.6 1.6"/></svg></div>
-        <h3>Measurement uncertainty <span class="badge badge--opt">On request</span></h3>
-        <p>The model predicts an uncertainty for each core measurement, not just a value, and uses it to combine the photos into one result. It can be added to your response, for example to flag a scan for review.</p>
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 8h7M6.5 11h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Your size charts <span class="badge badge--opt">Optional</span></h3>
+        <p>Set up your charts once (one per garment, if you like). Each scan returns the size in each chart, and whether each measurement sits below, within or above it.</p>
       </article>
-      <article class="out out--wide">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="5" cy="10" r="1.6" fill="currentColor"/><circle cx="10" cy="10" r="1.6" fill="currentColor"/><circle cx="15" cy="10" r="1.6" fill="currentColor"/></svg></div>
+      <article class="out out--wide out--feature">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10.2l2 2 4-4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div>
-          <h3>Also available from every scan</h3>
-          <p>A compact body shape code (a few hundred bytes — store it, then regenerate the 3D model or apply new measurement definitions later without new photos), 3D joint positions and per-photo keypoints, a body-part map of the 3D model, the exact ring or path each measurement was taken along, and named landmark points on the body surface. If it's computed during a scan, it can be in your response.</p>
-        </div>
-        <a href="https://snapmeasureai.com/contact/" class="btn btn--ghost">Ask about an output →</a>
-      </article>
-      <article class="out out--wide out--indigo">
-        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 17.5h6M10 14.5v3M8 7l3 2-3 2V7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <div>
-          <h3>Embeddable 3D viewer <span class="badge badge--opt">Optional</span></h3>
-          <p>The interactive viewer from the live demo — rotating body model, measurement rings and lengths, a custom-measurement editor — returned as a self-contained page you can drop into an iframe, under your brand. Skip it if you render results yourself.</p>
+          <h3>Person check <span class="badge badge--core">Built in</span></h3>
+          <p>Every photo is checked for a person before it is measured. Photos without one are left out and listed in <code>photos.unused</code>, so your app can ask for that photo again; with fewer than two usable photos the answer is <code>422 no_person_detected</code>.</p>
         </div>
         <a href="https://demo.snapmeasureai.com/" class="btn btn--ghost">See it in the demo →</a>
       </article>
     </div>
 
+    <h3 class="sub-h">Extensions on request</h3>
+    <div class="extensions">
+      <div class="opt"><p class="opt__k">On request</p><h3>Measurement uncertainty</h3><p>The model estimates an uncertainty for each core measurement. It can be added to your response, for example to flag a scan for review.</p></div>
+      <div class="opt"><p class="opt__k">On request</p><h3>Body shape code</h3><p>A compact code for the body (a few hundred bytes) to store and later rebuild the 3D body, or take new measurements, without new photos.</p></div>
+      <div class="opt"><p class="opt__k">On request</p><h3>Hosted capture page</h3><p>A guided capture page under your brand, linked from an email, SMS, QR code or your portal, for teams without their own capture screen.</p></div>
+    </div>
+
     <div class="resp">
       <div>
-        <h3>Shaped per integration</h3>
-        <p>Your outputs are configured on your partner code, so a sizing integration and a health integration can call the same endpoint and get very different responses.</p>
-        <ul>
-          <li>Uniform supplier: your garment measurement set, mapped to your size chart</li>
-          <li>Made-to-measure: measurements plus the OBJ body model for pattern software</li>
-          <li>E-commerce sizing: the shopper's measurements, compared with each garment's size chart</li>
-          <li>Compression garments: leg girths at the exact heights from the floor your patterns use</li>
-          <li>GLP-1 program: tracking girths and waist-to-height ratio for the patient record</li>
-        </ul>
+        <h3><code>include</code> options</h3>
+        <div class="table-wrap stack">
+          <table style="min-width:0">
+            <thead><tr><th>Value</th><th>You get</th></tr></thead>
+            <tbody>
+              <tr><td data-l="Value"><span class="field">obj</span></td><td data-l="You get"><code>obj</code>: Wavefront OBJ text, for CAD, pattern-making and 3D tools</td></tr>
+              <tr><td data-l="Value"><span class="field">glb</span></td><td data-l="You get"><code>glb</code>: glTF 2.0 binary (base64), for three.js, Babylon.js, Unity, Blender</td></tr>
+              <tr><td data-l="Value"><span class="field">geometry</span></td><td data-l="You get"><code>geometry</code>: vertices, measurement outlines, landmarks and joints, for your own viewer</td></tr>
+              <tr><td data-l="Value"><span class="field">faces</span></td><td data-l="You get"><code>geometry.faces</code>: the triangles, the same for every scan</td></tr>
+              <tr><td data-l="Value"><span class="field">viewer</span></td><td data-l="You get"><code>viewer_html</code>: the embeddable 3D viewer page</td></tr>
+              <tr><td data-l="Value"><span class="field">heights_above_floor</span></td><td data-l="You get"><code>heights_above_floor</code>: each girth's height above the floor</td></tr>
+              <tr><td data-l="Value"><span class="field">sizes</span></td><td data-l="You get"><code>sizes</code>: the size in each of your size charts</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Also in every response: <code>request_id</code>, <code>model_version</code>, <code>unit</code>, <code>photos</code> and, with a profile, <code>missing</code> for any measurement that couldn't be taken on this body.</p>
       </div>
       <div class="code-card">
         <div class="code-card__bar">
           <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="code-card__title">Example response · measurements + 3D body model</span>
+          <span class="code-card__title">GET /v1/catalog · what your key returns</span>
           <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
         </div>
 <pre>{
-  <span class="p">"measurements"</span>: {
-    <span class="p">"height"</span>:                    <span class="n">174.0</span>,
-    <span class="p">"chest circumference"</span>:       <span class="n">100.5</span>,
-    <span class="p">"waist circumference"</span>:       <span class="n">88.6</span>,
-    <span class="p">"hip circumference"</span>:         <span class="n">100.2</span>,
-    <span class="p">"neck circumference"</span>:        <span class="n">39.8</span>,
-    <span class="p">"shoulder breadth"</span>:          <span class="n">36.4</span>,
-    <span class="p">"arm right length"</span>:          <span class="n">54.2</span>,
-    <span class="p">"inside leg height"</span>:         <span class="n">76.5</span>,
-    <span class="p">"thigh left circumference"</span>:  <span class="n">57.5</span>
-    <span class="c">// …the rest of your measurement set, in cm (the height's unit)</span>
-  },
-  <span class="p">"body_model"</span>: {
-    <span class="p">"format"</span>: <span class="s">"obj"</span>,
-    <span class="p">"data"</span>:   <span class="s">"v 0.0213 1.5482 0.0871\nv …"</span>
-  }
+  <span class="p">"measurements"</span>: [
+    { <span class="p">"name"</span>: <span class="s">"waist circumf"</span>, <span class="p">"kind"</span>: <span class="s">"girth"</span>,
+      <span class="p">"definition"</span>: <span class="s">"Round the waist at the level of the navel, square to the torso. …"</span> },
+    <span class="c">// …every measurement your key returns, with how it is taken</span>
+  ],
+  <span class="p">"outputs"</span>:    [<span class="s">"geometry"</span>, <span class="s">"glb"</span>, <span class="s">"obj"</span>, <span class="s">"viewer"</span>],
+  <span class="p">"poses"</span>:      [<span class="s">"measure"</span>, <span class="s">"a_pose"</span>, <span class="s">"t_pose"</span>],
+  <span class="p">"pose_angles"</span>: { <span class="p">"arms"</span>: { <span class="p">"min"</span>: <span class="n">0</span>, <span class="p">"max"</span>: <span class="n">70</span> }, <span class="p">"legs"</span>: { <span class="p">"min"</span>: <span class="n">0</span>, <span class="p">"max"</span>: <span class="n">20</span> } },
+  <span class="p">"units"</span>:      [<span class="s">"cm"</span>, <span class="s">"mm"</span>, <span class="s">"in"</span>],
+  <span class="p">"size_charts"</span>: {},
+  <span class="p">"model_version"</span>: <span class="s">"2026.10"</span>
 }</pre>
       </div>
     </div>
-    <p class="note">Illustrative. Field names and the exact contents of each response are agreed during onboarding.</p>
+    <p class="note">Measurement definitions are our own, written out in the catalog; they are not certified to a published standard such as ISO&nbsp;8559-1. A measurement profile can add measurements to any standard's definitions.</p>
   </div>
 </section>
 
-<!-- ==================== PHOTOS ==================== -->
-<section class="section" id="photos">
+<!-- ==================== 3D FILES ==================== -->
+<section class="section section--alt" id="mesh">
   <div class="container">
-    <p class="section__eyebrow">Photo capture</p>
-    <h2 class="section__title">Good photos in, precise measurements out.</h2>
-    <p class="section__sub">Build these into your capture screen. The live demo's guided camera, with a countdown timer, shows one way to do it.</p>
+    <p class="section__eyebrow">3D files</p>
+    <h2 class="section__title">The same body, in the pose your pipeline needs.</h2>
+    <p class="section__sub">Measurements are always taken in the same pose, so these options change only the 3D files (<code>obj</code>, <code>glb</code>, <code>geometry</code>), never the numbers.</p>
 
-    <div class="guide">
-      <div class="tip">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="4.5" r="2.2" stroke="currentColor" stroke-width="1.6"/><path d="M11 7v7M11 9l-5 3.5M11 9l5 3.5M11 14l-3 6M11 14l3 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <b>Stand in an A-pose</b>
-        <span>Arms slightly away from the body in both photos. Raised arms lift the shirt and make the chest read larger.</span>
+    <div class="table-wrap stack">
+      <table>
+        <thead><tr><th>Option</th><th>Values</th><th>Use it for</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Option"><span class="field">pose</span></td><td data-l="Values"><code>a_pose</code> (default, also called <code>measure</code>): arms about 66° below horizontal, the pose measurements are taken in</td><td data-l="Use it for">Comparing scans, a natural standing body</td></tr>
+          <tr><td data-l="Option"><span class="field">pose</span></td><td data-l="Values"><code>t_pose</code>: arms level, legs straight</td><td data-l="Use it for">Game engines, avatars, auto-rigging tools</td></tr>
+          <tr><td data-l="Option"><span class="field">pose</span></td><td data-l="Values"><code>{"arms": 45, "legs": 6}</code>: arms 0–70° below horizontal, each leg 0–20° out</td><td data-l="Use it for">Cloth simulation, matching the avatar your garments were made on</td></tr>
+          <tr><td data-l="Option"><span class="field">watertight</span></td><td data-l="Values"><code>true</code>: one closed surface</td><td data-l="Use it for">Cloth collision, physics, volume, 3D printing</td></tr>
+          <tr><td data-l="Option"><span class="field">mesh_units</span></td><td data-l="Values"><code>m</code>, <code>cm</code>, <code>mm</code> (OBJ)</td><td data-l="Use it for">CAD and cloth tools that expect cm or mm</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="split" style="margin-top:36px;">
+      <div>
+        <h3>One topology for every scan</h3>
+        <p>Every body has the same 10,475 vertices in the same order and the same triangles, whatever the person's shape. Vertex <i>i</i> is the same point on the body in every scan, so two scans of a person compare point by point with no extra processing.</p>
       </div>
-      <div class="tip">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="5" y="2" width="12" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 6h6M11 9v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <b>Whole body in frame</b>
-        <span>Head to toe, phone upright at about hip height. A shelf or a second person works well.</span>
-      </div>
-      <div class="tip">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M7 3l-4 3 2 3 2-1v11h8V8l2 1 2-3-4-3c-1 1.5-2.5 2-4 2S8 4.5 7 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-        <b>Everyday clothes work</b>
-        <span>Fitted clothing gives the best results; jeans, shorts, and T-shirts are fine. Take off coats and bulky layers.</span>
-      </div>
-      <div class="tip">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M11 2v2M11 18v2M2 11h2M18 11h2M4.6 4.6l1.4 1.4M16 16l1.4 1.4M4.6 17.4L6 16M16 6l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <b>One person, decent light</b>
-        <span>No special background needed. Very dark photos or other people in frame can stop a scan.</span>
+      <div>
+        <h3>Coordinates</h3>
+        <ul class="list">
+          <li><span>Metres; <b>+y</b> is up and the body faces <b>+z</b> (its left side at +x).</span></li>
+          <li><span>The floor is at y&nbsp;=&nbsp;0 and the origin is between the heels.</span></li>
+          <li><span>Geometry arrays are little-endian base64 (float32 vertices, uint16 faces).</span></li>
+          <li><span>No skeleton or skinning weights: rig the watertight A-pose or T-pose body in your own tool; <code>geometry.joints</code> gives the joint centres.</span></li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ==================== ERRORS ==================== -->
-<section class="section section--alt" id="errors">
+<section class="section" id="errors">
   <div class="container">
     <p class="section__eyebrow">Errors</p>
-    <h2 class="section__title">What can go wrong, and what to do.</h2>
-    <p class="section__sub">Input problems are rejected immediately with a readable message. Photos the engine can't measure come back as a successful response with no measurements, so your app can ask for a retake.</p>
+    <h2 class="section__title">Stable codes you can act on.</h2>
+    <p class="section__sub">Every error has the same shape, a code that never changes meaning, and a request id. Error messages never repeat the content you sent.</p>
 
-    <div class="table-wrap">
+    <div class="code-card" style="margin-bottom:22px;">
+      <div class="code-card__bar"><span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="code-card__title">400 Bad Request</span></div>
+<pre>{ <span class="p">"error"</span>: { <span class="p">"code"</span>: <span class="s">"invalid_height"</span>, <span class="p">"message"</span>: <span class="s">"Height must be a number with cm or in, e.g. 174cm or 68.5in."</span> },
+  <span class="p">"request_id"</span>: <span class="s">"3f9a1c0d2b7e4a51"</span> }</pre>
+    </div>
+
+    <div class="table-wrap stack">
       <table>
-        <thead><tr><th>Status</th><th>When</th><th>What to do</th></tr></thead>
+        <thead><tr><th>HTTP</th><th>Code</th><th>What to do</th></tr></thead>
         <tbody>
-          <tr><td><span class="field">200</span></td><td>Scan complete — your configured outputs are in the body.</td><td>Store and use the result.</td></tr>
-          <tr><td><span class="field">200</span> · no measurements</td><td>A person couldn't be found in enough photos, or fewer than two usable photos were sent.</td><td>Ask the user to retake: full body in frame, A-pose, decent light, one person.</td></tr>
-          <tr><td><span class="field">400</span></td><td>Height missing, no photos or more than four, or a photo over the size limit.</td><td>Fix the request; the message says which check failed.</td></tr>
-          <tr><td><span class="field">500</span></td><td>The scan couldn't be completed on our side.</td><td>Retry once; if it repeats, send us the time of the request.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">400</span></td><td data-l="Code"><code>invalid_json</code>, <code>missing_images</code>, <code>too_few_images</code>, <code>too_many_images</code>, <code>invalid_image</code>, <code>invalid_height</code>, <code>invalid_option</code>, <code>unknown_profile</code></td><td data-l="What to do">Fix the request; the message says which check failed.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">401</span></td><td data-l="Code"><code>missing_api_key</code>, <code>invalid_api_key</code></td><td data-l="What to do">Send a valid key in <code>X-API-Key</code>.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">403</span></td><td data-l="Code"><code>key_disabled</code>, <code>origin_not_allowed</code>, <code>ip_not_allowed</code>, <code>profile_not_allowed</code>, <code>output_not_allowed</code></td><td data-l="What to do">Use the right key for where you call from, or contact us.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">408</span></td><td data-l="Code"><code>request_timeout</code></td><td data-l="What to do">The upload took over 60 seconds: send smaller photos.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">413</span></td><td data-l="Code"><code>image_too_large</code>, <code>request_too_large</code></td><td data-l="What to do">Send smaller photos.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">415</span></td><td data-l="Code"><code>unsupported_media_type</code></td><td data-l="What to do">Send JSON with <code>Content-Type: application/json</code>.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">422</span></td><td data-l="Code"><code>no_person_detected</code></td><td data-l="What to do">Ask for new photos: whole body in frame, head to feet, one person.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">429</span></td><td data-l="Code"><code>rate_limited</code>, <code>too_many_concurrent_requests</code>, <code>too_many_failed_attempts</code></td><td data-l="What to do">Wait the seconds in <code>Retry-After</code>, then retry.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">503</span></td><td data-l="Code"><code>busy</code>, <code>starting</code></td><td data-l="What to do">Retry after <code>Retry-After</code> seconds; capacity is being added.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">500</span></td><td data-l="Code"><code>internal_error</code></td><td data-l="What to do">Retry once. If it persists, send us the <code>request_id</code>.</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- ==================== DATA HANDLING ==================== -->
-<section class="section" id="data">
+<!-- ==================== LIMITS ==================== -->
+<section class="section section--alt" id="limits">
   <div class="container">
-    <p class="section__eyebrow">Data handling</p>
+    <p class="section__eyebrow">Limits &amp; retries</p>
+    <h2 class="section__title">Built for production traffic.</h2>
+    <div class="split" style="margin-top:28px;">
+      <div>
+        <h3>Rate-limit headers</h3>
+        <p>Every response carries the standard headers for your key's per-minute limit, and errors that ask you to wait carry <code>Retry-After</code>.</p>
+        <div class="code-card">
+<pre><span class="p">X-Request-Id</span>:        3f9a1c0d2b7e4a51
+<span class="p">RateLimit-Limit</span>:     120
+<span class="p">RateLimit-Remaining</span>: 117
+<span class="p">RateLimit-Reset</span>:     42</pre>
+        </div>
+      </div>
+      <div>
+        <h3>Client guidance</h3>
+        <ul class="list">
+          <li><span><b>Retry safely.</b> Retry 429 and 503 after <code>Retry-After</code> seconds, and 500 once. A scan changes nothing on our side, so a retry never double-counts state.</span></li>
+          <li><span><b>Pace concurrency.</b> Send a few scans at once per key (your agreement says how many) and queue the rest; each takes a few seconds.</span></li>
+          <li><span><b>Time out at 120 seconds.</b> Uploads must finish within 60.</span></li>
+          <li><span><b>Quote the request id.</b> It's in every response, header and body, and is all we need to look into a request.</span></li>
+          <li><span><b>Check readiness</b> with <code>GET /health</code>, which needs no key.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECURITY ==================== -->
+<section class="section" id="security">
+  <div class="container">
+    <p class="section__eyebrow">Security &amp; data handling</p>
     <h2 class="section__title">Built so there's nothing to leak.</h2>
-    <p class="section__sub">The simplest way to protect body photos is never to keep them. Here is exactly what happens to the data in a scan, end to end.</p>
+    <p class="section__sub">The simplest way to protect body photos is never to keep them. Here is what happens to the data in a scan, end to end.</p>
 
     <div class="trust">
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="3" y="5" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 5l16 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <div><h3>Photos are never stored</h3><p>Images are decoded and processed in memory, never written to disk, and discarded as soon as the response is returned. In the live demo they are also downscaled on the device first, so full-resolution originals never leave the phone.</p></div>
+        <div><h3>Photos are never stored</h3><p>Photos and heights are processed in memory, on a read-only file system, and deleted as soon as the response is sent. They are never written to disk, logged or used for training.</p></div>
       </div>
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 19c1.2-3.5 4-5 7-5s5.8 1.5 7 5M3 3l16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <div><h3>No personal information required</h3><p>A scan needs photos, a height, and your partner code — no name, email, account, or date of birth. Your own user or patient ID never has to reach us.</p></div>
-      </div>
-      <div class="trust__item">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 6h14v12H4zM8 6V4h6v2M8 11h6M8 14h4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
-        <div><h3>Your system holds the history</h3><p>Results are returned to you, not kept by us as a record. Longitudinal tracking, deltas, and retention live in your environment, under your policies.</p></div>
+        <div><h3>No personal data in logs</h3><p>Logs record technical details only (status, duration, error type), never photos, heights, measurements or IP addresses, and are deleted within days. We count scans per customer for billing: counts only.</p></div>
       </div>
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="5" y="10" width="12" height="9" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <div><h3>Encrypted in transit, hosted where you need</h3><p>Requests travel over HTTPS with TLS 1.3. For enterprise agreements, a dedicated server can run in the cloud region you choose, with custom data-handling terms.</p></div>
+        <div><h3>Encrypted and filtered</h3><p>TLS 1.2 or higher on every connection, a web application firewall in front of the service, API keys stored only as hashes, and per-key and per-visitor rate limits.</p></div>
+      </div>
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 6h14v12H4zM8 6V4h6v2M8 11h6M8 14h4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <div><h3>Ready for your review</h3><p>A Data Processing Agreement, a security overview for your IT review, and a dedicated instance with private networking when your policies need it. The 3D viewer contacts no third parties.</p></div>
       </div>
     </div>
 
     <div class="boundary" aria-label="Where data lives">
       <div><b>Your app</b>Photos and height, captured with the user's consent</div>
-      <div><b>SnapMeasureAI</b>Processed in memory · returned · forgotten</div>
+      <div><b>SnapMeasureAI</b>Processed in memory · returned · deleted</div>
       <div><b>Your system</b>Results stored against your record, under your retention</div>
     </div>
   </div>
 </section>
 
-<!-- ==================== OPTIONS ==================== -->
-<section class="section section--alt" id="options">
+<!-- ==================== REGIONS ==================== -->
+<section class="section section--alt" id="regions">
   <div class="container">
-    <p class="section__eyebrow">Integration options</p>
-    <h2 class="section__title">Fit it into the product you already have.</h2>
-    <p class="section__sub">Start with whichever is fastest for your team; they share one engine and one partner code.</p>
+    <p class="section__eyebrow">Regions &amp; deployment</p>
+    <h2 class="section__title">Your data stays in the region you choose.</h2>
+    <p class="section__sub">Photos sent to a region are processed in that region only. Your agreement names your region and your keys.</p>
 
-    <div class="options">
-      <div class="opt"><p class="opt__k">Core</p><h3>REST API</h3><p>Your own capture screen calls the endpoint directly from your app or backend.</p></div>
-      <div class="opt"><p class="opt__k">Visual</p><h3>Embedded 3D viewer</h3><p>Show the rotating body model and measurements inside your product, without building a 3D renderer.</p></div>
-      <div class="opt"><p class="opt__k">On request</p><h3>Hosted capture page</h3><p>A guided capture page under your brand, linked from an email, SMS, QR code or your portal.</p></div>
-      <div class="opt"><p class="opt__k">Enterprise</p><h3>Dedicated servers</h3><p>A dedicated server in the cloud region you choose, with custom data-handling terms.</p></div>
+    <div class="table-wrap stack regions">
+      <table>
+        <thead><tr><th>Deployment</th><th>Base URL</th><th>For</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Deployment"><span class="field">United States</span></td><td data-l="Base URL"><code>https://api.snapmeasureai.com</code></td><td data-l="For">Shared service, US customers</td></tr>
+          <tr><td data-l="Deployment"><span class="field">European Union (Frankfurt)</span></td><td data-l="Base URL"><code>https://eu.api.snapmeasureai.com</code></td><td data-l="For">Shared service, processing in the EU</td></tr>
+          <tr><td data-l="Deployment"><span class="field">Dedicated instance</span></td><td data-l="Base URL"><code>https://&lt;company&gt;.api.snapmeasureai.com</code></td><td data-l="For">Your own environment in the cloud region you choose, with its own network, keys and data-handling terms</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="options" style="margin-top:28px;">
+      <div class="opt"><p class="opt__k">Core</p><h3>REST API</h3><p>Your own capture screen calls the API from your back end, website or app.</p></div>
+      <div class="opt"><p class="opt__k">Visual</p><h3>Embedded 3D viewer</h3><p>Show the body and measurements inside your product without building a 3D renderer.</p></div>
+      <div class="opt"><p class="opt__k">On request</p><h3>Hosted capture page</h3><p>A guided capture page under your brand, for teams without their own capture screen.</p></div>
+      <div class="opt"><p class="opt__k">Enterprise</p><h3>Dedicated instance</h3><p>Your own environment, private networking, and the region and terms your policies require.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VERSIONING ==================== -->
+<section class="section" id="versioning">
+  <div class="container">
+    <p class="section__eyebrow">Versioning</p>
+    <h2 class="section__title">Stable to build on.</h2>
+    <div class="split" style="margin-top:24px;">
+      <ul class="list">
+        <li><span><b><code>/v1</code> is stable.</b> Anything that would break an integration comes with a new version path and advance notice, as set out in your agreement.</span></li>
+        <li><span><b>Additions arrive without notice.</b> New optional fields and outputs can appear at any time, so ignore fields you don't recognise.</span></li>
+      </ul>
+      <ul class="list">
+        <li><span><b><code>model_version</code></b> changes only when the measurement models change. Store it with each result, so you know which model measured it.</span></li>
+        <li><span><b>Existing integrations</b> on the original <code>POST /body/analyze</code> contract keep working; new integrations should use <code>/v1/measurements</code>.</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
 <!-- ==================== FAQ ==================== -->
-<section class="section" id="faq">
+<section class="section section--alt" id="faq">
   <div class="container">
     <p class="section__eyebrow">FAQ</p>
     <h2 class="section__title">Developer questions</h2>
     <div class="faq" style="margin-top:28px;">
       <details>
         <summary>Which languages and platforms are supported?</summary>
-        <p>Anything that can make an HTTPS request with a JSON body: web, iOS, Android, or any backend language. There is no SDK to install. If you'd rather not build a capture screen, a hosted, white-label capture page can be set up on request, and the 3D viewer can be embedded either way.</p>
+        <p>Anything that can make an HTTPS request with a JSON body: any back-end language, web, iOS or Android. There is no SDK to install; the <a href="/developers/openapi.yaml" class="ok" download>OpenAPI 3.1 file</a> imports into Postman and generates a typed client for most languages.</p>
       </details>
       <details>
-        <summary>Can we get only the measurements, or only the 3D body model?</summary>
-        <p>Yes. The response is configured per integration: measurements only, the 3D body model only, both, or any combination of the other outputs. Many partners take the measurements for sizing and keep the compact shape code so they can regenerate the body model later.</p>
+        <summary>Can we call the API from our website or mobile app?</summary>
+        <p>Yes. Browser keys work only from the website addresses registered for them, and app keys carry per-device limits. Server keys stay on your back end: requests made with a server key from a web page are refused.</p>
+      </details>
+      <details>
+        <summary>How can we try it before signing?</summary>
+        <p>The <a href="https://demo.snapmeasureai.com/" class="ok">live demo</a> runs the same scan, free, in any browser, including the measurement studio for defining your own measurements. API keys are issued with an agreement and set up for your use case: your measurement set, your outputs and your region.</p>
+      </details>
+      <details>
+        <summary>Can we get only the measurements, or only the 3D body?</summary>
+        <p>Yes. Choose per request with <code>include</code>, or set your account's default outputs. Many integrations take the measurements for sizing and the OBJ or glTF body for their pattern, CAD or visualization tools.</p>
       </details>
       <details>
         <summary>How do we define our own measurements?</summary>
-        <p>In the live demo's 3D viewer, use Custom Measure to define circumferences or lengths between any points on the body, save them as a measurement profile (a JSON file), and send it to us. It is attached to your partner code, so every scan through your integration returns your set.</p>
-      </details>
-      <details>
-        <summary>What units are measurements returned in?</summary>
-        <p>The unit of the height you send. Send "174cm" and every measurement comes back in centimetres; send "68in" and they come back in inches.</p>
+        <p>Open the measurement studio on a demo result, use Custom Measure to define any girth or length on the body, and save it as a measurement profile. We attach it to your keys, and every scan returns exactly that set, with your field names, units and rounding.</p>
       </details>
       <details>
         <summary>Are photos or results stored?</summary>
-        <p>No. Photos are decoded and processed in memory, never written to disk, and discarded when the response is returned. No account, name, or email is needed to run a scan, and results go back to your system rather than being kept by SnapMeasureAI.</p>
+        <p>No. Photos and heights are processed in memory and deleted as soon as the response is sent. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI.</p>
       </details>
       <details>
-        <summary>How do we get access?</summary>
-        <p>Contact us with your use case. Onboarding provides your endpoint, partner code, and test access, and we configure your outputs and measurement profile with you. You can run the live demo at any time to see the scan your users would get.</p>
+        <summary>How fast is a scan?</summary>
+        <p>Processing takes about five seconds; the upload adds to that, so send photos of 1,000–2,000&nbsp;px on the long side. When many scans arrive at once, capacity is added automatically, and a busy answer tells you when to retry.</p>
+      </details>
+      <details>
+        <summary>Will the API change under us?</summary>
+        <p>No. <code>/v1</code> is stable. New optional fields and outputs can be added at any time, so ignore fields you don't recognise. A change that would break an integration comes with a new version path and advance notice, as set out in your agreement.</p>
       </details>
     </div>
   </div>
 </section>
 
 <!-- ==================== CTA ==================== -->
-<section class="cta section--alt">
+<section class="cta">
   <div class="container">
     <h2>Ready to build it in?</h2>
-    <p>Tell us what you're building. We'll set up your endpoint, partner code, and measurement set, and walk your team through the first integration.</p>
+    <p>Tell us what you're building. We'll set up your keys, measurement set and region, and walk your team through the first integration.</p>
     <div class="hero__actions">
       <a href="https://snapmeasureai.com/contact/" class="btn btn--primary btn--lg">Request API access →</a>
       <a href="https://demo.snapmeasureai.com/" class="btn btn--ghost btn--lg">Try the live demo</a>

@@ -1,0 +1,282 @@
+openapi: 3.1.0
+info:
+  title: SnapMeasureAI API
+  version: "1.1"
+  description: >-
+    Body measurements and a 3D body from two to four photos and a height. Photos are processed
+    in memory and deleted when the response is sent. Guide: https://snapmeasureai.com/developers/
+  contact: {name: SnapMeasureAI, email: info@snapmeasureai.com, url: "https://snapmeasureai.com/contact/"}
+servers:
+  - {url: "https://api.snapmeasureai.com", description: "United States"}
+  - {url: "https://eu.api.snapmeasureai.com", description: "European Union (Frankfurt)"}
+security:
+  - apiKey: []
+  - bearer: []
+paths:
+  /v1/measurements:
+    post:
+      summary: Measure a body from photos
+      operationId: measure
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/MeasureRequest"}
+            example: {height: "174cm", images: ["<base64 front>", "<base64 side>"], include: ["glb"], reference: "order-42"}
+      responses:
+        "200":
+          description: Measured.
+          headers:
+            X-Request-Id: {$ref: "#/components/headers/RequestId"}
+            RateLimit-Limit: {$ref: "#/components/headers/RateLimitLimit"}
+            RateLimit-Remaining: {$ref: "#/components/headers/RateLimitRemaining"}
+            RateLimit-Reset: {$ref: "#/components/headers/RateLimitReset"}
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/MeasureResponse"}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+        "408": {$ref: "#/components/responses/Error"}
+        "413": {$ref: "#/components/responses/Error"}
+        "415": {$ref: "#/components/responses/Error"}
+        "422": {$ref: "#/components/responses/Error"}
+        "429": {$ref: "#/components/responses/Retry"}
+        "500": {$ref: "#/components/responses/Error"}
+        "503": {$ref: "#/components/responses/Retry"}
+  /body/analyze:
+    post:
+      summary: Measure a body (original contract)
+      description: Kept for existing integrations. New integrations should use /v1/measurements.
+      operationId: analyzeLegacy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [height, images]
+              properties:
+                height: {type: string, example: "174cm"}
+                company: {type: string, description: "Measurement profile code, or empty."}
+                images:
+                  type: array
+                  minItems: 2
+                  maxItems: 4
+                  items:
+                    type: object
+                    required: [data]
+                    properties:
+                      data: {type: string, description: "Base64 JPEG/PNG/WebP, or a data URI."}
+                      fileName: {type: string}
+      responses:
+        "200":
+          description: >-
+            Measured, or no person found (then "data" is empty and "html" is a page asking
+            for new photos).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: {type: string, description: "The measurements as a JSON string, in the height's unit."}
+                  html: {type: string, description: "The 3D viewer page (empty for keys without the viewer)."}
+        "400": {$ref: "#/components/responses/Error"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+        "413": {$ref: "#/components/responses/Error"}
+        "429": {$ref: "#/components/responses/Retry"}
+        "503": {$ref: "#/components/responses/Retry"}
+  /v1/catalog:
+    get:
+      summary: The measurements, outputs, poses and size charts available to this key
+      operationId: catalog
+      responses:
+        "200":
+          description: The catalog.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  measurements:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name: {type: string}
+                        kind: {type: string, enum: [girth, length]}
+                        definition: {type: string}
+                        source: {type: string, enum: [standard, profile]}
+                  note: {type: string}
+                  outputs: {type: array, items: {type: string}}
+                  poses: {type: array, items: {type: string}}
+                  pose_angles:
+                    type: object
+                    description: "The range of your own pose angles, in degrees."
+                    properties:
+                      arms: {type: object, properties: {min: {type: number}, max: {type: number}}}
+                      legs: {type: object, properties: {min: {type: number}, max: {type: number}}}
+                  units: {type: array, items: {type: string}}
+                  profile: {type: [string, "null"]}
+                  size_charts: {type: object}
+                  model_version: {type: string}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+        "429": {$ref: "#/components/responses/Retry"}
+  /health:
+    get:
+      summary: Service health
+      security: []
+      responses:
+        "200":
+          description: Ready.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: {type: string, enum: [ok]}
+                  environment: {type: string}
+                  release: {type: string}
+                  model_version: {type: string}
+        "503": {description: "Starting, or a scan has stopped responding (the container is being replaced)."}
+components:
+  securitySchemes:
+    apiKey: {type: apiKey, in: header, name: X-API-Key}
+    bearer: {type: http, scheme: bearer}
+  headers:
+    RequestId: {description: "Identifier of this request; quote it when you contact us.", schema: {type: string}}
+    RateLimitLimit: {description: "Requests allowed per minute for this key.", schema: {type: integer}}
+    RateLimitRemaining: {description: "Requests left in the current minute.", schema: {type: integer}}
+    RateLimitReset: {description: "Seconds until the minute window resets.", schema: {type: integer}}
+    RetryAfter: {description: "Seconds to wait before retrying.", schema: {type: integer}}
+  responses:
+    Error:
+      description: An error with a stable code.
+      headers: {X-Request-Id: {$ref: "#/components/headers/RequestId"}}
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Error"}
+    Retry:
+      description: Rate limited or busy; retry after Retry-After seconds.
+      headers:
+        Retry-After: {$ref: "#/components/headers/RetryAfter"}
+        X-Request-Id: {$ref: "#/components/headers/RequestId"}
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Error"}
+  schemas:
+    Pose:
+      description: >-
+        Pose of the 3D files (measurements are always taken in the measure pose): measure or
+        a_pose (the same A-pose, arms about 66 degrees down), t_pose (arms level), or your own
+        angles in degrees (arms below horizontal, each leg out from vertical; a missing one is
+        arms 45, legs 0).
+      oneOf:
+        - {type: string, enum: [measure, a_pose, t_pose]}
+        - type: object
+          additionalProperties: false
+          minProperties: 1
+          properties:
+            arms: {type: number, minimum: 0, maximum: 70}
+            legs: {type: number, minimum: 0, maximum: 20}
+          example: {arms: 45, legs: 6}
+    MeasureRequest:
+      type: object
+      required: [height, images]
+      properties:
+        height:
+          oneOf:
+            - {type: string, pattern: "^\\s*\\d{1,3}([.,]\\d{1,2})?\\s*(cm|in)\\s*$", example: "174cm"}
+            - {type: number, example: 174}
+        height_unit: {type: string, enum: [cm, in], description: "Unit of a numeric height (default cm)."}
+        images:
+          type: array
+          minItems: 2
+          maxItems: 4
+          description: Front first, then side; optionally a back or second side view.
+          items:
+            oneOf:
+              - {type: string, description: "Base64 JPEG/PNG/WebP, or a data URI."}
+              - {type: object, required: [data], properties: {data: {type: string}}}
+        profile: {type: string, description: "Your measurement profile code."}
+        include:
+          type: array
+          maxItems: 10
+          items: {type: string, enum: [viewer, obj, glb, geometry, faces, heights_above_floor, sizes]}
+        unit: {type: string, enum: [cm, mm, in], description: "Unit of the measurements returned."}
+        viewer_style: {type: string, enum: [studio, showcase]}
+        pose: {$ref: "#/components/schemas/Pose"}
+        watertight: {type: boolean, description: "OBJ and glTF as one closed surface (eyes left out, mouth closed; renumbers the vertices)."}
+        mesh_units: {type: string, enum: [m, cm, mm], description: "OBJ units."}
+        reference: {type: string, maxLength: 128, description: "Returned as sent; not stored or logged."}
+        include_viewer: {type: boolean, deprecated: true, description: 'Same as include ["viewer"].'}
+    MeasureResponse:
+      type: object
+      required: [request_id, model_version, unit, measurements, photos]
+      properties:
+        request_id: {type: string}
+        reference: {type: string}
+        model_version: {type: string, example: "2026.10"}
+        unit: {type: string, enum: [cm, mm, in]}
+        profile: {type: [string, "null"]}
+        photos:
+          type: object
+          properties:
+            received: {type: integer}
+            used: {type: integer, description: "Photos that showed a whole person."}
+            unused: {type: array, items: {type: integer}, description: "Indices (from 0) of photos without a whole person."}
+        pose: {$ref: "#/components/schemas/Pose"}
+        measurements:
+          type: object
+          additionalProperties: {type: [number, "null"]}
+          example: {"chest circumf": 99.5, "waist circumf": 79.5, "hip circumf": 94.8}
+        missing: {type: array, items: {type: string}, description: "Profile measurements that could not be taken."}
+        heights_above_floor: {type: object, additionalProperties: {type: number}}
+        sizes:
+          type: object
+          description: "Per size chart: the size, and each measurement below, within or above it."
+          additionalProperties:
+            type: object
+            properties:
+              size: {type: [string, "null"]}
+              fit: {type: object, additionalProperties: {type: string, enum: [below, within, above, missing]}}
+              all_within: {type: boolean}
+        obj: {type: string, description: "Wavefront OBJ text."}
+        glb: {type: string, format: byte, description: "glTF 2.0 binary, base64."}
+        viewer_html: {type: string, description: "A self-contained 3D viewer page."}
+        geometry: {$ref: "#/components/schemas/Geometry"}
+    Geometry:
+      type: object
+      description: Metres, +y up, the body facing +z. Arrays are little-endian base64.
+      properties:
+        format: {type: string, example: snapmeasure.body/1}
+        units: {type: string, example: m}
+        up: {type: string, example: "+y"}
+        front: {type: string, example: "+z"}
+        vertex_count: {type: integer, example: 10475}
+        face_count: {type: integer, example: 20908}
+        vertices: {type: string, format: byte, description: "float32 x, y, z per vertex."}
+        faces: {type: string, format: byte, description: "uint16 vertex indices, three per triangle (with include \"faces\")."}
+        pose: {$ref: "#/components/schemas/Pose"}
+        floor_y: {type: number, description: "Always 0: the floor (heel level) is at y = 0, the origin between the heels."}
+        landmarks: {type: object, additionalProperties: {type: array, items: {type: number}}, description: "Named points on the body (crown, neck_front, shoulder_left, navel, crotch, ...), metres."}
+        joints: {type: object, additionalProperties: {type: array, items: {type: number}}, description: "Centres of the 22 main joints (pelvis to right_wrist), metres."}
+        outlines:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              kind: {type: string, enum: [circumference, length]}
+              closed: {type: boolean}
+              points: {type: string, format: byte, description: "float32 x, y, z per point, in order."}
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: {type: string, example: invalid_height}
+            message: {type: string}
+        request_id: {type: string}

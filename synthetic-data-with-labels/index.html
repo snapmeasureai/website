@@ -14,7 +14,7 @@
 
   <title>Synthetic Human Training Data, Auto-Labeled | SnapMeasureAI</title>
   <meta name="description" content="Photorealistic synthetic people in everyday clothing, each with exact 3D ground truth: body shape, pose, keypoints, depth and body measurements. No manual labels.">
-  <meta name="keywords" content="synthetic human training data, SMPL synthetic dataset, pose estimation training data, body model synthetic images, auto-labeled computer vision data, synthetic data GDPR compliant, human pose segmentation dataset, diffusion synthetic data generation, annotation-free training data, body shape training data">
+  <meta name="keywords" content="synthetic human training data, synthetic body dataset, pose estimation training data, body model synthetic images, auto-labeled computer vision data, privacy-safe synthetic data, human pose segmentation dataset, diffusion synthetic data generation, annotation-free training data, body shape training data">
   <meta name="author" content="SnapMeasureAI">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://snapmeasureai.com/synthetic-data-with-labels/">
@@ -43,16 +43,16 @@
     "name": "SnapMeasureAI Synthetic Data",
     "applicationCategory": "BusinessApplication",
     "applicationSubCategory": "Synthetic Human Training Data Generation",
-    "description": "Photorealistic synthetic human training images generated from 3D body models via diffusion — with auto-generated pose, segmentation, depth, and body measurement labels. SMPL-compatible. No manual annotation, no real human subjects, no GDPR exposure. Enterprise licensing for CV and ML teams, body-tracking platforms, and research institutions.",
+    "description": "Photorealistic synthetic human training images generated from 3D body models via diffusion — with auto-generated pose, segmentation, depth, and body measurement labels. No manual annotation and no real people in the data. Enterprise licensing for CV and ML teams, body-tracking platforms, and research institutions.",
     "url": "https://snapmeasureai.com/synthetic-data-with-labels/",
     "featureList": [
-      "1M+ rigged 3D body models — full BMI, height, and demographic range",
+      "1M+ poseable 3D body models — full BMI, height, and demographic range",
       "Diffusion-based photorealistic rendering guided by depth maps, surface normals, and pose",
       "Auto-generated labels: 2D/3D keypoints, segmentation masks, depth maps, body measurements",
-      "SMPL and SMPL-X compatible — integrates with standard body modelling pipelines",
+      "Body-model shape and pose parameters— integrates with standard body modelling pipelines",
       "COCO-format keypoints and custom annotation schemas supported",
-      "No real human subjects — GDPR, HIPAA, and CCPA compatible",
-      "100M+ distinct image variations per base model",
+      "No real people in the data— no personal data to consent to, store or secure",
+      "2M+ training images generated for our own measurement model",
       "Edge cases, rare poses, and custom demographic distributions on demand"
     ],
     "offers": {
@@ -102,7 +102,7 @@
         "name": "How are the labels aligned to the generated images?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Labels are derived directly from the 3D body model geometry — keypoints, segmentation masks, and depth maps are computed from the same source that drives the render, not estimated after the fact. Because generation uses diffusion conditioned on depth, surface normals, and pose, there is natural variation between the 3D source and the photorealistic output — the same kind of variation you see in SMPL annotations fitted to real images. For pose estimation, segmentation, and body measurement tasks, geometry-derived labels at this scale consistently produce strong model performance."
+          "text": "Labels are derived directly from the 3D body model geometry — keypoints, segmentation masks, and depth maps are computed from the same source that drives the render, not estimated after the fact. Because generation uses diffusion conditioned on depth, surface normals, and pose, there is natural variation between the 3D source and the photorealistic output — the same kind of variation you see when body models are fitted to real images. For pose estimation, segmentation and body measurement, geometry-derived labels at this scale train well: it is the data our own measurement model learns from."
         }
       },
       {
@@ -110,7 +110,7 @@
         "name": "What output formats are supported?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SMPL and SMPL-X body model parameters (shape and pose coefficients), COCO-format 2D keypoints, 3D keypoints, instance segmentation masks, per-pixel depth maps, bounding boxes, and 100+ body measurements. Custom output schemas are available for specific model architectures and research pipelines."
+          "text": "Body-model shape and pose parameters, COCO-format 2D keypoints, 3D keypoints, instance segmentation masks, per-pixel depth maps, bounding boxes, and 100+ body measurements. Custom output schemas are available for specific model architectures and research pipelines."
         }
       },
       {
@@ -131,10 +131,10 @@
       },
       {
         "@type": "Question",
-        "name": "Is the data GDPR and HIPAA compliant?",
+        "name": "Does the data contain any real person's information?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. No real human subjects are involved at any stage. The 3D models are synthetic, the rendered images are synthetic, and no biometric data from real individuals is captured or stored. There are no data subject rights, no consent requirements, and no re-identification risk — making the dataset fully compatible with GDPR, HIPAA, and CCPA."
+          "text": "No. No real people are photographed or scanned at any stage. The 3D bodies are synthetic, the rendered images are synthetic, and no personal or biometric data from real individuals is captured or stored, so there are no subjects to ask for consent and nobody to re-identify. Your legal team can review how the data is made before you license it."
         }
       },
       {
@@ -702,6 +702,9 @@
     .dx-more { color: var(--teal); font-weight: 600; }
     .dx-more:hover { text-decoration: underline; }
     .dx-note { font-size: 13px; color: var(--text-3); margin-top: 12px; line-height: 1.6; }
+    .dx-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; margin: 14px 0 0; }
+    .dx-stats dt { font-size: 15.5px; font-weight: 650; color: var(--text); letter-spacing: -0.01em; line-height: 1.3; }
+    .dx-stats dd { margin: 2px 0 0; font-size: 12.5px; color: var(--text-3); line-height: 1.45; }
 
     /* ---- VIDEO ---- */
     .vx { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 56px; align-items: center; }
@@ -807,7 +810,7 @@
     </h1>
 
     <div class="hero__ticker-wrap" aria-label="Built for CV and ML teams, body-tracking platforms, and privacy-sensitive applications">
-      <div class="hero__ticker-item">Built for <em>CV and ML teams</em> — SMPL, COCO, and custom label formats</div>
+      <div class="hero__ticker-item">Built for <em>CV and ML teams</em> — COCO, body-model and custom label formats</div>
       <div class="hero__ticker-item">Built for <em>body-tracking platforms</em> — diverse data, no photo studio</div>
       <div class="hero__ticker-item">Built for <em>privacy-sensitive apps</em> — no real subjects, no consent needed</div>
     </div>
@@ -823,7 +826,7 @@
       <span class="hero__also-tag">Any body type &amp; pose</span>
       <span class="hero__also-tag">Edge cases on demand</span>
       <span class="hero__also-tag">Custom scenes &amp; lighting</span>
-      <span class="hero__also-tag">SMPL-compatible output</span>
+      <span class="hero__also-tag">Body-model parameters</span>
     </div>
 
     <div class="hero__actions">
@@ -850,20 +853,20 @@
 
     <div class="hero__stats">
       <div>
-        <div class="hero__stat-value">1M+</div>
-        <div class="hero__stat-label">3D body models in the library</div>
+        <div class="hero__stat-value">2M+</div>
+        <div class="hero__stat-label">Training images generated</div>
       </div>
       <div>
-        <div class="hero__stat-value">100M+</div>
-        <div class="hero__stat-label">Distinct image variations possible</div>
+        <div class="hero__stat-value">1M+</div>
+        <div class="hero__stat-label">3D bodies in the library</div>
+      </div>
+      <div>
+        <div class="hero__stat-value">BMI 15–45</div>
+        <div class="hero__stat-label">A third of bodies at BMI 30+</div>
       </div>
       <div>
         <div class="hero__stat-value">0</div>
         <div class="hero__stat-label">Manual labels needed</div>
-      </div>
-      <div>
-        <div class="hero__stat-value">∞</div>
-        <div class="hero__stat-label">No ceiling on dataset volume</div>
       </div>
     </div>
   </div>
@@ -894,8 +897,8 @@
 <div class="proof-strip">
   <div class="container">
     <div class="proof-strip__inner">
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>No human subjects — GDPR friendly</div>
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>SMPL, COCO, and custom output formats</div>
+      <div class="proof-strip__item"><span class="proof-strip__dot"></span>No real people in the data</div>
+      <div class="proof-strip__item"><span class="proof-strip__dot"></span>COCO, body-model and custom output formats</div>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Pose, segmentation, depth, measurements</div>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Any body type, skin tone, background</div>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Edge cases and rare poses on demand</div>
@@ -965,6 +968,18 @@
           <p class="dx-note dx-labels">Body shape and 3D pose &middot; 2D/3D keypoints &middot; body-part segmentation &middot; metric depth &middot; camera &middot; body measurements</p>
           <p class="dx-note"><a class="dx-more" href="https://snapmeasureai.com/contact/">Full sample label files on request &rarr;</a></p>
         </div>
+        <div class="dx-card">
+          <div class="dx-k">Who&rsquo;s in the dataset</div>
+          <dl class="dx-stats">
+            <div><dt>BMI 15&ndash;45</dt><dd>about a third at BMI 30+</dd></div>
+            <div><dt>141&ndash;206&nbsp;cm</dt><dd>standing height</dd></div>
+            <div><dt>50 / 50</dt><dd>women and men</dd></div>
+            <div><dt>Every skin tone</dt><dd>in equal shares</dd></div>
+            <div><dt>Young adult to elderly</dt><dd>age range</dd></div>
+            <div><dt>Survey-matched</dt><dd>body proportions follow population surveys</dd></div>
+          </dl>
+          <p class="dx-note">Dressed in the clothes people actually wear: sweaters, dresses, layers. Specify the distribution your model needs.</p>
+        </div>
       </aside>
     </div>
 
@@ -986,7 +1001,7 @@
       <div class="step">
         <p class="step__num">Step 01 — Model</p>
         <h3 class="step__title">Start with a 3D body</h3>
-        <p class="step__body">Choose from over one million rigged 3D body models — any body type, proportion, and pose. Specify lighting, background, and camera angle, or let us generate the variation set for you.</p>
+        <p class="step__body">Choose from over one million poseable 3D body models — any body type, proportion, and pose. Specify lighting, background, and camera angle, or let us generate the variation set for you.</p>
       </div>
       <div class="step">
         <p class="step__num">Step 02 — Render</p>
@@ -1018,7 +1033,7 @@
         <h3 class="audience-card__title">Training data without the annotation sprint</h3>
         <p class="audience-card__body">Pose estimation and body analysis models need thousands of labeled examples — and rare poses or edge-case body types are always underrepresented in real datasets. Synthetic data fills the gaps with consistent, reproducible labels.</p>
         <ul class="audience-card__list">
-          <li>SMPL body model parameters, COCO keypoints, segmentation masks</li>
+          <li>Body-model shape and pose parameters, COCO keypoints, segmentation masks</li>
           <li>Compatible with standard 3D body modelling and research pipelines</li>
           <li>Rare-pose and edge-case generation on request</li>
           <li>Custom label schemas and output formats available</li>
@@ -1035,7 +1050,7 @@
           <li>Limb and torso proportions vary independently, matched to anthropometric survey data</li>
           <li>Full range of skin tones, ages, and body shapes</li>
           <li>Body measurements derived from 3D geometry per image</li>
-          <li>No real human subjects — no GDPR or HIPAA exposure</li>
+          <li>No real people — no personal data to consent to, store or secure</li>
         </ul>
         <a href="https://snapmeasureai.com/contact/" class="audience-card__cta">Talk to us about your dataset →</a>
       </div>
@@ -1054,7 +1069,7 @@
       <div class="spec-item">
         <div class="spec-item__label">3D model library</div>
         <div class="spec-item__value">1M+ body models</div>
-        <div class="spec-item__note">Full range of body types, heights, weights, and poses — all rigged and poseable</div>
+        <div class="spec-item__note">Full range of body types, heights, weights, and poses — all poseable</div>
       </div>
       <div class="spec-item">
         <div class="spec-item__label">Rendering approach</div>
@@ -1068,8 +1083,8 @@
       </div>
       <div class="spec-item">
         <div class="spec-item__label">Output formats</div>
-        <div class="spec-item__value">SMPL · COCO · Custom</div>
-        <div class="spec-item__note">SMPL body model parameters, COCO-format keypoints, and custom schemas for your pipeline</div>
+        <div class="spec-item__value">COCO · Body model · Custom</div>
+        <div class="spec-item__note">Body-model shape and pose parameters, COCO-format keypoints, and custom schemas for your pipeline</div>
       </div>
       <div class="spec-item">
         <div class="spec-item__label">Ground truth</div>
@@ -1079,12 +1094,12 @@
       <div class="spec-item">
         <div class="spec-item__label">Privacy</div>
         <div class="spec-item__value">No real subjects</div>
-        <div class="spec-item__note">No biometric data captured or stored. Compatible with GDPR and HIPAA requirements.</div>
+        <div class="spec-item__note">No real people are photographed or scanned, so the data holds no personal or biometric information.</div>
       </div>
       <div class="spec-item">
         <div class="spec-item__label">Image variations</div>
-        <div class="spec-item__value">100M+ per model</div>
-        <div class="spec-item__note">Lighting, background, camera angle, and skin tone all independently variable</div>
+        <div class="spec-item__value">Independent controls</div>
+        <div class="spec-item__note">Lighting, background, camera angle, clothing and skin tone each varied on its own, for every body</div>
       </div>
       <div class="spec-item">
         <div class="spec-item__label">Body diversity</div>
@@ -1111,7 +1126,7 @@
 
       <div class="faq-item">
         <div class="faq-item__q" onclick="toggleFaq(this)">How are labels generated, and how accurate are they?<span class="faq-item__icon">+</span></div>
-        <p class="faq-item__a">Labels are computed directly from the 3D body model geometry — keypoints, segmentation masks, depth maps, and body measurements all share the same ground truth as the render. Because generation uses diffusion conditioned on depth, surface normals, and pose, there is natural variation between the 3D source and the photorealistic output — similar to the variation you see when SMPL parameters are fitted to real images. For most pose estimation, segmentation, and body measurement tasks this is not a practical limitation. Whether it is right for your specific model is a good question to explore on a call.</p>
+        <p class="faq-item__a">Labels are computed directly from the 3D body model geometry — keypoints, segmentation masks, depth maps, and body measurements all share the same ground truth as the render. Because generation uses diffusion conditioned on depth, surface normals, and pose, there is natural variation between the 3D source and the photorealistic output — similar to the variation you see when body models are fitted to real images. For most pose estimation, segmentation, and body measurement tasks this is not a practical limitation. Whether it is right for your specific model is a good question to explore on a call.</p>
       </div>
 
       <div class="faq-item">
@@ -1121,7 +1136,7 @@
 
       <div class="faq-item">
         <div class="faq-item__q" onclick="toggleFaq(this)">What output formats are supported?<span class="faq-item__icon">+</span></div>
-        <p class="faq-item__a">We support SMPL body model parameters (shape and pose coefficients compatible with standard 3D body modelling pipelines), COCO-format keypoints, instance segmentation masks, depth maps, bounding boxes, and body measurements. Custom output schemas are available — contact us with the format your pipeline expects.</p>
+        <p class="faq-item__a">We support body-model shape and pose parameters, COCO-format keypoints, instance segmentation masks, depth maps, bounding boxes, and body measurements. Custom output schemas are available — contact us with the format your pipeline expects.</p>
       </div>
 
       <div class="faq-item">
@@ -1130,8 +1145,8 @@
       </div>
 
       <div class="faq-item">
-        <div class="faq-item__q" onclick="toggleFaq(this)">Is the data GDPR and HIPAA compliant?<span class="faq-item__icon">+</span></div>
-        <p class="faq-item__a">Yes. No real human subjects are used at any stage. The 3D models are synthetic, the rendered images are synthetic, and no biometric data from real individuals is captured or stored. There are no data subject rights, no consent requirements, and no re-identification risk.</p>
+        <div class="faq-item__q" onclick="toggleFaq(this)">Does the data contain any real person&rsquo;s information?<span class="faq-item__icon">+</span></div>
+        <p class="faq-item__a">No. No real people are photographed or scanned at any stage. The 3D bodies are synthetic, the rendered images are synthetic, and no personal or biometric data from real individuals is captured or stored, so there are no subjects to ask for consent and nobody to re-identify. Your legal team can review how the data is made before you license it.</p>
       </div>
 
       <div class="faq-item">

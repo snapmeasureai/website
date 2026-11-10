@@ -268,7 +268,7 @@
     </div>
     <h1 class="page-hero__title">Privacy <span class="page-hero__title-accent">Policy</span></h1>
     <p class="page-hero__sub">Your photos are processed, then deleted. Your scans stay with you.</p>
-    <p class="legal-meta">Last updated November 1, 2026</p>
+    <p class="legal-meta">Last updated November 10, 2026</p>
   </div>
 </section>
 
@@ -315,7 +315,8 @@
       <li><strong>Your photos are never used to train or improve our models.</strong> We train on synthetic (computer-generated) data.</li>
       <li><strong>No one is identified.</strong> The software locates body landmarks to estimate shape and size. It does not recognize people. It does not create or keep face templates, faceprints or any other biometric identifier.</li>
     </ul>
-    <p>Request logging is turned off on our scanning servers. If a scan fails, the server keeps a short technical error record so we can fix the bug: where in our code it failed and what kind of error it was. These records are built to leave out photos, heights and measurements, and we don’t use them to identify anyone.</p>
+    <p>Our scanning servers keep a short technical log of each request, such as the time, the result (for example “scan completed” or “no person found”) and how long it took, so we can run the service and fix problems. The log never contains photos, heights, measurements or IP addresses, and it is deleted after a few days. We also count scans per business customer, for capacity planning and billing; these counts identify no one.</p>
+    <p>To stop abuse, the servers limit how many scans can come from one network. For this they keep short-lived counters filed under a one-way, keyed scramble (hash) of your IP address, never the address itself, and the counters are gone within a day. Each visit to the Demo also gets a pass that expires after two hours and works only from the network it was issued to; your IP address is checked against it but not stored.</p>
     <p>Only send photos of yourself, or of an adult who has agreed to be scanned.</p>
 
     <h2 id="device">3. Information kept on your device</h2>
@@ -331,7 +332,7 @@
     <p>Your phone’s own backups (iCloud on iPhone, Google backup on Android) may include App data if you have backups turned on. Those backups are controlled by you and Apple or Google, not by us.</p>
     <p>The App can make a PDF report, a CSV file or a progress image of your scans. It does this on your phone. The file goes only where you choose to send it. A progress image includes your photos only if you switch that on.</p>
     <p><strong>Apple Health and Health Connect.</strong> If you turn on sync, the App writes your waist (Apple Health only), body-fat estimate and any weight you entered to Apple Health or Health Connect on your phone, and reads your latest weight to fill in the weight field. This happens on your phone. We never receive data from Apple Health or Health Connect, and it is not used for advertising, sold, or shared. You can turn sync off in the App, and manage or delete that data in Apple Health or Health Connect.</p>
-    <p><strong>Demo.</strong> The Demo keeps your recent scans in your browser’s local storage, on your device, so you can compare them later. Clearing your browser’s site data removes them.</p>
+    <p><strong>Demo.</strong> When you choose to save a scan, the Demo keeps it in your browser’s storage, on your device, so you can compare scans later. Clearing your browser’s site data removes them.</p>
 
     <h2 id="purchases">4. Subscriptions and purchases</h2>
     <p>App subscriptions are bought and billed through the Apple App Store or Google Play. Apple or Google handles your payment details, and we never receive them.</p>
@@ -347,7 +348,8 @@
     <h2 id="website">5. The Website, analytics and cookies</h2>
     <p>The Website and Demo use Google Analytics 4, loaded through Google Tag Manager. They set cookies to show us how pages are used: pages viewed, device and browser type, approximate location (country or city), referring site, and events such as starting a scan or opening the contact form. We use this only to improve the site. We don’t use advertising features or build advertising profiles.</p>
     <p>To opt out, block cookies in your browser or use <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">Google’s opt-out add-on</a>. See also <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">how Google uses information from sites that use its services</a>. The App contains no analytics or advertising code.</p>
-    <p>Our hosting providers may keep standard technical logs, such as IP address and request time, for security and to keep the service running. The 3D viewer loads open-source code from a public content delivery network (jsDelivr), which receives your IP address the way any website does.</p>
+    <p>The Website and Demo also use Leadfeeder (by Dealfront), loaded the same way. It looks up the IP address of a visit to recognize the company or organization whose network it comes from, so we can see which businesses are interested in our products. We don’t use it to identify individual visitors.</p>
+    <p>Our hosting providers may keep standard technical logs, such as IP address and request time, for security and to keep the service running. The Demo and the 3D viewer load their code from our own servers. Some Website pages load open-source code from a public content delivery network (jsDelivr), which receives your IP address the way any website does.</p>
 
     <h2 id="contact-info">6. When you contact us</h2>
     <p>If you use the contact form or email us, we receive what you send, such as your name, email address, company and message. The contact form is delivered to our inbox by Web3Forms. We use this only to reply to you and to run any business relationship that follows. We keep the correspondence for as long as that relationship lasts, plus a reasonable period for our records.</p>
@@ -370,9 +372,10 @@
       <li><strong>Apple and Google</strong>: distribute the App and handle subscription payments.</li>
       <li><strong>RevenueCat</strong>: checks subscription status (see section 4).</li>
       <li><strong>Google Analytics</strong>: measures Website and Demo use (see section 5).</li>
+      <li><strong>Leadfeeder (Dealfront)</strong>: recognizes which companies visit the Website and Demo (see section 5).</li>
       <li><strong>Web3Forms</strong>: delivers contact-form messages.</li>
       <li><strong>GitHub</strong>: hosts the Website.</li>
-      <li><strong>jsDelivr</strong>: delivers the open-source code the 3D viewer runs on.</li>
+      <li><strong>jsDelivr</strong>: delivers open-source code that some Website pages use.</li>
     </ul>
     <p>We may also disclose information if the law requires it, to protect people’s safety or our rights, or to a buyer or successor if our business is sold or reorganized. In a sale or reorganization, this policy would continue to apply.</p>
 
@@ -381,12 +384,14 @@
       <li><strong>Photos, height, measurements and 3D models sent for a scan:</strong> only while the scan is being processed, usually a few seconds.</li>
       <li><strong>App and Demo data on your device:</strong> until you delete it.</li>
       <li><strong>Subscription records:</strong> kept by Apple, Google and RevenueCat as long as needed to provide the subscription and meet tax and accounting rules.</li>
+      <li><strong>Technical request logs on our scanning servers:</strong> deleted after a few days. They contain no photos, heights, measurements or IP addresses.</li>
+      <li><strong>Abuse-prevention counters:</strong> kept in memory for 24 hours at most.</li>
       <li><strong>Analytics data:</strong> kept in Google Analytics for 14 months at most.</li>
       <li><strong>Correspondence:</strong> as described in section 6.</li>
     </ul>
 
     <h2 id="security">11. Security</h2>
-    <p>Scans travel over TLS 1.3. Photos are processed in memory and never saved to files. The server’s swap space is encrypted with a key that is lost at every restart, and wiped at shutdown. Server request logging and crash dumps are turned off. Access to the servers is restricted to the people who run them. No system is perfectly secure, but keeping as little as possible is our main protection: we can’t lose what we don’t keep.</p>
+    <p>Scans travel over TLS 1.2 or higher (TLS 1.3 on current devices). Photos are processed in memory on servers whose file systems are read-only, with no swap space and crash dumps turned off, so photos can’t be written to disk. Server logs never contain request content (see section 2). Administration requires multi-factor authentication and is limited to the people who run the service. No system is perfectly secure, but keeping as little as possible is our main protection: we can’t lose what we don’t keep.</p>
 
     <h2 id="rights">12. Your choices and rights</h2>
     <p>Most of your information is already in your hands. You can delete App data in the App and Demo data in your browser at any time, and turn off analytics as described in section 5.</p>
