@@ -31,6 +31,9 @@ paths:
             RateLimit-Limit: {$ref: "#/components/headers/RateLimitLimit"}
             RateLimit-Remaining: {$ref: "#/components/headers/RateLimitRemaining"}
             RateLimit-Reset: {$ref: "#/components/headers/RateLimitReset"}
+            X-Scans-Limit: {$ref: "#/components/headers/ScansLimit"}
+            X-Scans-Remaining: {$ref: "#/components/headers/ScansRemaining"}
+            X-Scans-Renew: {$ref: "#/components/headers/ScansRenew"}
           content:
             application/json:
               schema: {$ref: "#/components/schemas/MeasureResponse"}
@@ -151,6 +154,9 @@ components:
     RateLimitRemaining: {description: "Requests left in the current minute.", schema: {type: integer}}
     RateLimitReset: {description: "Seconds until the minute window resets.", schema: {type: integer}}
     RetryAfter: {description: "Seconds to wait before retrying.", schema: {type: integer}}
+    ScansLimit: {description: "Plans with a monthly allowance only: measured scans included per month.", schema: {type: integer}}
+    ScansRemaining: {description: "Plans with a monthly allowance only: measured scans left this month.", schema: {type: integer}}
+    ScansRenew: {description: "Plans with a monthly allowance only: the date the allowance renews.", schema: {type: string, format: date}}
   responses:
     Error:
       description: An error with a stable code.

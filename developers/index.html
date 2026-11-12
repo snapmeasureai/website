@@ -913,6 +913,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="HTTP"><span class="field">415</span></td><td data-l="Code"><code>unsupported_media_type</code></td><td data-l="What to do">Send JSON with <code>Content-Type: application/json</code>.</td></tr>
           <tr><td data-l="HTTP"><span class="field">422</span></td><td data-l="Code"><code>no_person_detected</code></td><td data-l="What to do">Ask for new photos: whole body in frame, head to feet, one person.</td></tr>
           <tr><td data-l="HTTP"><span class="field">429</span></td><td data-l="Code"><code>rate_limited</code>, <code>too_many_concurrent_requests</code>, <code>too_many_failed_attempts</code></td><td data-l="What to do">Wait the seconds in <code>Retry-After</code>, then retry.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">429</span></td><td data-l="Code"><code>monthly_limit_reached</code></td><td data-l="What to do">This month's scans are used. They renew on the date in <code>X-Scans-Renew</code>; contact us to raise the limit.</td></tr>
           <tr><td data-l="HTTP"><span class="field">503</span></td><td data-l="Code"><code>busy</code>, <code>starting</code></td><td data-l="What to do">Retry after <code>Retry-After</code> seconds; capacity is being added.</td></tr>
           <tr><td data-l="HTTP"><span class="field">500</span></td><td data-l="Code"><code>internal_error</code></td><td data-l="What to do">Retry once. If it persists, send us the <code>request_id</code>.</td></tr>
         </tbody>
@@ -936,6 +937,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 <span class="p">RateLimit-Remaining</span>: 117
 <span class="p">RateLimit-Reset</span>:     42</pre>
         </div>
+        <p style="margin-top:14px;">Plans with a monthly number of scans also carry <code>X-Scans-Limit</code>, <code>X-Scans-Remaining</code> and <code>X-Scans-Renew</code>. Only measured scans count, and the month runs from the day your key was issued.</p>
       </div>
       <div>
         <h3>Client guidance</h3>
