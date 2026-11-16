@@ -268,7 +268,7 @@
     </div>
     <h1 class="page-hero__title">Privacy <span class="page-hero__title-accent">Policy</span></h1>
     <p class="page-hero__sub">Your photos are processed, then deleted. Your scans stay with you.</p>
-    <p class="legal-meta">Last updated November 10, 2026</p>
+    <p class="legal-meta">Last updated November 15, 2026</p>
   </div>
 </section>
 
@@ -300,6 +300,7 @@
       <li>this website, snapmeasureai.com (the “Website”); and</li>
       <li>emails and other messages you send us.</li>
     </ul>
+    <p>Inchly, our GLP-1 tracking app, has its own privacy policy at <a href="https://getinchly.com/privacy/" rel="noopener">getinchly.com/privacy</a>.</p>
     <p>Businesses that use our scanning API in their own products have a separate agreement with us. For scans made through a business’s product, that business decides how the data is used, and its privacy notice applies. See <a href="#business">section 7</a>.</p>
 
     <h2 id="photos">2. Photos and scans</h2>
@@ -315,7 +316,7 @@
       <li><strong>Your photos are never used to train or improve our models.</strong> We train on synthetic (computer-generated) data.</li>
       <li><strong>No one is identified.</strong> The software locates body landmarks to estimate shape and size. It does not recognize people. It does not create or keep face templates, faceprints or any other biometric identifier.</li>
     </ul>
-    <p>Our scanning servers keep a short technical log of each request, such as the time, the result (for example “scan completed” or “no person found”) and how long it took, so we can run the service and fix problems. The log never contains photos, heights, measurements or IP addresses, and it is deleted after a few days. We also count scans per business customer, for capacity planning and billing; these counts identify no one.</p>
+    <p>Our scanning servers keep a short technical log of each request, such as the time, the result (for example “scan completed” or “no person found”) and how long it took, so we can run the service and fix problems. The log never contains photos, heights, measurements or IP addresses, and it is deleted after a few days. We also keep running totals of scans for each API customer, including our own apps: for example, how many scans an app made in a minute and how many found no person. These totals contain no request details and identify no one. We keep them for up to 15 months for capacity planning and billing.</p>
     <p>To stop abuse, the servers limit how many scans can come from one network. For this they keep short-lived counters filed under a one-way, keyed scramble (hash) of your IP address, never the address itself, and the counters are gone within a day. Each visit to the Demo also gets a pass that expires after two hours and works only from the network it was issued to; your IP address is checked against it but not stored.</p>
     <p>Only send photos of yourself, or of an adult who has agreed to be scanned.</p>
 
@@ -324,13 +325,15 @@
     <ul>
       <li>your scans: measurements, 3D model and date;</li>
       <li>any weight you enter, and any note you write on a scan;</li>
-      <li>your profile: height, sex (used to pick the body-fat formula), units, any goal you set and your reminder schedule;</li>
+      <li>your profile: height, sex (used to pick the body-fat formula), units, any goal you set and your reminder settings;</li>
       <li>if you use the <strong>Medication log</strong>, the medication names, doses and dates you enter; and</li>
       <li>if you turn on <strong>Keep progress photos</strong>, the two photos from each scan, so you can see them side by side. This is off until you turn it on.</li>
     </ul>
     <p>We can’t see, recover or restore this information. You can delete one scan, or everything at once in Settings → Delete all data. Uninstalling the App also removes it.</p>
     <p>Your phone’s own backups (iCloud on iPhone, Google backup on Android) may include App data if you have backups turned on. Those backups are controlled by you and Apple or Google, not by us.</p>
     <p>The App can make a PDF report, a CSV file or a progress image of your scans. It does this on your phone. The file goes only where you choose to send it. A progress image includes your photos only if you switch that on.</p>
+    <p><strong>Backup files.</strong> Because there is no account, the App can save a backup file of everything it keeps, including any progress photos, so you can move to a new phone. The file is made on your phone and goes only where you choose to save it, such as iCloud Drive, Google Drive or Files. We never receive it. Anyone who has the file can open it, so keep it somewhere private.</p>
+    <p><strong>Reminders.</strong> Scan reminders (if you turn them on) and the reminder two days before a free trial ends are scheduled by the App on your phone. We don’t send push notifications and have no way to contact your phone.</p>
     <p><strong>Apple Health and Health Connect.</strong> If you turn on sync, the App writes your waist (Apple Health only), body-fat estimate and any weight you entered to Apple Health or Health Connect on your phone, and reads your latest weight to fill in the weight field. This happens on your phone. We never receive data from Apple Health or Health Connect, and it is not used for advertising, sold, or shared. You can turn sync off in the App, and manage or delete that data in Apple Health or Health Connect.</p>
     <p><strong>Demo.</strong> When you choose to save a scan, the Demo keeps it in your browser’s storage, on your device, so you can compare scans later. Clearing your browser’s site data removes them.</p>
 
@@ -386,6 +389,7 @@
       <li><strong>Subscription records:</strong> kept by Apple, Google and RevenueCat as long as needed to provide the subscription and meet tax and accounting rules.</li>
       <li><strong>Technical request logs on our scanning servers:</strong> deleted after a few days. They contain no photos, heights, measurements or IP addresses.</li>
       <li><strong>Abuse-prevention counters:</strong> kept in memory for 24 hours at most.</li>
+      <li><strong>Scan totals per API customer:</strong> up to 15 months. They contain no personal information.</li>
       <li><strong>Analytics data:</strong> kept in Google Analytics for 14 months at most.</li>
       <li><strong>Correspondence:</strong> as described in section 6.</li>
     </ul>
