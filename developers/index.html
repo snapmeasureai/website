@@ -538,6 +538,7 @@
     <ul>
       <li><a href="#flow">Overview</a></li>
       <li><a href="#quickstart">Quickstart</a></li>
+      <li><a href="#sdk">Capture SDK</a></li>
       <li><a href="#auth">Authentication</a></li>
       <li><a href="#request">Request</a></li>
       <li><a href="#outputs">Outputs</a></li>
@@ -563,7 +564,7 @@
       <div class="flow__box">
         <p class="flow__tag">Your app or website</p>
         <h3>Capture</h3>
-        <p>Your user takes a front and a side photo and enters their height, in your own capture screen.</p>
+        <p>Your user takes a front and a side photo and enters their height, in your own capture screen or with our <a href="#sdk" class="ok">capture SDK</a> inside your page.</p>
         <ul><li>Any smartphone camera</li><li>Everyday clothes work</li></ul>
       </div>
       <div class="flow__arrow" aria-hidden="true">
@@ -688,8 +689,68 @@ curl https://api.snapmeasureai.com/v1/measurements \
   </div>
 </section>
 
+<!-- ==================== CAPTURE SDK ==================== -->
+<section class="section" id="sdk">
+  <div class="container">
+    <p class="section__eyebrow">Capture SDK</p>
+    <h2 class="section__title">The guided camera, inside your own page.</h2>
+    <p class="section__sub">Add one script and call <code>SnapMeasure.capture()</code>. The guided camera flow runs on your domain and in your design, sends the photos straight to the API with your browser key, and hands the result to your page's code.</p>
+
+    <div class="qs">
+      <ol class="steps">
+        <li>
+          <h3>Add the script</h3>
+          <p>From the API's own domain, pinned to its version with an <code>integrity</code> hash, or bundled from npm (<code>@snapmeasureai/capture</code>) so no third-party script runs on your page.</p>
+        </li>
+        <li>
+          <h3>Call <code>capture()</code> when your user is ready</h3>
+          <p>Pass the height if your form already asks for it; otherwise the SDK asks. Add <code>include: ["weight"]</code> and you can drop the weight question too.</p>
+        </li>
+        <li>
+          <h3>Take it from there</h3>
+          <p>The promise resolves with the same JSON as <code>/v1/measurements</code>, the SDK closes, and your next step shows. Closing it rejects with <code>cancelled</code>.</p>
+        </li>
+      </ol>
+
+      <div class="code-card">
+        <div class="code-card__bar">
+          <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="code-card__title">your page</span>
+          <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
+        </div>
+<pre>&lt;<span class="k">script</span> src=<span class="s">"https://api.snapmeasureai.com/sdk/capture-1.0.0.js"</span>
+        integrity=<span class="s">"sha384-WAIpTIiFeDmYIJPYcYT0SB56LvjqzOywWnwCaYygN3R05Vgbk3T3B2UG1wghiy/z"</span>
+        crossorigin=<span class="s">"anonymous"</span>&gt;&lt;/<span class="k">script</span>&gt;
+&lt;<span class="k">script</span>&gt;
+  button.onclick = <span class="k">async</span> () =&gt; {
+    <span class="k">try</span> {
+      <span class="k">const</span> scan = <span class="k">await</span> SnapMeasure.capture({
+        apiKey: <span class="s">"smk_pub_…"</span>,          <span class="c">// works only on your website</span>
+        height: form.height.value,      <span class="c">// or leave out: the SDK asks</span>
+        include: [<span class="s">"weight"</span>],
+        theme: { accent: <span class="s">"#1D1D1B"</span>, font: <span class="s">"Your Sans, sans-serif"</span> },
+      });
+      nextStep(scan.measurements, scan.weight);
+    } <span class="k">catch</span> (err) {
+      <span class="k">if</span> (err.code !== <span class="s">"cancelled"</span>) showRetry(err.code);
+    }
+  };
+&lt;/<span class="k">script</span>&gt;</pre>
+      </div>
+    </div>
+
+    <div class="options" style="margin-top:28px;">
+      <div class="opt"><p class="opt__k">At home or in store</p><h3>Self or assisted</h3><p>A countdown with beeps for a phone propped against a wall, or a shutter button and the back camera for staff with a tablet.</p></div>
+      <div class="opt"><p class="opt__k">Your design</p><h3>Styled to your brand</h3><p>Your colours, corners and font, every text replaceable, CSS parts for the rest. Or build your own screens and send photos with <code>SnapMeasure.measure()</code>.</p></div>
+      <div class="opt"><p class="opt__k">Built in</p><h3>Guidance and recovery</h3><p>A body outline to stand in, photo review and retake, upload when there's no camera, and automatic retries when the service is busy.</p></div>
+      <div class="opt"><p class="opt__k">Private</p><h3>Nothing left behind</h3><p>No cookies, storage or third parties. Photos are re-encoded on the device, without location data, and the camera turns off the moment it closes.</p></div>
+    </div>
+    <p class="note">Phones, tablets and computers, in current Safari, Chrome, Edge, Firefox and Samsung Internet, on HTTPS pages. About 20&nbsp;KB gzipped, no dependencies, TypeScript types included. Two people in one visit: call <code>capture()</code> once for each.</p>
+  </div>
+</section>
+
 <!-- ==================== AUTHENTICATION ==================== -->
-<section class="section" id="auth">
+<section class="section section--alt" id="auth">
   <div class="container">
     <p class="section__eyebrow">Authentication</p>
     <h2 class="section__title">One key per place you call from.</h2>
@@ -714,7 +775,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== REQUEST ==================== -->
-<section class="section section--alt" id="request">
+<section class="section" id="request">
   <div class="container">
     <p class="section__eyebrow">Request</p>
     <h2 class="section__title">Two fields required. Everything else is optional.</h2>
@@ -736,9 +797,10 @@ curl https://api.snapmeasureai.com/v1/measurements \
         <tbody>
           <tr><td data-l="Field"><span class="field">height</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">string | number</span></td><td data-l="Description"><code>"174cm"</code> or <code>"68.5in"</code>, or a number with <code>"height_unit": "cm"</code> or <code>"in"</code>. The body is scaled to it, so every measurement is at real size.</td></tr>
           <tr><td data-l="Field"><span class="field">images</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">2–4 photos of one person, <b>front first, then side</b>; a back or second side view helps. Each is a base64 string or <code>{"data": "…"}</code>. Whole body in frame, head to feet.</td></tr>
-          <tr><td data-l="Field"><span class="field">include</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">Extra outputs: <code>obj</code>, <code>glb</code>, <code>geometry</code>, <code>faces</code>, <code>viewer</code>, <code>heights_above_floor</code>, <code>sizes</code> (see <a href="#outputs" class="ok">Outputs</a>). Without it you get your account's default outputs.</td></tr>
+          <tr><td data-l="Field"><span class="field">include</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">Extra outputs: <code>weight</code>, <code>obj</code>, <code>glb</code>, <code>geometry</code>, <code>faces</code>, <code>viewer</code>, <code>heights_above_floor</code>, <code>sizes</code> (see <a href="#outputs" class="ok">Outputs</a>). Without it you get your account's default outputs.</td></tr>
           <tr><td data-l="Field"><span class="field">profile</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">Your measurement profile: your own measurement set. Keys with a default profile use it automatically.</td></tr>
           <tr><td data-l="Field"><span class="field">unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>cm</code>, <code>mm</code> or <code>in</code>. Default: your account's setting, or the height's unit.</td></tr>
+          <tr><td data-l="Field"><span class="field">weight_unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>kg</code> or <code>lb</code>, for the estimated weight. Default: <code>lb</code> when the measurements are in inches, otherwise <code>kg</code>.</td></tr>
           <tr><td data-l="Field"><span class="field">pose</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string | object</span></td><td data-l="Description">Pose of the 3D files: <code>a_pose</code> (default), <code>t_pose</code>, or your own angles such as <code>{"arms": 45, "legs": 6}</code>. See <a href="#mesh" class="ok">3D files</a>.</td></tr>
           <tr><td data-l="Field"><span class="field">watertight</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Description"><code>true</code>: the OBJ and glTF are one closed surface, for cloth simulation, physics and 3D printing.</td></tr>
           <tr><td data-l="Field"><span class="field">mesh_units</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">OBJ units: <code>m</code> (default), <code>cm</code> or <code>mm</code>. glTF and geometry are always metres.</td></tr>
@@ -752,7 +814,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== OUTPUTS ==================== -->
-<section class="section" id="outputs">
+<section class="section section--alt" id="outputs">
   <div class="container">
     <p class="section__eyebrow">Outputs</p>
     <h2 class="section__title">Measurements, the full 3D body, or both.</h2>
@@ -789,6 +851,13 @@ curl https://api.snapmeasureai.com/v1/measurements \
         <h3>Your size charts <span class="badge badge--opt">Optional</span></h3>
         <p>Set up your charts once (one per garment, if you like). Each scan returns the size in each chart, and whether each measurement sits below, within or above it.</p>
       </article>
+      <article class="out out--wide out--indigo">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M7 8.5a3.2 3.2 0 0 1 6 0M10 8.6l1.4-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div>
+          <h3>Estimated weight <span class="badge badge--opt">Optional</span></h3>
+          <p>The body weight estimated from the scan's height and girths, with a 90% range, so your users needn't type it in. Fitted on public surveys in which people were both tape-measured and weighed (NHANES and ANSUR&nbsp;II, over 33,000 adults). No extra input needed. An estimate for recommendations, not a weighing.</p>
+        </div>
+      </article>
       <article class="out out--wide out--feature">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10.2l2 2 4-4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div>
@@ -813,6 +882,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <table style="min-width:0">
             <thead><tr><th>Value</th><th>You get</th></tr></thead>
             <tbody>
+              <tr><td data-l="Value"><span class="field">weight</span></td><td data-l="You get"><code>weight</code>: estimated body weight, <code>{"value", "unit", "range"}</code>, in kg or lb</td></tr>
               <tr><td data-l="Value"><span class="field">obj</span></td><td data-l="You get"><code>obj</code>: Wavefront OBJ text, for CAD, pattern-making and 3D tools</td></tr>
               <tr><td data-l="Value"><span class="field">glb</span></td><td data-l="You get"><code>glb</code>: glTF 2.0 binary (base64), for three.js, Babylon.js, Unity, Blender</td></tr>
               <tr><td data-l="Value"><span class="field">geometry</span></td><td data-l="You get"><code>geometry</code>: vertices, measurement outlines, landmarks and joints, for your own viewer</td></tr>
@@ -851,7 +921,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== 3D FILES ==================== -->
-<section class="section section--alt" id="mesh">
+<section class="section" id="mesh">
   <div class="container">
     <p class="section__eyebrow">3D files</p>
     <h2 class="section__title">The same body, in the pose your pipeline needs.</h2>
@@ -889,7 +959,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== ERRORS ==================== -->
-<section class="section" id="errors">
+<section class="section section--alt" id="errors">
   <div class="container">
     <p class="section__eyebrow">Errors</p>
     <h2 class="section__title">Stable codes you can act on.</h2>
@@ -923,7 +993,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== LIMITS ==================== -->
-<section class="section section--alt" id="limits">
+<section class="section" id="limits">
   <div class="container">
     <p class="section__eyebrow">Limits &amp; retries</p>
     <h2 class="section__title">Built for production traffic.</h2>
@@ -954,7 +1024,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== SECURITY ==================== -->
-<section class="section" id="security">
+<section class="section section--alt" id="security">
   <div class="container">
     <p class="section__eyebrow">Security &amp; data handling</p>
     <h2 class="section__title">Built so there's nothing to leak.</h2>
@@ -988,7 +1058,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== REGIONS ==================== -->
-<section class="section section--alt" id="regions">
+<section class="section" id="regions">
   <div class="container">
     <p class="section__eyebrow">Regions &amp; deployment</p>
     <h2 class="section__title">Your data stays in the region you choose.</h2>
@@ -1008,14 +1078,14 @@ curl https://api.snapmeasureai.com/v1/measurements \
     <div class="options" style="margin-top:28px;">
       <div class="opt"><p class="opt__k">Core</p><h3>REST API</h3><p>Your own capture screen calls the API from your back end, website or app.</p></div>
       <div class="opt"><p class="opt__k">Visual</p><h3>Embedded 3D viewer</h3><p>Show the body and measurements inside your product without building a 3D renderer.</p></div>
-      <div class="opt"><p class="opt__k">On request</p><h3>Hosted capture page</h3><p>A guided capture page under your brand, for teams without their own capture screen.</p></div>
+      <div class="opt"><p class="opt__k">Core</p><h3>Capture SDK</h3><p>The guided camera flow inside your own web page, in your design, with one script.</p></div>
       <div class="opt"><p class="opt__k">Enterprise</p><h3>Dedicated instance</h3><p>Your own environment, private networking, and the region and terms your policies require.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ==================== VERSIONING ==================== -->
-<section class="section" id="versioning">
+<section class="section section--alt" id="versioning">
   <div class="container">
     <p class="section__eyebrow">Versioning</p>
     <h2 class="section__title">Stable to build on.</h2>
@@ -1033,14 +1103,22 @@ curl https://api.snapmeasureai.com/v1/measurements \
 </section>
 
 <!-- ==================== FAQ ==================== -->
-<section class="section section--alt" id="faq">
+<section class="section" id="faq">
   <div class="container">
     <p class="section__eyebrow">FAQ</p>
     <h2 class="section__title">Developer questions</h2>
     <div class="faq" style="margin-top:28px;">
       <details>
         <summary>Which languages and platforms are supported?</summary>
-        <p>Anything that can make an HTTPS request with a JSON body: any back-end language, web, iOS or Android. There is no SDK to install; the <a href="/developers/openapi.yaml" class="ok" download>OpenAPI 3.1 file</a> imports into Postman and generates a typed client for most languages.</p>
+        <p>Anything that can make an HTTPS request with a JSON body: any back-end language, web, iOS or Android. For websites there is the <a href="#sdk" class="ok">capture SDK</a>, one script with the whole guided camera flow; for everything else, the <a href="/developers/openapi.yaml" class="ok" download>OpenAPI 3.1 file</a> imports into Postman and generates a typed client for most languages.</p>
+      </details>
+      <details>
+        <summary>Can the scan give the person's weight?</summary>
+        <p>Yes, as an estimate: add <code>"weight"</code> to <code>include</code>. It is computed from the scan's height and girths with formulas fitted on public survey data (NHANES and ANSUR&nbsp;II) and comes with a 90% range. From tape measurements the formulas are within about 2% on average; from photos, the error of the photo measurements adds to that. It is meant for recommendations, not for medical use.</p>
+      </details>
+      <details>
+        <summary>Can two people be measured in one visit?</summary>
+        <p>Yes, one after the other: each scan is one person, with their own height and their own result. With the SDK, call <code>capture()</code> once for each.</p>
       </details>
       <details>
         <summary>Can we call the API from our website or mobile app?</summary>

@@ -4,7 +4,7 @@ info:
   version: "1.1"
   description: >-
     Body measurements and a 3D body from two to four photos and a height. Photos are processed
-    in memory and deleted when the response is sent. Guide: https://snapmeasureai.com/developers/
+    in memory and deleted when the response is sent. See API.md for guidance.
   contact: {name: SnapMeasureAI, email: info@snapmeasureai.com, url: "https://snapmeasureai.com/contact/"}
 servers:
   - {url: "https://api.snapmeasureai.com", description: "United States"}
@@ -210,8 +210,9 @@ components:
         include:
           type: array
           maxItems: 10
-          items: {type: string, enum: [viewer, obj, glb, geometry, faces, heights_above_floor, sizes]}
+          items: {type: string, enum: [viewer, obj, glb, geometry, faces, heights_above_floor, sizes, weight]}
         unit: {type: string, enum: [cm, mm, in], description: "Unit of the measurements returned."}
+        weight_unit: {type: string, enum: [kg, lb], description: "Unit of the estimated weight (include \"weight\"). Default: lb when the measurements are in inches, else kg."}
         viewer_style: {type: string, enum: [studio, showcase]}
         pose: {$ref: "#/components/schemas/Pose"}
         watertight: {type: boolean, description: "OBJ and glTF as one closed surface (eyes left out, mouth closed; renumbers the vertices)."}
@@ -239,6 +240,14 @@ components:
           additionalProperties: {type: [number, "null"]}
           example: {"chest circumf": 99.5, "waist circumf": 79.5, "hip circumf": 94.8}
         missing: {type: array, items: {type: string}, description: "Profile measurements that could not be taken."}
+        weight:
+          type: [object, "null"]
+          description: "With include \"weight\": the body weight estimated from the height and girths, with a 90% range. An estimate, not a weighing."
+          properties:
+            value: {type: number, example: 70.9}
+            unit: {type: string, enum: [kg, lb]}
+            range: {type: array, items: {type: number}, minItems: 2, maxItems: 2, example: [63.2, 79.5]}
+            model: {type: string, example: "2026.11", description: "Version of the weight model."}
         heights_above_floor: {type: object, additionalProperties: {type: number}}
         sizes:
           type: object
