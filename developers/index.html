@@ -944,7 +944,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
     </details>
 
     <h3 class="sub-h">Results and errors</h3>
-        <p class="ref-p">The promise resolves with the API's response, unchanged: the same JSON as <code>/v1/measurements</code>, with <code>weight</code> when you include it. It rejects with a <code>SnapMeasure.Error</code> (<code>code</code>, <code>status</code>, <code>requestId</code>, <code>retryAfter</code>, <code>retryable</code>). By then the customer has already seen a clear message and a way forward; the code is for your page and your logs.</p>
+        <p class="ref-p">The promise resolves with the API's response, unchanged: the same JSON as <code>/v1/measurements</code>, with <code>weight</code> and <code>uncertainty</code> when you include them. It rejects with a <code>SnapMeasure.Error</code> (<code>code</code>, <code>status</code>, <code>requestId</code>, <code>retryAfter</code>, <code>retryable</code>). By then the customer has already seen a clear message and a way forward; the code is for your page and your logs.</p>
         <div class="table-wrap stack">
           <table class="ref-two">
             <thead><tr><th>code</th><th>Meaning</th></tr></thead>
@@ -1045,7 +1045,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
         <tbody>
           <tr><td data-l="Field"><span class="field">height</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">string | number</span></td><td data-l="Description"><code>"174cm"</code> or <code>"68.5in"</code>, or a number with <code>"height_unit": "cm"</code> or <code>"in"</code>. The body is scaled to it, so every measurement is at real size.</td></tr>
           <tr><td data-l="Field"><span class="field">images</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">2–4 photos of one person, <b>front first, then side</b>; a back or second side view helps. Each is a base64 string or <code>{"data": "…"}</code>. Whole body in frame, head to feet.</td></tr>
-          <tr><td data-l="Field"><span class="field">include</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">Extra outputs: <code>weight</code>, <code>obj</code>, <code>glb</code>, <code>geometry</code>, <code>faces</code>, <code>viewer</code>, <code>heights_above_floor</code>, <code>sizes</code> (see <a href="#outputs" class="ok">Outputs</a>). Without it you get your account's default outputs.</td></tr>
+          <tr><td data-l="Field"><span class="field">include</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">Extra outputs: <code>weight</code>, <code>uncertainty</code>, <code>obj</code>, <code>glb</code>, <code>geometry</code>, <code>faces</code>, <code>viewer</code>, <code>heights_above_floor</code>, <code>sizes</code> (see <a href="#outputs" class="ok">Outputs</a>). Without it you get your account's default outputs.</td></tr>
           <tr><td data-l="Field"><span class="field">profile</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">Your measurement set, built in the <a href="https://demo.snapmeasureai.com/measurement-builder" class="ok">measurement builder</a>. Keys with a default set use it automatically.</td></tr>
           <tr><td data-l="Field"><span class="field">unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>cm</code>, <code>mm</code> or <code>in</code>. Default: your account's setting, or the height's unit.</td></tr>
           <tr><td data-l="Field"><span class="field">weight_unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>kg</code> or <code>lb</code>, for the estimated weight. Default: <code>lb</code> when the measurements are in inches, otherwise <code>kg</code>.</td></tr>
@@ -1128,6 +1128,13 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <p>The body weight estimated from the scan's height and girths, with a 90% range, so your users needn't type it in. Fitted on public surveys in which people were both tape-measured and weighed (NHANES and ANSUR&nbsp;II, over 33,000 adults). No extra input needed. An estimate for recommendations, not a weighing.</p>
         </div>
       </article>
+      <article class="out out--wide out--indigo">
+        <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h14M3 7v6M17 7v6M10 5v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div>
+          <h3>Measurement uncertainty <span class="badge badge--opt">Optional</span></h3>
+          <p>For every measurement, a range the true value falls inside 9 times in 10, such as waist 79.5&nbsp;cm, likely 72.8&ndash;86.2. Calibrated on how far our measurements actually were from 3D-scanned and tape-measured people, not on the model's own confidence. Use it to show a range, flag a body between two sizes, or ask for a tape check where it matters.</p>
+        </div>
+      </article>
       <article class="out out--wide out--feature">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4.5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 10.2l2 2 4-4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div>
@@ -1140,7 +1147,6 @@ curl https://api.snapmeasureai.com/v1/measurements \
 
     <h3 class="sub-h">Extensions on request</h3>
     <div class="extensions">
-      <div class="opt"><p class="opt__k">On request</p><h3>Measurement uncertainty</h3><p>The model estimates an uncertainty for each core measurement. It can be added to your response, for example to flag a scan for review.</p></div>
       <div class="opt"><p class="opt__k">On request</p><h3>Body shape code</h3><p>A compact code for the body (a few hundred bytes) to store and later rebuild the 3D body, or take new measurements, without new photos.</p></div>
       <div class="opt"><p class="opt__k">On request</p><h3>Hosted capture page</h3><p>A guided capture page under your brand, linked from an email, SMS, QR code or your portal, for teams without their own capture screen.</p></div>
     </div>
@@ -1153,6 +1159,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
             <thead><tr><th>Value</th><th>You get</th></tr></thead>
             <tbody>
               <tr><td data-l="Value"><span class="field">weight</span></td><td data-l="You get"><code>weight</code>: estimated body weight, <code>{"value", "unit", "range"}</code>, in kg or lb</td></tr>
+              <tr><td data-l="Value"><span class="field">uncertainty</span></td><td data-l="You get"><code>uncertainty</code>: a 90% range for each measurement, <code>{"plus_minus", "range"}</code>, in the measurements' unit</td></tr>
               <tr><td data-l="Value"><span class="field">obj</span></td><td data-l="You get"><code>obj</code>: Wavefront OBJ text, for CAD, pattern-making and 3D tools</td></tr>
               <tr><td data-l="Value"><span class="field">glb</span></td><td data-l="You get"><code>glb</code>: glTF 2.0 binary (base64), for three.js, Babylon.js, Unity, Blender</td></tr>
               <tr><td data-l="Value"><span class="field">geometry</span></td><td data-l="You get"><code>geometry</code>: vertices, measurement outlines, landmarks and joints, for your own viewer</td></tr>
