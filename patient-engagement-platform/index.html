@@ -254,7 +254,7 @@
   .proof-strip__inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 15px; color: var(--text-3); }
   .proof-strip__item { display: flex; align-items: center; gap: 8px; }
   .proof-strip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
-  .proof-divider { color: var(--border-hi); }
+  .proof-divider { display: none; }
 
   /* ---- VIDEO ---- */
   .vid-grid { display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: center; margin-top: 48px; }
@@ -517,6 +517,7 @@
   .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0; }
   .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
   .footer__logo { font-size: 15px; font-weight: 700; opacity: .6; }
+  .footer__logo img { height: 24px; display: block; }
   .footer__logo i { font-style: normal; color: var(--teal); }
   .footer__links { display: flex; gap: 24px; list-style: none; flex-wrap: wrap; }
   .footer__links a { font-size: 13px; color: var(--text-3); }
@@ -540,6 +541,9 @@
     .portal__head, .rail, .months, .chart-block, .portal__foot { padding-left: 18px; padding-right: 18px; }
   }
   @media (max-width: 600px) {
+    .portal__chrome { flex-wrap: wrap; row-gap: 10px; padding: 12px 14px; }
+    .portal__url { min-width: 0; }
+    .portal__badge { flex-basis: 100%; text-align: center; }
     body { font-size: 16px; }
     .section { padding: 48px 0; }
     .hero { padding: 100px 0 44px; }
@@ -625,6 +629,22 @@
     @media (max-width: 1120px) and (min-width: 901px) {
       .nav__links { gap: 20px; }
       .nav__links > li:first-child, .nav__links > li:last-child { display: none; }
+    }
+  </style>
+  <style>
+    /* Layout guards: the logo keeps its proportions at every width (the links and buttons
+       give way, never the logo), and the footer links wrap instead of widening the page. */
+    .nav__logo { flex-shrink: 0; }
+    .nav__logo img { width: auto; }
+    @media (max-width: 380px) { .nav__logo img { height: 26px; } }
+    @media (max-width: 340px) { .nav__logo img { height: 22px; } }
+    @media (min-width: 601px) { .footer__links { flex-wrap: wrap; row-gap: 12px; } }
+    /* Just above the menu breakpoint the full nav is tight: smaller gaps and buttons keep air between items. */
+    @media (max-width: 1000px) and (min-width: 901px) {
+      .nav__links { gap: 16px; font-size: 13.5px; }
+      .nav__dropdown-toggle { font-size: 13.5px; }
+      .nav__cta { gap: 8px; }
+      .nav__cta .btn { padding-left: 14px; padding-right: 14px; }
     }
   </style>
 </head>
@@ -1106,7 +1126,7 @@
 
 <footer class="footer">
   <div class="container footer__inner">
-    <a href="https://snapmeasureai.com/" class="footer__logo">SnapMeasure<i>AI</i></a>
+    <a href="https://snapmeasureai.com/" class="footer__logo"><img src="/assets/images/logo.png" alt="SnapMeasureAI"></a>
     <ul class="footer__links">
       <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
       <li><a href="/patient-engagement-platform/" style="color:var(--teal);">Patient engagement</a></li>

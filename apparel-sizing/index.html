@@ -407,7 +407,7 @@
   @media (max-width: 1000px) {
     .cards, .related { grid-template-columns: 1fr; }
     .cards--2 { grid-template-columns: 1fr; }
-    .split { grid-template-columns: 1fr; }
+    .split { grid-template-columns: minmax(0, 1fr); }
     .specs-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 900px) {
@@ -416,6 +416,7 @@
     .nav__hamburger { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; cursor: pointer; color: var(--text-2); font-size: 22px; background: none; border: none; }
   }
   @media (max-width: 600px) {
+    .mock table { min-width: 0; font-size: 13px; }
     body { font-size: 16px; }
     .container { padding: 0 16px; }
     .section { padding: 52px 0; }
@@ -460,6 +461,22 @@
     @media (max-width: 1120px) and (min-width: 901px) {
       .nav__links { gap: 20px; }
       .nav__links > li:first-child, .nav__links > li:last-child { display: none; }
+    }
+  </style>
+  <style>
+    /* Layout guards: the logo keeps its proportions at every width (the links and buttons
+       give way, never the logo), and the footer links wrap instead of widening the page. */
+    .nav__logo { flex-shrink: 0; }
+    .nav__logo img { width: auto; }
+    @media (max-width: 380px) { .nav__logo img { height: 26px; } }
+    @media (max-width: 340px) { .nav__logo img { height: 22px; } }
+    @media (min-width: 601px) { .footer__links { flex-wrap: wrap; row-gap: 12px; } }
+    /* Just above the menu breakpoint the full nav is tight: smaller gaps and buttons keep air between items. */
+    @media (max-width: 1000px) and (min-width: 901px) {
+      .nav__links { gap: 16px; font-size: 13.5px; }
+      .nav__dropdown-toggle { font-size: 13.5px; }
+      .nav__cta { gap: 8px; }
+      .nav__cta .btn { padding-left: 14px; padding-right: 14px; }
     }
   </style>
 </head>
@@ -813,7 +830,7 @@
 
 <footer class="footer">
   <div class="container footer__inner">
-    <a href="https://snapmeasureai.com/" class="footer__logo"><img src="/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI"></a>
+    <a href="https://snapmeasureai.com/" class="footer__logo"><img src="/assets/images/logo.png" alt="SnapMeasureAI"></a>
     <ul class="footer__links">
         <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
         <li><a href="https://snapmeasureai.com/patient-engagement-platform/">Patient engagement</a></li>

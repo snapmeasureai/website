@@ -305,6 +305,10 @@
       33%    { opacity: 0; }
       100%   { opacity: 0; }
     }
+    @media (max-width: 1200px) and (min-width: 601px) {
+      .hero__ticker-wrap { height: 3.3em; }
+      .hero__ticker-item { white-space: normal; line-height: 1.5; padding-top: 0.15em; }
+    }
     @media (max-width: 600px) {
       .hero__ticker-wrap { height: 3.6em; max-width: 100%; }
       .hero__ticker-item { white-space: normal; line-height: 1.5; padding-top: 0.3em; font-size: 15px; }
@@ -379,8 +383,8 @@
     /* ---- PROOF STRIP ---- */
     .proof-strip { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; }
     .proof-strip__inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; font-size: 15px; color: var(--text-3); }
-    .proof-strip__item { display: flex; align-items: center; gap: 8px; }
-    .proof-strip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+    .proof-strip__item { display: flex; align-items: flex-start; gap: 8px; }
+    .proof-strip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: .65em; }
 
     /* ---- SECTIONS ---- */
     .section { padding: 50px 0; }
@@ -671,7 +675,7 @@
     }
     .dx-nav:hover { color: var(--teal); border-color: rgba(10,191,163,.55); }
     .dx-count { font-variant-numeric: tabular-nums; color: var(--text-2); min-width: 54px; text-align: center; }
-    .dx-hint { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dx-hint { overflow: hidden; line-height: 1.35; }
     .dx-reveal { margin-left: auto; flex-shrink: 0; }
     .dx-thumbs { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; padding: 0 12px 12px; }
     .dx-thumb {
@@ -742,9 +746,32 @@
   <style>
     /* Mid-width screens: keep the nav on one line (the in-page links stay in the menu and the page) */
     .nav__links a, .nav__links button { white-space: nowrap; }
+    .nav__cta .btn { white-space: nowrap; }
+    /* Seven links don't fit beside two buttons at any width: the two in-page ones step out
+       (Dataset is where "See the dataset" goes; the FAQs are further down this page). */
+    @media (min-width: 1121px) {
+      .nav__links > li:first-child, .nav__links > li:last-child { display: none; }
+    }
     @media (max-width: 1120px) and (min-width: 901px) {
       .nav__links { gap: 20px; }
+      .nav__cta .btn--outline { display: none; }
       .nav__links > li:first-child, .nav__links > li:last-child { display: none; }
+    }
+  </style>
+  <style>
+    /* Layout guards: the logo keeps its proportions at every width (the links and buttons
+       give way, never the logo), and the footer links wrap instead of widening the page. */
+    .nav__logo { flex-shrink: 0; }
+    .nav__logo img { width: auto; }
+    @media (max-width: 380px) { .nav__logo img { height: 26px; } }
+    @media (max-width: 340px) { .nav__logo img { height: 22px; } }
+    @media (min-width: 601px) { .footer__links { flex-wrap: wrap; row-gap: 12px; } }
+    /* Just above the menu breakpoint the full nav is tight: smaller gaps and buttons keep air between items. */
+    @media (max-width: 1000px) and (min-width: 901px) {
+      .nav__links { gap: 16px; font-size: 13.5px; }
+      .nav__dropdown-toggle { font-size: 13.5px; }
+      .nav__cta { gap: 8px; }
+      .nav__cta .btn { padding-left: 14px; padding-right: 14px; }
     }
   </style>
 </head>
@@ -912,7 +939,7 @@
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Pose, segmentation, depth, measurements</div>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Any body type, skin tone, background</div>
       <div class="proof-strip__item"><span class="proof-strip__dot"></span>Edge cases and rare poses on demand</div>
-      <div class="proof-strip__item"><span class="proof-strip__dot"></span>Trains our own clothed-body measurement model &mdash; <a href="https://demo.snapmeasureai.com/" style="color: var(--teal);">try the demo</a></div>
+      <div class="proof-strip__item"><span class="proof-strip__dot"></span><span>Trains our own clothed-body measurement model &mdash; <a href="https://demo.snapmeasureai.com/" style="color: var(--teal);">try the demo</a></span></div>
     </div>
   </div>
 </div>
@@ -1201,7 +1228,7 @@
   <div class="container">
     <div class="footer__inner">
       <a href="https://snapmeasureai.com/" class="footer__logo">
-        <img src="/assets/images/logo.svg?v=1.17" alt="SnapMeasureAI">
+        <img src="/assets/images/logo.png" alt="SnapMeasureAI">
       </a>
       <ul class="footer__links">
         <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
