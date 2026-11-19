@@ -710,6 +710,10 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <h3>Take it from there</h3>
           <p>The promise resolves with the same JSON as <code>/v1/measurements</code>, the SDK closes, and your next step shows. Closing it rejects with <code>cancelled</code>.</p>
         </li>
+        <li>
+          <h3>Choose where your key lives</h3>
+          <p>A browser key is public by design: anyone can read it in your page's source. It only runs scans, only from your registered websites, within per-visitor limits and your monthly cap, and there's no stored data for it to reach. To keep any key out of the page, use <code>proxyUrl: "/api/body-scan"</code> instead of <code>apiKey</code>: a route on your own server that adds your server key and forwards the request. This also suits store tablets that share one internet connection.</p>
+        </li>
       </ol>
 
       <div class="code-card">
@@ -719,13 +723,14 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
         </div>
 <pre>&lt;<span class="k">script</span> src=<span class="s">"https://api.snapmeasureai.com/sdk/capture-1.0.0.js"</span>
-        integrity=<span class="s">"sha384-WAIpTIiFeDmYIJPYcYT0SB56LvjqzOywWnwCaYygN3R05Vgbk3T3B2UG1wghiy/z"</span>
+        integrity=<span class="s">"sha384-lQAe7WBKEIUKKWjdNjIDXUKfL9VF6b7dvohefZNzpOV6v0MXFG2P9YncmmwLzzdG"</span>
         crossorigin=<span class="s">"anonymous"</span>&gt;&lt;/<span class="k">script</span>&gt;
 &lt;<span class="k">script</span>&gt;
   button.onclick = <span class="k">async</span> () =&gt; {
     <span class="k">try</span> {
       <span class="k">const</span> scan = <span class="k">await</span> SnapMeasure.capture({
-        apiKey: <span class="s">"smk_pub_…"</span>,          <span class="c">// works only on your website</span>
+        apiKey: <span class="s">"smk_pub_…"</span>,          <span class="c">// public, works only on your website (step 4)</span>
+        <span class="c">// proxyUrl: "/api/body-scan", // or no key: your server adds it</span>
         height: form.height.value,      <span class="c">// or leave out: the SDK asks</span>
         include: [<span class="s">"weight"</span>],
         theme: { accent: <span class="s">"#1D1D1B"</span>, font: <span class="s">"Your Sans, sans-serif"</span> },
@@ -745,8 +750,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
       <div class="opt"><p class="opt__k">Built in</p><h3>Guidance and recovery</h3><p>A body outline to stand in, photo review and retake, upload when there's no camera, and automatic retries when the service is busy.</p></div>
       <div class="opt"><p class="opt__k">Private</p><h3>Nothing left behind</h3><p>No cookies, storage or third parties. Photos are re-encoded on the device, without location data, and the camera turns off the moment it closes.</p></div>
     </div>
-    <p class="note">Phones, tablets and computers, in current Safari, Chrome, Edge, Firefox and Samsung Internet, on HTTPS pages. About 20&nbsp;KB gzipped, no dependencies, TypeScript types included. Two people in one visit: call <code>capture()</code> once for each.</p>
-  </div>
+    <p class="note">Phones, tablets and computers, in current Safari, Chrome, Edge, Firefox and Samsung Internet, on HTTPS pages. About 20&nbsp;KB gzipped, no dependencies, TypeScript types included. Two people in one visit: call <code>capture()</code> once for each.</p>  </div>
 </section>
 
 <!-- ==================== AUTHENTICATION ==================== -->
@@ -761,12 +765,13 @@ curl https://api.snapmeasureai.com/v1/measurements \
         <thead><tr><th>Key type</th><th>Prefix</th><th>Use it from</th><th>Protection</th></tr></thead>
         <tbody>
           <tr><td data-l="Key type"><span class="field">Server</span></td><td data-l="Prefix"><code>smk_live_</code></td><td data-l="Use it from">Your back end</td><td data-l="Protection">Secret. Refused when sent from a web page. Can be limited to your own IP ranges.</td></tr>
-          <tr><td data-l="Key type"><span class="field">Browser</span></td><td data-l="Prefix"><code>smk_pub_</code></td><td data-l="Use it from">Your website</td><td data-l="Protection">Works only from the website addresses registered for it, with per-visitor limits.</td></tr>
+          <tr><td data-l="Key type"><span class="field">Browser</span></td><td data-l="Prefix"><code>smk_pub_</code></td><td data-l="Use it from">Your website</td><td data-l="Protection">Public by design: visible in your page's source, but it only runs scans, only from the website addresses registered for it, with per-visitor limits.</td></tr>
           <tr><td data-l="Key type"><span class="field">App</span></td><td data-l="Prefix"><code>smk_app_</code></td><td data-l="Use it from">Your mobile app</td><td data-l="Protection">Per-device limits, so one copied key can't run up volume.</td></tr>
         </tbody>
       </table>
     </div>
     <ul class="list" style="margin-top:22px;">
+      <li><span><b>No key in the browser, if you prefer.</b> Your website can send scans through your own server, which adds your server key. The <a href="#sdk" class="ok">capture SDK</a> supports this with its <code>proxyUrl</code> option.</span></li>
       <li><span><b>Rotation without downtime.</b> Hold several keys at once: switch to a new one, then the old one is disabled. Keys can also carry an expiry date.</span></li>
       <li><span><b>Limits per key.</b> Each key has its own rate limits and number of scans at once, as set in your agreement.</span></li>
       <li><span><b>Stored as hashes.</b> We keep only a cryptographic hash of each key, so a key is shown once, when it's issued.</span></li>
