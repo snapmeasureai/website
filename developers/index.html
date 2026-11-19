@@ -245,7 +245,7 @@
     /* tables */
     .table-wrap { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow-x: auto; background: var(--bg3); }
     table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 640px; }
-    th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 14px 18px; border-bottom: 1px solid var(--border-hi); background: rgba(255,255,255,.02); }
+    th { white-space: nowrap; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 14px 18px; border-bottom: 1px solid var(--border-hi); background: rgba(255,255,255,.02); }
     td { padding: 16px 18px; border-bottom: 1px solid var(--border); color: var(--text-2); vertical-align: top; line-height: 1.6; }
     tr:last-child td { border-bottom: none; }
     td:first-child { white-space: nowrap; }
@@ -396,7 +396,11 @@
     .sdk-flow li { counter-increment: f; }
     .sdk-flow li::before { content: counter(f); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--teal); background: var(--teal-dim); margin-top: 1px; }
     .sdk-flow li { grid-template-columns: 22px 1fr; gap: 12px; }
-    table.narrow { min-width: 0; }
+    table.ref-two { min-width: 0; }
+    table.ref-two td:first-child { white-space: normal; width: 42%; }
+    table.ref-two td code { display: inline-block; margin: 0 2px 4px 0; }
+    #sdk td:first-child { white-space: normal; }
+    #sdk td .field { white-space: nowrap; }
     .ref-more { margin-top: 14px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg3); padding: 0 18px; }
     .ref-more summary { cursor: pointer; list-style: none; padding: 16px 0; font-size: 15px; font-weight: 500; color: var(--text); display: flex; justify-content: space-between; gap: 12px; }
     .ref-more summary::-webkit-details-marker { display: none; }
@@ -418,6 +422,30 @@
       .stack td[data-l]::before { content: attr(data-l); display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 2px; }
       .hero__links { margin-top: -8px; }
       .ep { font-size: 13px; }
+    }
+  </style>
+  <style>
+    /* Measurement profile builder banner */
+    .pb-banner { padding: 44px 0; }
+    .pb-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px 40px; align-items: center; padding: 34px 38px; border-radius: 20px;
+      border: 1px solid rgba(10,191,163,.4); background: linear-gradient(135deg, rgba(10,191,163,.13), rgba(108,99,255,.07) 55%, rgba(255,255,255,0)), var(--bg3, #0F161D); }
+    .pb-k { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal, #0ABFA3); margin: 0 0 10px; }
+    .pb-card h2 { font-size: clamp(23px, 3vw, 31px); line-height: 1.2; letter-spacing: -.02em; margin: 0 0 10px; color: var(--text, #F0F4F8); }
+    .pb-card p.pb-body { color: var(--text-2, #A9B6C4); font-size: 16px; line-height: 1.65; margin: 0; max-width: 660px; }
+    .pb-points { display: flex; flex-wrap: wrap; gap: 8px 22px; list-style: none; margin: 16px 0 0; padding: 0; font-size: 14px; color: var(--text-2, #A9B6C4); }
+    .pb-points li::before { content: "\2713"; color: var(--teal, #0ABFA3); font-weight: 700; margin-right: 8px; }
+    .pb-actions { display: flex; flex-direction: column; align-items: stretch; gap: 12px; min-width: 240px; }
+    .pb-actions .btn { justify-content: center; text-align: center; }
+    .pb-link { color: var(--teal, #0ABFA3); font-size: 14px; text-align: center; }
+    .pb-link:hover { text-decoration: underline; }
+    @media (max-width: 760px) { .pb-card { grid-template-columns: 1fr; padding: 26px 20px; } .pb-actions { min-width: 0; } }
+  </style>
+  <style>
+    /* Mid-width screens: keep the nav on one line (the in-page links stay in the menu and the page) */
+    .nav__links a, .nav__links button { white-space: nowrap; }
+    @media (max-width: 1120px) and (min-width: 901px) {
+      .nav__links { gap: 20px; }
+      .nav__links > li:first-child, .nav__links > li:last-child { display: none; }
     }
   </style>
 </head>
@@ -463,6 +491,7 @@
         </div>
       </li>
       <li><a href="https://snapmeasureai.com/developers/" aria-current="page">Developers</a></li>
+      <li><a href="https://demo.snapmeasureai.com/profile-builder">Profile builder</a></li>
       <li><a href="https://snapmeasureai.com/#faqs">FAQs</a></li>
     </ul>
     <div class="nav__cta">
@@ -480,6 +509,7 @@
   <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
   <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
   <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()" style="color:var(--teal);">Developers</a>
+  <a href="https://demo.snapmeasureai.com/profile-builder" onclick="toggleMenu()">Profile builder</a>
   <a href="https://snapmeasureai.com/#faqs" onclick="toggleMenu()">FAQs</a>
   <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
   <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
@@ -881,12 +911,10 @@ curl https://api.snapmeasureai.com/v1/measurements \
       <p class="ref-p"><code>root</code> <code>dialog</code> <code>screen</code> <code>title</code> <code>logo</code> <code>tips</code> <code>height</code> <code>input</code> <code>consent</code> <code>consent-checkbox</code> <code>button-primary</code> <code>button-secondary</code> <code>button-link</code> <code>button-back</code> <code>button-close</code> <code>camera</code> <code>frame</code> <code>video</code> <code>steps</code> <code>panel</code> <code>instruction-title</code> <code>instruction-text</code> <code>countdown</code> <code>countdown-cue</code> <code>shutter</code> <code>button-switch</code> <code>button-sound</code> <code>review-photo</code> <code>upload-tile</code> <code>measuring-photo</code> <code>measuring-steps</code> <code>result-list</code></p>
     </details>
 
-    <h3 class="sub-h">Results, errors and events</h3>
-    <div class="split">
-      <div>
+    <h3 class="sub-h">Results and errors</h3>
         <p class="ref-p">The promise resolves with the API's response, unchanged: the same JSON as <code>/v1/measurements</code>, with <code>weight</code> when you include it. It rejects with a <code>SnapMeasure.Error</code> (<code>code</code>, <code>status</code>, <code>requestId</code>, <code>retryAfter</code>, <code>retryable</code>). By then the customer has already seen a clear message and a way forward; the code is for your page and your logs.</p>
         <div class="table-wrap stack">
-          <table class="narrow">
+          <table class="ref-two">
             <thead><tr><th>code</th><th>Meaning</th></tr></thead>
             <tbody>
               <tr><td data-l="code"><code>cancelled</code></td><td data-l="Meaning">The customer closed it, or your code did.</td></tr>
@@ -898,11 +926,11 @@ curl https://api.snapmeasureai.com/v1/measurements \
             </tbody>
           </table>
         </div>
-      </div>
-      <div>
+
+    <h3 class="sub-h">Events</h3>
         <p class="ref-p"><code>onEvent(name, detail)</code> reports progress for your analytics and funnels. Events never contain photos, heights or measurements.</p>
         <div class="table-wrap stack">
-          <table class="narrow">
+          <table class="ref-two">
             <thead><tr><th>Event</th><th>detail</th></tr></thead>
             <tbody>
               <tr><td data-l="Event"><code>open</code></td><td data-l="detail"><code>mode</code>: self or assisted</td></tr>
@@ -917,8 +945,6 @@ curl https://api.snapmeasureai.com/v1/measurements \
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
 
     <h3 class="sub-h">Methods and requirements</h3>
     <div class="split">
@@ -1000,6 +1026,28 @@ curl https://api.snapmeasureai.com/v1/measurements \
       </table>
     </div>
     <p class="note">No names, emails or account ids are needed. To join a result to your own record, keep your id on your side, or pass it as <code>reference</code>.</p>
+  </div>
+</section>
+
+<!-- ==================== PROFILE BUILDER ==================== -->
+<section class="pb-banner" aria-labelledby="pbTitle">
+  <div class="container">
+    <div class="pb-card">
+      <div>
+        <p class="pb-k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 12h8"/></svg>Measurement profile builder</p>
+        <h2 id="pbTitle">Define your own measurements. No scan needed.</h2>
+        <p class="pb-body">Open a default 3D body, click where each girth or length goes, and save your set as a measurement profile. Every scan through your integration then returns exactly those measurements, with your names and units.</p>
+        <ul class="pb-points">
+          <li>Any girth or length on the body</li>
+          <li>Your field names and units</li>
+          <li>Measured the same way on every scan</li>
+        </ul>
+      </div>
+      <div class="pb-actions">
+        <a class="btn btn--primary" href="https://demo.snapmeasureai.com/profile-builder">Open the profile builder &rarr;</a>
+        <a class="pb-link" href="https://snapmeasureai.com/developers/#request">How measurement profiles work</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1370,6 +1418,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
         <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
         <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
         <li><a href="https://snapmeasureai.com/developers/" style="color:var(--teal)">Developers</a></li>
+        <li><a href="https://demo.snapmeasureai.com/profile-builder">Profile builder</a></li>
         <li><a href="https://demo.snapmeasureai.com/">Live demo</a></li>
         <li><a href="https://snapmeasureai.com/contact/">Contact</a></li>
         <li><a href="https://snapmeasureai.com/privacy/">Privacy</a></li>
