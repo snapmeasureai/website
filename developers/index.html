@@ -49,7 +49,7 @@
       { "@type": "Question", "name": "How can we try it before signing?",
         "acceptedAnswer": { "@type": "Answer", "text": "The live demo at demo.snapmeasureai.com runs the same scan, free, in any browser. API keys are issued with an agreement and set up for your use case: your measurement set, your outputs and your region." } },
       { "@type": "Question", "name": "How do we define our own measurements?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Open the measurement studio on a demo result, use Custom Measure to define any girth or length on the body, and save it as a measurement profile. We attach it to your keys, and every scan returns exactly that set, with your field names, units and rounding." } },
+        "acceptedAnswer": { "@type": "Answer", "text": "Open our profile builder (a default 3D body, no scan needed), use Custom Measure to define any girth or length on the body, and save it as a measurement profile. We attach it to your keys, and every scan returns exactly that set, with your field names, units and rounding." } },
       { "@type": "Question", "name": "Are photos or results stored?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. Photos and heights are processed in memory and deleted as soon as the response is sent. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI." } },
       { "@type": "Question", "name": "Will the API change under us?",
@@ -508,6 +508,7 @@
         <a href="/developers/openapi.yaml" download>OpenAPI 3.1 specification ↓</a>
         <a href="#quickstart">Quickstart</a>
         <a href="#errors">Error codes</a>
+        <a href="https://demo.snapmeasureai.com/profile-builder">Profile builder</a>
       </p>
       <ul class="hero__facts">
         <li>REST, JSON in and out</li>
@@ -807,7 +808,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="Option"><span class="field">askHeight</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default"><code>auto</code></td><td data-l="Description"><code>auto</code>: ask only when no height is passed. <code>always</code>: show the field, filled in. <code>never</code>: a missing height is an error.</td></tr>
           <tr><td data-l="Option"><span class="field">include</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Default">your account's</td><td data-l="Description">Extra outputs, such as <code>["weight"]</code> (see <a href="#outputs" class="ok">Outputs</a>).</td></tr>
           <tr><td data-l="Option"><span class="field">unit</span>, <span class="field">weightUnit</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">the height's</td><td data-l="Description"><code>cm</code>, <code>mm</code> or <code>in</code> for the measurements; <code>kg</code> or <code>lb</code> for the weight.</td></tr>
-          <tr><td data-l="Option"><span class="field">profile</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">your key's</td><td data-l="Description">One of your measurement profiles.</td></tr>
+          <tr><td data-l="Option"><span class="field">profile</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">your key's</td><td data-l="Description">One of your measurement profiles (build one in the <a href="https://demo.snapmeasureai.com/profile-builder" class="ok">profile builder</a>).</td></tr>
           <tr><td data-l="Option"><span class="field">reference</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">–</td><td data-l="Description">Your own id, returned as sent. Never stored or logged.</td></tr>
           <tr><td data-l="Option"><span class="field">imageMaxSize</span>, <span class="field">jpegQuality</span></td><td data-l="Type"><span class="type">number</span></td><td data-l="Default"><code>1280</code>, <code>0.9</code></td><td data-l="Description">The photos sent: long side in pixels, and JPEG quality.</td></tr>
         </tbody>
@@ -987,7 +988,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="Field"><span class="field">height</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">string | number</span></td><td data-l="Description"><code>"174cm"</code> or <code>"68.5in"</code>, or a number with <code>"height_unit": "cm"</code> or <code>"in"</code>. The body is scaled to it, so every measurement is at real size.</td></tr>
           <tr><td data-l="Field"><span class="field">images</span><span class="req req--yes">Required</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">2–4 photos of one person, <b>front first, then side</b>; a back or second side view helps. Each is a base64 string or <code>{"data": "…"}</code>. Whole body in frame, head to feet.</td></tr>
           <tr><td data-l="Field"><span class="field">include</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Description">Extra outputs: <code>weight</code>, <code>obj</code>, <code>glb</code>, <code>geometry</code>, <code>faces</code>, <code>viewer</code>, <code>heights_above_floor</code>, <code>sizes</code> (see <a href="#outputs" class="ok">Outputs</a>). Without it you get your account's default outputs.</td></tr>
-          <tr><td data-l="Field"><span class="field">profile</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">Your measurement profile: your own measurement set. Keys with a default profile use it automatically.</td></tr>
+          <tr><td data-l="Field"><span class="field">profile</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">Your measurement profile: your own measurement set, built in the <a href="https://demo.snapmeasureai.com/profile-builder" class="ok">profile builder</a>. Keys with a default profile use it automatically.</td></tr>
           <tr><td data-l="Field"><span class="field">unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>cm</code>, <code>mm</code> or <code>in</code>. Default: your account's setting, or the height's unit.</td></tr>
           <tr><td data-l="Field"><span class="field">weight_unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>kg</code> or <code>lb</code>, for the estimated weight. Default: <code>lb</code> when the measurements are in inches, otherwise <code>kg</code>.</td></tr>
           <tr><td data-l="Field"><span class="field">pose</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string | object</span></td><td data-l="Description">Pose of the 3D files: <code>a_pose</code> (default), <code>t_pose</code>, or your own angles such as <code>{"arms": 45, "legs": 6}</code>. See <a href="#mesh" class="ok">3D files</a>.</td></tr>
@@ -1013,7 +1014,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
       <article class="out">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><ellipse cx="10" cy="10" rx="8" ry="3.4" stroke="currentColor" stroke-width="1.7"/></svg></div>
         <h3>Body measurements <span class="badge badge--core">Core</span></h3>
-        <p>About 20 standard girths and lengths: chest, waist, hips, neck, upper arm, forearm, wrist, thigh, calf, ankle, head, shoulder width, arm length, inseam, torso length, foot length and width. In centimetres, millimetres or inches.</p>
+        <p>18 standard girths and lengths: chest, waist, hips, neck, upper arm, forearm, wrist, thigh, calf, ankle, head, shoulder width, back to shoulder, arm length, inseam, torso length, foot length and width. In centimetres, millimetres or inches. Add your own in the <a href="https://demo.snapmeasureai.com/profile-builder" class="ok">profile builder</a>.</p>
       </article>
       <article class="out">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16l12-12M4 4h4M4 4v4M16 16h-4M16 16v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
@@ -1323,7 +1324,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
       </details>
       <details>
         <summary>How do we define our own measurements?</summary>
-        <p>Open the measurement studio on a demo result, use Custom Measure to define any girth or length on the body, and save it as a measurement profile. We attach it to your keys, and every scan returns exactly that set, with your field names, units and rounding.</p>
+        <p>Open our <a href="https://demo.snapmeasureai.com/profile-builder" class="ok">profile builder</a> (a default 3D body, no scan needed), use Custom Measure to define any girth or length on the body, and save it as a measurement profile. We attach it to your keys, and every scan returns exactly that set, with your field names, units and rounding.</p>
       </details>
       <details>
         <summary>Are photos or results stored?</summary>
