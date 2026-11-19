@@ -209,7 +209,18 @@
 
     /* in-page contents */
     .toc { position: sticky; top: 64px; z-index: 50; background: rgba(8,12,16,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
-    .toc ul { display: flex; gap: 6px; list-style: none; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+    .toc-track { position: relative; display: flex; align-items: center; }
+    .toc ul { display: flex; gap: 6px; list-style: none; overflow-x: auto; padding: 10px 0; scrollbar-width: none; flex: 1; min-width: 0; scroll-behavior: smooth; }
+    .toc-track.can-left ul { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px); mask-image: linear-gradient(90deg, transparent 0, #000 64px); }
+    .toc-track.can-right ul { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 64px), transparent 100%); mask-image: linear-gradient(90deg, #000 calc(100% - 64px), transparent 100%); }
+    .toc-track.can-left.can-right ul { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 64px, #000 calc(100% - 64px), transparent 100%); }
+    .toc-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; display: none; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border); background: rgba(15,22,29,.96); color: var(--text); cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.4); transition: border-color .15s, color .15s; }
+    .toc-arrow:hover { border-color: rgba(10,191,163,.6); color: var(--teal); }
+    .toc-arrow:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    .toc-arrow--prev { left: 0; }
+    .toc-arrow--next { right: 0; }
+    .toc-track.can-left .toc-arrow--prev, .toc-track.can-right .toc-arrow--next { display: inline-flex; }
     .toc ul::-webkit-scrollbar { display: none; }
     .toc a { display: block; white-space: nowrap; font-size: 13px; font-weight: 600; color: var(--text-3); padding: 7px 12px; border-radius: 100px; border: 1px solid transparent; }
     .toc a:hover { color: var(--text); }
@@ -582,7 +593,8 @@
 
 <!-- ==================== IN-PAGE CONTENTS ==================== -->
 <nav class="toc" aria-label="On this page">
-  <div class="container">
+  <div class="container toc-track">
+    <button type="button" class="toc-arrow toc-arrow--prev" aria-label="Scroll sections left" tabindex="-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
     <ul>
       <li><a href="#flow">Overview</a></li>
       <li><a href="#quickstart">Quickstart</a></li>
@@ -599,6 +611,7 @@
       <li><a href="#versioning">Versioning</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
+    <button type="button" class="toc-arrow toc-arrow--next" aria-label="Scroll sections right" tabindex="-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
   </div>
 </nav>
 
@@ -1473,6 +1486,29 @@ curl https://api.snapmeasureai.com/v1/measurements \
     });
   });
 
+  /* Contents bar: arrows and edge fades when the sections overflow */
+  var tocTrack = document.querySelector('.toc-track');
+  var tocList = tocTrack && tocTrack.querySelector('ul');
+  function updateTocEdges() {
+    if (!tocList) return;
+    var max = tocList.scrollWidth - tocList.clientWidth;
+    tocTrack.classList.toggle('can-left', tocList.scrollLeft > 4);
+    tocTrack.classList.toggle('can-right', tocList.scrollLeft < max - 4);
+  }
+  function revealInBar(a) {          /* keep the active link in view without moving the page */
+    if (!tocList) return;
+    var l = a.offsetLeft - tocList.offsetLeft, r = l + a.offsetWidth, pad = 48;
+    if (l - pad < tocList.scrollLeft) tocList.scrollLeft = Math.max(0, l - pad);
+    else if (r + pad > tocList.scrollLeft + tocList.clientWidth) tocList.scrollLeft = r + pad - tocList.clientWidth;
+  }
+  if (tocList) {
+    tocTrack.querySelector('.toc-arrow--prev').addEventListener('click', function () { tocList.scrollLeft -= tocList.clientWidth * 0.7; });
+    tocTrack.querySelector('.toc-arrow--next').addEventListener('click', function () { tocList.scrollLeft += tocList.clientWidth * 0.7; });
+    tocList.addEventListener('scroll', updateTocEdges, { passive: true });
+    window.addEventListener('resize', updateTocEdges);
+    updateTocEdges();
+  }
+
   /* Highlight the section in view in the contents bar */
   (function () {
     var links = document.querySelectorAll('.toc a');
@@ -1484,7 +1520,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
         if (!en.isIntersecting) return;
         links.forEach(function (a) { a.classList.remove('is-on'); });
         var a = map[en.target.id];
-        if (a) { a.classList.add('is-on'); a.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+        if (a) { a.classList.add('is-on'); revealInBar(a); }
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
