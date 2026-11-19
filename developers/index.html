@@ -388,6 +388,23 @@
     .regions td:first-child { white-space: normal; }
     .mini { font-size: 13px; color: var(--text-3); }
     .ok { color: var(--teal); }
+    /* SDK reference */
+    .ref-k { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin: 26px 0 10px; }
+    .ref-p { font-size: 15px; color: var(--text-2); line-height: 1.65; margin-bottom: 16px; }
+    .ref-p code { margin-right: 2px; }
+    .sdk-flow { counter-reset: f; }
+    .sdk-flow li { counter-increment: f; }
+    .sdk-flow li::before { content: counter(f); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--teal); background: var(--teal-dim); margin-top: 1px; }
+    .sdk-flow li { grid-template-columns: 22px 1fr; gap: 12px; }
+    table.narrow { min-width: 0; }
+    .ref-more { margin-top: 14px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg3); padding: 0 18px; }
+    .ref-more summary { cursor: pointer; list-style: none; padding: 16px 0; font-size: 15px; font-weight: 500; color: var(--text); display: flex; justify-content: space-between; gap: 12px; }
+    .ref-more summary::-webkit-details-marker { display: none; }
+    .ref-more summary::after { content: '+'; color: var(--teal); font-size: 18px; line-height: 1; }
+    .ref-more[open] summary::after { content: '\2212'; }
+    .ref-more[open] { padding-bottom: 16px; }
+    .ref-more .table-wrap { margin-top: 2px; }
+    .ref-more td code { display: inline-block; margin: 0 4px 4px 0; }
 
     /* Tables become stacked cards on a phone, so nothing scrolls sideways. */
     @media (max-width: 640px) {
@@ -539,6 +556,7 @@
       <li><a href="#flow">Overview</a></li>
       <li><a href="#quickstart">Quickstart</a></li>
       <li><a href="#sdk">Capture SDK</a></li>
+      <li><a href="#sdk-reference">SDK reference</a></li>
       <li><a href="#auth">Authentication</a></li>
       <li><a href="#request">Request</a></li>
       <li><a href="#outputs">Outputs</a></li>
@@ -723,7 +741,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
         </div>
 <pre>&lt;<span class="k">script</span> src=<span class="s">"https://api.snapmeasureai.com/sdk/capture-1.0.0.js"</span>
-        integrity=<span class="s">"sha384-lQAe7WBKEIUKKWjdNjIDXUKfL9VF6b7dvohefZNzpOV6v0MXFG2P9YncmmwLzzdG"</span>
+        integrity=<span class="s">"sha384-doqZd2+Dv12gx4zzg+B5k/YaEpCClshQAMbc1pbUT7NswergVi0vAUZ65/J1tNAc"</span>
         crossorigin=<span class="s">"anonymous"</span>&gt;&lt;/<span class="k">script</span>&gt;
 &lt;<span class="k">script</span>&gt;
   button.onclick = <span class="k">async</span> () =&gt; {
@@ -745,12 +763,178 @@ curl https://api.snapmeasureai.com/v1/measurements \
     </div>
 
     <div class="options" style="margin-top:28px;">
-      <div class="opt"><p class="opt__k">At home or in store</p><h3>Self or assisted</h3><p>A countdown with beeps for a phone propped against a wall, or a shutter button and the back camera for staff with a tablet.</p></div>
-      <div class="opt"><p class="opt__k">Your design</p><h3>Styled to your brand</h3><p>Your colours, corners and font, every text replaceable, CSS parts for the rest. Or build your own screens and send photos with <code>SnapMeasure.measure()</code>.</p></div>
-      <div class="opt"><p class="opt__k">Built in</p><h3>Guidance and recovery</h3><p>A body outline to stand in, photo review and retake, upload when there's no camera, and automatic retries when the service is busy.</p></div>
+      <div class="opt"><p class="opt__k">At home or in store</p><h3>Self or assisted</h3><p>A countdown in a ring, with beeps, for a phone propped against a wall; or a shutter button and the back camera for staff with a tablet.</p></div>
+      <div class="opt"><p class="opt__k">Your brand</p><h3>Your colours, font and words</h3><p>Theme colours, corners, font and logo; every text replaceable or translated; CSS parts for the rest. Or your own screens with <code>SnapMeasure.measure()</code>.</p></div>
+      <div class="opt"><p class="opt__k">Built in</p><h3>Guidance and recovery</h3><p>The whole picture inside a frame in your colour, instructions never over the person, photo review and retake, upload without a camera, automatic retries.</p></div>
       <div class="opt"><p class="opt__k">Private</p><h3>Nothing left behind</h3><p>No cookies, storage or third parties. Photos are re-encoded on the device, without location data, and the camera turns off the moment it closes.</p></div>
     </div>
-    <p class="note">Phones, tablets and computers, in current Safari, Chrome, Edge, Firefox and Samsung Internet, on HTTPS pages. About 20&nbsp;KB gzipped, no dependencies, TypeScript types included. Two people in one visit: call <code>capture()</code> once for each.</p>  </div>
+    <p class="note">Phones, tablets and computers, in current Safari, Chrome, Edge, Firefox and Samsung Internet, on HTTPS pages. About 27&nbsp;KB gzipped, no dependencies, TypeScript types included. Two people in one visit: call <code>capture()</code> once for each.</p>
+
+    <!-- ===== SDK reference ===== -->
+    <h3 class="sub-h" id="sdk-reference">What your customer sees</h3>
+    <ol class="list sdk-flow">
+      <li><span><b>Start.</b> Three setup steps (prop the phone up, stand 2–3&nbsp;m back, fitted clothes), the height field if you didn't pass a height (in ft/in on US pages, cm elsewhere), a privacy line or your consent checkbox, then <i>Start</i> or <i>Upload photos instead</i>. One screen before the camera.</span></li>
+      <li><span><b>Camera.</b> The whole camera picture, never cropped, inside a border in your colour: the person stands inside the frame. Instructions, the countdown and the buttons sit in a panel below the picture, or beside it on wide screens, never over the person. Self-capture: <i>Start countdown</i>, a 10-second countdown in a ring with a cue readable from 2–3&nbsp;m and beeps in the last three seconds, then <i>Turn to your side</i> (the frame turns amber) and a 7-second side countdown that starts on its own. <i>Stop</i> returns to the start without leaving. Assisted: a shutter button.</span></li>
+      <li><span><b>Check the photos.</b> Both photos, each with <i>Retake</i>. On phones they sit one above the other, as large as fits, with no scrolling.</span></li>
+      <li><span><b>Measuring.</b> The front photo with a scan line and the three stages, a few seconds. Busy moments are retried on their own.</span></li>
+      <li><span><b>Done.</b> The SDK closes and your page has the result, for your own results page or next step. (<code>showResult: true</code> shows a short summary first.)</span></li>
+    </ol>
+    <p class="note">Camera blocked, or none: two upload tiles instead. No whole body found: the SDK explains and offers to retake. Height out of range: it asks again and resends the same photos.</p>
+
+    <h3 class="sub-h">Options</h3>
+    <p class="ref-k">Connection</p>
+    <div class="table-wrap stack">
+      <table>
+        <thead><tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Option"><span class="field">apiKey</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">–</td><td data-l="Description">Your browser key, <code>smk_pub_…</code>. Server keys are refused from web pages. A sandbox key (<code>smk_test_…</code>) returns sample results, for your automated tests.</td></tr>
+          <tr><td data-l="Option"><span class="field">proxyUrl</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">–</td><td data-l="Description">Instead of <code>apiKey</code>: a route on <b>your own</b> server, such as <code>/api/body-scan</code>, that adds your server key and forwards the same JSON to <code>/v1/measurements</code>. No key in the page.</td></tr>
+          <tr><td data-l="Option"><span class="field">headers</span></td><td data-l="Type"><span class="type">object</span></td><td data-l="Default">–</td><td data-l="Description">Extra request headers for your proxy, such as a CSRF token.</td></tr>
+          <tr><td data-l="Option"><span class="field">credentials</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default"><code>omit</code></td><td data-l="Description"><code>same-origin</code> to send your session cookie to your proxy.</td></tr>
+          <tr><td data-l="Option"><span class="field">apiUrl</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default"><code>https://api.snapmeasureai.com</code></td><td data-l="Description">The EU endpoint or your dedicated URL (see <a href="#regions" class="ok">Regions</a>).</td></tr>
+          <tr><td data-l="Option"><span class="field">timeout</span>, <span class="field">retries</span></td><td data-l="Type"><span class="type">number</span></td><td data-l="Default"><code>120000</code>, <code>3</code></td><td data-l="Description">Milliseconds per attempt, and retries when the service is busy (waiting the time the API asks for).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ref-k">The scan</p>
+    <div class="table-wrap stack">
+      <table>
+        <thead><tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Option"><span class="field">height</span></td><td data-l="Type"><span class="type">number | string | object</span></td><td data-l="Default">–</td><td data-l="Description"><code>175</code>, <code>"175cm"</code>, <code>"69in"</code>, <code>"5'9\""</code> or <code>{ft: 5, in: 9}</code>. Leave it out and the SDK asks on its first screen.</td></tr>
+          <tr><td data-l="Option"><span class="field">heightUnit</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">by language</td><td data-l="Description"><code>cm</code> or <code>in</code>: the unit of a numeric <code>height</code>, and the unit the height field opens in. Without it the field opens in ft/in on US pages and in cm elsewhere.</td></tr>
+          <tr><td data-l="Option"><span class="field">askHeight</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default"><code>auto</code></td><td data-l="Description"><code>auto</code>: ask only when no height is passed. <code>always</code>: show the field, filled in. <code>never</code>: a missing height is an error.</td></tr>
+          <tr><td data-l="Option"><span class="field">include</span></td><td data-l="Type"><span class="type">array</span></td><td data-l="Default">your account's</td><td data-l="Description">Extra outputs, such as <code>["weight"]</code> (see <a href="#outputs" class="ok">Outputs</a>).</td></tr>
+          <tr><td data-l="Option"><span class="field">unit</span>, <span class="field">weightUnit</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">the height's</td><td data-l="Description"><code>cm</code>, <code>mm</code> or <code>in</code> for the measurements; <code>kg</code> or <code>lb</code> for the weight.</td></tr>
+          <tr><td data-l="Option"><span class="field">profile</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">your key's</td><td data-l="Description">One of your measurement profiles.</td></tr>
+          <tr><td data-l="Option"><span class="field">reference</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default">–</td><td data-l="Description">Your own id, returned as sent. Never stored or logged.</td></tr>
+          <tr><td data-l="Option"><span class="field">imageMaxSize</span>, <span class="field">jpegQuality</span></td><td data-l="Type"><span class="type">number</span></td><td data-l="Default"><code>1280</code>, <code>0.9</code></td><td data-l="Description">The photos sent: long side in pixels, and JPEG quality.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ref-k">The flow</p>
+    <div class="table-wrap stack">
+      <table>
+        <thead><tr><th>Option</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Option"><span class="field">assisted</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Default"><code>false</code></td><td data-l="Description">Someone else takes the photos, such as store staff: a shutter button and staff wording.</td></tr>
+          <tr><td data-l="Option"><span class="field">camera</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Default"><code>user</code></td><td data-l="Description"><code>environment</code> for the back camera, with <code>assisted</code> on tablets. Users can switch cameras on screen.</td></tr>
+          <tr><td data-l="Option"><span class="field">countdown</span>, <span class="field">sideCountdown</span></td><td data-l="Type"><span class="type">number</span></td><td data-l="Default"><code>10</code>, <code>7</code></td><td data-l="Description">Seconds before the front photo and before the side photo.</td></tr>
+          <tr><td data-l="Option"><span class="field">sound</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Default"><code>true</code></td><td data-l="Description">Beeps in the last three seconds. Users can mute them on screen.</td></tr>
+          <tr><td data-l="Option"><span class="field">voice</span>, <span class="field">language</span></td><td data-l="Type"><span class="type">boolean, string</span></td><td data-l="Default"><code>false</code>, the page's</td><td data-l="Description">Spoken prompts (the browser's speech), in <code>language</code>. The language also picks the height unit.</td></tr>
+          <tr><td data-l="Option"><span class="field">intro</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Default"><code>true</code></td><td data-l="Description">The first screen. <code>false</code> goes straight to the camera (asking the height on its own screen if needed).</td></tr>
+          <tr><td data-l="Option"><span class="field">consent</span></td><td data-l="Type"><span class="type">boolean | string</span></td><td data-l="Default"><code>false</code></td><td data-l="Description"><code>true</code> or your own wording: a checkbox on the first screen that must be ticked before the camera or upload.</td></tr>
+          <tr><td data-l="Option"><span class="field">review</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Default"><code>true</code></td><td data-l="Description">The check-the-photos screen.</td></tr>
+          <tr><td data-l="Option"><span class="field">allowUpload</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Default"><code>true</code></td><td data-l="Description">Photo upload as an alternative, and the fallback when there's no camera.</td></tr>
+          <tr><td data-l="Option"><span class="field">showResult</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Default"><code>false</code></td><td data-l="Description">A summary of the main measurements before closing. Usually your own page shows the results instead.</td></tr>
+          <tr><td data-l="Option"><span class="field">container</span></td><td data-l="Type"><span class="type">element</span></td><td data-l="Default">–</td><td data-l="Description">Render inside this element instead of a full-screen overlay.</td></tr>
+          <tr><td data-l="Option"><span class="field">zIndex</span></td><td data-l="Type"><span class="type">number</span></td><td data-l="Default"><code>2147483000</code></td><td data-l="Description">Of the overlay.</td></tr>
+          <tr><td data-l="Option"><span class="field">signal</span></td><td data-l="Type"><span class="type">AbortSignal</span></td><td data-l="Default">–</td><td data-l="Description">Close it from your code (or call <code>SnapMeasure.close()</code>).</td></tr>
+          <tr><td data-l="Option"><span class="field">onResult</span>, <span class="field">onError</span>, <span class="field">onCancel</span></td><td data-l="Type"><span class="type">function</span></td><td data-l="Default">–</td><td data-l="Description">Callbacks, if you prefer them to the promise.</td></tr>
+          <tr><td data-l="Option"><span class="field">onEvent</span></td><td data-l="Type"><span class="type">function</span></td><td data-l="Default">–</td><td data-l="Description"><code>(name, detail)</code> for your analytics (events below).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-h" id="sdk-branding">Your brand</h3>
+    <p class="ref-p">Pass <code>theme</code> for colours, corners and font, <code>logo</code> (an image URL) for the top of the first screen, and <code>text</code> to change any words. The flow lives in a Shadow DOM, so your page's CSS can't break it and its CSS can't touch your page.</p>
+    <div class="table-wrap stack">
+      <table>
+        <thead><tr><th>theme key</th><th>Default</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td data-l="theme key"><span class="field">accent</span>, <span class="field">accentText</span></td><td data-l="Default"><code>#0ABFA3</code>, <code>#04211C</code></td><td data-l="Used for">Primary buttons and their text, focus rings, icon tints.</td></tr>
+          <tr><td data-l="theme key"><span class="field">background</span>, <span class="field">text</span>, <span class="field">muted</span></td><td data-l="Default">white, <code>#0F172A</code>, <code>#5B6474</code></td><td data-l="Used for">The light screens: start, upload, camera problems.</td></tr>
+          <tr><td data-l="theme key"><span class="field">surface</span>, <span class="field">border</span>, <span class="field">danger</span></td><td data-l="Default"><code>#F2F5F8</code>, <code>#E2E8F0</code>, <code>#B42318</code></td><td data-l="Used for">Cards, secondary buttons and dividers; error text.</td></tr>
+          <tr><td data-l="theme key"><span class="field">radius</span>, <span class="field">buttonRadius</span></td><td data-l="Default"><code>16</code>, <code>999</code></td><td data-l="Used for">Corners of the panel and of buttons, in px or any CSS length.</td></tr>
+          <tr><td data-l="theme key"><span class="field">font</span></td><td data-l="Default">system font</td><td data-l="Used for">A <code>font-family</code> your page already loads.</td></tr>
+          <tr><td data-l="theme key"><span class="field">overlay</span></td><td data-l="Default"><code>rgba(8,12,16,.6)</code></td><td data-l="Used for">The backdrop behind the panel on large screens.</td></tr>
+          <tr><td data-l="theme key"><span class="field">cameraAccent</span>, <span class="field">cameraAccentText</span></td><td data-l="Default"><code>accent</code></td><td data-l="Used for">The camera's frame border, countdown ring, step indicator and buttons. The camera screen is black, so if your accent is too dark to see there (a near-black brand colour), the SDK uses a bright teal unless you set this.</td></tr>
+          <tr><td data-l="theme key"><span class="field">cameraTurn</span></td><td data-l="Default"><code>#FFB020</code></td><td data-l="Used for">The frame and heading while the person turns to the side.</td></tr>
+          <tr><td data-l="theme key"><span class="field">frameWidth</span></td><td data-l="Default"><code>5</code></td><td data-l="Used for">The width of the frame border, in px.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details class="ref-more">
+      <summary>Every <code>text</code> key, to reword or translate</summary>
+      <div class="table-wrap stack">
+        <table>
+          <thead><tr><th>Screen</th><th>Keys</th></tr></thead>
+          <tbody>
+            <tr><td data-l="Screen">Start</td><td data-l="Keys"><code>introTitle</code> <code>introBody</code> <code>tipPhoneTitle</code> <code>tipPhone</code> <code>tipSpaceTitle</code> <code>tipSpace</code> <code>tipClothesTitle</code> <code>tipClothes</code> <code>privacy</code> <code>consent</code> <code>start</code> <code>uploadInstead</code> <code>logoAlt</code>, and <code>…Assisted</code> versions of the intro and tip keys</td></tr>
+            <tr><td data-l="Screen">Height</td><td data-l="Keys"><code>heightLabel</code> <code>heightTitle</code> <code>heightHint</code> (each with <code>…Assisted</code>; <code>heightHint</code> is an optional line under the field, empty by default) <code>heightInvalid</code> <code>unitCm</code> <code>unitFtIn</code> <code>cm</code> <code>ft</code> <code>inch</code> <code>heightLabelCm</code> <code>heightLabelFt</code> <code>heightLabelIn</code></td></tr>
+            <tr><td data-l="Screen">Camera</td><td data-l="Keys"><code>cameraStarting</code> <code>cameraAllow</code> <code>front</code> <code>side</code> <code>frontTitle</code> <code>frontText</code> <code>sideTitle</code> <code>sideText</code> (each with <code>…Assisted</code>) <code>startCountdown</code> <code>takePhoto</code> <code>cueFront</code> <code>cueSide</code> <code>holdStill</code> <code>stop</code> <code>turnTitle</code> <code>turnText</code> <code>frontTaken</code> <code>allTaken</code> <code>photoTaken</code> <code>switchCamera</code> <code>soundOn</code> <code>soundOff</code> <code>tapToStart</code></td></tr>
+            <tr><td data-l="Screen">Camera problems</td><td data-l="Keys"><code>cameraBlockedTitle</code> <code>cameraBlocked</code> <code>cameraFailedTitle</code> <code>cameraFailed</code> <code>cameraMissing</code></td></tr>
+            <tr><td data-l="Screen">Review, upload</td><td data-l="Keys"><code>reviewTitle</code> <code>reviewText</code> <code>retake</code> <code>usePhotos</code> <code>uploadTitle</code> <code>uploadText</code> <code>uploadFront</code> <code>uploadSide</code> <code>choosePhoto</code> <code>change</code> <code>notAPhoto</code> <code>photoTooLarge</code> <code>photoUnreadable</code> <code>useCamera</code></td></tr>
+            <tr><td data-l="Screen">Measuring, result</td><td data-l="Keys"><code>measuring</code> <code>measuringAssisted</code> <code>stepSend</code> <code>stepBuild</code> <code>stepMeasure</code> <code>busyRetry</code> (<code>{s}</code> is the seconds left) <code>processingNote</code> <code>resultTitle</code> <code>weight</code> <code>done</code></td></tr>
+            <tr><td data-l="Screen">Errors</td><td data-l="Keys"><code>errorTitle</code> <code>errNoPerson</code> <code>errImage</code> <code>errHeight</code> <code>errNetwork</code> <code>errTimeout</code> <code>errBusy</code> <code>errUnavailable</code> <code>errGeneric</code> <code>tryAgain</code> <code>retakePhotos</code></td></tr>
+            <tr><td data-l="Screen">Other</td><td data-l="Keys"><code>dialogLabel</code> <code>close</code> <code>cancel</code> <code>back</code> <code>continue</code> <code>voiceFront</code> <code>voiceSide</code> <code>voiceDone</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <details class="ref-more">
+      <summary>Every CSS part, for styling beyond the theme</summary>
+      <p class="ref-p">Style a part from your own stylesheet, for example <code>snapmeasure-capture::part(button-primary) { text-transform: uppercase; }</code>.</p>
+      <p class="ref-p"><code>root</code> <code>dialog</code> <code>screen</code> <code>title</code> <code>logo</code> <code>tips</code> <code>height</code> <code>input</code> <code>consent</code> <code>consent-checkbox</code> <code>button-primary</code> <code>button-secondary</code> <code>button-link</code> <code>button-back</code> <code>button-close</code> <code>camera</code> <code>frame</code> <code>video</code> <code>steps</code> <code>panel</code> <code>instruction-title</code> <code>instruction-text</code> <code>countdown</code> <code>countdown-cue</code> <code>shutter</code> <code>button-switch</code> <code>button-sound</code> <code>review-photo</code> <code>upload-tile</code> <code>measuring-photo</code> <code>measuring-steps</code> <code>result-list</code></p>
+    </details>
+
+    <h3 class="sub-h">Results, errors and events</h3>
+    <div class="split">
+      <div>
+        <p class="ref-p">The promise resolves with the API's response, unchanged: the same JSON as <code>/v1/measurements</code>, with <code>weight</code> when you include it. It rejects with a <code>SnapMeasure.Error</code> (<code>code</code>, <code>status</code>, <code>requestId</code>, <code>retryAfter</code>, <code>retryable</code>). By then the customer has already seen a clear message and a way forward; the code is for your page and your logs.</p>
+        <div class="table-wrap stack">
+          <table class="narrow">
+            <thead><tr><th>code</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td data-l="code"><code>cancelled</code></td><td data-l="Meaning">The customer closed it, or your code did.</td></tr>
+              <tr><td data-l="code"><code>camera_denied</code>, <code>camera_unavailable</code></td><td data-l="Meaning">Camera blocked or failing, and they closed instead of uploading.</td></tr>
+              <tr><td data-l="code"><code>no_person_detected</code>, <code>invalid_image</code></td><td data-l="Meaning">They closed after being asked to retake.</td></tr>
+              <tr><td data-l="code"><code>network</code>, <code>timeout</code>, <code>busy</code></td><td data-l="Meaning">Connection trouble, after the automatic retries.</td></tr>
+              <tr><td data-l="code"><code>rate_limited</code>, <code>monthly_limit_reached</code></td><td data-l="Meaning">Your key's limits.</td></tr>
+              <tr><td data-l="code"><code>invalid_config</code>, <code>origin_not_allowed</code>, <code>invalid_api_key</code>, …</td><td data-l="Meaning">Setup problems only you can fix. Also written to the browser console.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p class="ref-p"><code>onEvent(name, detail)</code> reports progress for your analytics and funnels. Events never contain photos, heights or measurements.</p>
+        <div class="table-wrap stack">
+          <table class="narrow">
+            <thead><tr><th>Event</th><th>detail</th></tr></thead>
+            <tbody>
+              <tr><td data-l="Event"><code>open</code></td><td data-l="detail"><code>mode</code>: self or assisted</td></tr>
+              <tr><td data-l="Event"><code>consent_given</code>, <code>intro_start</code></td><td data-l="detail">–</td></tr>
+              <tr><td data-l="Event"><code>height_entered</code></td><td data-l="detail"><code>unit</code></td></tr>
+              <tr><td data-l="Event"><code>camera_ready</code>, <code>camera_error</code>, <code>camera_switched</code></td><td data-l="detail"><code>facing</code>; <code>code</code></td></tr>
+              <tr><td data-l="Event"><code>photo_taken</code>, <code>retake</code>, <code>countdown_stopped</code></td><td data-l="detail"><code>view</code>: front or side</td></tr>
+              <tr><td data-l="Event"><code>review_confirmed</code>, <code>upload_selected</code>, <code>upload_confirmed</code></td><td data-l="detail"><code>view</code> for uploads</td></tr>
+              <tr><td data-l="Event"><code>submit</code>, <code>retry</code></td><td data-l="detail"><code>attempt</code>, <code>code</code>, <code>wait</code></td></tr>
+              <tr><td data-l="Event"><code>result</code>, <code>error</code></td><td data-l="detail"><code>seconds</code>, <code>requestId</code>; <code>code</code>, <code>status</code></td></tr>
+              <tr><td data-l="Event"><code>cancel</code>, <code>close</code></td><td data-l="detail"><code>outcome</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Methods and requirements</h3>
+    <div class="split">
+      <ul class="list">
+        <li><span><b><code>capture(options)</code></b> the guided flow, resolving with the result.</span></li>
+        <li><span><b><code>measure(options)</code></b> no interface: pass <code>images</code> you captured yourself (File, Blob, image, video, canvas or base64). It resizes them, strips their metadata, sends them with the same retries and resolves with the same result.</span></li>
+        <li><span><b><code>isSupported()</code></b> <code>{camera, upload, secureContext, fetch}</code>, to decide whether to show your button.</span></li>
+        <li><span><b><code>close()</code></b>, <b><code>parseHeight(value, unit)</code></b>, <b><code>version</code></b>, <b><code>Error</code></b>.</span></li>
+      </ul>
+      <ul class="list">
+        <li><span><b>HTTPS.</b> Browsers allow the camera only on secure pages. In an iframe, add <code>allow="camera"</code>.</span></li>
+        <li><span><b>Content-Security-Policy.</b> Allow <code>https://api.snapmeasureai.com</code> in <code>script-src</code> (unless you bundle it) and <code>connect-src</code>, and <code>blob:</code> <code>data:</code> in <code>img-src</code>. No <code>eval</code>, inline scripts or <code>'unsafe-inline'</code> needed.</span></li>
+        <li><span><b>Accessible.</b> A labelled dialog that keeps focus inside, fully keyboard operable, every control named for screen readers, progress announced, no animation for users who ask for reduced motion.</span></li>
+        <li><span><b>Versions.</b> <code>capture-1.0.0.js</code> never changes, so you can pin it with <code>integrity</code>. A new version gets a new file name.</span></li>
+      </ul>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== AUTHENTICATION ==================== -->
