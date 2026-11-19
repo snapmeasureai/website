@@ -61,7 +61,7 @@ paths:
               required: [height, images]
               properties:
                 height: {type: string, example: "174cm"}
-                company: {type: string, description: "Measurement profile code, or empty."}
+                company: {type: string, description: "Measurement set code, or empty."}
                 images:
                   type: array
                   minItems: 2
@@ -206,7 +206,7 @@ components:
             oneOf:
               - {type: string, description: "Base64 JPEG/PNG/WebP, or a data URI."}
               - {type: object, required: [data], properties: {data: {type: string}}}
-        profile: {type: string, description: "Your measurement profile code."}
+        profile: {type: string, description: "Your measurement set code."}
         include:
           type: array
           maxItems: 10

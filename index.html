@@ -87,7 +87,7 @@
       "name": "What body measurements does the scan produce?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The scan produces a detailed 3D body model, so any circumference or length between any points on the body can be generated. Standard outputs include chest, waist, hips, thighs, biceps, forearms, calves, neck, shoulder width, inseam, and full torso lengths. Each platform defines the measurement set its product needs: build a custom measurement profile in our profile builder on a default 3D body (no scan needed), save it as JSON, and send it to us — every scan through your integration then returns those measurements."
+        "text": "The scan produces a detailed 3D body model, so any circumference or length between any points on the body can be generated. Standard outputs include chest, waist, hips, thighs, biceps, forearms, calves, neck, shoulder width, inseam, and full torso lengths. Each platform defines the measurement set its product needs: build a custom measurement set in our measurement builder on a default 3D body (no scan needed), save it as JSON, and send it to us — every scan through your integration then returns those measurements."
       }
     },
     {
@@ -502,7 +502,7 @@
     }
   </style>
   <style>
-    /* Measurement profile builder banner */
+    /* Measurement builder banner */
     .pb-banner { padding: 44px 0; }
     .pb-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px 40px; align-items: center; padding: 34px 38px; border-radius: 20px;
       border: 1px solid rgba(10,191,163,.4); background: linear-gradient(135deg, rgba(10,191,163,.13), rgba(108,99,255,.07) 55%, rgba(255,255,255,0)), var(--bg3, #0F161D); }
@@ -568,7 +568,7 @@
         </div>
       </li>
       <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
-      <li><a href="https://demo.snapmeasureai.com/profile-builder">Profile builder</a></li>
+      <li><a href="https://demo.snapmeasureai.com/measurement-builder">Measurement builder</a></li>
       <li><a href="#faqs">FAQs</a></li>
     </ul>
     <div class="nav__cta">
@@ -586,7 +586,7 @@
   <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
   <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
   <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()">Developers</a>
-  <a href="https://demo.snapmeasureai.com/profile-builder" onclick="toggleMenu()">Profile builder</a>
+  <a href="https://demo.snapmeasureai.com/measurement-builder" onclick="toggleMenu()">Measurement builder</a>
   <a href="#faqs" onclick="toggleMenu()">FAQs</a>
   <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
   <a href="https://snapmeasureai.com/" style="padding-left:12px;color:var(--teal);" onclick="toggleMenu()">3D body scan (this page)</a>
@@ -696,21 +696,21 @@
       <div class="step">
         <p class="step__num">Step 03 — Deliver</p>
         <h3 class="step__title">Your measurements + 3D export</h3>
-        <p class="step__body">Your platform receives the measurements it needs — 18 standard girths and lengths, or your own set from 100+ available — plus the 3D body as an OBJ or glTF file, through one API call. Need your own measurement points? Build a custom measurement profile in the <a href="https://demo.snapmeasureai.com/profile-builder">profile builder</a>, no scan needed, and send it to us as JSON — every scan then returns your measurements.</p>
+        <p class="step__body">Your platform receives the measurements it needs — 18 standard girths and lengths, or your own set from 100+ available — plus the 3D body as an OBJ or glTF file, through one API call. Need your own measurement points? Build a custom measurement set in the <a href="https://demo.snapmeasureai.com/measurement-builder">measurement builder</a>, no scan needed, and send it to us as JSON — every scan then returns your measurements.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ==================== WHY: TRAINED ON THE BODY UNDER THE CLOTHES ==================== -->
-<!-- ==================== PROFILE BUILDER ==================== -->
+<!-- ==================== MEASUREMENT BUILDER ==================== -->
 <section class="pb-banner" aria-labelledby="pbTitle">
   <div class="container">
     <div class="pb-card">
       <div>
-        <p class="pb-k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 12h8"/></svg>Measurement profile builder</p>
+        <p class="pb-k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 12h8"/></svg>Measurement builder</p>
         <h2 id="pbTitle">Define your own measurements. No scan needed.</h2>
-        <p class="pb-body">Open a default 3D body, click where each girth or length goes, and save your set as a measurement profile. Every scan through your integration then returns exactly those measurements, with your names and units.</p>
+        <p class="pb-body">Open a default 3D body, click where each girth or length goes, and save it as your measurement set. Every scan through your integration then returns exactly those measurements, with your names and units.</p>
         <ul class="pb-points">
           <li>Any girth or length on the body</li>
           <li>Your field names and units</li>
@@ -718,8 +718,8 @@
         </ul>
       </div>
       <div class="pb-actions">
-        <a class="btn btn--primary" href="https://demo.snapmeasureai.com/profile-builder">Open the profile builder &rarr;</a>
-        <a class="pb-link" href="https://snapmeasureai.com/developers/#request">How measurement profiles work</a>
+        <a class="btn btn--primary" href="https://demo.snapmeasureai.com/measurement-builder">Open the measurement builder &rarr;</a>
+        <a class="pb-link" href="https://snapmeasureai.com/developers/#request">How measurement sets work</a>
       </div>
     </div>
   </div>
@@ -887,7 +887,7 @@
 
       <div class="faq-item">
         <div class="faq-item__q" onclick="toggleFaq(this)">What body measurements does the scan produce?<span class="faq-item__icon">+</span></div>
-        <p class="faq-item__a">The scan produces a detailed 3D body model, so any circumference or length between any points on the body can be generated. Standard outputs include chest, waist, hips, thighs, biceps, forearms, calves, neck, shoulder width, inseam, and full torso lengths. Each platform defines the measurement set its product needs: build a custom measurement profile in our <a href="https://demo.snapmeasureai.com/profile-builder">profile builder</a> on a default 3D body (no scan needed), save it as JSON, and send it to us — every scan through your integration then returns those measurements.</p>
+        <p class="faq-item__a">The scan produces a detailed 3D body model, so any circumference or length between any points on the body can be generated. Standard outputs include chest, waist, hips, thighs, biceps, forearms, calves, neck, shoulder width, inseam, and full torso lengths. Each platform defines the measurement set its product needs: build a custom measurement set in our <a href="https://demo.snapmeasureai.com/measurement-builder">measurement builder</a> on a default 3D body (no scan needed), save it as JSON, and send it to us — every scan through your integration then returns those measurements.</p>
       </div>
 
       <div class="faq-item">
@@ -977,7 +977,7 @@
         <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
         <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
         <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
-        <li><a href="https://demo.snapmeasureai.com/profile-builder">Profile builder</a></li>
+        <li><a href="https://demo.snapmeasureai.com/measurement-builder">Measurement builder</a></li>
         <li><a href="https://demo.snapmeasureai.com/">Live demo</a></li>
         <li><a href="https://snapmeasureai.com/contact/">Contact</a></li>
         <li><a href="https://snapmeasureai.com/privacy/">Privacy</a></li>
