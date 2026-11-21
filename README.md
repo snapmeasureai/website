@@ -3,7 +3,7 @@
 
   <strong>3D body scanning from two photos, in everyday clothing.</strong>
 
-  100+ measurements and a 3D body model in under 10 seconds, inside your product.
+  100+ measurements and a 3D body model in about 5 seconds, inside your product.
 
 [![Live demo](https://img.shields.io/badge/Live_demo-→-1D9E75?style=for-the-badge)](https://demo.snapmeasureai.com)
 [![Contact us](https://img.shields.io/badge/Contact_us-info%40snapmeasureai.com-0F6E56?style=for-the-badge)](https://snapmeasureai.com/contact/)
@@ -17,7 +17,7 @@ Your users take a front and a side photo inside your product. Your system gets b
 
 - **100+ body measurements**, or your own custom set
 - **A 3D body model**, a detailed mesh exportable as OBJ
-- **In under 10 seconds**, from any smartphone, with no hardware
+- **In about 5 seconds**, from any smartphone, with no hardware
 
 Within 1.6 cm on average in everyday clothing, across 18 standard measurements. Built on Cambridge research and trained on over two million images.
 
