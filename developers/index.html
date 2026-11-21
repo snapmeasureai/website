@@ -804,7 +804,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
         </div>
 <pre>&lt;<span class="k">script</span> src=<span class="s">"https://api.snapmeasureai.com/sdk/capture-1.0.0.js"</span>
-        integrity=<span class="s">"sha384-bPRihavnqn2GAgGiVMt7vuKWp88YCTYP809qYE9XP2oNxg2pbNCpVrWGnykzjpcF"</span>
+        integrity=<span class="s">"sha384-QECijm30jZtgcqPgpWhWi+37FumYQJbFRr470rQEiVaPd+qmccgpQSqbT+5ooLP+"</span>
         crossorigin=<span class="s">"anonymous"</span>&gt;&lt;/<span class="k">script</span>&gt;
 &lt;<span class="k">script</span>&gt;
   button.onclick = <span class="k">async</span> () =&gt; {
@@ -826,7 +826,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
     </div>
 
     <div class="options" style="margin-top:28px;">
-      <div class="opt"><p class="opt__k">At home or in store</p><h3>Self or assisted</h3><p>A countdown in a ring, with beeps, for a phone propped against a wall; or a shutter button and the back camera for staff with a tablet.</p></div>
+      <div class="opt"><p class="opt__k">At home or in store</p><h3>Self or assisted</h3><p>A large countdown, with beeps, for a phone propped against a wall; or a shutter button and the back camera for staff with a tablet.</p></div>
       <div class="opt"><p class="opt__k">Your brand</p><h3>Your colours, font and words</h3><p>Theme colours, corners, font and logo; every text replaceable or translated; CSS parts for the rest. Or your own screens with <code>SnapMeasure.measure()</code>.</p></div>
       <div class="opt"><p class="opt__k">Built in</p><h3>Guidance and recovery</h3><p>The whole picture inside a frame in your colour, instructions never over the person, photo review and retake, upload without a camera, automatic retries.</p></div>
       <div class="opt"><p class="opt__k">Private</p><h3>Nothing left behind</h3><p>No cookies, storage or third parties. Photos are re-encoded on the device, without location data, and the camera turns off the moment it closes.</p></div>
@@ -836,9 +836,9 @@ curl https://api.snapmeasureai.com/v1/measurements \
     <!-- ===== SDK reference ===== -->
     <h3 class="sub-h" id="sdk-reference">What your customer sees</h3>
     <ol class="list sdk-flow">
-      <li><span><b>Start.</b> Three setup steps (prop the phone up, stand 2–3&nbsp;m back, fitted clothes), the height field if you didn't pass a height (in ft/in on US pages, cm elsewhere), a privacy line or your consent checkbox, then <i>Start</i> or <i>Upload photos instead</i>. One screen before the camera.</span></li>
-      <li><span><b>Camera.</b> The whole camera picture, never cropped, inside a border in your colour: the person stands inside the frame. Instructions, the countdown and the buttons sit in a panel below the picture, or beside it on wide screens, never over the person. Self-capture: <i>Start countdown</i>, a 10-second countdown in a ring with a cue readable from 2–3&nbsp;m and beeps in the last three seconds, then <i>Turn to your side</i> (the frame turns amber) and a 7-second side countdown that starts on its own. <i>Stop</i> returns to the start without leaving. Assisted: a shutter button.</span></li>
-      <li><span><b>Check the photos.</b> Both photos, each with <i>Retake</i>. On phones they sit one above the other, as large as fits, with no scrolling.</span></li>
+      <li><span><b>Start.</b> Three setup steps (prop the phone up, stand 2–3&nbsp;m back, no coats or baggy layers with arms slightly out), the height field if you didn't pass a height (in ft/in on US pages, cm elsewhere), a privacy line or your consent checkbox, then <i>Start</i> or <i>Upload photos instead</i>. One screen before the camera.</span></li>
+      <li><span><b>Camera.</b> The whole camera picture, never cropped, inside a border in your colour: the person stands inside the frame. Instructions, the countdown and the buttons sit in a panel below the picture, or beside it on wide screens, never over the person. Self-capture: <i>Start countdown</i>, a 10-second countdown as one large number with a cue readable from 2–3&nbsp;m and beeps in the last three seconds, then <i>Turn to your side</i> in large type (the frame turns amber) and a 7-second side countdown that starts on its own. Nothing on the camera screen is animated, so it behaves the same on every device. <i>Stop</i> returns to the start without leaving. Assisted: a shutter button.</span></li>
+      <li><span><b>Check the photos.</b> Both photos, each with <i>Retake</i>, and <i>Retake both</i>. On phones they sit one above the other, as large as fits, with no scrolling.</span></li>
       <li><span><b>Measuring.</b> The front photo with a scan line and the three stages, a few seconds. Busy moments are retried on their own.</span></li>
       <li><span><b>Done.</b> The SDK closes and your page has the result, for your own results page or next step. (<code>showResult: true</code> shows a short summary first.)</span></li>
     </ol>
@@ -925,11 +925,11 @@ curl https://api.snapmeasureai.com/v1/measurements \
         <table>
           <thead><tr><th>Screen</th><th>Keys</th></tr></thead>
           <tbody>
-            <tr><td data-l="Screen">Start</td><td data-l="Keys"><code>introTitle</code> <code>introBody</code> <code>tipPhoneTitle</code> <code>tipPhone</code> <code>tipSpaceTitle</code> <code>tipSpace</code> <code>tipClothesTitle</code> <code>tipClothes</code> <code>privacy</code> <code>consent</code> <code>start</code> <code>uploadInstead</code> <code>logoAlt</code>, and <code>…Assisted</code> versions of the intro and tip keys</td></tr>
+            <tr><td data-l="Screen">Start</td><td data-l="Keys"><code>introTitle</code> <code>introBody</code> <code>tipPhoneTitle</code> <code>tipPhone</code> <code>tipSpaceTitle</code> <code>tipSpace</code> <code>tipClothesTitle</code> <code>tipClothes</code> <code>privacy</code> <code>privacyAssisted</code> <code>consent</code> <code>start</code> <code>uploadInstead</code> <code>logoAlt</code>, and <code>…Assisted</code> versions of the intro and tip keys</td></tr>
             <tr><td data-l="Screen">Height</td><td data-l="Keys"><code>heightLabel</code> <code>heightTitle</code> <code>heightHint</code> (each with <code>…Assisted</code>; <code>heightHint</code> is an optional line under the field, empty by default) <code>heightInvalid</code> <code>unitCm</code> <code>unitFtIn</code> <code>cm</code> <code>ft</code> <code>inch</code> <code>heightLabelCm</code> <code>heightLabelFt</code> <code>heightLabelIn</code></td></tr>
             <tr><td data-l="Screen">Camera</td><td data-l="Keys"><code>cameraStarting</code> <code>cameraAllow</code> <code>front</code> <code>side</code> <code>frontTitle</code> <code>frontText</code> <code>sideTitle</code> <code>sideText</code> (each with <code>…Assisted</code>) <code>startCountdown</code> <code>takePhoto</code> <code>cueFront</code> <code>cueSide</code> <code>holdStill</code> <code>stop</code> <code>turnTitle</code> <code>turnText</code> <code>frontTaken</code> <code>allTaken</code> <code>photoTaken</code> <code>switchCamera</code> <code>soundOn</code> <code>soundOff</code> <code>tapToStart</code></td></tr>
             <tr><td data-l="Screen">Camera problems</td><td data-l="Keys"><code>cameraBlockedTitle</code> <code>cameraBlocked</code> <code>cameraFailedTitle</code> <code>cameraFailed</code> <code>cameraMissing</code></td></tr>
-            <tr><td data-l="Screen">Review, upload</td><td data-l="Keys"><code>reviewTitle</code> <code>reviewText</code> <code>retake</code> <code>usePhotos</code> <code>uploadTitle</code> <code>uploadText</code> <code>uploadFront</code> <code>uploadSide</code> <code>choosePhoto</code> <code>change</code> <code>notAPhoto</code> <code>photoTooLarge</code> <code>photoUnreadable</code> <code>useCamera</code></td></tr>
+            <tr><td data-l="Screen">Review, upload</td><td data-l="Keys"><code>reviewTitle</code> <code>reviewText</code> <code>retake</code> <code>retakeBoth</code> <code>usePhotos</code> <code>uploadTitle</code> <code>uploadText</code> <code>uploadFront</code> <code>uploadSide</code> <code>choosePhoto</code> <code>change</code> <code>notAPhoto</code> <code>photoTooLarge</code> <code>photoUnreadable</code> <code>useCamera</code></td></tr>
             <tr><td data-l="Screen">Measuring, result</td><td data-l="Keys"><code>measuring</code> <code>measuringAssisted</code> <code>stepSend</code> <code>stepBuild</code> <code>stepMeasure</code> <code>busyRetry</code> (<code>{s}</code> is the seconds left) <code>processingNote</code> <code>resultTitle</code> <code>weight</code> <code>done</code></td></tr>
             <tr><td data-l="Screen">Errors</td><td data-l="Keys"><code>errorTitle</code> <code>errNoPerson</code> <code>errImage</code> <code>errHeight</code> <code>errNetwork</code> <code>errTimeout</code> <code>errBusy</code> <code>errUnavailable</code> <code>errGeneric</code> <code>tryAgain</code> <code>retakePhotos</code></td></tr>
             <tr><td data-l="Screen">Other</td><td data-l="Keys"><code>dialogLabel</code> <code>close</code> <code>cancel</code> <code>back</code> <code>continue</code> <code>voiceFront</code> <code>voiceSide</code> <code>voiceDone</code></td></tr>
@@ -969,7 +969,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
               <tr><td data-l="Event"><code>consent_given</code>, <code>intro_start</code></td><td data-l="detail">–</td></tr>
               <tr><td data-l="Event"><code>height_entered</code></td><td data-l="detail"><code>unit</code></td></tr>
               <tr><td data-l="Event"><code>camera_ready</code>, <code>camera_error</code>, <code>camera_switched</code></td><td data-l="detail"><code>facing</code>; <code>code</code></td></tr>
-              <tr><td data-l="Event"><code>photo_taken</code>, <code>retake</code>, <code>countdown_stopped</code></td><td data-l="detail"><code>view</code>: front or side</td></tr>
+              <tr><td data-l="Event"><code>photo_taken</code>, <code>retake</code>, <code>countdown_stopped</code></td><td data-l="detail"><code>view</code>: front or side (<code>retake</code>: also both)</td></tr>
               <tr><td data-l="Event"><code>review_confirmed</code>, <code>upload_selected</code>, <code>upload_confirmed</code></td><td data-l="detail"><code>view</code> for uploads</td></tr>
               <tr><td data-l="Event"><code>submit</code>, <code>retry</code></td><td data-l="detail"><code>attempt</code>, <code>code</code>, <code>wait</code></td></tr>
               <tr><td data-l="Event"><code>result</code>, <code>error</code></td><td data-l="detail"><code>seconds</code>, <code>requestId</code>; <code>code</code>, <code>status</code></td></tr>
@@ -990,7 +990,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
         <li><span><b>HTTPS.</b> Browsers allow the camera only on secure pages. In an iframe, add <code>allow="camera"</code>.</span></li>
         <li><span><b>Content-Security-Policy.</b> Allow <code>https://api.snapmeasureai.com</code> in <code>script-src</code> (unless you bundle it) and <code>connect-src</code>, and <code>blob:</code> <code>data:</code> in <code>img-src</code>. No <code>eval</code>, inline scripts or <code>'unsafe-inline'</code> needed.</span></li>
         <li><span><b>Accessible.</b> A labelled dialog that keeps focus inside, fully keyboard operable, every control named for screen readers, progress announced, no animation for users who ask for reduced motion.</span></li>
-        <li><span><b>Versions.</b> <code>capture-1.0.0.js</code> never changes, so you can pin it with <code>integrity</code>. A new version gets a new file name.</span></li>
+        <li><span><b>Versions.</b> <code>capture-1.0.0.js</code> is the current version; pin it with <code>integrity</code>.</span></li>
       </ul>
     </div>
   </div>
