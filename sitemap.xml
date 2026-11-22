@@ -70,4 +70,12 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- The app's support page (App Store and Google Play Support URL) -->
+  <url>
+    <loc>https://snapmeasureai.com/app/</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>

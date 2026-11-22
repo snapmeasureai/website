@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3T6T8SX');</script>
+  <title>App Support | SnapMeasureAI</title>
+  <meta name="description" content="Help with the SnapMeasureAI app: getting a good 3D body scan, your subscription, backups, Apple Health and your data.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://snapmeasureai.com/app/">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+  <style>
+    :root {
+      --bg:        #080C10;
+      --bg2:       #0E1419;
+      --bg3:       #141C24;
+      --surface:   #1A2330;
+      --border:    rgba(255,255,255,0.08);
+      --border-hi: rgba(255,255,255,0.15);
+      --teal:      #0ABFA3;
+      --teal-dim:  rgba(10,191,163,0.12);
+      --teal-glow: rgba(10,191,163,0.25);
+      --indigo:    #6C63FF;
+      --indigo-dim:rgba(108,99,255,0.12);
+      --text:      #F0F4F8;
+      --text-2:    #AABDCF;
+      --text-3:    #7A96AA;
+      --radius:    10px;
+      --radius-lg: 18px;
+      --max:       1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,12,16,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); height: 64px;
+      display: flex; align-items: center;
+    }
+    .nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .nav__logo img { height: 32px; }
+    .nav__links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 14px; color: var(--text-2); }
+    .nav__links a:hover { color: var(--text); }
+    .nav__dropdown { position: relative; }
+    .nav__dropdown-toggle {
+      display: flex; align-items: center; gap: 5px; cursor: pointer;
+      color: var(--text-2); font-size: 14px; background: none; border: none; padding: 0; font-family: inherit;
+    }
+    .nav__dropdown-toggle:hover { color: var(--text); }
+    .nav__dropdown-toggle svg { transition: transform .2s; }
+    .nav__dropdown:hover .nav__dropdown-toggle svg { transform: rotate(180deg); }
+    .nav__dropdown-menu {
+      display: none; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); background: var(--bg2); border: 1px solid var(--border-hi);
+      border-radius: var(--radius); padding: 8px; min-width: 220px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .nav__dropdown-menu::before {
+      content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px;
+    }
+    .nav__dropdown:hover .nav__dropdown-menu { display: block; }
+    .nav__dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--text-2); border-radius: 6px; transition: background .12s, color .12s; }
+    .nav__dropdown-menu a:hover { background: var(--surface); color: var(--teal); }
+    .nav__dropdown-menu .dropdown-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); padding: 8px 14px 4px; display: block; }
+    .nav__cta { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: opacity .15s, transform .1s; border: none;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn--outline { background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.5); color: #C4C0FF; }
+    .btn--outline:hover { background: rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.8); color: #fff; }
+    .btn--primary { background: var(--teal); color: #050E0C; font-weight: 600; }
+    .btn--primary:hover { opacity: .88; }
+    .nav__hamburger { display: none; }
+    .nav__mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: var(--bg); padding: 32px 24px; flex-direction: column; gap: 24px; z-index: 99;
+    }
+    .nav__mobile-menu.open { display: flex; }
+    .nav__mobile-menu a { font-size: 18px; color: var(--text-2); }
+    .nav__mobile-menu a:hover { color: var(--teal); }
+
+    /* ---- PAGE HERO ---- */
+    .page-hero {
+      padding: 120px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero__bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 60% at 80% 30%, rgba(10,191,163,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 15% 70%, rgba(108,99,255,0.06) 0%, transparent 70%);
+    }
+    .page-hero__eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-dim); border: 1px solid rgba(10,191,163,0.25);
+      border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 600;
+      color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .page-hero__eyebrow-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform: scale(1); }
+      50% { opacity:.5; transform: scale(0.8); }
+    }
+    .page-hero__title {
+      font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.07; margin-bottom: 16px;
+    }
+    .page-hero__title-accent { color: var(--teal); }
+    .page-hero__sub {
+      font-size: 17px; color: var(--text-2); max-width: 520px; line-height: 1.7;
+    }
+
+
+    /* ---- LEGAL DOCUMENT ---- */
+    .page-hero { padding-bottom: 40px; }
+    .legal-meta { font-size: 14px; color: var(--text-3); margin-top: 12px; }
+    .legal { padding: 0 0 96px; }
+    .legal__grid { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; align-items: start; }
+    .legal__toc { position: sticky; top: 96px; font-size: 13.5px; line-height: 1.5; }
+    .legal__toc p { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+    .legal__toc ol { list-style: none; display: grid; gap: 9px; border-left: 1px solid var(--border); padding-left: 16px; }
+    .legal__toc a { color: var(--text-3); }
+    .legal__toc a:hover { color: var(--teal); }
+    .legal__body { max-width: 720px; color: var(--text-2); font-size: 16px; }
+    .legal__body h2 { color: var(--text); font-size: 21px; font-weight: 700; letter-spacing: -0.01em; margin: 48px 0 12px; scroll-margin-top: 88px; }
+    .legal__body p { margin-bottom: 14px; }
+    .legal__body ul { margin: 0 0 16px 20px; display: grid; gap: 7px; }
+    .legal__body li::marker { color: var(--teal); }
+    .legal__body strong { color: var(--text); font-weight: 600; }
+    .legal__body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(10,191,163,.4); }
+    .legal-summary { background: var(--bg3); border: 1px solid var(--border-hi); border-radius: var(--radius-lg); padding: 24px 28px; }
+    .legal-summary__title { color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px !important; }
+    .legal-summary ul { margin-bottom: 0; }
+    .legal-summary li { color: var(--text); }
+
+    /* ---- FOOTER ---- */
+    .footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer__logo img { height: 24px; opacity: .6; }
+    .footer__links { display: flex; gap: 24px; list-style: none; }
+    .footer__links a { font-size: 13px; color: var(--text-3); }
+    .footer__links a:hover { color: var(--teal); }
+    .footer__copy { font-size: 12px; color: var(--text-3); }
+
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .legal__grid { grid-template-columns: 1fr; gap: 0; }
+      .legal__toc { display: none; }
+      .nav__links { display: none; }
+      .nav__cta .btn--outline { display: none; }
+      .nav__hamburger {
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; cursor: pointer; color: var(--text-2); font-size: 22px;
+        background: none; border: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .legal-summary { padding: 20px; }
+      .footer__inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer__links { display: grid; grid-template-columns: repeat(3, auto); gap: 10px 20px; }
+      .nav .btn--primary { font-size: 12px; padding: 7px 11px; white-space: nowrap; margin-left: 8px; }
+    }
+  </style>
+  <style>
+    /* Mid-width screens: keep the nav on one line (the in-page links stay in the menu and the page) */
+    .nav__links a, .nav__links button { white-space: nowrap; }
+    @media (max-width: 1120px) and (min-width: 901px) {
+      .nav__links { gap: 20px; }
+      .nav__links > li:first-child, .nav__links > li:last-child { display: none; }
+    }
+  </style>
+  <style>
+    /* Layout guards: the logo keeps its proportions at every width (the links and buttons
+       give way, never the logo), and the footer links wrap instead of widening the page. */
+    .nav__logo { flex-shrink: 0; }
+    .nav__logo img { width: auto; }
+    @media (max-width: 380px) { .nav__logo img { height: 26px; } }
+    @media (max-width: 340px) { .nav__logo img { height: 22px; } }
+    @media (min-width: 601px) { .footer__links { flex-wrap: wrap; row-gap: 12px; } }
+    /* Just above the menu breakpoint the full nav is tight: smaller gaps and buttons keep air between items. */
+    @media (max-width: 1000px) and (min-width: 901px) {
+      .nav__links { gap: 16px; font-size: 13.5px; }
+      .nav__dropdown-toggle { font-size: 13.5px; }
+      .nav__cta { gap: 8px; }
+      .nav__cta .btn { padding-left: 14px; padding-right: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3T6T8SX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <a href="https://snapmeasureai.com/" class="nav__logo">
+      <img src="/assets/images/logo.png" alt="SnapMeasureAI">
+    </a>
+    <ul class="nav__links">
+      <li><a href="https://snapmeasureai.com/#how-it-works">How it works</a></li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Solutions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">Solutions</span>
+          <a href="https://snapmeasureai.com/patient-engagement-platform/">GLP-1 &amp; weight loss</a>
+          <a href="https://snapmeasureai.com/uniform-sizing/">Uniforms &amp; workwear</a>
+          <a href="https://snapmeasureai.com/apparel-sizing/">Apparel &amp; made-to-measure</a>
+          <a href="https://snapmeasureai.com/#use-cases">All use cases</a>
+        </div>
+      </li>
+      <li class="nav__dropdown">
+        <button class="nav__dropdown-toggle">
+          Technologies
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropdown-menu">
+          <span class="dropdown-label">AI technologies</span>
+          <a href="https://snapmeasureai.com/">3D body scan</a>
+          <a href="https://snapmeasureai.com/motion-capture-from-video/">AI motion capture</a>
+          <a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a>
+        </div>
+      </li>
+      <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+      <li><a href="https://demo.snapmeasureai.com/measurement-builder">Measurement builder</a></li>
+      <li><a href="https://snapmeasureai.com/#faqs">FAQs</a></li>
+    </ul>
+    <div class="nav__cta">
+      <a href="https://demo.snapmeasureai.com/" class="btn btn--primary">Live demo →</a>
+      <a href="https://snapmeasureai.com/contact/" class="btn btn--outline">Contact us</a>
+      <button class="nav__hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav__mobile-menu" id="mobile-menu">
+  <a href="https://snapmeasureai.com/#how-it-works" onclick="toggleMenu()">How it works</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Solutions</div>
+  <a href="https://snapmeasureai.com/patient-engagement-platform/" style="padding-left:12px;">GLP-1 &amp; weight loss</a>
+  <a href="https://snapmeasureai.com/uniform-sizing/" style="padding-left:12px;">Uniforms &amp; workwear</a>
+  <a href="https://snapmeasureai.com/apparel-sizing/" style="padding-left:12px;">Apparel &amp; made-to-measure</a>
+  <a href="https://snapmeasureai.com/developers/" onclick="toggleMenu()">Developers</a>
+  <a href="https://demo.snapmeasureai.com/measurement-builder" onclick="toggleMenu()">Measurement builder</a>
+  <a href="https://snapmeasureai.com/#faqs" onclick="toggleMenu()">FAQs</a>
+  <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-top:8px;">Technologies</div>
+  <a href="https://snapmeasureai.com/" style="padding-left:12px;" onclick="toggleMenu()">3D body scan</a>
+  <a href="https://snapmeasureai.com/motion-capture-from-video/" style="padding-left:12px;" onclick="toggleMenu()">AI motion capture</a>
+  <a href="https://snapmeasureai.com/synthetic-data-with-labels/" style="padding-left:12px;" onclick="toggleMenu()">Synthetic data</a>
+  <a href="https://demo.snapmeasureai.com/" class="btn btn--primary" style="text-align:center;margin-top:8px;color:#050E0C !important;">Live demo →</a>
+</div>
+
+
+<!-- ==================== PAGE HERO ==================== -->
+<section class="page-hero">
+  <div class="page-hero__bg"></div>
+  <div class="container">
+    <div class="page-hero__eyebrow">
+      <span class="page-hero__eyebrow-dot"></span>
+      App support
+    </div>
+    <h1 class="page-hero__title">The SnapMeasureAI <span class="page-hero__title-accent">app</span></h1>
+    <p class="page-hero__sub">Help with scanning, your subscription and your data, on iPhone and Android.</p>
+  </div>
+</section>
+
+<!-- ==================== DOCUMENT ==================== -->
+<section class="legal">
+  <div class="container legal__grid">
+    <nav class="legal__toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#scan">Getting a good scan</a></li><li><a href="#free">Is it free?</a></li><li><a href="#subscription">Manage or cancel your subscription</a></li><li><a href="#restore">Pro on a new phone</a></li><li><a href="#data">Where your scans are kept</a></li><li><a href="#delete">Deleting your data</a></li><li><a href="#health">Apple Health</a></li><li><a href="#estimates">About the measurements</a></li><li><a href="#problems">If something goes wrong</a></li><li><a href="#contact">Contact us</a></li></ol>
+    </nav>
+    <article class="legal__body">
+
+    <div class="legal-summary">
+      <p class="legal-summary__title">The short version</p>
+      <ul>
+        <li>Two photos, about 2&ndash;3&nbsp;m from the phone, head to feet in the frame.</li>
+        <li>Your scans stay on your phone. Back them up from Settings before you switch phones.</li>
+        <li>Subscriptions are managed and cancelled in your Apple or Google account.</li>
+        <li>Questions: <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a></li>
+      </ul>
+    </div>
+
+    <h2 id="scan">Getting a good scan</h2>
+    <ul>
+      <li><b>Clothes:</b> fitted ones, like leggings or shorts and a T&#8209;shirt. Tie long hair up, off your neck.</li>
+      <li><b>Phone:</b> upright, at about hip height, propped against something steady.</li>
+      <li><b>Distance:</b> 2&ndash;3&nbsp;m (6&ndash;10&nbsp;ft) back, so your whole body, head to feet, is inside the frame on screen.</li>
+      <li><b>Front photo:</b> face the camera with your arms slightly away from your body. <b>Side photo:</b> turn so your side faces the camera, arms relaxed.</li>
+      <li><b>Light:</b> even light from the front or above. A plain wall behind you helps.</li>
+    </ul>
+    <p>Tap <b>Start countdown</b> and step back. The app counts down out loud, takes the front photo, tells you to turn, then takes the side photo. Tap <b>Stop</b> to start that photo again. Before measuring, tap either photo to retake just that one.</p>
+    <p>To compare scans, keep the clothes, the spot and the time of day the same. The app shows when your last scan was taken and your note from it, so you can match them.</p>
+
+    <h2 id="free">Is it free?</h2>
+    <p>Yes. Free includes one full scan every month with your complete 3D body and all 18 measurements, the change since your last scan, your waist trend, goals, reminders and backup.</p>
+    <p><b>SnapMeasureAI Pro</b> adds unlimited scans, the change map, your 3D transformation replay, before and after side by side or overlaid, every measurement as a trend, goal dates, progress photos side by side, the medication log, and PDF and CSV export. Prices are shown in the app before you buy, and the yearly plan includes a free trial for new subscribers.</p>
+
+    <h2 id="subscription">Manage or cancel your subscription</h2>
+    <p>Subscriptions are handled by Apple or Google, so you manage them in your store account:</p>
+    <ul>
+      <li><b>iPhone:</b> in the app, Settings &rsaquo; Manage subscription; or the iPhone&rsquo;s Settings &rsaquo; your name &rsaquo; Subscriptions.</li>
+      <li><b>Android:</b> in the app, Settings &rsaquo; Manage subscription; or Google Play &rsaquo; your profile &rsaquo; Payments &amp; subscriptions &rsaquo; Subscriptions.</li>
+    </ul>
+    <p>Cancel at least 24 hours before the next renewal, or before a free trial ends, so you&rsquo;re not charged. Refunds are decided by Apple (<a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>) or Google Play, not by us.</p>
+
+    <h2 id="restore">Pro on a new phone</h2>
+    <p>Open the app, go to Settings and tap <b>Restore purchases</b>, signed in with the same Apple Account or Google account you subscribed with.</p>
+
+    <h2 id="data">Where your scans are kept</h2>
+    <p>On your phone, and nowhere else. There&rsquo;s no account. Your photos are sent encrypted to make your scan, processed in memory and deleted straight away; your 3D body and measurements come back to the phone and are saved there.</p>
+    <p>To move to a new phone, or to keep a copy, go to Settings &rsaquo; Backup &rsaquo; <b>Back up now</b>. It saves one file to a place you choose, such as iCloud Drive, Files or Google Drive. On the new phone, install the app and tap <b>Restore from a backup</b>.</p>
+
+    <h2 id="delete">Deleting your data</h2>
+    <p>Settings &rsaquo; <b>Delete all data</b> removes everything the app has saved. Deleting the app does the same. We don&rsquo;t keep your photos or scans on our servers, so there is nothing else to delete. Backup files you saved yourself stay where you put them.</p>
+
+    <h2 id="health">Apple Health</h2>
+    <p>On iPhone, turn on Settings &rsaquo; <b>Sync with Apple Health</b>. After each scan the app saves your waist, the body&#8209;fat estimate and any weight you entered to Apple Health, and it fills in the weight field from your latest weigh&#8209;in there. This happens on your phone; we never receive Apple Health data. Health Connect on Android is planned for a later version.</p>
+
+    <h2 id="estimates">About the measurements</h2>
+    <p>Measurements are estimates from two photos, made for tracking how your body changes over time. They aren&rsquo;t medical measurements and SnapMeasureAI isn&rsquo;t a medical device. Fitted clothes, the same spot and the same time of day give the most consistent results.</p>
+
+    <h2 id="problems">If something goes wrong</h2>
+    <ul>
+      <li><b>The camera won&rsquo;t start:</b> allow camera access for SnapMeasureAI in your phone&rsquo;s Settings, and close other apps that use the camera.</li>
+      <li><b>&ldquo;We couldn&rsquo;t see a whole body&rdquo;:</b> retake the photos with your head and feet inside the frame and your arms slightly away from your body.</li>
+      <li><b>&ldquo;Couldn&rsquo;t reach the scan service&rdquo;:</b> check your connection and try again. Your photos weren&rsquo;t kept, so nothing is lost.</li>
+      <li><b>Anything else:</b> email us with your phone model and what happened. Please don&rsquo;t send photos of yourself; we don&rsquo;t need them.</li>
+    </ul>
+
+    <h2 id="contact">Contact us</h2>
+    <p>Email <a href="mailto:info@snapmeasureai.com">info@snapmeasureai.com</a>. We usually reply within one business day.</p>
+    <p>SnapMeasureAI, LLC<br>119 South Western Avenue, Unit 1 #488<br>Chicago, IL 60612, USA</p>
+    <p>See also our <a href="https://snapmeasureai.com/privacy/">Privacy Policy</a> and <a href="https://snapmeasureai.com/terms/">Terms of Use</a>.</p>
+
+    </article>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <a href="https://snapmeasureai.com/" class="footer__logo">
+        <img src="/assets/images/logo.png" alt="SnapMeasureAI">
+      </a>
+      <ul class="footer__links">
+        <li><a href="https://snapmeasureai.com/">3D body scan</a></li>
+        <li><a href="https://snapmeasureai.com/patient-engagement-platform/">Patient engagement</a></li>
+        <li><a href="https://snapmeasureai.com/uniform-sizing/">Uniform sizing</a></li>
+        <li><a href="https://snapmeasureai.com/apparel-sizing/">Apparel sizing</a></li>
+        <li><a href="https://snapmeasureai.com/motion-capture-from-video/">Motion capture</a></li>
+        <li><a href="https://snapmeasureai.com/synthetic-data-with-labels/">Synthetic data</a></li>
+        <li><a href="https://snapmeasureai.com/developers/">Developers</a></li>
+        <li><a href="https://demo.snapmeasureai.com/measurement-builder">Measurement builder</a></li>
+        <li><a href="https://demo.snapmeasureai.com/">Live demo</a></li>
+        <li><a href="https://snapmeasureai.com/contact/">Contact</a></li>
+        <li><a href="https://snapmeasureai.com/privacy/">Privacy</a></li>
+        <li><a href="https://snapmeasureai.com/terms/">Terms</a></li>
+      </ul>
+      <span class="footer__copy">© <span data-year>2026</span> SnapMeasureAI</span><script>document.querySelectorAll("[data-year]").forEach(function (e) { e.textContent = new Date().getFullYear(); });</script>
+    </div>
+  </div>
+</footer>
+<script>
+  /* Nav */
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobile-menu');
+    const nav  = document.getElementById('nav');
+    if (menu.classList.contains('open') && !nav.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>

@@ -168,7 +168,7 @@
     .seg button { padding: 9px 12px; font-size: 12.5px; }
     .toggle { padding: 9px 13px; font-size: 12.5px; }
     .toggle .long { display: none; }
-    .toggle .short { display: inline; }
+    .toggle span.short { display: inline; }   /* beats the base rule below */
     #key { padding: 7px 13px; font-size: 11.5px; gap: 10px; }
     #figure-labels span { font-size: 12.5px; }
     #figure-labels span small { font-size: 10.5px; }
@@ -1081,6 +1081,8 @@ document.querySelectorAll('#view button').forEach((b) => {
   b.addEventListener('click', () => { state.view = b.dataset.v; applyView(); });
 });
 $('tint').addEventListener('change', (e) => { state.tint = e.target.checked; applyView(); });
+// The unit buttons start on the unit the page was opened with (the app passes the user's).
+document.querySelectorAll('#units button').forEach((x) => x.classList.toggle('active', x.dataset.v === state.unit));
 document.querySelectorAll('#units button').forEach((b) => {
   b.addEventListener('click', () => {
     document.querySelectorAll('#units button').forEach((x) => x.classList.toggle('active', x === b));
