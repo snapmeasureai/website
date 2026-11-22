@@ -90,6 +90,25 @@ paths:
         "413": {$ref: "#/components/responses/Error"}
         "429": {$ref: "#/components/responses/Retry"}
         "503": {$ref: "#/components/responses/Retry"}
+  /v1/usage:
+    get:
+      summary: This month's measured scans for the key
+      description: >-
+        Costs no scan. A key in a shared account allowance also gets what it can still use;
+        the account's own platform key also gets the shared total and every key's count.
+      operationId: usage
+      responses:
+        "200":
+          description: Usage this month.
+          headers:
+            X-Request-Id: {$ref: "#/components/headers/RequestId"}
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/UsageResponse"}
+        "401": {$ref: "#/components/responses/Error"}
+        "403": {$ref: "#/components/responses/Error"}
+        "429": {$ref: "#/components/responses/Retry"}
+        "503": {$ref: "#/components/responses/Retry"}
   /v1/catalog:
     get:
       summary: The measurements, outputs, poses and size charts available to this key
@@ -187,6 +206,35 @@ components:
         application/json:
           schema: {$ref: "#/components/schemas/Error"}
   schemas:
+    UsageCount:
+      type: object
+      properties:
+        id: {type: string}
+        used: {type: [integer, "null"], description: "Measured scans this month; null when the key is not counted."}
+        limit: {type: [integer, "null"], description: "The monthly cap; null for none."}
+        remaining: {type: [integer, "null"], description: "What can still be used this month; null when nothing limits it."}
+    UsageResponse:
+      type: object
+      required: [request_id, period, key]
+      properties:
+        request_id: {type: string}
+        period:
+          type: object
+          properties:
+            start: {type: string, format: date}
+            renews: {type: string, format: date}
+        key: {$ref: "#/components/schemas/UsageCount"}
+        pool: {$ref: "#/components/schemas/UsageCount", description: "The account's own platform key only: the shared allowance."}
+        keys:
+          type: array
+          description: "The account's own platform key only: every key sharing the allowance."
+          items:
+            type: object
+            properties:
+              id: {type: string}
+              used: {type: integer}
+              limit: {type: [integer, "null"]}
+              active: {type: boolean}
     Pose:
       description: >-
         Pose of the 3D files (measurements are always taken in the measure pose): measure or

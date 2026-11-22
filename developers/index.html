@@ -1260,7 +1260,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="HTTP"><span class="field">415</span></td><td data-l="Code"><code>unsupported_media_type</code></td><td data-l="What to do">Send JSON with <code>Content-Type: application/json</code>.</td></tr>
           <tr><td data-l="HTTP"><span class="field">422</span></td><td data-l="Code"><code>no_person_detected</code></td><td data-l="What to do">Ask for new photos: whole body in frame, head to feet, one person.</td></tr>
           <tr><td data-l="HTTP"><span class="field">429</span></td><td data-l="Code"><code>rate_limited</code>, <code>too_many_concurrent_requests</code>, <code>too_many_failed_attempts</code></td><td data-l="What to do">Wait the seconds in <code>Retry-After</code>, then retry.</td></tr>
-          <tr><td data-l="HTTP"><span class="field">429</span></td><td data-l="Code"><code>monthly_limit_reached</code></td><td data-l="What to do">This month's scans are used. They renew on the date in <code>X-Scans-Renew</code>; contact us to raise the limit.</td></tr>
+          <tr><td data-l="HTTP"><span class="field">429</span></td><td data-l="Code"><code>monthly_limit_reached</code></td><td data-l="What to do">This month's scans are used: your key's own, or those its account shares (the message says which). They renew on the date in <code>X-Scans-Renew</code>; contact us to raise the limit.</td></tr>
           <tr><td data-l="HTTP"><span class="field">503</span></td><td data-l="Code"><code>busy</code>, <code>starting</code></td><td data-l="What to do">Retry after <code>Retry-After</code> seconds; capacity is being added.</td></tr>
           <tr><td data-l="HTTP"><span class="field">500</span></td><td data-l="Code"><code>internal_error</code></td><td data-l="What to do">Retry once. If it persists, send us the <code>request_id</code>.</td></tr>
         </tbody>
@@ -1284,7 +1284,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 <span class="p">RateLimit-Remaining</span>: 117
 <span class="p">RateLimit-Reset</span>:     42</pre>
         </div>
-        <p style="margin-top:14px;">Plans with a monthly number of scans also carry <code>X-Scans-Limit</code>, <code>X-Scans-Remaining</code> and <code>X-Scans-Renew</code>. Only measured scans count, and the month runs from the day your key was issued.</p>
+        <p style="margin-top:14px;">Plans with a monthly number of scans also carry <code>X-Scans-Limit</code>, <code>X-Scans-Remaining</code> and <code>X-Scans-Renew</code>. Only measured scans count, and the month runs from the day your key was issued. For a key that shares its account's scans, <code>X-Scans-Remaining</code> is the lower of what's left on the key and on the account.</p>
       </div>
       <div>
         <h3>Client guidance</h3>
@@ -1295,6 +1295,40 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <li><span><b>Quote the request id.</b> It's in every response, header and body, and is all we need to look into a request.</span></li>
           <li><span><b>Check readiness</b> with <code>GET /health</code>, which needs no key.</span></li>
         </ul>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:36px;">
+      <div>
+        <h3>Usage this month</h3>
+        <p><code>GET /v1/usage</code> returns your key's measured scans this month: <code>used</code>, <code>limit</code>, <code>remaining</code> and the renewal date. It costs no scan.</p>
+        <h3 style="margin-top:22px;">Platforms with keys for their own customers</h3>
+        <p>If you give each of your customers (shops, stores, clinics) a key of its own, those keys share your plan's monthly scans, on one invoice to you. A key can also have a cap, so you can split the scans between customers or let them share freely.</p>
+        <p>Your platform key sees the shared total and every key's count, which is what you bill your customers by. Their keys see only their own. We add keys and change caps on request, usually the same day.</p>
+      </div>
+      <div style="min-width:0;">
+        <div class="code-card">
+          <div class="code-card__bar">
+            <span class="code-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="code-card__title">GET /v1/usage · platform key</span>
+            <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
+          </div>
+<pre>{
+  <span class="p">"period"</span>: { <span class="p">"start"</span>: <span class="s">"2026-12-01"</span>,
+              <span class="p">"renews"</span>: <span class="s">"2027-01-01"</span> },
+  <span class="p">"key"</span>:  { <span class="p">"id"</span>: <span class="s">"platform"</span>, <span class="p">"used"</span>: <span class="n">112</span>,
+            <span class="p">"limit"</span>: <span class="k">null</span>, <span class="p">"remaining"</span>: <span class="n">788</span> },
+  <span class="p">"pool"</span>: { <span class="p">"id"</span>: <span class="s">"account"</span>, <span class="p">"used"</span>: <span class="n">512</span>,
+            <span class="p">"limit"</span>: <span class="n">1300</span>, <span class="p">"remaining"</span>: <span class="n">788</span> },
+  <span class="p">"keys"</span>: [
+    { <span class="p">"id"</span>: <span class="s">"platform"</span>, <span class="p">"used"</span>: <span class="n">112</span>,
+      <span class="p">"limit"</span>: <span class="k">null</span>, <span class="p">"active"</span>: <span class="k">true</span> },
+    { <span class="p">"id"</span>: <span class="s">"shop-north"</span>, <span class="p">"used"</span>: <span class="n">41</span>,
+      <span class="p">"limit"</span>: <span class="n">300</span>, <span class="p">"active"</span>: <span class="k">true</span> },
+    <span class="c">// …every key sharing the scans</span>
+  ]
+}</pre>
+        </div>
       </div>
     </div>
   </div>
