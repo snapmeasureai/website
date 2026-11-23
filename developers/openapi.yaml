@@ -133,6 +133,8 @@ paths:
                   note: {type: string}
                   outputs: {type: array, items: {type: string}}
                   poses: {type: array, items: {type: string}}
+                  hands: {type: array, items: {type: string, enum: [relaxed, flat]}}
+                  default_hands: {type: string, enum: [relaxed, flat], description: "The hands a request gets when it does not choose."}
                   pose_angles:
                     type: object
                     description: "The range of your own pose angles, in degrees."
@@ -277,6 +279,7 @@ components:
         weight_unit: {type: string, enum: [kg, lb], description: "Unit of the estimated weight (include \"weight\"). Default: lb when the measurements are in inches, else kg."}
         viewer_style: {type: string, enum: [studio, showcase]}
         pose: {$ref: "#/components/schemas/Pose"}
+        hands: {type: string, enum: [relaxed, flat], description: "How the hands look in the viewers and 3D files: relaxed (default, fingers gently curled) or flat (fingers straight). Measurements are the same either way."}
         watertight: {type: boolean, description: "OBJ and glTF as one closed surface (eyes left out, mouth closed; renumbers the vertices)."}
         mesh_units: {type: string, enum: [m, cm, mm], description: "OBJ units."}
         reference: {type: string, maxLength: 128, description: "Returned as sent; not stored or logged."}
@@ -297,6 +300,7 @@ components:
             used: {type: integer, description: "Photos that showed a whole person."}
             unused: {type: array, items: {type: integer}, description: "Indices (from 0) of photos without a whole person."}
         pose: {$ref: "#/components/schemas/Pose"}
+        hands: {type: string, enum: [relaxed, flat], description: "The hands in the 3D files (with obj, glb or geometry)."}
         measurements:
           type: object
           additionalProperties: {type: [number, "null"]}

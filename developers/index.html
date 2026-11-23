@@ -1050,6 +1050,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="Field"><span class="field">unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>cm</code>, <code>mm</code> or <code>in</code>. Default: your account's setting, or the height's unit.</td></tr>
           <tr><td data-l="Field"><span class="field">weight_unit</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>kg</code> or <code>lb</code>, for the estimated weight. Default: <code>lb</code> when the measurements are in inches, otherwise <code>kg</code>.</td></tr>
           <tr><td data-l="Field"><span class="field">pose</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string | object</span></td><td data-l="Description">Pose of the 3D files: <code>a_pose</code> (default), <code>t_pose</code>, or your own angles such as <code>{"arms": 45, "legs": 6}</code>. See <a href="#mesh" class="ok">3D files</a>.</td></tr>
+          <tr><td data-l="Field"><span class="field">hands</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">How the hands look in the viewer and 3D files: <code>relaxed</code> (default, fingers gently curled) or <code>flat</code> (fingers straight). Measurements are the same either way.</td></tr>
           <tr><td data-l="Field"><span class="field">watertight</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Description"><code>true</code>: the OBJ and glTF are one closed surface, for cloth simulation, physics and 3D printing.</td></tr>
           <tr><td data-l="Field"><span class="field">mesh_units</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">OBJ units: <code>m</code> (default), <code>cm</code> or <code>mm</code>. glTF and geometry are always metres.</td></tr>
           <tr><td data-l="Field"><span class="field">viewer_style</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>studio</code> (every measurement, custom measurements) or <code>showcase</code> (the body large, with the key measurements on it).</td></tr>
@@ -1186,6 +1187,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
   ],
   <span class="p">"outputs"</span>:    [<span class="s">"geometry"</span>, <span class="s">"glb"</span>, <span class="s">"obj"</span>, <span class="s">"viewer"</span>],
   <span class="p">"poses"</span>:      [<span class="s">"measure"</span>, <span class="s">"a_pose"</span>, <span class="s">"t_pose"</span>],
+  <span class="p">"hands"</span>:      [<span class="s">"relaxed"</span>, <span class="s">"flat"</span>], <span class="p">"default_hands"</span>: <span class="s">"relaxed"</span>,
   <span class="p">"pose_angles"</span>: { <span class="p">"arms"</span>: { <span class="p">"min"</span>: <span class="n">0</span>, <span class="p">"max"</span>: <span class="n">70</span> }, <span class="p">"legs"</span>: { <span class="p">"min"</span>: <span class="n">0</span>, <span class="p">"max"</span>: <span class="n">20</span> } },
   <span class="p">"units"</span>:      [<span class="s">"cm"</span>, <span class="s">"mm"</span>, <span class="s">"in"</span>],
   <span class="p">"size_charts"</span>: {},
@@ -1202,7 +1204,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
   <div class="container">
     <p class="section__eyebrow">3D files</p>
     <h2 class="section__title">The same body, in the pose your pipeline needs.</h2>
-    <p class="section__sub">Measurements are always taken in the same pose, so these options change only the 3D files (<code>obj</code>, <code>glb</code>, <code>geometry</code>), never the numbers.</p>
+    <p class="section__sub">Measurements are always taken in the same pose, so these options change only the 3D files (<code>obj</code>, <code>glb</code>, <code>geometry</code>; <code>hands</code> also the viewer), never the numbers.</p>
 
     <div class="table-wrap stack">
       <table>
@@ -1211,6 +1213,8 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="Option"><span class="field">pose</span></td><td data-l="Values"><code>a_pose</code> (default, also called <code>measure</code>): arms about 66° below horizontal, the pose measurements are taken in</td><td data-l="Use it for">Comparing scans, a natural standing body</td></tr>
           <tr><td data-l="Option"><span class="field">pose</span></td><td data-l="Values"><code>t_pose</code>: arms level, legs straight</td><td data-l="Use it for">Game engines, avatars, auto-rigging tools</td></tr>
           <tr><td data-l="Option"><span class="field">pose</span></td><td data-l="Values"><code>{"arms": 45, "legs": 6}</code>: arms 0–70° below horizontal, each leg 0–20° out</td><td data-l="Use it for">Cloth simulation, matching the avatar your garments were made on</td></tr>
+          <tr><td data-l="Option"><span class="field">hands</span></td><td data-l="Values"><code>relaxed</code> (default): fingers gently curled, thumb resting in, as hands hang when standing</td><td data-l="Use it for">Viewers, apps, avatars: anything people look at</td></tr>
+          <tr><td data-l="Option"><span class="field">hands</span></td><td data-l="Values"><code>flat</code>: fingers straight and spread</td><td data-l="Use it for">Tools that expect the straight-finger pose, such as retargeting onto a rig built on it</td></tr>
           <tr><td data-l="Option"><span class="field">watertight</span></td><td data-l="Values"><code>true</code>: one closed surface</td><td data-l="Use it for">Cloth collision, physics, volume, 3D printing</td></tr>
           <tr><td data-l="Option"><span class="field">mesh_units</span></td><td data-l="Values"><code>m</code>, <code>cm</code>, <code>mm</code> (OBJ)</td><td data-l="Use it for">CAD and cloth tools that expect cm or mm</td></tr>
         </tbody>
