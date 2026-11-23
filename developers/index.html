@@ -53,7 +53,7 @@
       { "@type": "Question", "name": "Are photos or results stored?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. Photos and heights are processed in memory and deleted as soon as the response is sent. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI." } },
       { "@type": "Question", "name": "Will the API change under us?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. /v1 is stable. New optional fields and outputs can be added at any time, so ignore fields you don't recognise. A change that would break an integration comes with a new version path and advance notice, as set out in your agreement." } }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. /v1 is stable. New optional fields and outputs can be added at any time, so ignore fields you don't recognize. A change that would break an integration comes with a new version path and advance notice, as set out in your agreement." } }
     ]
   }
   </script>
@@ -827,8 +827,8 @@ curl https://api.snapmeasureai.com/v1/measurements \
 
     <div class="options" style="margin-top:28px;">
       <div class="opt"><p class="opt__k">At home or in store</p><h3>Self or assisted</h3><p>A large countdown, with beeps, for a phone propped against a wall; or a shutter button and the back camera for staff with a tablet.</p></div>
-      <div class="opt"><p class="opt__k">Your brand</p><h3>Your colours, font and words</h3><p>Theme colours, corners, font and logo; every text replaceable or translated; CSS parts for the rest. Or your own screens with <code>SnapMeasure.measure()</code>.</p></div>
-      <div class="opt"><p class="opt__k">Built in</p><h3>Guidance and recovery</h3><p>The whole picture inside a frame in your colour, instructions never over the person, photo review and retake, upload without a camera, automatic retries.</p></div>
+      <div class="opt"><p class="opt__k">Your brand</p><h3>Your colors, font and words</h3><p>Theme colors, corners, font and logo; every text replaceable or translated; CSS parts for the rest. Or your own screens with <code>SnapMeasure.measure()</code>.</p></div>
+      <div class="opt"><p class="opt__k">Built in</p><h3>Guidance and recovery</h3><p>The whole picture inside a frame in your color, instructions never over the person, photo review and retake, upload without a camera, automatic retries.</p></div>
       <div class="opt"><p class="opt__k">Private</p><h3>Nothing left behind</h3><p>No cookies, storage or third parties. Photos are re-encoded on the device, without location data, and the camera turns off the moment it closes.</p></div>
     </div>
     <p class="note">Phones, tablets and computers, in current Safari, Chrome, Edge, Firefox and Samsung Internet, on HTTPS pages. About 27&nbsp;KB gzipped, no dependencies, TypeScript types included. Two people in one visit: call <code>capture()</code> once for each.</p>
@@ -837,7 +837,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
     <h3 class="sub-h" id="sdk-reference">What your customer sees</h3>
     <ol class="list sdk-flow">
       <li><span><b>Start.</b> Three setup steps (prop the phone up, stand 2–3&nbsp;m back, no coats or baggy layers with arms slightly out), the height field if you didn't pass a height (in ft/in on US pages, cm elsewhere), a privacy line or your consent checkbox, then <i>Start</i> or <i>Upload photos instead</i>. One screen before the camera.</span></li>
-      <li><span><b>Camera.</b> The whole camera picture, never cropped, inside a border in your colour: the person stands inside the frame. Instructions, the countdown and the buttons sit in a panel below the picture, or beside it on wide screens, never over the person. Self-capture: <i>Start countdown</i>, a 10-second countdown as one large number with a cue readable from 2–3&nbsp;m and beeps in the last three seconds, then <i>Turn to your side</i> in large type (the frame turns amber) and a 7-second side countdown that starts on its own. Nothing on the camera screen is animated, so it behaves the same on every device. <i>Stop</i> returns to the start without leaving. Assisted: a shutter button.</span></li>
+      <li><span><b>Camera.</b> The whole camera picture, never cropped, inside a border in your color: the person stands inside the frame. Instructions, the countdown and the buttons sit in a panel below the picture, or beside it on wide screens, never over the person. Self-capture: <i>Start countdown</i>, a 10-second countdown as one large number with a cue readable from 2–3&nbsp;m and beeps in the last three seconds, then <i>Turn to your side</i> in large type (the frame turns amber) and a 7-second side countdown that starts on its own. Nothing on the camera screen is animated, so it behaves the same on every device. <i>Stop</i> returns to the start without leaving. Assisted: a shutter button.</span></li>
       <li><span><b>Check the photos.</b> Both photos, each with <i>Retake</i>, and <i>Retake both</i>. On phones they sit one above the other, as large as fits, with no scrolling.</span></li>
       <li><span><b>Measuring.</b> The front photo with a scan line and the three stages, a few seconds. Busy moments are retried on their own.</span></li>
       <li><span><b>Done.</b> The SDK closes and your page has the result, for your own results page or next step. (<code>showResult: true</code> shows a short summary first.)</span></li>
@@ -902,7 +902,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
     </div>
 
     <h3 class="sub-h" id="sdk-branding">Your brand</h3>
-    <p class="ref-p">Pass <code>theme</code> for colours, corners and font, <code>logo</code> (an image URL) for the top of the first screen, and <code>text</code> to change any words. The flow lives in a Shadow DOM, so your page's CSS can't break it and its CSS can't touch your page.</p>
+    <p class="ref-p">Pass <code>theme</code> for colors, corners and font, <code>logo</code> (an image URL) for the top of the first screen, and <code>text</code> to change any words. The flow lives in a Shadow DOM, so your page's CSS can't break it and its CSS can't touch your page.</p>
     <div class="table-wrap stack">
       <table>
         <thead><tr><th>theme key</th><th>Default</th><th>Used for</th></tr></thead>
@@ -913,7 +913,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="theme key"><span class="field">radius</span>, <span class="field">buttonRadius</span></td><td data-l="Default"><code>16</code>, <code>999</code></td><td data-l="Used for">Corners of the panel and of buttons, in px or any CSS length.</td></tr>
           <tr><td data-l="theme key"><span class="field">font</span></td><td data-l="Default">system font</td><td data-l="Used for">A <code>font-family</code> your page already loads.</td></tr>
           <tr><td data-l="theme key"><span class="field">overlay</span></td><td data-l="Default"><code>rgba(8,12,16,.6)</code></td><td data-l="Used for">The backdrop behind the panel on large screens.</td></tr>
-          <tr><td data-l="theme key"><span class="field">cameraAccent</span>, <span class="field">cameraAccentText</span></td><td data-l="Default"><code>accent</code></td><td data-l="Used for">The camera's frame border, countdown ring, step indicator and buttons. The camera screen is black, so if your accent is too dark to see there (a near-black brand colour), the SDK uses a bright teal unless you set this.</td></tr>
+          <tr><td data-l="theme key"><span class="field">cameraAccent</span>, <span class="field">cameraAccentText</span></td><td data-l="Default"><code>accent</code></td><td data-l="Used for">The camera's frame border, countdown ring, step indicator and buttons. The camera screen is black, so if your accent is too dark to see there (a near-black brand color), the SDK uses a bright teal unless you set this.</td></tr>
           <tr><td data-l="theme key"><span class="field">cameraTurn</span></td><td data-l="Default"><code>#FFB020</code></td><td data-l="Used for">The frame and heading while the person turns to the side.</td></tr>
           <tr><td data-l="theme key"><span class="field">frameWidth</span></td><td data-l="Default"><code>5</code></td><td data-l="Used for">The width of the frame border, in px.</td></tr>
         </tbody>
@@ -989,7 +989,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
       <ul class="list">
         <li><span><b>HTTPS.</b> Browsers allow the camera only on secure pages. In an iframe, add <code>allow="camera"</code>.</span></li>
         <li><span><b>Content-Security-Policy.</b> Allow <code>https://api.snapmeasureai.com</code> in <code>script-src</code> (unless you bundle it) and <code>connect-src</code>, and <code>blob:</code> <code>data:</code> in <code>img-src</code>. No <code>eval</code>, inline scripts or <code>'unsafe-inline'</code> needed.</span></li>
-        <li><span><b>Accessible.</b> A labelled dialog that keeps focus inside, fully keyboard operable, every control named for screen readers, progress announced, no animation for users who ask for reduced motion.</span></li>
+        <li><span><b>Accessible.</b> A labeled dialog that keeps focus inside, fully keyboard operable, every control named for screen readers, progress announced, no animation for users who ask for reduced motion.</span></li>
         <li><span><b>Versions.</b> <code>capture-1.0.0.js</code> is the current version; pin it with <code>integrity</code>.</span></li>
       </ul>
     </div>
@@ -1052,7 +1052,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <tr><td data-l="Field"><span class="field">pose</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string | object</span></td><td data-l="Description">Pose of the 3D files: <code>a_pose</code> (default), <code>t_pose</code>, or your own angles such as <code>{"arms": 45, "legs": 6}</code>. See <a href="#mesh" class="ok">3D files</a>.</td></tr>
           <tr><td data-l="Field"><span class="field">hands</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">How the hands look in the viewer and 3D files: <code>relaxed</code> (default, fingers gently curled) or <code>flat</code> (fingers straight). Measurements are the same either way.</td></tr>
           <tr><td data-l="Field"><span class="field">watertight</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">boolean</span></td><td data-l="Description"><code>true</code>: the OBJ and glTF are one closed surface, for cloth simulation, physics and 3D printing.</td></tr>
-          <tr><td data-l="Field"><span class="field">mesh_units</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">OBJ units: <code>m</code> (default), <code>cm</code> or <code>mm</code>. glTF and geometry are always metres.</td></tr>
+          <tr><td data-l="Field"><span class="field">mesh_units</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">OBJ units: <code>m</code> (default), <code>cm</code> or <code>mm</code>. glTF and geometry are always meters.</td></tr>
           <tr><td data-l="Field"><span class="field">viewer_style</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description"><code>studio</code> (every measurement, custom measurements) or <code>showcase</code> (the body large, with the key measurements on it).</td></tr>
           <tr><td data-l="Field"><span class="field">reference</span><span class="req req--opt">Optional</span></td><td data-l="Type"><span class="type">string</span></td><td data-l="Description">Your own identifier, up to 128 characters, returned as sent. We don't store or log it.</td></tr>
         </tbody>
@@ -1095,7 +1095,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
       <article class="out">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><ellipse cx="10" cy="10" rx="8" ry="3.4" stroke="currentColor" stroke-width="1.7"/></svg></div>
         <h3>Body measurements <span class="badge badge--core">Core</span></h3>
-        <p>18 standard girths and lengths: chest, waist, hips, neck, upper arm, forearm, wrist, thigh, calf, ankle, head, shoulder width, back to shoulder, arm length, inseam, torso length, foot length and width. In centimetres, millimetres or inches. Add your own in the <a href="https://demo.snapmeasureai.com/measurement-builder" class="ok">measurement builder</a>.</p>
+        <p>18 standard girths and lengths: chest, waist, hips, neck, upper arm, forearm, wrist, thigh, calf, ankle, head, shoulder width, back to shoulder, arm length, inseam, torso length, foot length and width. In centimeters, millimeters or inches. Add your own in the <a href="https://demo.snapmeasureai.com/measurement-builder" class="ok">measurement builder</a>.</p>
       </article>
       <article class="out">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16l12-12M4 4h4M4 4v4M16 16h-4M16 16v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
@@ -1105,12 +1105,12 @@ curl https://api.snapmeasureai.com/v1/measurements \
       <article class="out">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2l7 4v8l-7 4-7-4V6l7-4z M3 6l7 4 7-4 M10 10v8" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
         <h3>3D body <span class="badge badge--core">Core</span></h3>
-        <p>The body at real size, in the same topology for every scan: OBJ, glTF&nbsp;2.0 (each measurement as a named line), or raw geometry with named landmarks and joint centres.</p>
+        <p>The body at real size, in the same topology for every scan: OBJ, glTF&nbsp;2.0 (each measurement as a named line), or raw geometry with named landmarks and joint centers.</p>
       </article>
       <article class="out out--indigo">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M7 17.5h6M10 14.5v3M8 7l3 2-3 2V7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
         <h3>Embeddable 3D viewer <span class="badge badge--opt">Optional</span></h3>
-        <p>A self-contained interactive viewer page for an iframe or web view, in your colours and with your logo or none. It loads nothing from third parties.</p>
+        <p>A self-contained interactive viewer page for an iframe or web view, in your colors and with your logo or none. It loads nothing from third parties.</p>
       </article>
       <article class="out out--indigo">
         <div class="out__icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 17h14M7 17V4M13 17V8M7 7h3M13 11h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
@@ -1229,10 +1229,10 @@ curl https://api.snapmeasureai.com/v1/measurements \
       <div>
         <h3>Coordinates</h3>
         <ul class="list">
-          <li><span>Metres; <b>+y</b> is up and the body faces <b>+z</b> (its left side at +x).</span></li>
+          <li><span>Meters; <b>+y</b> is up and the body faces <b>+z</b> (its left side at +x).</span></li>
           <li><span>The floor is at y&nbsp;=&nbsp;0 and the origin is between the heels.</span></li>
           <li><span>Geometry arrays are little-endian base64 (float32 vertices, uint16 faces).</span></li>
-          <li><span>No skeleton or skinning weights: rig the watertight A-pose or T-pose body in your own tool; <code>geometry.joints</code> gives the joint centres.</span></li>
+          <li><span>No skeleton or skinning weights: rig the watertight A-pose or T-pose body in your own tool; <code>geometry.joints</code> gives the joint centers.</span></li>
         </ul>
       </div>
     </div>
@@ -1407,7 +1407,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
     <div class="split" style="margin-top:24px;">
       <ul class="list">
         <li><span><b><code>/v1</code> is stable.</b> Anything that would break an integration comes with a new version path and advance notice, as set out in your agreement.</span></li>
-        <li><span><b>Additions arrive without notice.</b> New optional fields and outputs can appear at any time, so ignore fields you don't recognise.</span></li>
+        <li><span><b>Additions arrive without notice.</b> New optional fields and outputs can appear at any time, so ignore fields you don't recognize.</span></li>
       </ul>
       <ul class="list">
         <li><span><b><code>model_version</code></b> changes only when the measurement models change. Store it with each result, so you know which model measured it.</span></li>
@@ -1461,7 +1461,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
       </details>
       <details>
         <summary>Will the API change under us?</summary>
-        <p>No. <code>/v1</code> is stable. New optional fields and outputs can be added at any time, so ignore fields you don't recognise. A change that would break an integration comes with a new version path and advance notice, as set out in your agreement.</p>
+        <p>No. <code>/v1</code> is stable. New optional fields and outputs can be added at any time, so ignore fields you don't recognize. A change that would break an integration comes with a new version path and advance notice, as set out in your agreement.</p>
       </details>
     </div>
   </div>

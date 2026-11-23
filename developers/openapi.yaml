@@ -316,7 +316,7 @@ components:
             model: {type: string, example: "2026.11", description: "Version of the weight model."}
         uncertainty:
           type: object
-          description: "With include \"uncertainty\": for each measurement, a range the true value falls inside about 9 times in 10 (level), calibrated on real measurement errors of the current model. Centred on the returned value; height has none."
+          description: "With include \"uncertainty\": for each measurement, a range the true value falls inside about 9 times in 10 (level), calibrated on real measurement errors of the current model. Centered on the returned value; height has none."
           properties:
             level: {type: number, example: 0.9}
             model: {type: string, example: "2026.11", description: "Version of the calibration."}
@@ -345,7 +345,7 @@ components:
         geometry: {$ref: "#/components/schemas/Geometry"}
     Geometry:
       type: object
-      description: Metres, +y up, the body facing +z. Arrays are little-endian base64.
+      description: Meters, +y up, the body facing +z. Arrays are little-endian base64.
       properties:
         format: {type: string, example: snapmeasure.body/1}
         units: {type: string, example: m}
@@ -357,8 +357,8 @@ components:
         faces: {type: string, format: byte, description: "uint16 vertex indices, three per triangle (with include \"faces\")."}
         pose: {$ref: "#/components/schemas/Pose"}
         floor_y: {type: number, description: "Always 0: the floor (heel level) is at y = 0, the origin between the heels."}
-        landmarks: {type: object, additionalProperties: {type: array, items: {type: number}}, description: "Named points on the body (crown, neck_front, shoulder_left, navel, crotch, ...), metres."}
-        joints: {type: object, additionalProperties: {type: array, items: {type: number}}, description: "Centres of the 22 main joints (pelvis to right_wrist), metres."}
+        landmarks: {type: object, additionalProperties: {type: array, items: {type: number}}, description: "Named points on the body (crown, neck_front, shoulder_left, navel, crotch, ...), meters."}
+        joints: {type: object, additionalProperties: {type: array, items: {type: number}}, description: "Centers of the 22 main joints (pelvis to right_wrist), meters."}
         outlines:
           type: object
           additionalProperties:
