@@ -772,8 +772,10 @@ const deltas = measurementDeltas(meta.measurementsA, meta.measurementsB)
   .filter((r) => r.delta !== null);
 
 // Height is typed in, not measured, so a change in it is a change in what was
-// typed. It stays out of the "what changed" story.
-const bodyDeltas = deltas.filter((r) => friendly(r.name) !== 'Height');
+// typed. Lengths (inseam, arm length, shoulder width...) don't change in adults, so a
+// difference there is only scan-to-scan noise. Both stay out of the "what changed" story.
+const isLengthName = (n) => /length|breadth|width|height|\bto\b/i.test(n);
+const bodyDeltas = deltas.filter((r) => friendly(r.name) !== 'Height' && !isLengthName(r.name));
 
 const daysBetween = (meta.dateA && meta.dateB)
   ? Math.round((new Date(meta.dateB) - new Date(meta.dateA)) / 86400000) : null;
