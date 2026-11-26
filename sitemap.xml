@@ -13,7 +13,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://snapmeasureai.com/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -21,7 +21,7 @@
   <!-- Patient Engagement Platform -->
   <url>
     <loc>https://snapmeasureai.com/patient-engagement-platform/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -45,19 +45,19 @@
   <!-- Developers (API docs) -->
   <url>
     <loc>https://snapmeasureai.com/developers/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://snapmeasureai.com/uniform-sizing/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://snapmeasureai.com/apparel-sizing/</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- The app's support page (App Store and Google Play Support URL) -->
   <url>
     <loc>https://snapmeasureai.com/app/</loc>
-    <lastmod>2026-11-22</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

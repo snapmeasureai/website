@@ -51,7 +51,7 @@
       { "@type": "Question", "name": "How do we define our own measurements?",
         "acceptedAnswer": { "@type": "Answer", "text": "Open our measurement builder (a default 3D body, no scan needed), use Custom Measure to define any girth or length on the body, and save it as a measurement set. We attach it to your keys, and every scan returns exactly that set, with your field names, units and rounding." } },
       { "@type": "Question", "name": "Are photos or results stored?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Photos and heights are processed in memory and deleted as soon as the response is sent. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI." } },
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Photos and heights are processed in memory only. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI." } },
       { "@type": "Question", "name": "Will the API change under us?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. /v1 is stable. New optional fields and outputs can be added at any time, so ignore fields you don't recognize. A change that would break an integration comes with a new version path and advance notice, as set out in your agreement." } }
     ]
@@ -804,7 +804,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
           <button class="copy" type="button" data-copy style="margin-left:auto;">Copy</button>
         </div>
 <pre>&lt;<span class="k">script</span> src=<span class="s">"https://api.snapmeasureai.com/sdk/capture-1.0.0.js"</span>
-        integrity=<span class="s">"sha384-QECijm30jZtgcqPgpWhWi+37FumYQJbFRr470rQEiVaPd+qmccgpQSqbT+5ooLP+"</span>
+        integrity=<span class="s">"sha384-HVWGqxyKBqZK33AHHyLCGONTIjYjW3L0ODUjXLhzjiWsSrCndW78yPeYhVIoekaN"</span>
         crossorigin=<span class="s">"anonymous"</span>&gt;&lt;/<span class="k">script</span>&gt;
 &lt;<span class="k">script</span>&gt;
   button.onclick = <span class="k">async</span> () =&gt; {
@@ -836,8 +836,8 @@ curl https://api.snapmeasureai.com/v1/measurements \
     <!-- ===== SDK reference ===== -->
     <h3 class="sub-h" id="sdk-reference">What your customer sees</h3>
     <ol class="list sdk-flow">
-      <li><span><b>Start.</b> Three setup steps (prop the phone up, stand 2–3&nbsp;m back, no coats or baggy layers with arms slightly out), the height field if you didn't pass a height (in ft/in on US pages, cm elsewhere), a privacy line or your consent checkbox, then <i>Start</i> or <i>Upload photos instead</i>. One screen before the camera.</span></li>
-      <li><span><b>Camera.</b> The whole camera picture, never cropped, inside a border in your color: the person stands inside the frame. Instructions, the countdown and the buttons sit in a panel below the picture, or beside it on wide screens, never over the person. Self-capture: <i>Start countdown</i>, a 10-second countdown as one large number with a cue readable from 2–3&nbsp;m and beeps in the last three seconds, then <i>Turn to your side</i> in large type (the frame turns amber) and a 7-second side countdown that starts on its own. Nothing on the camera screen is animated, so it behaves the same on every device. <i>Stop</i> returns to the start without leaving. Assisted: a shutter button.</span></li>
+      <li><span><b>Start.</b> Three setup steps (prop the phone up, stand 2–3&nbsp;m back, fitted clothes work best but everyday clothes are fine, no coats, arms slightly out), the height field if you didn't pass a height (in ft/in on US pages, cm elsewhere), a privacy line or your consent checkbox, then <i>Start</i> or <i>Upload photos instead</i>. One screen before the camera.</span></li>
+      <li><span><b>Camera.</b> The whole camera picture, never cropped, inside a border in your color: the person stands inside the frame. Instructions, the countdown and the buttons sit in a panel below the picture, or beside it on wide screens, never over the person. Self-capture: <i>Start countdown</i>, a 10-second countdown as one large number with a cue readable from 2–3&nbsp;m and beeps in the last three seconds, then for 3 seconds the picture dims and <i>Turn to your side</i> sits in large type in its middle (the frame turns amber), where people look while getting into place, and a 7-second side countdown starts on its own. The screen stays on throughout. Nothing on the camera screen is animated, so it behaves the same on every device. <i>Stop</i> returns to the start without leaving. Assisted: a shutter button.</span></li>
       <li><span><b>Check the photos.</b> Both photos, each with <i>Retake</i>, and <i>Retake both</i>. On phones they sit one above the other, as large as fits, with no scrolling.</span></li>
       <li><span><b>Measuring.</b> The front photo with a scan line and the three stages, a few seconds. Busy moments are retried on their own.</span></li>
       <li><span><b>Done.</b> The SDK closes and your page has the result, for your own results page or next step. (<code>showResult: true</code> shows a short summary first.)</span></li>
@@ -1348,7 +1348,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
     <div class="trust">
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><rect x="3" y="5" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 5l16 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <div><h3>Photos are never stored</h3><p>Photos and heights are processed in memory, on a read-only file system, and deleted as soon as the response is sent. They are never written to disk, logged or used for training.</p></div>
+        <div><h3>Photos are never stored</h3><p>Photos and heights are processed in memory only, on a read-only file system. They are never written to disk, logged or used for training.</p></div>
       </div>
       <div class="trust__item">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="11" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4 19c1.2-3.5 4-5 7-5s5.8 1.5 7 5M3 3l16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -1366,7 +1366,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
 
     <div class="boundary" aria-label="Where data lives">
       <div><b>Your app</b>Photos and height, captured with the user's consent</div>
-      <div><b>SnapMeasureAI</b>Processed in memory · returned · deleted</div>
+      <div><b>SnapMeasureAI</b>Processed in memory · returned · never saved</div>
       <div><b>Your system</b>Results stored against your record, under your retention</div>
     </div>
   </div>
@@ -1453,7 +1453,7 @@ curl https://api.snapmeasureai.com/v1/measurements \
       </details>
       <details>
         <summary>Are photos or results stored?</summary>
-        <p>No. Photos and heights are processed in memory and deleted as soon as the response is sent. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI.</p>
+        <p>No. Photos and heights are processed in memory only. They are never written to disk, logged or used for training, and results go back to your system rather than being kept by SnapMeasureAI.</p>
       </details>
       <details>
         <summary>How fast is a scan?</summary>

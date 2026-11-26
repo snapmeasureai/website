@@ -731,8 +731,7 @@
     </h1>
 
     <p class="hero__sub">
-      Two smartphone photos return a full measurement set in about five seconds. The photos are deleted on
-      delivery. The longitudinal record lives in your environment — the portal simply renders it, month
+      Two smartphone photos return a full measurement set in about five seconds. The photos are processed in memory and never saved. The longitudinal record lives in your environment — the portal simply renders it, month
       after month, so patients can see the change a scale never shows.
     </p>
 
@@ -764,7 +763,7 @@
 
 <div class="proof-strip">
   <div class="container proof-strip__inner">
-    <span class="proof-strip__item"><span class="proof-strip__dot"></span> Images deleted on delivery</span>
+    <span class="proof-strip__item"><span class="proof-strip__dot"></span> Images never saved</span>
     <span class="proof-divider">·</span>
     <span class="proof-strip__item"><span class="proof-strip__dot"></span> No PII retained</span>
     <span class="proof-divider">·</span>
@@ -835,7 +834,7 @@
         </div>
 
         <div class="note-callout">
-          <strong>Then it's gone.</strong> The photos are processed and deleted. What leaves our system is a
+          <strong>Nothing is kept.</strong> The photos are processed in memory and never saved. What leaves our system is a
           set of numbers and a mesh — addressed to you, not held by us.
         </div>
       </div>
@@ -849,8 +848,7 @@
     <div class="section__eyebrow">Longitudinal progress tracking</div>
     <h2 class="section__title">Month over month — rendered from your record, not ours.</h2>
     <p class="section__sub">
-      This is the patient-facing view. Each month begins with two photos — front and side — that return a
-      full measurement set in seconds and are deleted on delivery. The body model narrows as the numbers do,
+      This is the patient-facing view. Each month begins with two photos — front and side — that return a full measurement set in seconds and are never saved. The body model narrows as the numbers do,
       so a patient on a GLP-1 or weight-management program watches their own shape change over time. Every
       value shown is drawn from the record your platform holds; we supply the numbers once, then forget them.
       The example below is a simulated 12-week change on a sample scan, not patient data.
@@ -944,7 +942,7 @@
         <p class="flow__body">The mesh is solved, the measurements are computed, the result is returned — in about five seconds.</p>
         <ul class="flow__list">
           <li>Full 3D body mesh, 100+ measurements</li>
-          <li>Images deleted on delivery</li>
+          <li>Images never saved</li>
           <li class="no">No measurement history kept</li>
           <li class="no">No patient identifiers, ever</li>
         </ul>
@@ -987,7 +985,7 @@
   <span class="c-key">"mesh"</span><span class="c-punct">: {</span> <span class="c-key">"format"</span><span class="c-punct">:</span> <span class="c-str">"obj"</span><span class="c-punct">,</span> <span class="c-key">"vertices"</span><span class="c-punct">:</span> <span class="c-str">10000</span><span class="c-punct">,</span> <span class="c-key">"url"</span><span class="c-punct">:</span> <span class="c-str">"&lt;signed, short-lived&gt;"</span> <span class="c-punct">},</span>
 
   <span class="c-key">"retention"</span><span class="c-punct">: {</span>
-    <span class="c-key">"source_images"</span><span class="c-punct">:</span>  <span class="c-str">"deleted"</span><span class="c-punct">,</span>
+    <span class="c-key">"source_images"</span><span class="c-punct">:</span>  <span class="c-str">"never saved"</span><span class="c-punct">,</span>
     <span class="c-key">"measurements"</span><span class="c-punct">:</span>   <span class="c-str">"not_stored"</span><span class="c-punct">,</span>
     <span class="c-key">"identifiers"</span><span class="c-punct">:</span>    <span class="c-str">"none_received"</span>
   <span class="c-punct">}</span>
